@@ -3,9 +3,14 @@ package com.nonIt.GameOn.service.dto;
 import com.nonIt.GameOn.entity.Gender;
 import com.nonIt.GameOn.entity.Role;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDto {
     private String firstName;
 

@@ -2,17 +2,17 @@ package com.nonIt.GameOn.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
 
 @Entity
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
 @Table(name = "user_info")
 public class User {
     @Id
@@ -20,22 +20,22 @@ public class User {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "first_name")
+    @Column(name = "first_name", length = 500)
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", length = 500)
     private String lastName;
 
-    @Column(name = "user_password")
+    @Column(name = "user_password", length = 1000)
     private String password;
 
-    @Column(name = "email")
+    @Column(name = "email", length = 1000)
     private String email;
 
     @Column(name = "telephone_num")
     private String tel;
 
-    @Column(name = "address")
+    @Column(name = "address", length = 2000)
     private String address;
 
     @Column(name = "dob")
@@ -44,10 +44,10 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Column(name = "profile_img")
+    @Column(name = "profile_img", length = 5000)
     private String profileImg;
 
-    @Column(name = "balance")
+    @Column(name = "balance", columnDefinition="Decimal(20,2)")
     private Double balance;
 
     @Column(name = "user_role")

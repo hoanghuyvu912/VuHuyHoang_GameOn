@@ -1,16 +1,14 @@
 package com.nonIt.GameOn.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 @Entity
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
+@Table(name = "game_image")
 public class GameImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

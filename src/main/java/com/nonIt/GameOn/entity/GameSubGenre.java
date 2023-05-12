@@ -2,14 +2,16 @@ package com.nonIt.GameOn.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "game_genre")
+@Table(name = "game_sub_genre")
 public class GameSubGenre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -2,7 +2,13 @@ package com.nonIt.GameOn.service.restDto;
 
 import com.nonIt.GameOn.entity.Game;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class GameImageRestDto {
     private Integer id;
 
