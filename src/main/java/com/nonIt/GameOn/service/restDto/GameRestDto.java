@@ -1,7 +1,16 @@
 package com.nonIt.GameOn.service.restDto;
 
+import com.nonIt.GameOn.entity.Developer;
+import com.nonIt.GameOn.entity.Publisher;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class GameRestDto {
     private Integer id;
 
@@ -18,4 +27,8 @@ public class GameRestDto {
     private String systemReq;
 
     private Double price;
+
+    private Developer developer;
+
+    private Publisher publisher;
 }

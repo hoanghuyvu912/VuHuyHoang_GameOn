@@ -1,18 +1,16 @@
 package com.nonIt.GameOn.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 import java.time.LocalDate;
 
 @Entity
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
 @Table(name = "publisher")
 public class Publisher {
     @Id
@@ -23,13 +21,13 @@ public class Publisher {
     @Column(name = "publisher_name")
     private String name;
 
-    @Column(name = "thumbnail")
+    @Column(name = "thumbnail", length = 1000)
     private String thumbnail;
 
-    @Column(name = "cover_photo")
+    @Column(name = "cover_photo", length = 1000)
     private String coverPhoto;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 1000)
     private String description;
 
     @Column(name = "established_date")

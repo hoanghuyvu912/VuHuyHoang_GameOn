@@ -1,18 +1,15 @@
 package com.nonIt.GameOn.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Entity
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
 @Table(name = "game")
 public class Game {
     @Id
@@ -20,22 +17,22 @@ public class Game {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "game_name")
+    @Column(name = "game_name", length = 2000)
     private String name;
 
-    @Column(name = "thumbnail")
+    @Column(name = "thumbnail", length = 2000)
     private String thumbnail;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 3000)
     private String description;
 
-    @Column(name = "trailer")
+    @Column(name = "trailer", length = 3000)
     private String trailer;
 
     @Column(name = "released_date")
     private LocalDate releasedDate;
 
-    @Column(name = "system_req")
+    @Column(name = "system_req", length = 5000)
     private String systemReq;
 
     @Column(name = "price")
@@ -47,5 +44,5 @@ public class Game {
 
     @ManyToOne
     @JoinColumn(name = "publisher_id")
-    private Developer publisher;
+    private Publisher publisher;
 }

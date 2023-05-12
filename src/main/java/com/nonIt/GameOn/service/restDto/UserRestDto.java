@@ -2,9 +2,15 @@ package com.nonIt.GameOn.service.restDto;
 
 import com.nonIt.GameOn.entity.Gender;
 import com.nonIt.GameOn.entity.Role;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserRestDto {
     private Integer id;
 
