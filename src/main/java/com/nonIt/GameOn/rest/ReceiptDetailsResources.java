@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/receiptDetailss")
+@RequestMapping(value = "/receipt_details")
 public class ReceiptDetailsResources {
     private final ReceiptDetailsService receiptDetailsService;
 

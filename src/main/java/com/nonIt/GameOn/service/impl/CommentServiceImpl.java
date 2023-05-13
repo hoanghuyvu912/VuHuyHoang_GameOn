@@ -33,6 +33,11 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    public List<CommentRestDto> getByUserId(Integer userId) {
+        return commentRepository.getCommentByUserId(userId).stream().map(commentMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
     public CommentRestDto findById(Integer commentId) {
         return commentRepository.findById(commentId).map(commentMapper::toDto).orElseThrow(GameOnException::CommentNotFound);
     }
@@ -75,4 +80,5 @@ public class CommentServiceImpl implements CommentService {
     public void deleteComment(Integer commentId) {
         commentRepository.deleteById(commentId);
     }
+
 }

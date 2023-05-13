@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/{game_genres}")
+@RequestMapping(value = "/game_genres")
 public class GameGenreResources {
     private final GameGenreService gameGenreService;
 

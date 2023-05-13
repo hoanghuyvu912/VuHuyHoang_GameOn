@@ -41,4 +41,9 @@ public class CommentResources {
         commentService.deleteComment(commentId);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping(value = "/by_user/{userId}")
+    public ResponseEntity<List<CommentRestDto>> getCommentByUserId(@PathVariable("userId") Integer userId) {
+        return ResponseEntity.ok(commentService.getByUserId(userId));
+    }
 }
