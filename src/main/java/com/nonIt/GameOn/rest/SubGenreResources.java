@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/subgenres")
+@RequestMapping(value = "/sub_genres")
 public class SubGenreResources {
     private final SubGenreService subGenreService;
 
