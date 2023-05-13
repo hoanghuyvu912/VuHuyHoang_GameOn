@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class RatingDto {
     private Integer userId;
     private Integer gameId;
-    private String rating;
+    private Integer rating;
 }

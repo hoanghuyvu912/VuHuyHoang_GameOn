@@ -27,5 +27,5 @@ public class Rating {
     private Game game;
 
     @Column(name = "rating")
-    private String rating;
+    private Integer rating;
 }
