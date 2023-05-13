@@ -1,6 +1,7 @@
 package com.nonIt.GameOn.service.impl;
 
 import com.nonIt.GameOn.entity.Developer;
+import com.nonIt.GameOn.entity.Game;
 import com.nonIt.GameOn.exception.GameOnException;
 import com.nonIt.GameOn.repository.DeveloperRepository;
 import com.nonIt.GameOn.service.DeveloperService;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,6 +36,22 @@ public class DeveloperServiceImpl implements DeveloperService {
 
     @Override
     public DeveloperRestDto createDeveloper(DeveloperDto developerDto) {
+        if (developerDto.getName() == null || developerDto.getName().trim().isBlank() || developerDto.getName().isEmpty()) {
+            throw GameOnException.badRequest("DeveloperNameNotFound", "Developer's name is missing.");
+        }
+        if (developerDto.getDescription() == null || developerDto.getDescription().trim().isBlank() || developerDto.getDescription().isEmpty()) {
+            throw GameOnException.badRequest("DeveloperDescriptionNotFound", "Developer's sescription is missing.");
+        }
+        if (developerDto.getThumbnail() == null || developerDto.getThumbnail().trim().isBlank() || developerDto.getThumbnail().isEmpty()) {
+            throw GameOnException.badRequest("DeveloperThumbnailNotFound", "Developer's thumbnail is missing.");
+        }
+        if (developerDto.getCoverPhoto() == null || developerDto.getCoverPhoto().trim().isBlank() || developerDto.getCoverPhoto().isEmpty()) {
+            throw GameOnException.badRequest("DeveloperCoverPhotoNotFound", "Developer's cover photo is missing.");
+        }
+        if (developerDto.getEstablishedDate().isAfter(LocalDate.now())) {
+            throw GameOnException.badRequest("InvalidEstablishedDate", "Established date cannot be after current date.");
+        }
+
         Developer developer = Developer.builder()
                 .name(developerDto.getName())
                 .description(developerDto.getDescription())
@@ -49,6 +67,22 @@ public class DeveloperServiceImpl implements DeveloperService {
     @Override
     public DeveloperRestDto updateDeveloper(Integer developerId, DeveloperDto developerDto) {
         Developer developer = developerRepository.findById(developerId).orElseThrow(GameOnException::DeveloperNotFound);
+
+        if (developerDto.getName().trim().isBlank() || developerDto.getName().isEmpty()) {
+            throw GameOnException.badRequest("DeveloperNameNotFound", "Developer's name is missing.");
+        }
+        if (developerDto.getDescription().trim().isBlank() || developerDto.getDescription().isEmpty()) {
+            throw GameOnException.badRequest("DeveloperDescriptionNotFound", "Developer's sescription is missing.");
+        }
+        if (developerDto.getThumbnail().trim().isBlank() || developerDto.getThumbnail().isEmpty()) {
+            throw GameOnException.badRequest("DeveloperThumbnailNotFound", "Developer's thumbnail is missing.");
+        }
+        if (developerDto.getCoverPhoto().trim().isBlank() || developerDto.getCoverPhoto().isEmpty()) {
+            throw GameOnException.badRequest("DeveloperCoverPhotoNotFound", "Developer's cover photo is missing.");
+        }
+        if (developerDto.getEstablishedDate().isAfter(LocalDate.now())) {
+            throw GameOnException.badRequest("InvalidEstablishedDate", "Established date cannot be after current date.");
+        }
         developerMapper.updateFromDto(developerDto, developer);
         developer = developerRepository.save(developer);
         return developerMapper.toDto(developer);
