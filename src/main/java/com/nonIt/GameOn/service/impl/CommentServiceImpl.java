@@ -42,6 +42,10 @@ public class CommentServiceImpl implements CommentService {
         User user = userRepository.findById(commentDto.getUserId()).orElseThrow(GameOnException::UserNotFound);
         Game game = gameRepository.findById(commentDto.getGameId()).orElseThrow(GameOnException::GameNotFound);
 
+        if (commentDto.getCommentContent() == null || commentDto.getCommentContent().trim().isBlank() || commentDto.getCommentContent().isEmpty()) {
+            throw GameOnException.badRequest("CommentContentNotFound", "Comment content is missing.");
+        }
+
         Comment comment = Comment.builder()
                 .commentContent(commentDto.getCommentContent())
                 .user(user)
@@ -55,6 +59,9 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public CommentRestDto updateComment(Integer commentId, CommentDto commentDto) {
         Comment comment = commentRepository.findById(commentId).orElseThrow(GameOnException::CommentNotFound);
+        if (commentDto.getCommentContent().trim().isBlank() || commentDto.getCommentContent().isEmpty()) {
+            throw GameOnException.badRequest("CommentContentNotFound", "Comment content is missing.");
+        }
         commentMapper.updateFromDto(commentDto, comment);
         comment = commentRepository.save(comment);
         return commentMapper.toDto(comment);
