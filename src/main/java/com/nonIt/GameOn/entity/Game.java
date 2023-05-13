@@ -35,7 +35,7 @@ public class Game {
     @Column(name = "system_req", length = 5000)
     private String systemReq;
 
-    @Column(name = "price")
+    @Column(name = "price", columnDefinition="Decimal(4,2)")
     private Double price;
 
     @ManyToOne
