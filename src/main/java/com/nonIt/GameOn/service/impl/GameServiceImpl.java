@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,6 +45,34 @@ public class GameServiceImpl implements GameService {
         Developer developer = developerRepository.findById(gameDto.getDeveloperId()).orElseThrow(GameOnException::DeveloperNotFound);
         Publisher publisher = publisherRepository.findById(gameDto.getPublisherId()).orElseThrow(GameOnException::PublisherNotFound);
 
+        if (gameDto.getName() == null || gameDto.getName().trim().isBlank() || gameDto.getName().isEmpty()) {
+            throw GameOnException.badRequest("GameNameNotFound", "Game's name is missing");
+        }
+        if (gameDto.getThumbnail() == null || gameDto.getThumbnail().trim().isBlank() || gameDto.getThumbnail().isEmpty()) {
+            throw GameOnException.badRequest("GameThumbnailNotFound", "Game's thumbnail is missing");
+        }
+        if (gameDto.getDescription() == null || gameDto.getDescription().trim().isBlank() || gameDto.getDescription().isEmpty()) {
+            throw GameOnException.badRequest("GameDescriptionNotFound", "Game's description is missing");
+        }
+        if (gameDto.getTrailer() == null || gameDto.getTrailer().trim().isBlank() || gameDto.getTrailer().isEmpty()) {
+            throw GameOnException.badRequest("GameTrailerNotFound", "Game's trailer is missing");
+        }
+        if (gameDto.getReleasedDate().isAfter(LocalDate.now())) {
+            throw GameOnException.badRequest("InvalidReleasedDate", "Released date cannot be after current date.");
+        }
+        if (gameDto.getReleasedDate().isBefore(developer.getEstablishedDate())) {
+            throw GameOnException.badRequest("InvalidReleasedDate", "Released date cannot be before developer's established date.");
+        }
+        if (gameDto.getReleasedDate().isBefore(publisher.getEstablishedDate())) {
+            throw GameOnException.badRequest("InvalidReleasedDate", "Released date cannot be before publisher's established date.");
+        }
+        if (gameDto.getSystemReq() == null || gameDto.getSystemReq().trim().isBlank() || gameDto.getSystemReq().isEmpty()) {
+            throw GameOnException.badRequest("GameSystemReqNotFound", "Game's system requirement is missing");
+        }
+        if (gameDto.getPrice() < 0) {
+            throw GameOnException.badRequest("InvalidPrice", "Game's price must be a positive number.");
+        }
+
         Game game = Game.builder()
                 .name(gameDto.getName())
                 .thumbnail(gameDto.getThumbnail())
@@ -63,6 +92,34 @@ public class GameServiceImpl implements GameService {
     @Override
     public GameRestDto updateGame(Integer gameId, GameDto gameDto) {
         Game game = gameRepository.findById(gameId).orElseThrow(GameOnException::GameNotFound);
+
+        if (gameDto.getName().trim().isBlank() || gameDto.getName().isEmpty()) {
+            throw GameOnException.badRequest("GameNameNotFound", "Game's name is missing");
+        }
+        if (gameDto.getThumbnail().trim().isBlank() || gameDto.getThumbnail().isEmpty()) {
+            throw GameOnException.badRequest("GameThumbnailNotFound", "Game's thumbnail is missing");
+        }
+        if (gameDto.getDescription().trim().isBlank() || gameDto.getDescription().isEmpty()) {
+            throw GameOnException.badRequest("GameDescriptionNotFound", "Game's description is missing");
+        }
+        if (gameDto.getTrailer().trim().isBlank() || gameDto.getTrailer().isEmpty()) {
+            throw GameOnException.badRequest("GameTrailerNotFound", "Game's trailer is missing");
+        }
+        if (gameDto.getReleasedDate().isAfter(LocalDate.now())) {
+            throw GameOnException.badRequest("InvalidReleasedDate", "Released date cannot be after current date.");
+        }
+        if (gameDto.getReleasedDate().isBefore(game.getDeveloper().getEstablishedDate())) {
+            throw GameOnException.badRequest("InvalidReleasedDate", "Released date cannot be before developer's established date.");
+        }
+        if (gameDto.getReleasedDate().isBefore(game.getPublisher().getEstablishedDate())) {
+            throw GameOnException.badRequest("InvalidReleasedDate", "Released date cannot be before publisher's established date.");
+        }
+        if (gameDto.getSystemReq().trim().isBlank() || gameDto.getSystemReq().isEmpty()) {
+            throw GameOnException.badRequest("GameSystemReqNotFound", "Game's system requirement is missing");
+        }
+        if (gameDto.getPrice() < 0) {
+            throw GameOnException.badRequest("InvalidPrice", "Game's price must be a positive number.");
+        }
         gameMapper.updateFromDto(gameDto, game);
         game = gameRepository.save(game);
         return gameMapper.toDto(game);
