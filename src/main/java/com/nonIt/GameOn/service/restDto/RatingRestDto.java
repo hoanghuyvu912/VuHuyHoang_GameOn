@@ -17,5 +17,5 @@ public class RatingRestDto {
 
     private Game game;
 
-    private String rating;
+    private Integer rating;
 }
