@@ -59,9 +59,14 @@ public class RatingServiceImpl implements RatingService {
         Rating rating = ratingRepository.findById(ratingId).orElseThrow(GameOnException::RatingNotFound);
         User user = userRepository.findById(ratingDto.getUserId()).orElseThrow(GameOnException::UserNotFound);
         Game game = gameRepository.findById(ratingDto.getGameId()).orElseThrow(GameOnException::GameNotFound);
+        if(ratingDto.getRating() == null){
+            throw GameOnException.badRequest("RatingNotFound", "Rating is missing.");
+        }
+
         if (ratingDto.getRating() > 5 || ratingDto.getRating() < 1) {
             throw GameOnException.badRequest("InvalidRating", "Rating must be an integer between 1 and 5.");
         }
+        rating.setRating(ratingDto.getRating());
         rating.setUser(user);
         rating.setGame(game);
         rating = ratingRepository.save(rating);

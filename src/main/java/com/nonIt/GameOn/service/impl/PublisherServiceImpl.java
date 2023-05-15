@@ -66,22 +66,32 @@ public class PublisherServiceImpl implements PublisherService {
     public PublisherRestDto updatePublisher(Integer publisherId, PublisherDto publisherDto) {
         Publisher publisher = PublisherRepository.findById(publisherId).orElseThrow(GameOnException::PublisherNotFound);
 
-        if (publisherDto.getName().trim().isBlank() || publisherDto.getName().isEmpty()) {
-            throw GameOnException.badRequest("DeveloperNameNotFound", "Developer's name is missing.");
+        if (publisherDto.getName() != null) {
+            if (publisherDto.getName().trim().isBlank() || publisherDto.getName().isEmpty()) {
+                throw GameOnException.badRequest("DeveloperNameNotFound", "Developer's name is missing.");
+            }
         }
-        if (publisherDto.getDescription().trim().isBlank() || publisherDto.getDescription().isEmpty()) {
-            throw GameOnException.badRequest("DeveloperDescriptionNotFound", "Developer's sescription is missing.");
+        if (publisherDto.getDescription() != null) {
+            if (publisherDto.getDescription().trim().isBlank() || publisherDto.getDescription().isEmpty()) {
+                throw GameOnException.badRequest("DeveloperDescriptionNotFound", "Developer's description is missing.");
+            }
         }
-        if (publisherDto.getThumbnail().trim().isBlank() || publisherDto.getThumbnail().isEmpty()) {
-            throw GameOnException.badRequest("DeveloperThumbnailNotFound", "Developer's thumbnail is missing.");
+        if (publisherDto.getThumbnail() != null) {
+            if (publisherDto.getThumbnail().trim().isBlank() || publisherDto.getThumbnail().isEmpty()) {
+                throw GameOnException.badRequest("DeveloperThumbnailNotFound", "Developer's thumbnail is missing.");
+            }
         }
-        if (publisherDto.getCoverPhoto().trim().isBlank() || publisherDto.getCoverPhoto().isEmpty()) {
-            throw GameOnException.badRequest("DeveloperCoverPhotoNotFound", "Developer's cover photo is missing.");
+        if (publisherDto.getCoverPhoto() != null) {
+            if (publisherDto.getCoverPhoto().trim().isBlank() || publisherDto.getCoverPhoto().isEmpty()) {
+                throw GameOnException.badRequest("DeveloperCoverPhotoNotFound", "Developer's cover photo is missing.");
+            }
         }
-        if (publisherDto.getEstablishedDate().isAfter(LocalDate.now())) {
-            throw GameOnException.badRequest("InvalidEstablishedDate", "Established date cannot be after current date.");
+        if (publisherDto.getEstablishedDate() != null) {
+            if (publisherDto.getEstablishedDate().isAfter(LocalDate.now())) {
+                throw GameOnException.badRequest("InvalidEstablishedDate", "Established date cannot be after current date.");
+            }
         }
-        PublisherMapper.updateFromDto(publisherDto, publisher);
+        PublisherMapper.mapFromDto(publisherDto, publisher);
         publisher = PublisherRepository.save(publisher);
         return PublisherMapper.toDto(publisher);
     }
