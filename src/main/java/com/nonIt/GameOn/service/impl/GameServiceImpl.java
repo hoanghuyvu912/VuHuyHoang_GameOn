@@ -93,34 +93,48 @@ public class GameServiceImpl implements GameService {
     public GameRestDto updateGame(Integer gameId, GameDto gameDto) {
         Game game = gameRepository.findById(gameId).orElseThrow(GameOnException::GameNotFound);
 
-        if (gameDto.getName().trim().isBlank() || gameDto.getName().isEmpty()) {
-            throw GameOnException.badRequest("GameNameNotFound", "Game's name is missing");
+        if (gameDto.getName() != null) {
+            if (gameDto.getName().trim().isBlank() || gameDto.getName().isEmpty()) {
+                throw GameOnException.badRequest("GameNameNotFound", "Game's name is missing");
+            }
         }
-        if (gameDto.getThumbnail().trim().isBlank() || gameDto.getThumbnail().isEmpty()) {
-            throw GameOnException.badRequest("GameThumbnailNotFound", "Game's thumbnail is missing");
+        if (gameDto.getThumbnail() != null) {
+            if (gameDto.getThumbnail().trim().isBlank() || gameDto.getThumbnail().isEmpty()) {
+                throw GameOnException.badRequest("GameThumbnailNotFound", "Game's thumbnail is missing");
+            }
         }
-        if (gameDto.getDescription().trim().isBlank() || gameDto.getDescription().isEmpty()) {
-            throw GameOnException.badRequest("GameDescriptionNotFound", "Game's description is missing");
+        if (gameDto.getDescription() != null) {
+            if (gameDto.getDescription().trim().isBlank() || gameDto.getDescription().isEmpty()) {
+                throw GameOnException.badRequest("GameDescriptionNotFound", "Game's description is missing");
+            }
         }
-        if (gameDto.getTrailer().trim().isBlank() || gameDto.getTrailer().isEmpty()) {
-            throw GameOnException.badRequest("GameTrailerNotFound", "Game's trailer is missing");
+        if (gameDto.getTrailer() != null) {
+            if (gameDto.getTrailer().trim().isBlank() || gameDto.getTrailer().isEmpty()) {
+                throw GameOnException.badRequest("GameTrailerNotFound", "Game's trailer is missing");
+            }
         }
-        if (gameDto.getReleasedDate().isAfter(LocalDate.now())) {
-            throw GameOnException.badRequest("InvalidReleasedDate", "Released date cannot be after current date.");
+        if (gameDto.getReleasedDate() != null) {
+            if (gameDto.getReleasedDate().isAfter(LocalDate.now())) {
+                throw GameOnException.badRequest("InvalidReleasedDate", "Released date cannot be after current date.");
+            }
+            if (gameDto.getReleasedDate().isBefore(game.getDeveloper().getEstablishedDate())) {
+                throw GameOnException.badRequest("InvalidReleasedDate", "Released date cannot be before developer's established date.");
+            }
+            if (gameDto.getReleasedDate().isBefore(game.getPublisher().getEstablishedDate())) {
+                throw GameOnException.badRequest("InvalidReleasedDate", "Released date cannot be before publisher's established date.");
+            }
         }
-        if (gameDto.getReleasedDate().isBefore(game.getDeveloper().getEstablishedDate())) {
-            throw GameOnException.badRequest("InvalidReleasedDate", "Released date cannot be before developer's established date.");
+        if (gameDto.getSystemReq() != null) {
+            if (gameDto.getSystemReq().trim().isBlank() || gameDto.getSystemReq().isEmpty()) {
+                throw GameOnException.badRequest("GameSystemReqNotFound", "Game's system requirement is missing");
+            }
         }
-        if (gameDto.getReleasedDate().isBefore(game.getPublisher().getEstablishedDate())) {
-            throw GameOnException.badRequest("InvalidReleasedDate", "Released date cannot be before publisher's established date.");
+        if (gameDto.getPrice() != null) {
+            if (gameDto.getPrice() < 0) {
+                throw GameOnException.badRequest("InvalidPrice", "Game's price must be a positive number.");
+            }
         }
-        if (gameDto.getSystemReq().trim().isBlank() || gameDto.getSystemReq().isEmpty()) {
-            throw GameOnException.badRequest("GameSystemReqNotFound", "Game's system requirement is missing");
-        }
-        if (gameDto.getPrice() < 0) {
-            throw GameOnException.badRequest("InvalidPrice", "Game's price must be a positive number.");
-        }
-        gameMapper.updateFromDto(gameDto, game);
+        gameMapper.mapFromDto(gameDto, game);
         game = gameRepository.save(game);
         return gameMapper.toDto(game);
     }

@@ -57,10 +57,12 @@ public class ReceiptServiceImpl implements ReceiptService {
     public ReceiptRestDto updateReceipt(Integer receiptId, ReceiptDto receiptDto) {
         Receipt receipt = receiptRepository.findById(receiptId).orElseThrow(GameOnException::ReceiptNotFound);
         User user = userRepository.findById(receiptDto.getUserId()).orElseThrow(GameOnException::UserNotFound);
-        if (receiptDto.getReceiptDate().isAfter(LocalDate.now())) {
-            throw GameOnException.badRequest("InvalidReceiptDate", "Receipt date cannot be after current date.");
+        if (receiptDto.getReceiptDate() != null) {
+            if (receiptDto.getReceiptDate().isAfter(LocalDate.now())) {
+                throw GameOnException.badRequest("InvalidReceiptDate", "Receipt date cannot be after current date.");
+            }
         }
-        receiptMapper.updateFromDto(receiptDto, receipt);
+        receiptMapper.mapFromDto(receiptDto, receipt);
         receipt.setUser(user);
         receipt = receiptRepository.save(receipt);
 

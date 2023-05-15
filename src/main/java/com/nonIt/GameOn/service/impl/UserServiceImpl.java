@@ -100,22 +100,63 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserRestDto updateUser(Integer userId, UserDto userDto) {
-        Period age = Period.between(userDto.getDob(), LocalDate.now());
-        int years = age.getYears();
         User user = userRepository.findById(userId).orElseThrow(GameOnException::UserNotFound);
-        if (years < 18) {
-            throw GameOnException.badRequest("IllegalAge", "User must be 18-year-old.");
+        Period age;
+        int years;
+        if (userDto.getDob() != null) {
+            age = Period.between(userDto.getDob(), LocalDate.now());
+            years = age.getYears();
+            if (years < 18) {
+                throw GameOnException.badRequest("IllegalAge", "User must be 18-year-old.");
+            }
         }
-        if (userDto.getGender() != Gender.Female && userDto.getGender() != Gender.Male) {
-            throw GameOnException.badRequest("InvalidGender", "Gender must be MALE or FEMALE.");
+
+        if (userDto.getFirstName() != null) {
+            if (userDto.getFirstName().trim().isBlank() || userDto.getFirstName().isEmpty()) {
+                throw GameOnException.badRequest("FirstNameNotFound", "First name is missing");
+            }
         }
-        if (userDto.getBalance() < 0) {
-            throw GameOnException.badRequest("InvalidBalance", "Balance must be a positive number");
+        if (userDto.getLastName() != null) {
+            if (userDto.getLastName().trim().isBlank() || userDto.getLastName().isEmpty()) {
+                throw GameOnException.badRequest("LastNameNotFound", "Last name is missing");
+            }
         }
-        if (userDto.getRole() != Role.USER && userDto.getRole() != Role.ADMIN) {
-            throw GameOnException.badRequest("InvalidRole", "Gender must be " + Role.USER + " or " + Role.ADMIN);
+        if (userDto.getPassword() != null) {
+            if (userDto.getPassword().trim().isBlank() || userDto.getPassword().isEmpty()) {
+                throw GameOnException.badRequest("PasswordNotFound", "Password is missing");
+            }
         }
-        userMapper.updateFromDto(userDto, user);
+        if (userDto.getEmail() != null) {
+            if (userDto.getEmail().trim().isBlank() || userDto.getEmail().isEmpty()) {
+                throw GameOnException.badRequest("EmailNotFound", "Email is missing");
+            }
+        }
+        if (userDto.getTel() != null) {
+            if (userDto.getTel().trim().isBlank() || userDto.getTel().isEmpty()) {
+                throw GameOnException.badRequest("TelephoneNumberNotFound", "Telephone number is missing");
+            }
+        }
+        if (userDto.getAddress() != null) {
+            if (userDto.getAddress().trim().isBlank() || userDto.getAddress().isEmpty()) {
+                throw GameOnException.badRequest("AddressNotFound", "Address is missing");
+            }
+        }
+        if (userDto.getGender() != null) {
+            if (userDto.getGender() != Gender.Female && userDto.getGender() != Gender.Male) {
+                throw GameOnException.badRequest("InvalidGender", "Gender must be MALE or FEMALE.");
+            }
+        }
+        if (userDto.getBalance() != null) {
+            if (userDto.getBalance() < 0) {
+                throw GameOnException.badRequest("InvalidBalance", "Balance must be a positive number");
+            }
+        }
+        if (userDto.getRole() != null) {
+            if (userDto.getRole() != Role.USER && userDto.getRole() != Role.ADMIN) {
+                throw GameOnException.badRequest("InvalidRole", "Gender must be " + Role.USER + " or " + Role.ADMIN);
+            }
+        }
+        userMapper.mapFromDto(userDto, user);
         user = userRepository.save(user);
         return userMapper.toDto(user);
     }

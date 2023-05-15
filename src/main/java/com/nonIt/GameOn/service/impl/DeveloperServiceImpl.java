@@ -68,22 +68,32 @@ public class DeveloperServiceImpl implements DeveloperService {
     public DeveloperRestDto updateDeveloper(Integer developerId, DeveloperDto developerDto) {
         Developer developer = developerRepository.findById(developerId).orElseThrow(GameOnException::DeveloperNotFound);
 
-        if (developerDto.getName().trim().isBlank() || developerDto.getName().isEmpty()) {
-            throw GameOnException.badRequest("DeveloperNameNotFound", "Developer's name is missing.");
+        if (developerDto.getName() != null) {
+            if (developerDto.getName().trim().isBlank() || developerDto.getName().isEmpty()) {
+                throw GameOnException.badRequest("DeveloperNameNotFound", "Developer's name is missing.");
+            }
         }
-        if (developerDto.getDescription().trim().isBlank() || developerDto.getDescription().isEmpty()) {
-            throw GameOnException.badRequest("DeveloperDescriptionNotFound", "Developer's sescription is missing.");
+        if (developerDto.getDescription() != null) {
+            if (developerDto.getDescription().trim().isBlank() || developerDto.getDescription().isEmpty()) {
+                throw GameOnException.badRequest("DeveloperDescriptionNotFound", "Developer's sescription is missing.");
+            }
         }
-        if (developerDto.getThumbnail().trim().isBlank() || developerDto.getThumbnail().isEmpty()) {
-            throw GameOnException.badRequest("DeveloperThumbnailNotFound", "Developer's thumbnail is missing.");
+        if (developerDto.getThumbnail() != null) {
+            if (developerDto.getThumbnail().trim().isBlank() || developerDto.getThumbnail().isEmpty()) {
+                throw GameOnException.badRequest("DeveloperThumbnailNotFound", "Developer's thumbnail is missing.");
+            }
         }
-        if (developerDto.getCoverPhoto().trim().isBlank() || developerDto.getCoverPhoto().isEmpty()) {
-            throw GameOnException.badRequest("DeveloperCoverPhotoNotFound", "Developer's cover photo is missing.");
+        if (developerDto.getCoverPhoto() != null) {
+            if (developerDto.getCoverPhoto().trim().isBlank() || developerDto.getCoverPhoto().isEmpty()) {
+                throw GameOnException.badRequest("DeveloperCoverPhotoNotFound", "Developer's cover photo is missing.");
+            }
         }
-        if (developerDto.getEstablishedDate().isAfter(LocalDate.now())) {
-            throw GameOnException.badRequest("InvalidEstablishedDate", "Established date cannot be after current date.");
+        if (developerDto.getEstablishedDate() != null) {
+            if (developerDto.getEstablishedDate().isAfter(LocalDate.now())) {
+                throw GameOnException.badRequest("InvalidEstablishedDate", "Established date cannot be after current date.");
+            }
         }
-        developerMapper.updateFromDto(developerDto, developer);
+        developerMapper.mapFromDto(developerDto, developer);
         developer = developerRepository.save(developer);
         return developerMapper.toDto(developer);
     }
