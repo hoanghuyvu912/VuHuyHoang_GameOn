@@ -14,6 +14,10 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "user_info")
+@NamedQuery(
+        name = "User.findByGender",
+        query = "SELECT u from User u where u.gender = :string"
+)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
