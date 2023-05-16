@@ -63,17 +63,21 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public CommentRestDto updateComment(Integer commentId, CommentDto commentDto) {
-        User user = userRepository.findById(commentDto.getUserId()).orElseThrow(GameOnException::UserNotFound);
-        Game game = gameRepository.findById(commentDto.getGameId()).orElseThrow(GameOnException::GameNotFound);
         Comment comment = commentRepository.findById(commentId).orElseThrow(GameOnException::CommentNotFound);
-
-        if (commentDto.getCommentContent() == null || commentDto.getCommentContent().trim().isBlank() || commentDto.getCommentContent().isEmpty()) {
-            throw GameOnException.badRequest("CommentContentNotFound", "Comment content is missing.");
+        if (commentDto.getGameId() != null) {
+            Game game = gameRepository.findById(commentDto.getGameId()).orElseThrow(GameOnException::GameNotFound);
+            comment.setGame(game);
         }
-//        commentMapper.mapFromDto(commentDto, comment);
-        comment.setCommentContent(commentDto.getCommentContent());
-        comment.setUser(user);
-        comment.setGame(game);
+        if (commentDto.getUserId() != null) {
+            User user = userRepository.findById(commentDto.getUserId()).orElseThrow(GameOnException::UserNotFound);
+            comment.setUser(user);
+        }
+        if (commentDto.getCommentContent() != null) {
+            if (commentDto.getCommentContent().trim().isBlank() || commentDto.getCommentContent().isEmpty()) {
+                throw GameOnException.badRequest("CommentContentNotFound", "Comment content is missing.");
+            }
+        }
+        commentMapper.mapFromDto(commentDto, comment);
         comment = commentRepository.save(comment);
         return commentMapper.toDto(comment);
     }

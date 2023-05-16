@@ -162,6 +162,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<UserRestDto> findByGender(Gender gender) {
+        return userMapper.toDtos(userRepository.findByGender(gender));
+    }
+
+    @Override
     public void deleteUser(Integer userId) {
         userRepository.deleteById(userId);
     }

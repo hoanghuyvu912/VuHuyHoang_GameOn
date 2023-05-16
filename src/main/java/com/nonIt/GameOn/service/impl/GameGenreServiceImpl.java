@@ -55,11 +55,14 @@ public class GameGenreServiceImpl implements GameGenreService {
     public GameGenreRestDto updateGameGenre(Integer gameGenreId, GameGenreDto gameGenreDto) {
         GameGenre gameGenre = gameGenreRepository.findById(gameGenreId).orElseThrow(GameOnException::GameGenreNotFound);
 
-        Game game = gameRepository.findById(gameGenreDto.getGameId()).orElseThrow(GameOnException::GameNotFound);
-        Genre genre = genreRepository.findById(gameGenreDto.getGenreId()).orElseThrow(GameOnException::GenreNotFound);
-
-        gameGenre.setGame(game);
-        gameGenre.setGenre(genre);
+        if (gameGenreDto.getGameId() != null) {
+            Game game = gameRepository.findById(gameGenreDto.getGameId()).orElseThrow(GameOnException::GameNotFound);
+            gameGenre.setGame(game);
+        }
+        if (gameGenreDto.getGenreId() != null) {
+            Genre genre = genreRepository.findById(gameGenreDto.getGenreId()).orElseThrow(GameOnException::GenreNotFound);
+            gameGenre.setGenre(genre);
+        }
 
         gameGenreRepository.save(gameGenre);
 
