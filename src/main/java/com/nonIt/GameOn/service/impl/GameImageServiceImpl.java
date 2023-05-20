@@ -2,18 +2,17 @@ package com.nonIt.GameOn.service.impl;
 
 import com.nonIt.GameOn.entity.Game;
 import com.nonIt.GameOn.entity.GameImage;
-import com.nonIt.GameOn.entity.Genre;
 import com.nonIt.GameOn.exception.GameOnException;
 import com.nonIt.GameOn.repository.GameImageRepository;
 import com.nonIt.GameOn.repository.GameRepository;
-import com.nonIt.GameOn.repository.GenreRepository;
 import com.nonIt.GameOn.service.GameImageService;
 import com.nonIt.GameOn.service.dto.GameImageDto;
 import com.nonIt.GameOn.service.mapper.GameImageMapper;
 import com.nonIt.GameOn.service.restDto.GameImageRestDto;
-import jakarta.transaction.Transactional;
+//import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;

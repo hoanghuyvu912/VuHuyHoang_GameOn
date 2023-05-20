@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/game_images")
+@RequestMapping(value = "/game-images")
 public class GameImageResources {
     private final GameImageService gameImageService;
 

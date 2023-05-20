@@ -11,9 +11,10 @@ import com.nonIt.GameOn.service.GameSubGenreService;
 import com.nonIt.GameOn.service.dto.GameSubGenreDto;
 import com.nonIt.GameOn.service.mapper.GameSubGenreMapper;
 import com.nonIt.GameOn.service.restDto.GameSubGenreRestDto;
-import jakarta.transaction.Transactional;
+//import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;

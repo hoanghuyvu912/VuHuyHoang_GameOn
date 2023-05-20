@@ -42,7 +42,7 @@ public class CommentResources {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping(value = "/by_user/{userId}")
+    @GetMapping(value = "/by-user/{userId}")
     public ResponseEntity<List<CommentRestDto>> getCommentByUserId(@PathVariable("userId") Integer userId) {
         return ResponseEntity.ok(commentService.getByUserId(userId));
     }

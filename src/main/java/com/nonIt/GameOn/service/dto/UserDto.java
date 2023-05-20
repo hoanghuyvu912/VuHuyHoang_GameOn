@@ -2,7 +2,6 @@ package com.nonIt.GameOn.service.dto;
 
 import com.nonIt.GameOn.entity.Gender;
 import com.nonIt.GameOn.entity.Role;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +14,8 @@ public class UserDto {
     private String firstName;
 
     private String lastName;
+
+    private String username;
 
     private String password;
 

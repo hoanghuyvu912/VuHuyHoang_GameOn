@@ -1,7 +1,6 @@
 package com.nonIt.GameOn.service.restDto;
 
 import com.nonIt.GameOn.entity.User;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
