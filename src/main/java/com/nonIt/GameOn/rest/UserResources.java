@@ -1,5 +1,6 @@
 package com.nonIt.GameOn.rest;
 
+import com.nonIt.GameOn.entity.Gender;
 import com.nonIt.GameOn.service.UserService;
 import com.nonIt.GameOn.service.dto.UserDto;
 import com.nonIt.GameOn.service.restDto.UserRestDto;
@@ -41,5 +42,10 @@ public class UserResources {
     public ResponseEntity<Void> deleteUserById(@PathVariable("userId") Integer userId) {
         userService.deleteUser(userId);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/gender")
+    public ResponseEntity<List<UserRestDto>> getByGender(@RequestParam("string")Gender gender) {
+        return ResponseEntity.ok(userService.findByGender(gender));
     }
 }

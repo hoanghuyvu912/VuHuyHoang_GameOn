@@ -1,5 +1,6 @@
 package com.nonIt.GameOn.service;
 
+import com.nonIt.GameOn.entity.Gender;
 import com.nonIt.GameOn.service.dto.UserDto;
 import com.nonIt.GameOn.service.restDto.UserRestDto;
 
@@ -13,6 +14,8 @@ public interface UserService {
     UserRestDto createUser(UserDto userDto);
 
     UserRestDto updateUser(Integer userId, UserDto userDto);
+
+    List<UserRestDto> findByGender(Gender gender);
 
     void deleteUser(Integer userId);
 }
