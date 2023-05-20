@@ -1,6 +1,5 @@
 package com.nonIt.GameOn.service.impl;
 
-import com.nonIt.GameOn.entity.Game;
 import com.nonIt.GameOn.entity.Receipt;
 import com.nonIt.GameOn.entity.User;
 import com.nonIt.GameOn.exception.GameOnException;
@@ -10,10 +9,10 @@ import com.nonIt.GameOn.service.ReceiptService;
 import com.nonIt.GameOn.service.dto.ReceiptDto;
 import com.nonIt.GameOn.service.mapper.ReceiptMapper;
 import com.nonIt.GameOn.service.restDto.ReceiptRestDto;
-import jakarta.transaction.Transactional;
+//import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;

@@ -6,6 +6,7 @@ import com.nonIt.GameOn.service.dto.UserDto;
 import com.nonIt.GameOn.service.restDto.UserRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
 public class UserResources {
     private final UserService userService;
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping
     public ResponseEntity<List<UserRestDto>> getAllUser() {
         return ResponseEntity.ok(userService.getAll());

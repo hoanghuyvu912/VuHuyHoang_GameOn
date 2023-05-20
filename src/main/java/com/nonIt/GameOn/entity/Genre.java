@@ -1,6 +1,8 @@
 package com.nonIt.GameOn.entity;
 
-import jakarta.persistence.*;
+//import jakarta.persistence.*;
+import javax.persistence.*;
+
 import lombok.*;
 
 @Entity

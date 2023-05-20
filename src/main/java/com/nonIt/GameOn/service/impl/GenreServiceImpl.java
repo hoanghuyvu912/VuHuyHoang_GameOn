@@ -7,9 +7,10 @@ import com.nonIt.GameOn.service.GenreService;
 import com.nonIt.GameOn.service.dto.GenreDto;
 import com.nonIt.GameOn.service.mapper.GenreMapper;
 import com.nonIt.GameOn.service.restDto.GenreRestDto;
-import jakarta.transaction.Transactional;
+//import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;

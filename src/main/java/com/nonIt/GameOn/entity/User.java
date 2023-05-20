@@ -1,12 +1,17 @@
 package com.nonIt.GameOn.entity;
 
-import jakarta.persistence.*;
+//import jakarta.persistence.*;
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -30,7 +35,11 @@ public class User {
     @Column(name = "last_name", length = 500)
     private String lastName;
 
+    @Column(name = "username", length = 500)
+    private String username;
+
     @Column(name = "user_password", length = 1000)
+    @JsonIgnore
     private String password;
 
     @Column(name = "email", length = 1000)
@@ -54,10 +63,13 @@ public class User {
     @Column(name = "balance", columnDefinition="Decimal(20,2)")
     private Double balance;
 
-    @Column(name = "user_role")
-    @Enumerated(EnumType.STRING)
-    private Role role;
+//    @Column(name = "user_role")
+//    @Enumerated(EnumType.STRING)
+//    private Role role;
 
     @Column(name = "active")
     private boolean active;
+
+    @OneToMany(mappedBy = "users")
+    private List<UserRoleAssignment> roles = new ArrayList<>();
 }

@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface UserService {
     List<UserRestDto> getAll();
+
     UserRestDto findById(Integer userId);
 
     UserRestDto createUser(UserDto userDto);

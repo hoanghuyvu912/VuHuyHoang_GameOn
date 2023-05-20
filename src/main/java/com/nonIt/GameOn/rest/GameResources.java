@@ -4,11 +4,12 @@ import com.nonIt.GameOn.service.GameService;
 import com.nonIt.GameOn.service.dto.GameDto;
 import com.nonIt.GameOn.service.dto.UserDto;
 import com.nonIt.GameOn.service.restDto.GameRestDto;
-import jakarta.validation.Valid;
+//import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController

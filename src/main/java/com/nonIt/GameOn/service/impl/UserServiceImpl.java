@@ -74,8 +74,8 @@ public class UserServiceImpl implements UserService {
         if (userDto.getBalance() < 0) {
             throw GameOnException.badRequest("InvalidBalance", "Balance must be a positive number");
         }
-        if (userDto.getRole() != Role.USER && userDto.getRole() != Role.ADMIN) {
-            throw GameOnException.badRequest("InvalidRole", "Gender must be " + Role.USER + " or " + Role.ADMIN);
+        if (userDto.getRole() != Role.ROLE_USER && userDto.getRole() != Role.ROLE_ADMIN) {
+            throw GameOnException.badRequest("InvalidRole", "Gender must be " + Role.ROLE_USER + " or " + Role.ROLE_ADMIN);
         }
 
         User user = User.builder()
@@ -89,7 +89,6 @@ public class UserServiceImpl implements UserService {
                 .gender(userDto.getGender())
                 .profileImg(userDto.getProfileImg())
                 .balance(userDto.getBalance())
-                .role(userDto.getRole())
                 .active(userDto.isActive())
                 .build();
 
@@ -152,8 +151,8 @@ public class UserServiceImpl implements UserService {
             }
         }
         if (userDto.getRole() != null) {
-            if (userDto.getRole() != Role.USER && userDto.getRole() != Role.ADMIN) {
-                throw GameOnException.badRequest("InvalidRole", "Gender must be " + Role.USER + " or " + Role.ADMIN);
+            if (userDto.getRole() != Role.ROLE_USER && userDto.getRole() != Role.ROLE_ADMIN) {
+                throw GameOnException.badRequest("InvalidRole", "Gender must be " + Role.ROLE_USER + " or " + Role.ROLE_ADMIN);
             }
         }
         userMapper.mapFromDto(userDto, user);
