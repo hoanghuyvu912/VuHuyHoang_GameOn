@@ -3,12 +3,17 @@ package com.nonIt.GameOn.service.impl;
 import com.nonIt.GameOn.entity.Gender;
 import com.nonIt.GameOn.entity.Role;
 import com.nonIt.GameOn.entity.User;
+import com.nonIt.GameOn.entity.UserRoleAssignment;
 import com.nonIt.GameOn.exception.GameOnException;
 import com.nonIt.GameOn.repository.UserRepository;
+import com.nonIt.GameOn.repository.UserRoleAssignmentRepository;
+import com.nonIt.GameOn.service.UserRoleAssignmentService;
 import com.nonIt.GameOn.service.UserService;
 import com.nonIt.GameOn.service.dto.UserDto;
+import com.nonIt.GameOn.service.dto.UserRoleAssignmentDto;
 import com.nonIt.GameOn.service.mapper.UserMapper;
 import com.nonIt.GameOn.service.restDto.UserRestDto;
+import com.nonIt.GameOn.service.restDto.UserRoleAssignmentRestDto;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,7 +30,10 @@ import java.util.stream.Collectors;
 @Transactional
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
+    private final UserRoleAssignmentRepository userRoleAssignmentRepository;
     private final UserRepository userRepository;
+
+    private final UserRoleAssignmentService userRoleAssignmentService;
     private final UserMapper userMapper;
 
     @Override
@@ -74,9 +83,7 @@ public class UserServiceImpl implements UserService {
         if (userDto.getBalance() < 0) {
             throw GameOnException.badRequest("InvalidBalance", "Balance must be a positive number");
         }
-        if (userDto.getRole() != Role.ROLE_USER && userDto.getRole() != Role.ROLE_ADMIN) {
-            throw GameOnException.badRequest("InvalidRole", "Gender must be " + Role.ROLE_USER + " or " + Role.ROLE_ADMIN);
-        }
+
 
         User user = User.builder()
                 .firstName(userDto.getFirstName())
@@ -150,11 +157,11 @@ public class UserServiceImpl implements UserService {
                 throw GameOnException.badRequest("InvalidBalance", "Balance must be a positive number");
             }
         }
-        if (userDto.getRole() != null) {
-            if (userDto.getRole() != Role.ROLE_USER && userDto.getRole() != Role.ROLE_ADMIN) {
-                throw GameOnException.badRequest("InvalidRole", "Gender must be " + Role.ROLE_USER + " or " + Role.ROLE_ADMIN);
-            }
-        }
+//        if (userDto.getRole() != null) {
+//            if (userDto.getRole() != Role.ROLE_USER && userDto.getRole() != Role.ROLE_ADMIN) {
+//                throw GameOnException.badRequest("InvalidRole", "Role must be " + Role.ROLE_USER + " or " + Role.ROLE_ADMIN);
+//            }
+//        }
         userMapper.mapFromDto(userDto, user);
         user = userRepository.save(user);
         return userMapper.toDto(user);

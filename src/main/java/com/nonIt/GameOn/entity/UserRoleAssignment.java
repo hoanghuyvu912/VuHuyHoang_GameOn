@@ -3,6 +3,7 @@ package com.nonIt.GameOn.entity;
 //import jakarta.persistence.*;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,6 +27,7 @@ public class UserRoleAssignment {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="user_id")
     private User users;

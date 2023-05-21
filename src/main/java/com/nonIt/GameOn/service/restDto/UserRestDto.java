@@ -2,11 +2,14 @@ package com.nonIt.GameOn.service.restDto;
 
 import com.nonIt.GameOn.entity.Gender;
 import com.nonIt.GameOn.entity.Role;
+import com.nonIt.GameOn.entity.UserRoleAssignment;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -36,7 +39,8 @@ public class UserRestDto {
 
     private Double balance;
 
-    private Role role;
+    //    private Role role;
+    private List<UserRoleAssignment> roles = new ArrayList<>();
 
     private boolean active;
 }

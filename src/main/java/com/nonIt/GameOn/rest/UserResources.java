@@ -14,10 +14,10 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/users")
+@PreAuthorize("hasRole('ADMIN')")
 public class UserResources {
     private final UserService userService;
 
-    @PreAuthorize("hasRole('USER')")
     @GetMapping
     public ResponseEntity<List<UserRestDto>> getAllUser() {
         return ResponseEntity.ok(userService.getAll());

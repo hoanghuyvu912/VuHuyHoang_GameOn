@@ -5,6 +5,7 @@ import com.nonIt.GameOn.service.dto.GameImageDto;
 import com.nonIt.GameOn.service.restDto.GameImageRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/game-images")
+@PreAuthorize("hasRole('ADMIN')")
 public class GameImageResources {
     private final GameImageService gameImageService;
 

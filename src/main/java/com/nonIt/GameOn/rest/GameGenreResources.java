@@ -5,6 +5,7 @@ import com.nonIt.GameOn.service.dto.GameGenreDto;
 import com.nonIt.GameOn.service.restDto.GameGenreRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/game_genres")
+@PreAuthorize("hasRole('ADMIN')")
 public class GameGenreResources {
     private final GameGenreService gameGenreService;
 

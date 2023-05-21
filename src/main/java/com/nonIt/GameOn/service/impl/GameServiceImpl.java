@@ -35,6 +35,41 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
+    public List<GameRestDto> findByNameContaining(String name) {
+        return gameRepository.findByNameContaining(name).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByReleasedDateAfter(LocalDate date) {
+        return gameRepository.findByReleasedDateAfter(date).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByReleasedDateBefore(LocalDate date) {
+        return gameRepository.findByReleasedDateBefore(date).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByPriceGreaterThan(Double price) {
+        return gameRepository.findByPriceGreaterThan(price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByPriceLessThan(Double price) {
+        return gameRepository.findByPriceLessThan(price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> getByDeveloperId(Integer developerId) {
+        return gameRepository.getByDeveloperId(developerId).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> getByPublisherId(Integer publisherId) {
+        return gameRepository.getByPublisherId(publisherId).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
     public GameRestDto findById(Integer gameId) {
         Game game = gameRepository.findById(gameId).orElseThrow(GameOnException::GameNotFound);
         return gameMapper.toDto(game);
