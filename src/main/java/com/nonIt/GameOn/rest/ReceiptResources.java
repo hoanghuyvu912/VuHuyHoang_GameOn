@@ -5,6 +5,7 @@ import com.nonIt.GameOn.service.dto.ReceiptDto;
 import com.nonIt.GameOn.service.restDto.ReceiptRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/receipts")
+@PreAuthorize("hasRole('ADMIN')")
 public class ReceiptResources {
     private final ReceiptService receiptService;
 
@@ -25,6 +27,7 @@ public class ReceiptResources {
         return ResponseEntity.ok(receiptService.findById(receiptId));
     }
 
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @PostMapping
     public ResponseEntity<ReceiptRestDto> createReceipt(@RequestBody ReceiptDto receiptDto) {
         return ResponseEntity.ok(receiptService.createReceipt(receiptDto));

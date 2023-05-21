@@ -1,6 +1,7 @@
 package com.nonIt.GameOn.entity;
 
 //import jakarta.persistence.*;
+
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -60,7 +61,7 @@ public class User {
     @Column(name = "profile_img", length = 5000)
     private String profileImg;
 
-    @Column(name = "balance", columnDefinition="Decimal(20,2)")
+    @Column(name = "balance", columnDefinition = "Decimal(20,2)")
     private Double balance;
 
 //    @Column(name = "user_role")
@@ -70,6 +71,6 @@ public class User {
     @Column(name = "active")
     private boolean active;
 
-    @OneToMany(mappedBy = "users")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
     private List<UserRoleAssignment> roles = new ArrayList<>();
 }

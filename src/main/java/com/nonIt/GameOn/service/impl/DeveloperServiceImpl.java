@@ -29,6 +29,21 @@ public class DeveloperServiceImpl implements DeveloperService {
     }
 
     @Override
+    public List<DeveloperRestDto> findByName(String name) {
+        return developerRepository.findByName(name).stream().map(developerMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<DeveloperRestDto> findByEstablishedDateAfter(LocalDate date) {
+        return developerRepository.findByEstablishedDateAfter(date).stream().map(developerMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<DeveloperRestDto> findByEstablishedDateBefore(LocalDate date) {
+        return developerRepository.findByEstablishedDateBefore(date).stream().map(developerMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
     public DeveloperRestDto findById(Integer developerId) {
         Developer developer = developerRepository.findById(developerId).orElseThrow(GameOnException::DeveloperNotFound);
         return developerMapper.toDto(developer);

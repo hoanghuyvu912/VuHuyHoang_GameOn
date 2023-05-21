@@ -5,6 +5,7 @@ import com.nonIt.GameOn.service.dto.PublisherDto;
 import com.nonIt.GameOn.service.restDto.PublisherRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,16 +26,19 @@ public class PublisherResources {
         return ResponseEntity.ok(PublisherService.findById(publisherId));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<PublisherRestDto> createPublisher(@RequestBody PublisherDto PublisherDto) {
         return ResponseEntity.ok(PublisherService.createPublisher(PublisherDto));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(value = "/{publisherId}")
     public ResponseEntity<PublisherRestDto> updatePublisherById(@PathVariable("publisherId") Integer publisherId, @RequestBody PublisherDto PublisherDto) {
         return ResponseEntity.ok(PublisherService.updatePublisher(publisherId, PublisherDto));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping(value = "/{publisherId}")
     public ResponseEntity<Void> deletePublisherById(@PathVariable("publisherId") Integer publisherId) {
         PublisherService.deletePublisher(publisherId);

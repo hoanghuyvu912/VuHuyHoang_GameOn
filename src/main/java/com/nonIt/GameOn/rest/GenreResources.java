@@ -5,6 +5,7 @@ import com.nonIt.GameOn.service.dto.GenreDto;
 import com.nonIt.GameOn.service.restDto.GenreRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,16 +26,19 @@ public class GenreResources {
         return ResponseEntity.ok(genreService.findById(genreId));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<GenreRestDto> createGenre(@RequestBody GenreDto genreDto) {
         return ResponseEntity.ok(genreService.createGenre(genreDto));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(value = "/{genreId}")
     public ResponseEntity<GenreRestDto> updateGenreById(@PathVariable("genreId") Integer genreId, @RequestBody GenreDto genreDto) {
         return ResponseEntity.ok(genreService.updateGenre(genreId, genreDto));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping(value = "/{genreId}")
     public ResponseEntity<Void> deleteGenreById(@PathVariable("genreId") Integer genreId) {
         genreService.deleteGenre(genreId);
