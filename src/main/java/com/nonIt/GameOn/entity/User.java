@@ -64,10 +64,6 @@ public class User {
     @Column(name = "balance", columnDefinition = "Decimal(20,2)")
     private Double balance;
 
-//    @Column(name = "user_role")
-//    @Enumerated(EnumType.STRING)
-//    private Role role;
-
     @Column(name = "active")
     private boolean active;
 

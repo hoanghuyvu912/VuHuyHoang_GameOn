@@ -78,4 +78,9 @@ public class RatingServiceImpl implements RatingService {
     public void deleteRating(Integer ratingId) {
         ratingRepository.deleteById(ratingId);
     }
+
+    @Override
+    public List<RatingRestDto> getByUserId(Integer userId) {
+        return ratingRepository.getRatingByUserId(userId).stream().map(ratingMapper::toDto).collect(Collectors.toList());
+    }
 }

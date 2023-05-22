@@ -2,6 +2,7 @@ package com.nonIt.GameOn.rest;
 
 import com.nonIt.GameOn.service.ReceiptService;
 import com.nonIt.GameOn.service.dto.ReceiptDto;
+import com.nonIt.GameOn.service.restDto.CommentRestDto;
 import com.nonIt.GameOn.service.restDto.ReceiptRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -42,5 +43,11 @@ public class ReceiptResources {
     public ResponseEntity<Void> deleteReceiptById(@PathVariable("receiptId") Integer receiptId) {
         receiptService.deleteReceipt(receiptId);
         return ResponseEntity.noContent().build();
+    }
+
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @GetMapping(value = "/by-user/{userId}")
+    public ResponseEntity<List<ReceiptRestDto>> getCommentByUserId(@PathVariable("userId") Integer userId) {
+        return ResponseEntity.ok(receiptService.getByUserId(userId));
     }
 }
