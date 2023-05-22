@@ -23,12 +23,12 @@ public class DeveloperResources {
         return ResponseEntity.ok(developerService.getAll());
     }
 
-    @GetMapping
+    @GetMapping(value = "/established-after")
     public ResponseEntity<List<DeveloperRestDto>> findByEstablishedDateAfter(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return ResponseEntity.ok(developerService.findByEstablishedDateAfter(date));
     }
 
-    @GetMapping
+    @GetMapping(value = "/established-before")
     public ResponseEntity<List<DeveloperRestDto>> findByEstablishedDateBefore(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return ResponseEntity.ok(developerService.findByEstablishedDateBefore(date));
     }

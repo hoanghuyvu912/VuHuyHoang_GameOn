@@ -41,4 +41,17 @@ public class UserRoleAssignmentServiceImpl implements UserRoleAssignmentService 
 
         return userRoleAssignmentMapper.toDto(userRoleAssignment);
     }
+
+
+    @Override
+    public UserRoleAssignmentRestDto updateUserRoleAssignment(UserRoleAssignmentDto userRoleAssignmentDto, Integer userRoleAssignmentId) {
+        UserRoleAssignment userRoleAssignment = userRoleAssignmentRepository.findById(userRoleAssignmentId).orElseThrow(GameOnException::UserRoleAssignmentNotFound);
+//        User user = userRepository.findById(userRoleAssignmentDto.getUserId()).orElseThrow(GameOnException::UserNotFound);
+
+        userRoleAssignmentMapper.mapFromDto(userRoleAssignmentDto, userRoleAssignment);
+
+        userRoleAssignment = userRoleAssignmentRepository.save(userRoleAssignment);
+
+        return userRoleAssignmentMapper.toDto(userRoleAssignment);
+    }
 }

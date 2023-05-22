@@ -71,6 +71,6 @@ public class User {
     @Column(name = "active")
     private boolean active;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "users", cascade = CascadeType.PERSIST)
     private List<UserRoleAssignment> roles = new ArrayList<>();
 }
