@@ -10,10 +10,9 @@ import java.util.List;
 
 @Repository
 public interface DeveloperRepository extends JpaRepository<Developer, Integer> {
-    List<Developer> findByName(String name);
+    List<Developer> findByNameContaining(String name);
 
     List<Developer> findByEstablishedDateAfter(LocalDate date);
 
     List<Developer> findByEstablishedDateBefore(LocalDate date);
-
 }

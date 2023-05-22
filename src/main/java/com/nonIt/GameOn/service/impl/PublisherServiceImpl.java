@@ -19,18 +19,33 @@ import java.util.stream.Collectors;
 @Transactional
 @RequiredArgsConstructor
 public class PublisherServiceImpl implements PublisherService {
-    private final PublisherRepository PublisherRepository;
-    private final PublisherMapper PublisherMapper;
+    private final PublisherRepository publisherRepository;
+    private final PublisherMapper publisherMapper;
 
     @Override
     public List<PublisherRestDto> getAll() {
-        return PublisherRepository.findAll().stream().map(PublisherMapper::toDto).collect(Collectors.toList());
+        return publisherRepository.findAll().stream().map(publisherMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PublisherRestDto> findByNameContaining(String name) {
+        return publisherRepository.findByNameContaining(name).stream().map(publisherMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PublisherRestDto> findByEstablishedDateAfter(LocalDate date) {
+        return publisherRepository.findByEstablishedDateAfter(date).stream().map(publisherMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PublisherRestDto> findByEstablishedDateBefore(LocalDate date) {
+        return publisherRepository.findByEstablishedDateBefore(date).stream().map(publisherMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
     public PublisherRestDto findById(Integer publisherId) {
-        Publisher Publisher = PublisherRepository.findById(publisherId).orElseThrow(GameOnException::PublisherNotFound);
-        return PublisherMapper.toDto(Publisher);
+        Publisher publisher = publisherRepository.findById(publisherId).orElseThrow(GameOnException::PublisherNotFound);
+        return publisherMapper.toDto(publisher);
     }
 
     @Override
@@ -58,13 +73,13 @@ public class PublisherServiceImpl implements PublisherService {
                 .establishedDate(publisherDto.getEstablishedDate())
                 .build();
 
-        publisher = PublisherRepository.save(publisher);
-        return PublisherMapper.toDto(publisher);
+        publisher = publisherRepository.save(publisher);
+        return publisherMapper.toDto(publisher);
     }
 
     @Override
     public PublisherRestDto updatePublisher(Integer publisherId, PublisherDto publisherDto) {
-        Publisher publisher = PublisherRepository.findById(publisherId).orElseThrow(GameOnException::PublisherNotFound);
+        Publisher publisher = publisherRepository.findById(publisherId).orElseThrow(GameOnException::PublisherNotFound);
 
         if (publisherDto.getName() != null) {
             if (publisherDto.getName().trim().isBlank() || publisherDto.getName().isEmpty()) {
@@ -91,13 +106,13 @@ public class PublisherServiceImpl implements PublisherService {
                 throw GameOnException.badRequest("InvalidEstablishedDate", "Established date cannot be after current date.");
             }
         }
-        PublisherMapper.mapFromDto(publisherDto, publisher);
-        publisher = PublisherRepository.save(publisher);
-        return PublisherMapper.toDto(publisher);
+        publisherMapper.mapFromDto(publisherDto, publisher);
+        publisher = publisherRepository.save(publisher);
+        return publisherMapper.toDto(publisher);
     }
 
     @Override
     public void deletePublisher(Integer PublisherId) {
-        PublisherRepository.deleteById(PublisherId);
+        publisherRepository.deleteById(PublisherId);
     }
 }

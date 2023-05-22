@@ -1,6 +1,7 @@
 package com.nonIt.GameOn.service;
 
 import com.nonIt.GameOn.service.dto.ReceiptDto;
+import com.nonIt.GameOn.service.restDto.CommentRestDto;
 import com.nonIt.GameOn.service.restDto.ReceiptRestDto;
 
 import java.util.List;
@@ -15,4 +16,5 @@ public interface ReceiptService {
     ReceiptRestDto updateReceipt(Integer receiptId, ReceiptDto receiptDto);
 
     void deleteReceipt(Integer receiptId);
+    List<ReceiptRestDto> getByUserId(Integer userId);
 }

@@ -72,4 +72,9 @@ public class ReceiptServiceImpl implements ReceiptService {
     public void deleteReceipt(Integer receiptId) {
         receiptRepository.deleteById(receiptId);
     }
+
+    @Override
+    public List<ReceiptRestDto> getByUserId(Integer userId) {
+        return receiptRepository.getReceiptByUserId(userId).stream().map(receiptMapper::toDto).collect(Collectors.toList());
+    }
 }

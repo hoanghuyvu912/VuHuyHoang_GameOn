@@ -2,6 +2,7 @@ package com.nonIt.GameOn.rest;
 
 import com.nonIt.GameOn.service.RatingService;
 import com.nonIt.GameOn.service.dto.RatingDto;
+import com.nonIt.GameOn.service.restDto.CommentRestDto;
 import com.nonIt.GameOn.service.restDto.RatingRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -43,5 +44,11 @@ public class RatingResources {
     public ResponseEntity<Void> deleteRatingById(@PathVariable("ratingId") Integer ratingId) {
         ratingService.deleteRating(ratingId);
         return ResponseEntity.noContent().build();
+    }
+
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @GetMapping("/by-user/{userId}")
+    public ResponseEntity<List<RatingRestDto>> getRatingByUserId(@PathVariable("userId") Integer userId) {
+        return ResponseEntity.ok(ratingService.getByUserId(userId));
     }
 }

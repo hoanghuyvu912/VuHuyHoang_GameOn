@@ -23,6 +23,11 @@ public class DeveloperResources {
         return ResponseEntity.ok(developerService.getAll());
     }
 
+    @GetMapping(value = "/name-contain")
+    public ResponseEntity<List<DeveloperRestDto>> findByNameContaining(@RequestParam("name") String name) {
+        return ResponseEntity.ok(developerService.findByNameContaining("%" + name + "%"));
+    }
+
     @GetMapping(value = "/established-after")
     public ResponseEntity<List<DeveloperRestDto>> findByEstablishedDateAfter(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return ResponseEntity.ok(developerService.findByEstablishedDateAfter(date));

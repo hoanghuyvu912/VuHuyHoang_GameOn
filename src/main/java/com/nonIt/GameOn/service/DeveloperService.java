@@ -9,7 +9,7 @@ import java.util.List;
 public interface DeveloperService {
     List<DeveloperRestDto> getAll();
 
-    List<DeveloperRestDto> findByName(String name);
+    List<DeveloperRestDto> findByNameContaining(String name);
 
     List<DeveloperRestDto> findByEstablishedDateAfter(LocalDate date);
     List<DeveloperRestDto> findByEstablishedDateBefore(LocalDate date);

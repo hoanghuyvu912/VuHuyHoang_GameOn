@@ -29,8 +29,8 @@ public class DeveloperServiceImpl implements DeveloperService {
     }
 
     @Override
-    public List<DeveloperRestDto> findByName(String name) {
-        return developerRepository.findByName(name).stream().map(developerMapper::toDto).collect(Collectors.toList());
+    public List<DeveloperRestDto> findByNameContaining(String name) {
+        return developerRepository.findByNameContaining(name).stream().map(developerMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
