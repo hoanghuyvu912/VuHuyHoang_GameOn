@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +85,6 @@ public class UserServiceImpl implements UserService {
             throw GameOnException.badRequest("InvalidBalance", "Balance must be a positive number");
         }
 
-
         User user = User.builder()
                 .firstName(userDto.getFirstName())
                 .lastName(userDto.getLastName())
@@ -98,6 +98,17 @@ public class UserServiceImpl implements UserService {
                 .balance(userDto.getBalance())
                 .active(userDto.isActive())
                 .build();
+
+        List<UserRoleAssignment> tempList = new ArrayList<>();
+
+        for(int i = 0; i < userDto.getRoles().size(); i++) {
+            UserRoleAssignment role = new UserRoleAssignment();
+            role.setRole(userDto.getRoles().get(i));
+            role.setUsers(user);
+            tempList.add(role);
+        }
+
+        user.setRoles(tempList);
 
         user = userRepository.save(user);
 

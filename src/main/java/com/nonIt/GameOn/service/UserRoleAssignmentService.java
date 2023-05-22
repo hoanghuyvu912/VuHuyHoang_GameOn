@@ -5,4 +5,6 @@ import com.nonIt.GameOn.service.restDto.UserRoleAssignmentRestDto;
 
 public interface UserRoleAssignmentService {
     UserRoleAssignmentRestDto createUserRoleAssignment(UserRoleAssignmentDto userRoleAssignmentDto);
+
+    UserRoleAssignmentRestDto updateUserRoleAssignment(UserRoleAssignmentDto userRoleAssignmentDto, Integer userRoleAssignmentId);
 }

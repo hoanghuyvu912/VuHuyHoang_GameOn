@@ -8,14 +8,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserRoleAssignmentDto {
-    private LocalDateTime assignedDate;
+    private LocalDate assignedDate;
     private Role role;
-    private LocalDateTime updatedDate;
+    private LocalDate updatedDate;
     private Integer userId;
 }

@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -34,9 +35,9 @@ public class UserRoleAssignment {
 
     @CreationTimestamp
     @Column(name = "assigned_date")
-    private LocalDateTime assignedDate;
+    private LocalDate assignedDate;
 
     @UpdateTimestamp
     @Column(name = "modified_date")
-    private LocalDateTime updatedDate;
+    private LocalDate updatedDate;
 }

@@ -37,8 +37,7 @@ public class UserDto {
 
     private Double balance;
 
-
-//    private List<UserRoleAssignment> roles = new ArrayList<>();
+    private List<Role> roles = new ArrayList<>();
 
 //    private UserRoleAssignmentDto userRoleAssignmentDto;
 

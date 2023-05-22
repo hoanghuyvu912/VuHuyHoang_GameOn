@@ -1,14 +1,10 @@
 package com.nonIt.GameOn.rest;
 
-import com.nonIt.GameOn.entity.Game;
 import com.nonIt.GameOn.service.GameService;
 import com.nonIt.GameOn.service.dto.GameDto;
-import com.nonIt.GameOn.service.dto.UserDto;
 import com.nonIt.GameOn.service.restDto.GameRestDto;
 //import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

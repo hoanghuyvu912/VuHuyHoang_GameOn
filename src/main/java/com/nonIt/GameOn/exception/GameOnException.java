@@ -42,6 +42,9 @@ public class GameOnException {
     private static final String USER_NOT_FOUND_MSG_KEY = "UserNotExisted";
     private static final String USER_NOT_FOUND_MSG = "User Not Found";
 
+    private static final String USER_ROLE_ASSIGNMENT_NOT_FOUND_MSG_KEY = "UserRoleAssignmentNotExisted";
+    private static final String USER_ROLE_ASSIGNMENT_NOT_FOUND_MSG = "User Role Assignment Not Found";
+
 
 
     public static ResponseException notFound(String msgKey, String msg) {
@@ -107,4 +110,9 @@ public class GameOnException {
     public static ResponseException UserNotFound() {
         return notFound(USER_NOT_FOUND_MSG_KEY, USER_NOT_FOUND_MSG);
     }
+
+    public static ResponseException UserRoleAssignmentNotFound() {
+        return notFound(USER_ROLE_ASSIGNMENT_NOT_FOUND_MSG_KEY, USER_ROLE_ASSIGNMENT_NOT_FOUND_MSG);
+    }
+
 }
