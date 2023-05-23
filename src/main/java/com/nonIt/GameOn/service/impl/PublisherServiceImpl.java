@@ -29,11 +29,17 @@ public class PublisherServiceImpl implements PublisherService {
 
     @Override
     public List<PublisherRestDto> findByNameContaining(String name) {
+        if (name == null || name.trim().isBlank() || name.isEmpty()) {
+            throw GameOnException.badRequest("NameMissing", "Query name is missing");
+        }
         return publisherRepository.findByNameContaining(name).stream().map(publisherMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
     public List<PublisherRestDto> findByEstablishedDateAfter(LocalDate date) {
+        if(date.isAfter(LocalDate.now())){
+            throw GameOnException.badRequest("InvalidDate", "Query date cannot be after current date.");
+        }
         return publisherRepository.findByEstablishedDateAfter(date).stream().map(publisherMapper::toDto).collect(Collectors.toList());
     }
 

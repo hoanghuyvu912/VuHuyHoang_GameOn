@@ -192,37 +192,58 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserRestDto> findByGender(Gender gender) {
+        if (gender != Gender.Female && gender != Gender.Male) {
+            throw GameOnException.badRequest("InvalidGender", "Gender must be MALE or FEMALE.");
+        }
         return userMapper.toDtos(userRepository.findByGender(gender));
     }
 
     @Override
     public List<UserRestDto> findByFirstNameContaining(String name) {
+        if (name == null || name.trim().isBlank() || name.isEmpty()) {
+            throw GameOnException.badRequest("NameMissing", "Query name is missing");
+        }
         return userRepository.findByFirstNameContaining(name).stream().map(userMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
     public List<UserRestDto> findByLastNameContaining(String name) {
+        if (name == null || name.trim().isBlank() || name.isEmpty()) {
+            throw GameOnException.badRequest("NameMissing", "Query name is missing");
+        }
         return userRepository.findByLastNameContaining(name).stream().map(userMapper::toDto).collect(Collectors.toList());
 
     }
 
     @Override
-    public List<UserRestDto> findByEmailContaining(String name) {
-        return userRepository.findByEmailContaining(name).stream().map(userMapper::toDto).collect(Collectors.toList());
+    public List<UserRestDto> findByEmailContaining(String email) {
+        if (email == null || email.trim().isBlank() || email.isEmpty()) {
+            throw GameOnException.badRequest("EmailMissing", "Query email is missing");
+        }
+        return userRepository.findByEmailContaining(email).stream().map(userMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<UserRestDto> findByTelContaining(String name) {
-        return userRepository.findByTelContaining(name).stream().map(userMapper::toDto).collect(Collectors.toList());
+    public List<UserRestDto> findByTelContaining(String tel) {
+        if (tel == null || tel.trim().isBlank() || tel.isEmpty()) {
+            throw GameOnException.badRequest("TelephoneNumberMissing", "Query telephone number is missing");
+        }
+        return userRepository.findByTelContaining(tel).stream().map(userMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<UserRestDto> findByAddressContaining(String name) {
-        return userRepository.findByAddressContaining(name).stream().map(userMapper::toDto).collect(Collectors.toList());
+    public List<UserRestDto> findByAddressContaining(String address) {
+        if (address == null || address.trim().isBlank() || address.isEmpty()) {
+            throw GameOnException.badRequest("AddressMissing", "Query address is missing");
+        }
+        return userRepository.findByAddressContaining(address).stream().map(userMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
     public List<UserRestDto> findByDobAfter(LocalDate date) {
+        if (date.isAfter(LocalDate.now())) {
+            throw GameOnException.badRequest("InvalidDate", "Query date cannot be after current date.");
+        }
         return userRepository.findByDobAfter(date).stream().map(userMapper::toDto).collect(Collectors.toList());
     }
 
@@ -233,11 +254,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserRestDto> findByBalanceGreaterThan(Double balance) {
+        if (balance < 0) {
+            throw GameOnException.badRequest("InvalidBalance", "Query balance must be a positive number.");
+        }
         return userRepository.findByBalanceGreaterThan(balance).stream().map(userMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
     public List<UserRestDto> findByBalanceLessThan(Double balance) {
+        if (balance < 0) {
+            throw GameOnException.badRequest("InvalidBalance", "Query balance must be a positive number.");
+        }
         return userRepository.findByBalanceLessThan(balance).stream().map(userMapper::toDto).collect(Collectors.toList());
     }
 

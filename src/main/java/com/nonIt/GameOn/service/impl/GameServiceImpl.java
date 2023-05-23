@@ -80,6 +80,26 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
+    public List<GameRestDto> getByGenreId(Integer genreId) {
+        return gameRepository.getByGenreId(genreId).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> getByGenreName(String genreName) {
+        return gameRepository.getByGenreName(genreName).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> getBySubGenreId(Integer subGenreId) {
+        return gameRepository.getByGenreId(subGenreId).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> getBySubGenreName(String subGenreName) {
+        return gameRepository.getBySubGenreName(subGenreName).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
     public GameRestDto findById(Integer gameId) {
         Game game = gameRepository.findById(gameId).orElseThrow(GameOnException::GameNotFound);
         return gameMapper.toDto(game);
