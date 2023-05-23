@@ -21,18 +21,18 @@ import java.util.stream.Collectors;
 @Transactional
 @RequiredArgsConstructor
 public class GameImageServiceImpl implements GameImageService {
-    private final GameImageRepository GameImageRepository;
+    private final GameImageRepository gameImageRepository;
     private final GameRepository gameRepository;
-    private final GameImageMapper GameImageMapper;
+    private final GameImageMapper gameImageMapper;
 
     @Override
     public List<GameImageRestDto> getAll() {
-        return GameImageRepository.findAll().stream().map(GameImageMapper::toDto).collect(Collectors.toList());
+        return gameImageRepository.findAll().stream().map(gameImageMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
     public GameImageRestDto findById(Integer gameImageId) {
-        return GameImageRepository.findById(gameImageId).map(GameImageMapper::toDto).orElseThrow(GameOnException::GameImageNotFound);
+        return gameImageRepository.findById(gameImageId).map(gameImageMapper::toDto).orElseThrow(GameOnException::GameImageNotFound);
     }
 
     @Override
@@ -48,13 +48,13 @@ public class GameImageServiceImpl implements GameImageService {
                 .imageLink(gameImageDto.getImageLink())
                 .build();
 
-        gameImage = GameImageRepository.save(gameImage);
-        return GameImageMapper.toDto(gameImage);
+        gameImage = gameImageRepository.save(gameImage);
+        return gameImageMapper.toDto(gameImage);
     }
 
     @Override
     public GameImageRestDto updateGameImage(Integer GameImageId, GameImageDto gameImageDto) {
-        GameImage gameImage = GameImageRepository.findById(GameImageId).orElseThrow(GameOnException::GameImageNotFound);
+        GameImage gameImage = gameImageRepository.findById(GameImageId).orElseThrow(GameOnException::GameImageNotFound);
 
         Game game = gameRepository.findById(gameImageDto.getGameId()).orElseThrow(GameOnException::GameNotFound);
 
@@ -65,13 +65,23 @@ public class GameImageServiceImpl implements GameImageService {
         gameImage.setGame(game);
         gameImage.setImageLink(gameImageDto.getImageLink());
 
-        GameImageRepository.save(gameImage);
+        gameImageRepository.save(gameImage);
 
-        return GameImageMapper.toDto(gameImage);
+        return gameImageMapper.toDto(gameImage);
     }
 
     @Override
     public void deleteGameImage(Integer gameImageId) {
-        GameImageRepository.deleteById(gameImageId);
+        gameImageRepository.deleteById(gameImageId);
+    }
+
+    @Override
+    public List<GameImageRestDto> getByGameId(Integer gameId) {
+        return gameImageRepository.getByGameId(gameId).stream().map(gameImageMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameImageRestDto> getByGameName(String gameName) {
+        return gameImageRepository.getByGameName(gameName).stream().map(gameImageMapper::toDto).collect(Collectors.toList());
     }
 }

@@ -13,13 +13,24 @@ import java.util.List;
 @Repository
 public interface GameRepository extends JpaRepository<Game, Integer> {
     List<Game> findByNameContaining(String name);
+
     List<Game> findByReleasedDateAfter(LocalDate date);
+
     List<Game> findByReleasedDateBefore(LocalDate date);
+
     List<Game> findByPriceGreaterThan(Double price);
+
     List<Game> findByPriceLessThan(Double price);
+
     @Query(value = "SELECT g from Game g join Developer d on g.developer.id = d.id where d.id = :developerId")
     List<Game> getByDeveloperId(@Param("developerId") Integer developerId);
 
     @Query(value = "SELECT g from Game g join Publisher p on g.publisher.id = p.id where p.id = :publisherId")
     List<Game> getByPublisherId(@Param("publisherId") Integer publisherId);
+
+    @Query(value = "SELECT g from Game g join ReceiptDetails rd on g.id = rd.game.id join Receipt r on rd.receipt.id = r.id join User u on u.id = r.user.id where u.id = :userId")
+    List<Game> getByUserId(@Param("userId") Integer userId);
+
+    @Query(value = "SELECT g from Game g join ReceiptDetails rd on g.id = rd.game.id join Receipt r on rd.receipt.id = r.id join User u on u.id = r.user.id where UPPER(u.username) LIKE UPPER(:username)")
+    List<Game> getByUsername(@Param("username") String username);
 }

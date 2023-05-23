@@ -1,0 +1,2043 @@
+{
+	"info": {
+		"_postman_id": "a31cca5e-3219-4ceb-9483-2f4059a3f645",
+		"name": "GameOn",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27087694"
+	},
+	"item": [
+		{
+			"name": "UserAPIs",
+			"item": [
+				{
+					"name": "getAllUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0ODA3MjAzLCJleHAiOjE2ODQ4NTA0MDN9.ga9NAcRZB9ykdzSAqoMeGqG1k3D_qOvK69igeOD_WAZ__vVG2ZhRu6dX2GNj0kDzsc_ExFfVadDNxq11BwJMVA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0NzE4MjkyLCJleHAiOjE2ODQ3NjE0OTJ9.5tK9XXLJGFURTVx_Sy8VetZPLUoZ8rSpR5VUovf9fLwempzlmmKHZZBQ2i5lKuNv9Tnx6E9aIPyRKm6vs__y5A",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0NzUwNzc2LCJleHAiOjE2ODQ3OTM5NzZ9.3uoTUdaaEei9-EkKeHrS_a334oSkq8fsRwzr6TeJA_lcmtLvNssM3z-9XIxBchdb3a8jvOeD3O-kQEg8NxDBPQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/users/14",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUserById",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0NzUwNzc2LCJleHAiOjE2ODQ3OTM5NzZ9.3uoTUdaaEei9-EkKeHrS_a334oSkq8fsRwzr6TeJA_lcmtLvNssM3z-9XIxBchdb3a8jvOeD3O-kQEg8NxDBPQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"firstName\": \"Susie 2\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/users/14",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0ODMxOTk5LCJleHAiOjE2ODQ4NzUxOTl9.OMpiCFf7mIsPN9mFv91sgwlClkMagSr3DExKBA9EMf9QuQdsdM1rh9qFfJOD1W1D-oThhNGX-uH1a0ksabeeLA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0NzQ3MzQxLCJleHAiOjE2ODQ3OTA1NDF9.KpJCK-CuoJXFjTtE1s0cxZnsPiI4aJD5tyRwyn78L0UtbeTNrRV2jhGlNSNHV3WcBXjUDAiOl29Ey7AFQXN1tw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Margaret Persistn't\",\r\n    \"lastName\": \"Johnson\",\r\n    \"username\" : \"mjohnson123\",\r\n    \"password\": \"MTIzNDU2Nzg5\",\r\n    \"email\": \"mjohnson@gmail.com\",\r\n    \"tel\": \"0345612345\",\r\n    \"address\": \"34 DEF Street\",\r\n    \"dob\": \"1998-11-05\",\r\n    \"gender\": \"Female\",\r\n    \"profileImg\": null,\r\n    \"balance\": 4123.0,\r\n    \"roles\" : [\r\n            \"ROLE_USER\",\r\n            \"ROLE_ADMIN\"\r\n    ],\r\n    \"active\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUserById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/users/27",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"27"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GameAPIs",
+			"item": [
+				{
+					"name": "getAllGame",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByUserId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0ODI5MDE5LCJleHAiOjE2ODQ4NzIyMTl9.Sj4x3R6aKihvv_R_9JuPbcP0-hSRmbvYeZ1Unp0c_lbwmv1OuBtGws7QXtnCS3bhNPvTxK6NmRAUu8gKPuYtRw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/by-user-id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"by-user-id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByUsername",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0ODI5MDE5LCJleHAiOjE2ODQ4NzIyMTl9.Sj4x3R6aKihvv_R_9JuPbcP0-hSRmbvYeZ1Unp0c_lbwmv1OuBtGws7QXtnCS3bhNPvTxK6NmRAUu8gKPuYtRw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/by-username?username=orth",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"by-username"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "orth"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getGameById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/14",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateGameById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Assassin's Creed Valhalla\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/games/14",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createGame",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Assassin's Creed Valhalla Fake\",\r\n    \"thumbnail\": \"https://cdn.cloudflare.steamstatic.com/steam/apps/2208920/header.jpg?t=1671135934\",\r\n    \"description\": \"Become a legendary Viking on a quest for glory. Raid your enemies, grow your settlement, and build your political power.\",\r\n    \"trailer\": \"https://www.youtube.com/watch?v=rKjUAWlbTJk\",\r\n    \"releasedDate\": \"2022-12-07\",\r\n    \"systemReq\": \"MINIMUM:\\r\\nRequires a 64-bit processor and operating system\\r\\nOS: Windows 10 (versions 64 bits uniquement)\\r\\nProcessor: AMD Ryzen 3 1200 3.1 GHz / Intel Core i5-4460 3.2 GHz\\r\\nMemory: 8 GB RAM\\r\\nGraphics: AMD R9 380 /NVIDIA GeForce GTX 960\\r\\nDirectX: Version 12\\r\\nStorage: 160 GB available space\",\r\n    \"price\": 19.99,\r\n    \"developerId\": 10,\r\n    \"publisherId\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/games",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteGameById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/47",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"47"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DeveloperAPIs",
+			"item": [
+				{
+					"name": "getAllDeveloper",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/developers",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"developers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getDeveloperById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/developers/14",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"developers",
+								"14"
+							],
+							"query": [
+								{
+									"key": "devId",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateDeveloperById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Assassin's Creed Valhalla\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/developers/14",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"developers",
+								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createDeveloper",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"name\": \"Santa Monica Studio\",\r\n        \"thumbnail\": \"https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/Santa_Monica_Studio.svg/220px-Santa_Monica_Studio.svg.png\",\r\n        \"coverPhoto\": \"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnDTkdA38Qi_7RLtj2283fRSJxLHxvX6FdZg&usqp=CAU\",\r\n        \"description\": null,\r\n        \"establishedDate\": \"1999-01-01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/developers",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"developers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteDeveloperById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/developers/47",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"developers",
+								"47"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PublisherAPIs",
+			"item": [
+				{
+					"name": "getAllPublisher",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/publishers",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"publishers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPublisherById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/publishers/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"publishers",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updatePublisherById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Assassin's Creed Valhalla\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/publishers/14",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"publishers",
+								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createPublisher",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"name\": \"Santa Monica Studio\",\r\n        \"thumbnail\": \"https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/Santa_Monica_Studio.svg/220px-Santa_Monica_Studio.svg.png\",\r\n        \"coverPhoto\": \"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnDTkdA38Qi_7RLtj2283fRSJxLHxvX6FdZg&usqp=CAU\",\r\n        \"description\": null,\r\n        \"establishedDate\": \"1999-01-01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/publishers",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"publishers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletePublishererById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/publishers/47",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"publishers",
+								"47"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CommentAPIs",
+			"item": [
+				{
+					"name": "getAllComment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0ODA3MjAzLCJleHAiOjE2ODQ4NTA0MDN9.ga9NAcRZB9ykdzSAqoMeGqG1k3D_qOvK69igeOD_WAZ__vVG2ZhRu6dX2GNj0kDzsc_ExFfVadDNxq11BwJMVA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/comments",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCommentByUserId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0ODA3MjAzLCJleHAiOjE2ODQ4NTA0MDN9.ga9NAcRZB9ykdzSAqoMeGqG1k3D_qOvK69igeOD_WAZ__vVG2ZhRu6dX2GNj0kDzsc_ExFfVadDNxq11BwJMVA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/comments/by-user-id/5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comments",
+								"by-user-id",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCommentByGameId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0ODA3MjAzLCJleHAiOjE2ODQ4NTA0MDN9.ga9NAcRZB9ykdzSAqoMeGqG1k3D_qOvK69igeOD_WAZ__vVG2ZhRu6dX2GNj0kDzsc_ExFfVadDNxq11BwJMVA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/comments/by-game-id/10",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comments",
+								"by-game-id",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCommentByUsername",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0ODA3MjAzLCJleHAiOjE2ODQ4NTA0MDN9.ga9NAcRZB9ykdzSAqoMeGqG1k3D_qOvK69igeOD_WAZ__vVG2ZhRu6dX2GNj0kDzsc_ExFfVadDNxq11BwJMVA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/comments/by-username",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comments",
+								"by-username"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCommentByGameName",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0ODA3MjAzLCJleHAiOjE2ODQ4NTA0MDN9.ga9NAcRZB9ykdzSAqoMeGqG1k3D_qOvK69igeOD_WAZ__vVG2ZhRu6dX2GNj0kDzsc_ExFfVadDNxq11BwJMVA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/comments/by-game-name?gameName=hart",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comments",
+								"by-game-name"
+							],
+							"query": [
+								{
+									"key": "gameName",
+									"value": "hart"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCommentById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/comments/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comments",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCommentByDateAfter",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0ODMzODQ0LCJleHAiOjE2ODQ4NzcwNDR9.D7JrdRa7EE75aImHT_RzRwc_S8JAuhIAfM2mpbLt07hm89its6_ccL-bom9UOxy3p4Q2dQ1QxfIQzHzpDVAtQw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/comments/date-after?date=2023-01-01",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comments",
+								"date-after"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2023-01-01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCommentByDateAfter Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0ODMzODQ0LCJleHAiOjE2ODQ4NzcwNDR9.D7JrdRa7EE75aImHT_RzRwc_S8JAuhIAfM2mpbLt07hm89its6_ccL-bom9UOxy3p4Q2dQ1QxfIQzHzpDVAtQw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/comments/date-before?date=2023-05-31",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comments",
+								"date-before"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2023-05-31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCommentById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"commentContent\": \"Game is easy\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/comments/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comments",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createComment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"user\": 4,\r\n        \"game\": 47,\r\n        \"commentContent\": \"Game is a mess.\"\r\n    },",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/comments",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCommentById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/comments/100",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comments",
+								"100"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "RatingAPIs",
+			"item": [
+				{
+					"name": "getAllRating",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/ratings",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"ratings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getRatingById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/ratings/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"ratings",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateRatingById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"commentContent\": \"Game is easy\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/ratings/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"ratings",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createRating",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"user\": 4,\r\n        \"game\": 47,\r\n        \"commentContent\": \"Game is a mess.\"\r\n    },",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/ratings",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"ratings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCommentById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/ratings/100",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"ratings",
+								"100"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GenreAPIs",
+			"item": [
+				{
+					"name": "getAllGenre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/genres",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"genres"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getGenreById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/genres/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"genres",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateGenreById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"commentContent\": \"Game is easy\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/genres/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"genres",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createGenre",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"user\": 4,\r\n        \"game\": 47,\r\n        \"commentContent\": \"Game is a mess.\"\r\n    },",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/genres",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"genres"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteGenreById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/genres/100",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"genres",
+								"100"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SubGenreAPIs",
+			"item": [
+				{
+					"name": "getAllSubGenre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/sub-genres",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sub-genres"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSubGenreById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/sub-genres/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sub-genres",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateSubGenreById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"commentContent\": \"Game is easy\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/sub-genres/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sub-genres",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createSubGenre",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"user\": 4,\r\n        \"game\": 47,\r\n        \"commentContent\": \"Game is a mess.\"\r\n    },",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/sub-genres",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sub-genres"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteSubGenreById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/sub-genres/100",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sub-genres",
+								"100"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ReceiptAPIs",
+			"item": [
+				{
+					"name": "getAllReceipt",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0ODMzODQ0LCJleHAiOjE2ODQ4NzcwNDR9.D7JrdRa7EE75aImHT_RzRwc_S8JAuhIAfM2mpbLt07hm89its6_ccL-bom9UOxy3p4Q2dQ1QxfIQzHzpDVAtQw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/receipts",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"receipts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getReceiptById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0ODMzODQ0LCJleHAiOjE2ODQ4NzcwNDR9.D7JrdRa7EE75aImHT_RzRwc_S8JAuhIAfM2mpbLt07hm89its6_ccL-bom9UOxy3p4Q2dQ1QxfIQzHzpDVAtQw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/receipts/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"receipts",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateReceiptById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"commentContent\": \"Game is easy\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/receipts/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"receipts",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createReceipt",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"user\": 4,\r\n        \"game\": 47,\r\n        \"commentContent\": \"Game is a mess.\"\r\n    },",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/receipts",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"receipts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteReceiptById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/receipts/100",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"receipts",
+								"100"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ReceiptDetailsAPIs",
+			"item": [
+				{
+					"name": "getAllReceiptDetails",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/receipt_details",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"receipt_details"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getReceiptDetailsById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/receipt_details/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"receipt_details",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateReceiptDetailsById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"commentContent\": \"Game is easy\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/receipt_details/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"receipt_details",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createReceiptDetails",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"user\": 4,\r\n        \"game\": 47,\r\n        \"commentContent\": \"Game is a mess.\"\r\n    },",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/receipt_details/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"receipt_details",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteReceiptDetailsById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/receipt_details/100",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"receipt_details",
+								"100"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GameImageAPIs",
+			"item": [
+				{
+					"name": "getAllGameImage",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/game_images",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"game_images"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getGameImageById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/game_images/5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"game_images",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateGameImageById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"commentContent\": \"Game is easy\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/game_images/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"game_images",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createGameImage",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"user\": 4,\r\n        \"game\": 47,\r\n        \"commentContent\": \"Game is a mess.\"\r\n    },",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/game_images",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"game_images"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteGameImageById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/game_images/100",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"game_images",
+								"100"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GameGenreAPIs",
+			"item": [
+				{
+					"name": "getAllGameGenre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/game_genres",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"game_genres"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getGameGenreById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0ODMzODQ0LCJleHAiOjE2ODQ4NzcwNDR9.D7JrdRa7EE75aImHT_RzRwc_S8JAuhIAfM2mpbLt07hm89its6_ccL-bom9UOxy3p4Q2dQ1QxfIQzHzpDVAtQw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/game-genres/5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"game-genres",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateGameGenreById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"commentContent\": \"Game is easy\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/game-genres",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"game-genres"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createGameGenre",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"user\": 4,\r\n        \"game\": 47,\r\n        \"commentContent\": \"Game is a mess.\"\r\n    },",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/game-genres",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"game-genres"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteGameGenreById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/game-genres/100",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"game-genres",
+								"100"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GameSubGenreAPIs",
+			"item": [
+				{
+					"name": "getAllGameSubGenre",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0ODMzODQ0LCJleHAiOjE2ODQ4NzcwNDR9.D7JrdRa7EE75aImHT_RzRwc_S8JAuhIAfM2mpbLt07hm89its6_ccL-bom9UOxy3p4Q2dQ1QxfIQzHzpDVAtQw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/game-sub-genres",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"game-sub-genres"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getGameSubGenreById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/game-sub-genres/5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"game-sub-genres",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateGameSubGenreById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"commentContent\": \"Game is easy\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/game-sub-genres/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"game-sub-genres",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createGameSubGenre",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"user\": 4,\r\n        \"game\": 47,\r\n        \"commentContent\": \"Game is a mess.\"\r\n    },",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/game-sub-genres",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"game-sub-genres"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteGameSubGenreById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/game-sub-genres/100",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"game-sub-genres",
+								"100"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AuthAPIs",
+			"item": [
+				{
+					"name": "SignIn",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"hoangvu\",\r\n    \"password\": \"test123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/auth/signin",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "UserRoleAssignmentAPIs",
+			"item": [
+				{
+					"name": "UpdateUserRoleAssignment",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0NzQzODkyLCJleHAiOjE2ODQ3ODcwOTJ9.Ki6RLd35jI5eBh0gAqeTp_cF4nwOQbOM-k6lyK9ZL8RsaRNy0ZBshQ_4Zx5Y6dvx3QGQvcOnOcwdTYlvCSHtJw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"assignedDate\" : \"2020-03-13\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/user-role-assignments/8",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user-role-assignments",
+								"8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

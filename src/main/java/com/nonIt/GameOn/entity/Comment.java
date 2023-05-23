@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -30,4 +32,7 @@ public class Comment {
 
     @Column(name = "comment_content", length = 3000)
     private String commentContent;
+
+    @Column(name = "comment_date")
+    private LocalDate commentDate;
 }

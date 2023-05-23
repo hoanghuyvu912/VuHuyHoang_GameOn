@@ -35,9 +35,9 @@ public class UserRoleAssignment {
 
     @CreationTimestamp
     @Column(name = "assigned_date")
-    private LocalDate assignedDate;
+    private LocalDateTime assignedDate;
 
     @UpdateTimestamp
     @Column(name = "modified_date")
-    private LocalDate updatedDate;
+    private LocalDateTime updatedDate;
 }

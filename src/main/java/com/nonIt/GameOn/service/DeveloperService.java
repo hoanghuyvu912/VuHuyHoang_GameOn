@@ -12,6 +12,7 @@ public interface DeveloperService {
     List<DeveloperRestDto> findByNameContaining(String name);
 
     List<DeveloperRestDto> findByEstablishedDateAfter(LocalDate date);
+
     List<DeveloperRestDto> findByEstablishedDateBefore(LocalDate date);
 
     DeveloperRestDto findById(Integer developerId);
