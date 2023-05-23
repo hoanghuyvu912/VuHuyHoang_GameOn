@@ -33,4 +33,16 @@ public interface GameRepository extends JpaRepository<Game, Integer> {
 
     @Query(value = "SELECT g from Game g join ReceiptDetails rd on g.id = rd.game.id join Receipt r on rd.receipt.id = r.id join User u on u.id = r.user.id where UPPER(u.username) LIKE UPPER(:username)")
     List<Game> getByUsername(@Param("username") String username);
+
+    @Query(value = "SELECT g from Game g join GameGenre gg on g.id = gg.game.id join Genre g2 on gg.genre.id = g2.id where g2.id = :genreId")
+    List<Game> getByGenreId(@Param("genreId") Integer genreId);
+
+    @Query(value = "SELECT g from Game g join GameGenre gg on g.id = gg.game.id join Genre g2 on gg.genre.id = g2.id where g2.name LIKE :genreName")
+    List<Game> getByGenreName(@Param("genreName") String genreName);
+
+    @Query(value = "SELECT g from Game g join GameSubGenre gsg on g.id = gsg.game.id join SubGenre sg on gsg.subGenre.id = sg.id where sg.id = :subGenreId")
+    List<Game> getBySubGenreId(@Param("subGenreId") Integer subGenreId);
+
+    @Query(value = "SELECT g from Game g join GameSubGenre gsg on g.id = gsg.game.id join SubGenre sg on gsg.subGenre.id = sg.id where sg.name LIKE :subGenreName")
+    List<Game> getBySubGenreName(@Param("subGenreName") String subGenreName);
 }

@@ -30,11 +30,17 @@ public class DeveloperServiceImpl implements DeveloperService {
 
     @Override
     public List<DeveloperRestDto> findByNameContaining(String name) {
+        if (name == null || name.trim().isBlank() || name.isEmpty()) {
+            throw GameOnException.badRequest("NameMissing", "Query name is missing.");
+        }
         return developerRepository.findByNameContaining(name).stream().map(developerMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
     public List<DeveloperRestDto> findByEstablishedDateAfter(LocalDate date) {
+        if(date.isAfter(LocalDate.now())){
+            throw GameOnException.badRequest("InvalidDate", "Query date cannot be after current date.");
+        }
         return developerRepository.findByEstablishedDateAfter(date).stream().map(developerMapper::toDto).collect(Collectors.toList());
     }
 

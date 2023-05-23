@@ -60,7 +60,7 @@ public class RatingServiceImpl implements RatingService {
         Rating rating = ratingRepository.findById(ratingId).orElseThrow(GameOnException::RatingNotFound);
         User user = userRepository.findById(ratingDto.getUserId()).orElseThrow(GameOnException::UserNotFound);
         Game game = gameRepository.findById(ratingDto.getGameId()).orElseThrow(GameOnException::GameNotFound);
-        if(ratingDto.getRating() == null){
+        if (ratingDto.getRating() == null) {
             throw GameOnException.badRequest("RatingNotFound", "Rating is missing.");
         }
 
@@ -81,6 +81,7 @@ public class RatingServiceImpl implements RatingService {
 
     @Override
     public List<RatingRestDto> getByUserId(Integer userId) {
+        User user = userRepository.findById(userId).orElseThrow(GameOnException::UserNotFound);
         return ratingRepository.getRatingByUserId(userId).stream().map(ratingMapper::toDto).collect(Collectors.toList());
     }
 }

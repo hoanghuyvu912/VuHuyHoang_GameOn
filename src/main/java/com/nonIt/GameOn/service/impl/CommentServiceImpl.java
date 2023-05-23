@@ -35,16 +35,21 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<CommentRestDto> getByUserId(Integer userId) {
+        User user = userRepository.findById(userId).orElseThrow(GameOnException::UserNotFound);
         return commentRepository.getCommentByUserId(userId).stream().map(commentMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
     public List<CommentRestDto> getByUsername(String username) {
+        if (username == null || username.trim().isBlank() || username.isEmpty()) {
+            throw GameOnException.badRequest("UsernameNotFound", "Username is missing.");
+        }
         return commentRepository.getCommentByUsername(username).stream().map(commentMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
     public List<CommentRestDto> getByGameId(Integer gameId) {
+        Game game = gameRepository.findById(gameId).orElseThrow(GameOnException::GameNotFound);
         return commentRepository.getCommentByGameId(gameId).stream().map(commentMapper::toDto).collect(Collectors.toList());
     }
 
@@ -55,6 +60,9 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<CommentRestDto> findByCommentDateAfter(LocalDate date) {
+        if(date.isAfter(LocalDate.now())){
+            throw GameOnException.badRequest("InvalidDate", "Comment date cannot be after current date.");
+        }
         return commentRepository.findByCommentDateAfter(date).stream().map(commentMapper::toDto).collect(Collectors.toList());
     }
 

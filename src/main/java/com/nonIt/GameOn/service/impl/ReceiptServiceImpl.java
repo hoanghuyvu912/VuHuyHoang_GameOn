@@ -37,6 +37,19 @@ public class ReceiptServiceImpl implements ReceiptService {
     }
 
     @Override
+    public List<ReceiptRestDto> findByReceiptDateAfter(LocalDate date) {
+        if (date.isAfter(LocalDate.now())) {
+            throw GameOnException.badRequest("InvalidDate", "Query date cannot be after current date.");
+        }
+        return receiptRepository.findByReceiptDateAfter(date).stream().map(receiptMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ReceiptRestDto> findByReceiptDateBefore(LocalDate date) {
+        return receiptRepository.findByReceiptDateBefore(date).stream().map(receiptMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
     public ReceiptRestDto createReceipt(ReceiptDto receiptDto) {
         User user = userRepository.findById(receiptDto.getUserId()).orElseThrow(GameOnException::UserNotFound);
         if (receiptDto.getReceiptDate().isAfter(LocalDate.now())) {

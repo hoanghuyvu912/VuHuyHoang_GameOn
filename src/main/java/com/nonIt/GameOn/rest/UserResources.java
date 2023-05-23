@@ -47,6 +47,11 @@ public class UserResources {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/gender")
+    public ResponseEntity<List<UserRestDto>> getByGender(@RequestParam("gender") Gender gender) {
+        return ResponseEntity.ok(userService.findByGender(gender));
+    }
+
     @GetMapping("/first-name")
     public ResponseEntity<List<UserRestDto>> getByFirstNameContaining(@RequestParam("firstName") String firstName) {
         return ResponseEntity.ok(userService.findByFirstNameContaining(firstName));
