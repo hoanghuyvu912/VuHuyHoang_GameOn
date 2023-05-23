@@ -70,6 +70,16 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
+    public List<GameRestDto> getByUserId(Integer userId) {
+        return gameRepository.getByUserId(userId).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> getByUsername(String username) {
+        return gameRepository.getByUsername(username).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
     public GameRestDto findById(Integer gameId) {
         Game game = gameRepository.findById(gameId).orElseThrow(GameOnException::GameNotFound);
         return gameMapper.toDto(game);

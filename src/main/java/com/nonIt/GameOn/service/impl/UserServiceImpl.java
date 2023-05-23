@@ -6,22 +6,17 @@ import com.nonIt.GameOn.entity.User;
 import com.nonIt.GameOn.entity.UserRoleAssignment;
 import com.nonIt.GameOn.exception.GameOnException;
 import com.nonIt.GameOn.repository.UserRepository;
-import com.nonIt.GameOn.repository.UserRoleAssignmentRepository;
-import com.nonIt.GameOn.service.UserRoleAssignmentService;
 import com.nonIt.GameOn.service.UserService;
 import com.nonIt.GameOn.service.dto.UserDto;
-import com.nonIt.GameOn.service.dto.UserRoleAssignmentDto;
 import com.nonIt.GameOn.service.mapper.UserMapper;
 import com.nonIt.GameOn.service.restDto.UserRestDto;
-import com.nonIt.GameOn.service.restDto.UserRoleAssignmentRestDto;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,17 +26,17 @@ import java.util.stream.Collectors;
 @Transactional
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-    private final UserRoleAssignmentRepository userRoleAssignmentRepository;
     private final UserRepository userRepository;
 
-    private final UserRoleAssignmentService userRoleAssignmentService;
     private final UserMapper userMapper;
+
+    @Autowired
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public List<UserRestDto> getAll() {
         return userRepository.findAll().stream().map(userMapper::toDto).collect(Collectors.toList());
     }
-
 
     @Override
     public UserRestDto findById(Integer userId) {
@@ -88,7 +83,8 @@ public class UserServiceImpl implements UserService {
         User user = User.builder()
                 .firstName(userDto.getFirstName())
                 .lastName(userDto.getLastName())
-                .password(userDto.getPassword())
+                .username(userDto.getUsername())
+                .password(passwordEncoder.encode(userDto.getPassword()))
                 .email(userDto.getEmail())
                 .tel(userDto.getTel())
                 .address(userDto.getAddress())
@@ -101,12 +97,28 @@ public class UserServiceImpl implements UserService {
 
         List<UserRoleAssignment> tempList = new ArrayList<>();
 
-        for(int i = 0; i < userDto.getRoles().size(); i++) {
+
+        if (userDto.getRoles().size() == 0) {
             UserRoleAssignment role = new UserRoleAssignment();
-            role.setRole(userDto.getRoles().get(i));
+            role.setRole(Role.ROLE_USER);
             role.setUsers(user);
             tempList.add(role);
+        } else {
+            for (int i = 0; i < userDto.getRoles().size(); i++) {
+                UserRoleAssignment role = new UserRoleAssignment();
+                role.setRole(userDto.getRoles().get(i));
+                role.setUsers(user);
+                tempList.add(role);
+            }
         }
+
+//        User finalUser = user;
+//        userDto.getRoles().forEach(r -> {
+//            UserRoleAssignment role = new UserRoleAssignment();
+//            role.setRole(r);
+//            role.setUsers(finalUser);
+//            tempList.add(role);
+//        });
 
         user.setRoles(tempList);
 
@@ -181,6 +193,62 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserRestDto> findByGender(Gender gender) {
         return userMapper.toDtos(userRepository.findByGender(gender));
+    }
+
+    @Override
+    public List<UserRestDto> findByFirstNameContaining(String name) {
+        return userRepository.findByFirstNameContaining(name).stream().map(userMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UserRestDto> findByLastNameContaining(String name) {
+        return userRepository.findByLastNameContaining(name).stream().map(userMapper::toDto).collect(Collectors.toList());
+
+    }
+
+    @Override
+    public List<UserRestDto> findByEmailContaining(String name) {
+        return userRepository.findByEmailContaining(name).stream().map(userMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UserRestDto> findByTelContaining(String name) {
+        return userRepository.findByTelContaining(name).stream().map(userMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UserRestDto> findByAddressContaining(String name) {
+        return userRepository.findByAddressContaining(name).stream().map(userMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UserRestDto> findByDobAfter(LocalDate date) {
+        return userRepository.findByDobAfter(date).stream().map(userMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UserRestDto> findByDobBefore(LocalDate date) {
+        return userRepository.findByDobBefore(date).stream().map(userMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UserRestDto> findByBalanceGreaterThan(Double balance) {
+        return userRepository.findByBalanceGreaterThan(balance).stream().map(userMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UserRestDto> findByBalanceLessThan(Double balance) {
+        return userRepository.findByBalanceLessThan(balance).stream().map(userMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UserRestDto> findByActiveTrue() {
+        return userRepository.findByActiveTrue().stream().map(userMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UserRestDto> findByActiveFalse() {
+        return userRepository.findByActiveFalse().stream().map(userMapper::toDto).collect(Collectors.toList());
     }
 
     @Override

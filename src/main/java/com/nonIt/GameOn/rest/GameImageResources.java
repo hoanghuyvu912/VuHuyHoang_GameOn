@@ -43,4 +43,14 @@ public class GameImageResources {
         gameImageService.deleteGameImage(gameImageId);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping(value = "/by-game-id/{gameId}")
+    public ResponseEntity<List<GameImageRestDto>> getByGameId(@PathVariable("gameId") Integer gameId) {
+        return ResponseEntity.ok(gameImageService.getByGameId(gameId));
+    }
+
+    @GetMapping(value = "/by-game-name")
+    public ResponseEntity<List<GameImageRestDto>> getByGameName(@RequestParam("gameName") String gameName) {
+        return ResponseEntity.ok(gameImageService.getByGameName(gameName));
+    }
 }

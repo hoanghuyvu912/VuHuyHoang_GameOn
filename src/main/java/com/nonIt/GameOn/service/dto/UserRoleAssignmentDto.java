@@ -15,8 +15,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserRoleAssignmentDto {
-    private LocalDate assignedDate;
+    private LocalDateTime assignedDate;
     private Role role;
-    private LocalDate updatedDate;
+    private LocalDateTime updatedDate;
     private Integer userId;
 }

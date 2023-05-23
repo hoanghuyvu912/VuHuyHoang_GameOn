@@ -1,6 +1,7 @@
 package com.nonIt.GameOn.service.mapper;
 
 import org.mapstruct.BeanMapping;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 

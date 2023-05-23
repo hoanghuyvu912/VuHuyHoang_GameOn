@@ -57,7 +57,17 @@ public class GameResources {
 
     @GetMapping(value = "/by-publisher-id")
     public ResponseEntity<List<GameRestDto>> getByPublisherId(@RequestParam("publisherId") Integer publisherId) {
-        return ResponseEntity.ok(gameService.getByDeveloperId(publisherId));
+        return ResponseEntity.ok(gameService.getByPublisherId(publisherId));
+    }
+
+    @GetMapping(value = "/by-user-id")
+    public ResponseEntity<List<GameRestDto>> getByUserId(@RequestParam("userId") Integer userId) {
+        return ResponseEntity.ok(gameService.getByUserId(userId));
+    }
+
+    @GetMapping(value = "/by-username")
+    public ResponseEntity<List<GameRestDto>> getByUsername(@RequestParam("username") String username) {
+        return ResponseEntity.ok(gameService.getByUsername("%" + username + "%"));
     }
 
     @PreAuthorize("hasRole('ADMIN')")

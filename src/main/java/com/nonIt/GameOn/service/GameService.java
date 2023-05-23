@@ -25,6 +25,10 @@ public interface GameService {
 
     List<GameRestDto> getByPublisherId(Integer publisherId);
 
+    List<GameRestDto> getByUserId(Integer userId);
+
+    List<GameRestDto> getByUsername(String username);
+
     GameRestDto findById(Integer gameId);
 
     GameRestDto createGame(GameDto gameDto);

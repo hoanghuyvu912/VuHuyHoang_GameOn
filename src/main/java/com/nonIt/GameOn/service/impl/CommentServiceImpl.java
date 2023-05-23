@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,6 +36,31 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<CommentRestDto> getByUserId(Integer userId) {
         return commentRepository.getCommentByUserId(userId).stream().map(commentMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CommentRestDto> getByUsername(String username) {
+        return commentRepository.getCommentByUsername(username).stream().map(commentMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CommentRestDto> getByGameId(Integer gameId) {
+        return commentRepository.getCommentByGameId(gameId).stream().map(commentMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CommentRestDto> getByGameName(String gameName) {
+        return commentRepository.getCommentByGameName(gameName).stream().map(commentMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CommentRestDto> findByCommentDateAfter(LocalDate date) {
+        return commentRepository.findByCommentDateAfter(date).stream().map(commentMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CommentRestDto> findByCommentDateBefore(LocalDate date) {
+        return commentRepository.findByCommentDateBefore(date).stream().map(commentMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
