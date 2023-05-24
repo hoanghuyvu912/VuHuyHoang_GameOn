@@ -91,7 +91,7 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public List<GameRestDto> getBySubGenreId(Integer subGenreId) {
-        return gameRepository.getByGenreId(subGenreId).stream().map(gameMapper::toDto).collect(Collectors.toList());
+        return gameRepository.getBySubGenreId(subGenreId).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 
     @Override

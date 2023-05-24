@@ -64,6 +64,9 @@ public class User {
     @Column(name = "balance", columnDefinition = "Decimal(20,2)")
     private Double balance;
 
+    @Column(name = "registered_date")
+    private LocalDate registeredDate;
+
     @Column(name = "active")
     private boolean active;
 

@@ -37,12 +37,12 @@ public interface GameRepository extends JpaRepository<Game, Integer> {
     @Query(value = "SELECT g from Game g join GameGenre gg on g.id = gg.game.id join Genre g2 on gg.genre.id = g2.id where g2.id = :genreId")
     List<Game> getByGenreId(@Param("genreId") Integer genreId);
 
-    @Query(value = "SELECT g from Game g join GameGenre gg on g.id = gg.game.id join Genre g2 on gg.genre.id = g2.id where g2.name LIKE :genreName")
+    @Query(value = "SELECT g from Game g join GameGenre gg on g.id = gg.game.id join Genre g2 on gg.genre.id = g2.id where UPPER(g2.name) LIKE UPPER(:genreName)")
     List<Game> getByGenreName(@Param("genreName") String genreName);
 
     @Query(value = "SELECT g from Game g join GameSubGenre gsg on g.id = gsg.game.id join SubGenre sg on gsg.subGenre.id = sg.id where sg.id = :subGenreId")
     List<Game> getBySubGenreId(@Param("subGenreId") Integer subGenreId);
 
-    @Query(value = "SELECT g from Game g join GameSubGenre gsg on g.id = gsg.game.id join SubGenre sg on gsg.subGenre.id = sg.id where sg.name LIKE :subGenreName")
+    @Query(value = "SELECT g from Game g join GameSubGenre gsg on g.id = gsg.game.id join SubGenre sg on gsg.subGenre.id = sg.id where UPPER(sg.name) LIKE UPPER(:subGenreName)")
     List<Game> getBySubGenreName(@Param("subGenreName") String subGenreName);
 }
