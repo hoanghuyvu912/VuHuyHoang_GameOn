@@ -7,6 +7,40 @@
 	},
 	"item": [
 		{
+			"name": "AuthAPIs",
+			"item": [
+				{
+					"name": "SignIn",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"hoangvu\",\r\n    \"password\": \"test123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/auth/signin",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "UserAPIs",
 			"item": [
 				{
@@ -17,7 +51,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0ODA3MjAzLCJleHAiOjE2ODQ4NTA0MDN9.ga9NAcRZB9ykdzSAqoMeGqG1k3D_qOvK69igeOD_WAZ__vVG2ZhRu6dX2GNj0kDzsc_ExFfVadDNxq11BwJMVA",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0OTAxODI1LCJleHAiOjE2ODQ5NDUwMjV9.J5PJS7i1-BPr_8s1iIMvg0hz4FeNM4YqcMvLw9LWifEcKWzzM48-v6KF4kcdBsMPGI5xdaOXdLJrp8-PMUEvrA",
 									"type": "string"
 								}
 							]
@@ -65,6 +99,320 @@
 								"api",
 								"users",
 								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByFirstName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/users/first-name?firstName",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"first-name"
+							],
+							"query": [
+								{
+									"key": "firstName",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByLastName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/users/last-name?lastName",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"last-name"
+							],
+							"query": [
+								{
+									"key": "lastName",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByEmail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/users/email?email",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"email"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByTel",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/users/tel?tel",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"tel"
+							],
+							"query": [
+								{
+									"key": "tel",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByAddress",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/users/address?address",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"address"
+							],
+							"query": [
+								{
+									"key": "address",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByDobAfter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/users/dob-after?date",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"dob-after"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByDobBefore",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0ODM5MTIzLCJleHAiOjE2ODQ4ODIzMjN9.tbO-eO4LrHMj0NujOXNmzssneBOmQlfJnYIjLl2rLumQZfOqyJx0TW8b9vPC60SWU5bD7WI_9bw7a43YlAbabw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/users/dob-before?date=1970-01-03",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"dob-before"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "1970-01-03"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByBalanceGreaterThan",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/users/balance-greater-than?balance",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"balance-greater-than"
+							],
+							"query": [
+								{
+									"key": "balance",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByBalanceLessThan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0ODM5MTIzLCJleHAiOjE2ODQ4ODIzMjN9.tbO-eO4LrHMj0NujOXNmzssneBOmQlfJnYIjLl2rLumQZfOqyJx0TW8b9vPC60SWU5bD7WI_9bw7a43YlAbabw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/users/balance-less-than?balance=11000",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"balance-less-than"
+							],
+							"query": [
+								{
+									"key": "balance",
+									"value": "11000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByActiveTrue",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0ODM5MTIzLCJleHAiOjE2ODQ4ODIzMjN9.tbO-eO4LrHMj0NujOXNmzssneBOmQlfJnYIjLl2rLumQZfOqyJx0TW8b9vPC60SWU5bD7WI_9bw7a43YlAbabw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/users/active-true",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"active-true"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByActiveFalse",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0ODM5MTIzLCJleHAiOjE2ODQ4ODIzMjN9.tbO-eO4LrHMj0NujOXNmzssneBOmQlfJnYIjLl2rLumQZfOqyJx0TW8b9vPC60SWU5bD7WI_9bw7a43YlAbabw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/users/active-false",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"active-false"
 							]
 						}
 					},
@@ -274,6 +622,110 @@
 								"api",
 								"games",
 								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByGenreName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/by-genre-name?genreName=action",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"by-genre-name"
+							],
+							"query": [
+								{
+									"key": "genreName",
+									"value": "action"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByGenreId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/by-genre-id?genreId=3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"by-genre-id"
+							],
+							"query": [
+								{
+									"key": "genreId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBySubGenreId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/by-sub-genre-id?subGenreId=11",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"by-sub-genre-id"
+							],
+							"query": [
+								{
+									"key": "subGenreId",
+									"value": "11"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBySubGenreName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/by-sub-genre-name?subGenreName=action",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"by-sub-genre-name"
+							],
+							"query": [
+								{
+									"key": "subGenreName",
+									"value": "action"
+								}
 							]
 						}
 					},
@@ -1383,6 +1835,78 @@
 					"response": []
 				},
 				{
+					"name": "getByReceiptDateBefore",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0ODk2MzQ5LCJleHAiOjE2ODQ5Mzk1NDl9.U_NT5IYg9D1LbaVUXEjAggjAZKoHeLSM--IGtq5sLUyzmqfP41KLAHHlLJTXv8iZbwKylNQu4esqavatGK5yHQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/receipts/receipt-date-before?date",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"receipts",
+								"receipt-date-before"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByReceiptDateAfter",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0ODk2MzQ5LCJleHAiOjE2ODQ5Mzk1NDl9.U_NT5IYg9D1LbaVUXEjAggjAZKoHeLSM--IGtq5sLUyzmqfP41KLAHHlLJTXv8iZbwKylNQu4esqavatGK5yHQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/receipts/receipt-date-after?date=2022-12-01",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"receipts",
+								"receipt-date-after"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2022-12-01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "updateReceiptById",
 					"request": {
 						"method": "PUT",
@@ -1966,40 +2490,6 @@
 			]
 		},
 		{
-			"name": "AuthAPIs",
-			"item": [
-				{
-					"name": "SignIn",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"hoangvu\",\r\n    \"password\": \"test123\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8080/api/auth/signin",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"auth",
-								"signin"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "UserRoleAssignmentAPIs",
 			"item": [
 				{
@@ -2038,6 +2528,10 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "CustomAPIs",
+			"item": []
 		}
 	]
 }

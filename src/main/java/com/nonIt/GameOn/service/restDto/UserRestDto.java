@@ -39,6 +39,8 @@ public class UserRestDto {
 
     private Double balance;
 
+    private LocalDate registeredDate;
+
     //    private Role role;
     private List<UserRoleAssignment> roles = new ArrayList<>();
 

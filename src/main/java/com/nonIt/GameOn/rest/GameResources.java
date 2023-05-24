@@ -73,22 +73,22 @@ public class GameResources {
 
     @GetMapping(value = "/by-genre-id")
     public ResponseEntity<List<GameRestDto>> getByGenreId(@RequestParam("genreId") Integer genreId) {
-        return ResponseEntity.ok(gameService.getByUserId(genreId));
+        return ResponseEntity.ok(gameService.getByGenreId(genreId));
     }
 
     @GetMapping(value = "/by-genre-name")
     public ResponseEntity<List<GameRestDto>> getByGenreName(@RequestParam("genreName") String genreName) {
-        return ResponseEntity.ok(gameService.getByUsername("%" + genreName + "%"));
+        return ResponseEntity.ok(gameService.getByGenreName("%" + genreName + "%"));
     }
 
     @GetMapping(value = "/by-sub-genre-id")
     public ResponseEntity<List<GameRestDto>> getBySubGenreId(@RequestParam("subGenreId") Integer subGenreId) {
-        return ResponseEntity.ok(gameService.getByUserId(subGenreId));
+        return ResponseEntity.ok(gameService.getBySubGenreId(subGenreId));
     }
 
     @GetMapping(value = "/by-sub-genre-name")
     public ResponseEntity<List<GameRestDto>> getBySubGenreName(@RequestParam("subGenreName") String subGenreName) {
-        return ResponseEntity.ok(gameService.getByUsername("%" + subGenreName + "%"));
+        return ResponseEntity.ok(gameService.getBySubGenreName("%" + subGenreName + "%"));
     }
 
     @PreAuthorize("hasRole('ADMIN')")

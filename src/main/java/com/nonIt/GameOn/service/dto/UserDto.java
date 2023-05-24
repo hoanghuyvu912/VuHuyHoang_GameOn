@@ -37,6 +37,8 @@ public class UserDto {
 
     private Double balance;
 
+    private LocalDate registeredDate;
+
     private List<Role> roles = new ArrayList<>();
 
 //    private UserRoleAssignmentDto userRoleAssignmentDto;

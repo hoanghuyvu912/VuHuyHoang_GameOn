@@ -75,7 +75,7 @@ create table user_info(
 	gender varchar,
 	profile_img varchar,
 	balance numeric(7,2),
-	user_role varchar,
+	registered_date Date,
 	active boolean
 );
 
@@ -106,32 +106,32 @@ create table user_info(
 --(24,'Nelia','Crisford','WjRVUXdHUmRL','ncrisfordn@com.com','454-496-2875','37 Carioca Alley','1935-12-06','Female', 'https://images.pexels.com/photos/2761798/pexels-photo-2761798.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', 10000, 'USER', true),
 --(25,'Hoang', 'Vu', 'MTIzNDU2Nzg5', 'hoangvu@gmail.com', '045678912','69 Hang Chuoi', '1995-12-09','Male',  null, 10000, 'ADMIN', true);
 
-insert into user_info(id, first_name, last_name, username, user_password, email, telephone_num, address, dob, gender, profile_img, balance, active)
-values(1, 'Pepito', 'Cours', 'pepitocours','SlFsVmVK', 'pcours0@buzzfeed.com', '277-432-4462', '418 Katie Court', '1972-01-15', 'Male', 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 10000, true),
-(2, 'Mala', 'Longforth', 'malalongforth','RGJFYlBwRg==', 'mlongforth1@china.com.cn', '659-648-8888', '49 Vidon Place', '1971-06-10', 'Female', 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 10000, true),
-(3, 'Benjamin', 'Raspin', 'benjaminraspin','b2k3dTVnRmhKaHJZ', 'braspin2@state.tx.us', '134-274-3255', '3 Kenwood Trail', '1969-01-27', 'Male', 'https://as2.ftcdn.net/v2/jpg/03/64/21/11/1000_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg', 10000, true),
-(4, 'Eleanora', 'Mc Caughan', 'eleanoracaughan','MEk0WngzaVU=', 'emccaughan3@tiny.cc', '925-879-8502', '927 Armistice Point', '1977-09-16', 'Female', 'https://images.pexels.com/photos/634021/pexels-photo-634021.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 10000, true),
-(5, 'Cross', 'Rawes', 'crossrawes','MEk0WngzaVU=', 'crawes4@ucsd.edu', '326-298-1898', '104 Dexter Point', '1932-09-30', 'Male', 'https://images.pexels.com/photos/2589653/pexels-photo-2589653.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 10000, true),
-(6, 'Addison', 'Blaylock', 'addisonblaylock','eVlySHo5', 'ablaylock5@phpbb.com', '668-215-6778', '472 Russell Drive', '1993-02-27', 'Male', 'https://images.pexels.com/photos/428361/pexels-photo-428361.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 10000, true),
-(7, 'Benton', 'Pocknoll', 'bentonpocknoll','dWR2YXZwNkg=', 'bpocknoll6@typepad.com', '520-164-6847', '2120 Washington Court', '1985-06-15','Male', 'https://images.pexels.com/photos/1462980/pexels-photo-1462980.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 10000, true),
-(8, 'Faunie', 'Kirtland', 'fauniekirtland','dlVJQzQ0YXhIdQ==', 'fkirtland7@furl.net', '627-957-7220', '6635 Buell Crossing', '1931-07-26', 'Female', 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 10000, true),
-(9, 'Marie-jeanne', 'Romei', 'mariejeanneromei','Nm1ncEhSU2JlQXE=', 'mromei8@moonfruit.com', '286-211-0645', '85432 Stephen Alley', '1959-09-11', 'Female', 'https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', 10000, true),
-(10, 'Reynard', 'Ansteys', 'reynardansteys','dTdZa2dVT2M=', 'ransteys9@ucoz.com', '792-341-0273', '517 Pawling Center', '1974-07-02', 'Male', 'https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 10000, true),
-(11, 'Emily', 'Limeburn', 'emilylimeburn','aXZ4a1ljeDJL', 'elimeburna@moonfruit.com', '222-686-0489', '13 Meadow Ridge Junction', '1942-03-13', 'Female', 'https://images.pexels.com/photos/3958866/pexels-photo-3958866.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', 10000, true),
-(12,'Wylma','Lillgard', 'wylmalillgard','Mk1ESlUwWUY5MmJC','wlillgardb@chronoengine.com','802-409-4899','021 Glacier Hill Terrace','1937-07-02','Female', 'https://images.pexels.com/photos/4992382/pexels-photo-4992382.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', 10000, true),
-(13,'Dee','Tollfree', 'deetollfree','xnQFiVQRxV','dtollfreec@sciencedaily.com','713-202-6315','590 Everett Street','1970-08-13','Female', 'https://images.pexels.com/photos/1860368/pexels-photo-1860368.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', 10000, true),
-(14,'Susie','Ballin', 'susieballin','eG5RRmlWUVJ4Vg==','sballind@digg.com','297-923-0089','38 Basil Avenue','1993-12-01','Female', 'https://images.pexels.com/photos/6950769/pexels-photo-6950769.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', 10000, true),
-(15,'Wilmette','Layne', 'wilmettelayne','frxSR0','wlaynee@state.gov','875-113-6511','21683 Lindbergh Court','1931-11-27','Female', 'https://images.pexels.com/photos/1914877/pexels-photo-1914877.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', 10000, true),
-(16,'Felicle','Winspar', 'feliclewinspar','ZnJ4U1Iw','fwinsparf@redcross.org','751-934-5761','78 Manitowish Circle','1949-11-29','Female', 'https://media.istockphoto.com/id/1370426275/photo/portrait-of-middle-aged-woman-with-ginger-hair.jpg?s=612x612&w=0&k=20&c=gdEulh7b2F0_1xFuJeoD7bEoiw2oaxZ_9VRw21j5MUI=', 10000, true),
-(17,'Eldridge','Feast', 'eldridgefeast','zrImlZkT','efeastg@instagram.com','543-471-8206','2132 Vahlen Circle','1986-10-09','Male', 'https://images.pexels.com/photos/34534/people-peoples-homeless-male.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 10000, true),
-(18,'Edy','Ofield', 'edyofield','enJJbWxaa1Q=','eofieldh@cocolog-nifty.com','592-216-7132','5387 Charing Cross Point','1954-04-15','Female', 'https://images.pexels.com/photos/4116988/pexels-photo-4116988.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', 10000, true),
-(19,'Morton','Minghella', 'mortonminghella','MUtweklE','mminghellai@nhs.uk','222-241-1513','74 Blackbird Center','1999-02-28','Male', 'https://images.pexels.com/photos/810775/pexels-photo-810775.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 10000, true),
-(20,'Laurence','Mooney', 'laurencemooney','8116Oifsp2Ll','lmooneyj@vistaprint.com','203-843-3920','4 Porter Junction','1962-10-19','Male', 'https://images.pexels.com/photos/1451162/pexels-photo-1451162.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', 10000, true),
-(21,'Myrna','Kowalski', 'myrnakowalski','ODExNk9pZnNwMkxs','mkowalskik@quantcast.com','229-955-0371','77 Ridgeview Crossing','1987-04-10','Female', 'https://images.pexels.com/photos/5951543/pexels-photo-5951543.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', 10000, true),
-(22,'Yolanthe','MacDearmont', 'yolanthemacdearmont','ioYDxV','ymacdearmontl@theguardian.com','657-643-1026','56972 Karstens Avenue','1973-06-05','Female', 'https://images.pexels.com/photos/3764119/pexels-photo-3764119.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 10000, true),
-(23,'Finn','Ferrillo', 'finnferrillo','aW9ZRHhW','fferrillom@histats.com','647-489-2623','72 Melby Court','1959-08-13','Male', 'https://images.pexels.com/photos/947639/pexels-photo-947639.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 10000, true),
-(24,'Nelia','Crisford', 'neliacrisford','WjRVUXdHUmRL','ncrisfordn@com.com','454-496-2875','37 Carioca Alley','1935-12-06','Female', 'https://images.pexels.com/photos/2761798/pexels-photo-2761798.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', 10000, true),
-(25,'Hoang', 'Vu', 'hoangvu', 'MTIzNDU2Nzg5', 'hoangvu@gmail.com', '045678912','69 Hang Chuoi', '1995-12-09','Male',  null, 10000, true);
+insert into user_info(id, first_name, last_name, username, user_password, email, telephone_num, address, dob, gender, profile_img, balance, registered_date, active)
+values(1, 'Pepito', 'Cours', 'pepitocours','SlFsVmVK', 'pcours0@buzzfeed.com', '277-432-4462', '418 Katie Court', '1972-01-15', 'Male', 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 10000, '2001-03-04',true),
+(2, 'Mala', 'Longforth', 'malalongforth','RGJFYlBwRg==', 'mlongforth1@china.com.cn', '659-648-8888', '49 Vidon Place', '1971-06-10', 'Female', 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 10000, '2000-05-13',true),
+(3, 'Benjamin', 'Raspin', 'benjaminraspin','b2k3dTVnRmhKaHJZ', 'braspin2@state.tx.us', '134-274-3255', '3 Kenwood Trail', '1969-01-27', 'Male', 'https://as2.ftcdn.net/v2/jpg/03/64/21/11/1000_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg', 10000, '2002-11-22',true),
+(4, 'Eleanora', 'Mc Caughan', 'eleanoracaughan','MEk0WngzaVU=', 'emccaughan3@tiny.cc', '925-879-8502', '927 Armistice Point', '1977-09-16', 'Female', 'https://images.pexels.com/photos/634021/pexels-photo-634021.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 10000, '2000-01-19',true),
+(5, 'Cross', 'Rawes', 'crossrawes','MEk0WngzaVU=', 'crawes4@ucsd.edu', '326-298-1898', '104 Dexter Point', '1932-09-30', 'Male', 'https://images.pexels.com/photos/2589653/pexels-photo-2589653.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 10000, '2003-07-11',true),
+(6, 'Addison', 'Blaylock', 'addisonblaylock','eVlySHo5', 'ablaylock5@phpbb.com', '668-215-6778', '472 Russell Drive', '1993-02-27', 'Male', 'https://images.pexels.com/photos/428361/pexels-photo-428361.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 10000, '2001-08-03',true),
+(7, 'Benton', 'Pocknoll', 'bentonpocknoll','dWR2YXZwNkg=', 'bpocknoll6@typepad.com', '520-164-6847', '2120 Washington Court', '1985-06-15','Male', 'https://images.pexels.com/photos/1462980/pexels-photo-1462980.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 10000, '2002-10-30',true),
+(8, 'Faunie', 'Kirtland', 'fauniekirtland','dlVJQzQ0YXhIdQ==', 'fkirtland7@furl.net', '627-957-7220', '6635 Buell Crossing', '1931-07-26', 'Female', 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 10000, '2004-02-19',true),
+(9, 'Marie-jeanne', 'Romei', 'mariejeanneromei','Nm1ncEhSU2JlQXE=', 'mromei8@moonfruit.com', '286-211-0645', '85432 Stephen Alley', '1959-09-11', 'Female', 'https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', 10000, '2000-05-15',true),
+(10, 'Reynard', 'Ansteys', 'reynardansteys','dTdZa2dVT2M=', 'ransteys9@ucoz.com', '792-341-0273', '517 Pawling Center', '1974-07-02', 'Male', 'https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 10000, '2002-12-03',true),
+(11, 'Emily', 'Limeburn', 'emilylimeburn','aXZ4a1ljeDJL', 'elimeburna@moonfruit.com', '222-686-0489', '13 Meadow Ridge Junction', '1942-03-13', 'Female', 'https://images.pexels.com/photos/3958866/pexels-photo-3958866.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', 10000, '2001-08-27',true),
+(12,'Wylma','Lillgard', 'wylmalillgard','Mk1ESlUwWUY5MmJC','wlillgardb@chronoengine.com','802-409-4899','021 Glacier Hill Terrace','1937-07-02','Female', 'https://images.pexels.com/photos/4992382/pexels-photo-4992382.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', 10000, '2005-07-14',true),
+(13,'Dee','Tollfree', 'deetollfree','xnQFiVQRxV','dtollfreec@sciencedaily.com','713-202-6315','590 Everett Street','1970-08-13','Female', 'https://images.pexels.com/photos/1860368/pexels-photo-1860368.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', 10000, '2004-06-16',true),
+(14,'Susie','Ballin', 'susieballin','eG5RRmlWUVJ4Vg==','sballind@digg.com','297-923-0089','38 Basil Avenue','1993-12-01','Female', 'https://images.pexels.com/photos/6950769/pexels-photo-6950769.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', 10000, '2003-09-24',true),
+(15,'Wilmette','Layne', 'wilmettelayne','frxSR0','wlaynee@state.gov','875-113-6511','21683 Lindbergh Court','1931-11-27','Female', 'https://images.pexels.com/photos/1914877/pexels-photo-1914877.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', 10000, '1999-04-05',true),
+(16,'Felicle','Winspar', 'feliclewinspar','ZnJ4U1Iw','fwinsparf@redcross.org','751-934-5761','78 Manitowish Circle','1949-11-29','Female', 'https://media.istockphoto.com/id/1370426275/photo/portrait-of-middle-aged-woman-with-ginger-hair.jpg?s=612x612&w=0&k=20&c=gdEulh7b2F0_1xFuJeoD7bEoiw2oaxZ_9VRw21j5MUI=', 10000, '2011-03-19',true),
+(17,'Eldridge','Feast', 'eldridgefeast','zrImlZkT','efeastg@instagram.com','543-471-8206','2132 Vahlen Circle','1986-10-09','Male', 'https://images.pexels.com/photos/34534/people-peoples-homeless-male.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 10000, '2010-10-10',true),
+(18,'Edy','Ofield', 'edyofield','enJJbWxaa1Q=','eofieldh@cocolog-nifty.com','592-216-7132','5387 Charing Cross Point','1954-04-15','Female', 'https://images.pexels.com/photos/4116988/pexels-photo-4116988.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', 10000, '2012-05-04',true),
+(19,'Morton','Minghella', 'mortonminghella','MUtweklE','mminghellai@nhs.uk','222-241-1513','74 Blackbird Center','1999-02-28','Male', 'https://images.pexels.com/photos/810775/pexels-photo-810775.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 10000, '2015-08-28',true),
+(20,'Laurence','Mooney', 'laurencemooney','8116Oifsp2Ll','lmooneyj@vistaprint.com','203-843-3920','4 Porter Junction','1962-10-19','Male', 'https://images.pexels.com/photos/1451162/pexels-photo-1451162.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', 10000, '2011-01-29',true),
+(21,'Myrna','Kowalski', 'myrnakowalski','ODExNk9pZnNwMkxs','mkowalskik@quantcast.com','229-955-0371','77 Ridgeview Crossing','1987-04-10','Female', 'https://images.pexels.com/photos/5951543/pexels-photo-5951543.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', 10000, '2016-05-21',true),
+(22,'Yolanthe','MacDearmont', 'yolanthemacdearmont','ioYDxV','ymacdearmontl@theguardian.com','657-643-1026','56972 Karstens Avenue','1973-06-05','Female', 'https://images.pexels.com/photos/3764119/pexels-photo-3764119.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 10000, '2012-12-25',true),
+(23,'Finn','Ferrillo', 'finnferrillo','aW9ZRHhW','fferrillom@histats.com','647-489-2623','72 Melby Court','1959-08-13','Male', 'https://images.pexels.com/photos/947639/pexels-photo-947639.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 10000, '2013-04-19',true),
+(24,'Nelia','Crisford', 'neliacrisford','WjRVUXdHUmRL','ncrisfordn@com.com','454-496-2875','37 Carioca Alley','1935-12-06','Female', 'https://images.pexels.com/photos/2761798/pexels-photo-2761798.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', 10000, '2015-07-27',true),
+(25,'Hoang', 'Vu', 'hoangvu', 'MTIzNDU2Nzg5', 'hoangvu@gmail.com', '045678912','69 Hang Chuoi', '1995-12-09','Male',  null, 10000, '2023-03-13',true);
 
 
 create table game_image(
@@ -968,7 +968,7 @@ values(1, 1, 1, 'Game is good.', '2023-04-22'),
 (12, 3, 9, 'What is this, 2D Dark Souls??!', '2023-02-15'),
 (13, 3, 26, 'John Wick if he had a cyber arm.', '2023-05-01'),
 (14, 4, 28, 'Look ma I''m robbing a bank!', '2023-01-07'),
-(15, 4, 1, 'The best focking game I''ve ever played!', '2023-04-14',
+(15, 4, 1, 'The best focking game I''ve ever played!', '2023-04-14'),
 (16, 4, 5, 'Why does this guy look like every Spider-Man actor combine?', '2023-01-02'),
 (17, 4, 3, 'I got to fight giant mechanical dinosaurs, 10/10.', '2023-03-10'),
 (18, 5, 4, 'The worst port Naughty Dog has ever made!', '2023-05-09'),
@@ -995,7 +995,7 @@ values(1, 1, 1, 'Game is good.', '2023-04-22'),
 (39, 10, 35, 'ChatGPT if they went sentient.', '2023-03-30'),
 (40, 10, 36, 'Ooooooo scary.', '2023-01-26'),
 (41, 10, 16, 'Typically American dream.', '2023-05-06'),
-(42, 11, 41, '^#$%#$%%$&%^*%^&%^&(**!#$#', '2023-02-07'),
+(42, 11, 41, '^#$%#$%%$&%^*%^&%^&**!#$#', '2023-02-07'),
 (43, 11, 31, 'Ivy can penetrate me with her sword anytime.', '2023-01-15'),
 (44, 11, 40, 'Somehow a 2D game is better than all these 3D AAA games.', '2023-03-31'),
 (45, 12, 14, 'How is a Viking also an assassin??!', '2023-01-15'),
@@ -1044,107 +1044,6 @@ values(1, 1, 1, 'Game is good.', '2023-04-22'),
 (88, 21, 39, 'Cloud in a dress is my wet dream.', '2023-04-02'),
 (89, 21, 16, 'How can a guy have too many nukes and the US government still lets him live??!', '2023-02-23');
 
-alter table game_comment add column comment_date date;
-
-insert into game_comment(comment_date)
-values('2023-04-22'),
-('2023-03-26'),
-('2023-02-27'),
-('2023-03-17'),
-('2023-01-10'),
-('2023-01-01'),
-('2023-01-29'),
-('2023-03-15'),
-('2023-02-09'),
-('2023-04-04'),
-('2023-02-27'),
-('2023-02-15'),
-('2023-05-01'),
-('2023-01-07'),
-('2023-04-14'),
-('2023-01-02'),
-('2023-03-10'),
-('2023-05-09'),
-('2023-01-28'),
-('2023-04-16'),
-('2023-01-13'),
-('2023-03-06'),
-('2023-04-21'),
-('2023-01-18'),
-('2023-04-13'),
-('2023-03-03'),
-('2023-01-01'),
-('2023-01-07'),
-('2023-01-05'),
-('2023-02-22'),
-('2023-05-22'),
-('2023-03-06'),
-('2023-02-08'),
-('2023-01-24'),
-('2023-04-16'),
-('2023-02-26'),
-('2023-03-27'),
-('2023-03-04'),
-('2023-03-30'),
-('2023-01-26'),
-('2023-05-06'),
-('2023-02-07'),
-('2023-01-15'),
-('2023-03-31'),
-('2023-01-15'),
-('2023-01-05'),
-('2023-02-22'),
-('2023-03-29'),
-('2023-02-13'),
-('2023-05-05'),
-('2023-02-04'),
-('2023-03-24'),
-('2023-01-18'),
-('2023-04-30'),
-('2023-03-13'),
-('2023-03-31'),
-('2023-02-25'),
-('2023-01-16'),
-('2023-04-10'),
-('2023-02-13'),
-('2023-03-11'),
-('2023-02-18'),
-('2023-03-11'),
-('2023-03-28'),
-('2023-01-16'),
-('2023-03-03'),
-('2023-04-10'),
-('2023-04-24'),
-('2023-02-12'),
-('2023-02-25'),
-('2023-02-07'),
-('2023-02-19'),
-('2023-02-22'),
-('2023-01-29'),
-('2023-01-07'),
-('2023-04-06'),
-('2023-05-01'),
-('2023-03-03'),
-('2023-02-05'),
-('2023-01-14'),
-('2023-01-03'),
-('2023-04-09'),
-('2023-02-26'),
-('2023-01-26'),
-('2023-03-26'),
-('2023-01-21'),
-('2023-02-10'),
-('2023-04-02'),
-('2023-02-23'),
-('2023-03-08'),
-('2023-04-06'),
-('2023-03-05'),
-('2023-03-11'),
-('2023-01-31'),
-('2023-02-24'),
-('2023-01-15'),
-('2023-01-22'),
-('2023-04-11');
 
 create table rating(
 	id int, 
@@ -1421,6 +1320,9 @@ values(1, 59,21),
 (100, 63,10),
 (101, 41,9);
 
+insert into receipt_details(id, receipt_id, game_id)  
+values(102, 70, 26);
+
 select g.game_name, g2.image_link 
 from game g join game_image g2 on g.id = g2.game_id;
 
@@ -1451,3 +1353,69 @@ values(1, '2023-03-13', 'ROLE_USER', null, 1),
 (24, '2023-03-13', 'ROLE_USER', null, 24),
 (25, '2023-03-13', 'ROLE_USER', null, 25),
 (26, '2023-03-13', 'ROLE_ADMIN', null, 25);
+
+select g
+from game g join receipt_details rd on g.id = rd.game_id 
+join receipt r on r.id = rd.receipt_id 
+join user_info ui on ui.id = r.user_id 
+where ui.id = 2;
+
+select g
+from game g join receipt_details rd on g.id = rd.game_id 
+join receipt r on r.id = rd.receipt_id 
+join user_info ui on ui.id = r.user_id 
+where ui.username like '%orth%';
+
+--Custom queries
+--1/ List of games that have rating, releasedDate from A to B.
+select g, r.rating 
+from game g join rating r on r.game_id = g.id 
+group by g.id, r.rating 
+having g.released_date between '2022-01-01' and '2023-01-01'
+and r.rating between 3 and 4;
+
+--2/ Find games based on Developer, Publisher, Genre, SubGenre and Game name (LIKE).
+
+--3/ Revenue from date A to date B.
+select r.receipt_date, count(g.id) as "Game sold", sum(g.price) as "Revenue per day"
+from game g join receipt_details rd ON g.id = rd.game_id 
+join receipt r on r.id = rd.receipt_id
+group by r.receipt_date
+having r.receipt_date between '2020-01-01' and '2023-01-01';
+
+--4/ List of top-seller Games from date A to date B
+select "CopiesSold".id, "CopiesSold".game_name, count("CopiesSold"."Copies sold") as "Total sales"
+from
+(select g.id, g.game_name, count(rd.game_id) as "Copies sold" 
+from game g join receipt_details rd on g.id = rd.game_id 
+join receipt r on r.id = rd.receipt_id 
+group by g.id, r.receipt_date  
+having r.receipt_date between '2020-01-01' and '2023-01-01'
+order by g.id) as "CopiesSold"
+group by "CopiesSold".id, "CopiesSold".game_name
+order by "Total sales" desc
+limit 5;
+
+select g.id, g.game_name, count(rd.game_id) as "Copies sold"
+from game g join receipt_details rd on g.id = rd.game_id
+group by g.id
+order by g.id;
+
+--5/ List of worst-seller Games from date A to date B
+select "CopiesSold".id, "CopiesSold".game_name, count("CopiesSold"."Copies sold") as "Total sales"
+from
+(select g.id, g.game_name, count(rd.game_id) as "Copies sold" 
+from game g join receipt_details rd on g.id = rd.game_id 
+join receipt r on r.id = rd.receipt_id 
+group by g.id, r.receipt_date  
+having r.receipt_date between '2020-01-01' and '2023-01-01'
+order by g.id) as "CopiesSold"
+group by "CopiesSold".id, "CopiesSold".game_name
+order by "Total sales" asc
+limit 5;
+
+--6/ List of registered user by month
+select extract (month from ui.registered_date ) as "Month", count(ui.id) as "Number of registered users"
+from user_info ui
+group by "Month"
+having extract (month from ui.registered_date ) = 4;
