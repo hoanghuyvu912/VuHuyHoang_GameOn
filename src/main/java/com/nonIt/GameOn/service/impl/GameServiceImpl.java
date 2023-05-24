@@ -204,6 +204,11 @@ public class GameServiceImpl implements GameService {
         return gameMapper.toDto(game);
     }
 
+//    @Override
+//    public List<GameRestDto> getByRatingAndReleasedDateBetween() {
+//        return gameRepository.getByRatingAndReleasedDateBetween().stream().map(gameMapper::toDto).collect(Collectors.toList());
+//    }
+
     @Override
     public void deleteGame(Integer gameId) {
         gameRepository.deleteById(gameId);

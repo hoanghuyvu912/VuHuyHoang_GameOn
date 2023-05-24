@@ -43,5 +43,7 @@ public interface GameService {
 
     GameRestDto updateGame(Integer gameId, GameDto gameDto);
 
+//    List<GameRestDto> getByRatingAndReleasedDateBetween();
+
     void deleteGame(Integer gameId);
 }

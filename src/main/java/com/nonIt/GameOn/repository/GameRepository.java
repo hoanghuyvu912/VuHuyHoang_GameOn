@@ -45,4 +45,13 @@ public interface GameRepository extends JpaRepository<Game, Integer> {
 
     @Query(value = "SELECT g from Game g join GameSubGenre gsg on g.id = gsg.game.id join SubGenre sg on gsg.subGenre.id = sg.id where UPPER(sg.name) LIKE UPPER(:subGenreName)")
     List<Game> getBySubGenreName(@Param("subGenreName") String subGenreName);
+
+//    @Query(value = "select GameRating.g, max(Rating) as MaxRating from \n" +
+//            "(select g, r.rating as Rating\n" +
+//            "from Game g join Rating r on r.game.id = g.id \n" +
+//            "group by g.id, r.rating\n" +
+//            "HAVING r.rating between 3 and 4\n" +
+//            "and g.releasedDate between '2022-01-01' and '2023-01-01') as GameRating\n" +
+//            "group by GameRating.g")
+//    List<Game> getByRatingAndReleasedDateBetween();
 }
