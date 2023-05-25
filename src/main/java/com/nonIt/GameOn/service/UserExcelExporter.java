@@ -20,11 +20,11 @@ public class UserExcelExporter {
     private XSSFSheet sheet;
     private List<UserRestDto> listUsers;
 
+    //The Exporter will accept a list of your choice
     public UserExcelExporter(List<UserRestDto> listUsers) {
         this.listUsers = listUsers;
         workbook = new XSSFWorkbook();
     }
-
 
     private void writeHeaderLine() {
         sheet = workbook.createSheet("Users");
@@ -37,6 +37,7 @@ public class UserExcelExporter {
         font.setFontHeight(16);
         style.setFont(font);
 
+        //Define how many columns you want to have, with the columns' name
         createCell(row, 0, "ID", style);
         createCell(row, 1, "E-mail", style);
         createCell(row, 2, "Username", style);
@@ -68,6 +69,7 @@ public class UserExcelExporter {
         font.setFontHeight(14);
         style.setFont(font);
 
+        //Create row equivalent to each record in listUsers
         for (UserRestDto userRestDto : listUsers) {
             Row row = sheet.createRow(rowCount++);
             int columnCount = 0;
