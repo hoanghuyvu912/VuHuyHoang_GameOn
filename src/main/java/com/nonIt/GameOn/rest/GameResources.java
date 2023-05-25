@@ -91,6 +91,11 @@ public class GameResources {
         return ResponseEntity.ok(gameService.getBySubGenreName("%" + subGenreName + "%"));
     }
 
+//    @GetMapping(value = "/by-rating-and-released-date-between")
+//    public ResponseEntity<List<GameRestDto>> getByRatingAndReleasedDateBetween() {
+//        return ResponseEntity.ok(gameService.getByRatingAndReleasedDateBetween());
+//    }
+
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<GameRestDto> createGame(@Valid @RequestBody GameDto gameDto) {
