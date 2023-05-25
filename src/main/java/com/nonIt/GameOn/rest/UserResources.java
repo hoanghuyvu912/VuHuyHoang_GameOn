@@ -4,6 +4,7 @@ import com.lowagie.text.DocumentException;
 import com.nonIt.GameOn.entity.Gender;
 import com.nonIt.GameOn.entity.User;
 import com.nonIt.GameOn.service.PdfGenerator;
+import com.nonIt.GameOn.service.UserExcelExporter;
 import com.nonIt.GameOn.service.UserService;
 import com.nonIt.GameOn.service.dto.UserDto;
 import com.nonIt.GameOn.service.restDto.UserRestDto;
@@ -123,8 +124,25 @@ public class UserResources {
         String headerkey = "Content-Disposition";
         String headervalue = "attachment; filename=UsersList" + currentDateTime + ".pdf";
         response.setHeader(headerkey, headervalue);
-        List <UserRestDto> listofUsers = userService.getAll();
+        List <UserRestDto> userRestDtos = userService.getAll();
         PdfGenerator generator = new PdfGenerator();
-        generator.generate(listofUsers, response);
+        generator.generate(userRestDtos, response);
+    }
+
+    @GetMapping("/export-to-excel")
+    public void exportToExcel(HttpServletResponse response) throws IOException {
+        response.setContentType("application/octet-stream");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=users_" + currentDateTime + ".xlsx";
+        response.setHeader(headerKey, headerValue);
+
+        List <UserRestDto> userRestDtos = userService.getAll();
+
+        UserExcelExporter excelExporter = new UserExcelExporter(userRestDtos);
+
+        excelExporter.export(response);
     }
 }
