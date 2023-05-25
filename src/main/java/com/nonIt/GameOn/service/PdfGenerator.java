@@ -27,10 +27,10 @@ public class PdfGenerator {
         document.open();
         // Creating font
         // Setting font style and size
-        Font fontTiltle = FontFactory.getFont(FontFactory.TIMES_ROMAN);
-        fontTiltle.setSize(20);
+        Font fontTitle = FontFactory.getFont(FontFactory.TIMES_ROMAN);
+        fontTitle.setSize(20);
         // Creating paragraph
-        Paragraph paragraph1 = new Paragraph("List of the User", fontTiltle);
+        Paragraph paragraph1 = new Paragraph("List of the User", fontTitle);
         // Aligning the paragraph in the document
         paragraph1.setAlignment(Paragraph.ALIGN_CENTER);
         // Adding the created paragraph in the document
