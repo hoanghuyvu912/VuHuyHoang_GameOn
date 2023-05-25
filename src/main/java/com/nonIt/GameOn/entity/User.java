@@ -58,8 +58,11 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
+//    @Column(name = "profile_img", length = 5000)
+//    private String profileImg;
+
     @Column(name = "profile_img", length = 5000)
-    private String profileImg;
+    private byte[] profileImg;
 
     @Column(name = "balance", columnDefinition = "Decimal(20,2)")
     private Double balance;

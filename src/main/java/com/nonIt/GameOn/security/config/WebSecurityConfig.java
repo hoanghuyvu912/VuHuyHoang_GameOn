@@ -71,6 +71,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/genres/**").permitAll()
 				.antMatchers("/sub-genres/**").permitAll()
 				.antMatchers("/ratings/**").permitAll()
+				.antMatchers("/users/**").permitAll()
 				.anyRequest()
 				.authenticated();
 

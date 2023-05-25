@@ -3,9 +3,13 @@ package com.nonIt.GameOn.service;
 import com.nonIt.GameOn.entity.Gender;
 import com.nonIt.GameOn.service.dto.UserDto;
 import com.nonIt.GameOn.service.restDto.UserRestDto;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
     List<UserRestDto> getAll();
@@ -15,6 +19,10 @@ public interface UserService {
     UserRestDto createUser(UserDto userDto);
 
     UserRestDto updateUser(Integer userId, UserDto userDto);
+
+    UserRestDto updateUserProfileImage(Integer userId, File file) throws IOException;
+
+    void showUserProfileImage(Integer userId) throws IOException;
 
     List<UserRestDto> findByGender(Gender gender);
 

@@ -35,7 +35,8 @@ public class UserRestDto {
 
     private Gender gender;
 
-    private String profileImg;
+//    private String profileImg;
+    private byte[] profileImg;
 
     private Double balance;
 

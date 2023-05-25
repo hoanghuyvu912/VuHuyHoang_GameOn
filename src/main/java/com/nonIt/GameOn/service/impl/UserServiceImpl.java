@@ -6,20 +6,35 @@ import com.nonIt.GameOn.entity.User;
 import com.nonIt.GameOn.entity.UserRoleAssignment;
 import com.nonIt.GameOn.exception.GameOnException;
 import com.nonIt.GameOn.repository.UserRepository;
+import com.nonIt.GameOn.service.ImageService;
 import com.nonIt.GameOn.service.UserService;
 import com.nonIt.GameOn.service.dto.UserDto;
 import com.nonIt.GameOn.service.mapper.UserMapper;
 import com.nonIt.GameOn.service.restDto.UserRestDto;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.FileUtils;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.text.html.Option;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,6 +44,8 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     private final UserMapper userMapper;
+
+    private final ImageService imageService;
 
     @Autowired
     private final PasswordEncoder passwordEncoder;
@@ -90,13 +107,12 @@ public class UserServiceImpl implements UserService {
                 .address(userDto.getAddress())
                 .dob(userDto.getDob())
                 .gender(userDto.getGender())
-                .profileImg(userDto.getProfileImg())
+//                .profileImg(userDto.getProfileImg())
                 .balance(userDto.getBalance())
                 .active(userDto.isActive())
                 .build();
 
         List<UserRoleAssignment> tempList = new ArrayList<>();
-
 
         if (userDto.getRoles().size() == 0) {
             UserRoleAssignment role = new UserRoleAssignment();
@@ -120,12 +136,14 @@ public class UserServiceImpl implements UserService {
 //            tempList.add(role);
 //        });
 
+
         user.setRoles(tempList);
 
         user = userRepository.save(user);
 
         return userMapper.toDto(user);
     }
+
 
     @Override
     public UserRestDto updateUser(Integer userId, UserDto userDto) {
@@ -185,9 +203,47 @@ public class UserServiceImpl implements UserService {
 //                throw GameOnException.badRequest("InvalidRole", "Role must be " + Role.ROLE_USER + " or " + Role.ROLE_ADMIN);
 //            }
 //        }
+
         userMapper.mapFromDto(userDto, user);
         user = userRepository.save(user);
         return userMapper.toDto(user);
+    }
+
+    @Override
+    public UserRestDto updateUserProfileImage(Integer userId, MultipartFile file) throws IOException {
+        User user = userRepository.findById(userId).orElseThrow(GameOnException::UserNotFound);
+
+//        BufferedImage bImage = ImageIO.read(file);
+//        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+//        ImageIO.write(bImage, "png", bos);
+//        byte[] data = bos.toByteArray();
+
+
+        byte[] bytes = FileUtils.read.readFileToByteArray(file);
+
+        user.setProfileImg(bytes);
+
+        user = userRepository.save(user);
+        return userMapper.toDto(user);
+    }
+
+    @Override
+    public void showUserProfileImage(Integer userId) throws IOException {
+        User user = userRepository.findById(userId).orElseThrow(GameOnException::UserNotFound);
+
+        ByteArrayInputStream bis = new ByteArrayInputStream(user.getProfileImg());
+        BufferedImage bImage2 = ImageIO.read(bis);
+
+        JLabel ic = new JLabel(new ImageIcon(bImage2));
+        JScrollPane scroller = new JScrollPane(ic);
+        JDialog popup = new JDialog();
+        popup.getContentPane().setLayout(new FlowLayout());
+        popup.getContentPane().add(scroller);
+        popup.getContentPane().validate();
+        popup.setModal(true);
+        popup.pack();
+        popup.setVisible(true);
+//        return imageService.getImage(user.getProfileImg());
     }
 
     @Override

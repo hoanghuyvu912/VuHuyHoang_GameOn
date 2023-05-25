@@ -2,7 +2,6 @@ package com.nonIt.GameOn.rest;
 
 import com.lowagie.text.DocumentException;
 import com.nonIt.GameOn.entity.Gender;
-import com.nonIt.GameOn.entity.User;
 import com.nonIt.GameOn.service.PdfGenerator;
 import com.nonIt.GameOn.service.UserExcelExporter;
 import com.nonIt.GameOn.service.UserService;
@@ -11,10 +10,11 @@ import com.nonIt.GameOn.service.restDto.UserRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -25,7 +25,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/users")
-@PreAuthorize("hasRole('ADMIN')")
+//@PreAuthorize("hasRole('ADMIN')")
 public class UserResources {
     private final UserService userService;
 
@@ -47,6 +47,17 @@ public class UserResources {
     @PutMapping(value = "/{userId}")
     public ResponseEntity<UserRestDto> updateUserById(@PathVariable("userId") Integer userId, @RequestBody UserDto userDto) {
         return ResponseEntity.ok(userService.updateUser(userId, userDto));
+    }
+
+    @PutMapping(value = "/{userId}/update-profile-image")
+    public ResponseEntity<UserRestDto> updateUserImageById(@PathVariable("userId") Integer userId, @RequestParam("image") File file) throws IOException {
+        return ResponseEntity.ok(userService.updateUserProfileImage(userId, file));
+    }
+
+    @GetMapping(value = "/{userId}/profile-image")
+    public ResponseEntity<Void> showUserImageById(@PathVariable("userId") Integer userId) throws IOException {
+        userService.showUserProfileImage(userId);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping(value = "/{userId}")
