@@ -50,7 +50,7 @@ public class UserResources {
     }
 
     @PutMapping(value = "/{userId}/update-profile-image")
-    public ResponseEntity<UserRestDto> updateUserImageById(@PathVariable("userId") Integer userId, @RequestParam("image") File file) throws IOException {
+    public ResponseEntity<UserRestDto> updateUserImageById(@PathVariable("userId") Integer userId, @RequestParam("image") MultipartFile file) throws IOException {
         return ResponseEntity.ok(userService.updateUserProfileImage(userId, file));
     }
 
