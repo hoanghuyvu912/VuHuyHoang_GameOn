@@ -2,8 +2,7 @@ package com.nonIt.GameOn.rest;
 
 import com.lowagie.text.DocumentException;
 import com.nonIt.GameOn.entity.Gender;
-import com.nonIt.GameOn.entity.User;
-import com.nonIt.GameOn.service.PdfGenerator;
+import com.nonIt.GameOn.utils.PdfGenerator;
 import com.nonIt.GameOn.service.UserService;
 import com.nonIt.GameOn.service.dto.UserDto;
 import com.nonIt.GameOn.service.restDto.UserRestDto;

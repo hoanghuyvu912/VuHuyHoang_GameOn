@@ -28,81 +28,10 @@ public class GameServiceImpl implements GameService {
     private final PublisherRepository publisherRepository;
     private final GameMapper gameMapper;
 
+    //CRUD Services
     @Override
     public List<GameRestDto> getAll() {
-//        return gameMapper.toDtos(gameRepository.findAll());
         return gameRepository.findAll().stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GameRestDto> findByNameContaining(String name) {
-        return gameRepository.findByNameContaining(name).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GameRestDto> findByReleasedDateAfter(LocalDate date) {
-        return gameRepository.findByReleasedDateAfter(date).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GameRestDto> findByReleasedDateBefore(LocalDate date) {
-        return gameRepository.findByReleasedDateBefore(date).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GameRestDto> findByPriceGreaterThan(Double price) {
-        return gameRepository.findByPriceGreaterThan(price).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GameRestDto> findByPriceLessThan(Double price) {
-        return gameRepository.findByPriceLessThan(price).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GameRestDto> getByDeveloperId(Integer developerId) {
-        return gameRepository.getByDeveloperId(developerId).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GameRestDto> getByPublisherId(Integer publisherId) {
-        return gameRepository.getByPublisherId(publisherId).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GameRestDto> getByUserId(Integer userId) {
-        return gameRepository.getByUserId(userId).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GameRestDto> getByUsername(String username) {
-        return gameRepository.getByUsername(username).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GameRestDto> getByGenreId(Integer genreId) {
-        return gameRepository.getByGenreId(genreId).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GameRestDto> getByGenreName(String genreName) {
-        return gameRepository.getByGenreName(genreName).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GameRestDto> getBySubGenreId(Integer subGenreId) {
-        return gameRepository.getBySubGenreId(subGenreId).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GameRestDto> getBySubGenreName(String subGenreName) {
-        return gameRepository.getBySubGenreName(subGenreName).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public GameRestDto findById(Integer gameId) {
-        Game game = gameRepository.findById(gameId).orElseThrow(GameOnException::GameNotFound);
-        return gameMapper.toDto(game);
     }
 
     @Override
@@ -204,13 +133,224 @@ public class GameServiceImpl implements GameService {
         return gameMapper.toDto(game);
     }
 
-//    @Override
-//    public List<GameRestDto> getByRatingAndReleasedDateBetween() {
-//        return gameRepository.getByRatingAndReleasedDateBetween().stream().map(gameMapper::toDto).collect(Collectors.toList());
-//    }
-
     @Override
     public void deleteGame(Integer gameId) {
         gameRepository.deleteById(gameId);
     }
+
+
+    //Find by Game name related services
+
+    @Override
+    public List<GameRestDto> findByNameContaining(String name) {
+        return gameRepository.findByNameContaining(name).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByNameContainingAndSystemReqContaining(String name, String req) {
+        return gameRepository.findByNameContainingAndSystemReqContaining(name, req).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByNameContainingAndPriceLessThanEqual(String name, Double price) {
+        return gameRepository.findByNameContainingAndPriceLessThanEqual(name, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByNameContainingAndPriceGreaterThanEqual(String name, Double price) {
+        return gameRepository.findByNameContainingAndPriceLessThanEqual(name, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByNameContainingAndPriceBetween(String name, Double price1, Double price2) {
+        return gameRepository.findByNameContainingAndPriceBetween(name, price1, price2).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByNameContainingAndDeveloperNameContaining(String gameName, String developerName) {
+        return null;
+    }
+
+    @Override
+    public List<GameRestDto> findByNameContainingAndPublisherNameContaining(String gameName, String publisherName) {
+        return null;
+    }
+
+    @Override
+    public List<GameRestDto> findByNameContainingAndReleasedDateAfter(String gameName, LocalDate date) {
+        return null;
+    }
+
+    @Override
+    public List<GameRestDto> findByNameContainingAndReleasedDateBefore(String gameName, LocalDate date) {
+        return null;
+    }
+
+    @Override
+    public List<GameRestDto> findByNameContainingAndReleasedDateBetween(String gameName, LocalDate date1, LocalDate date2) {
+        return null;
+    }
+
+
+    //Find by Game releasedDate related services
+    @Override
+    public List<GameRestDto> findByReleasedDateAfter(LocalDate date) {
+        return gameRepository.findByReleasedDateAfter(date).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+
+    @Override
+    public List<GameRestDto> findByReleasedDateBefore(LocalDate date) {
+        return gameRepository.findByReleasedDateBefore(date).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByReleasedDateAfterAndSystemReqContaining(LocalDate date, String systemReq) {
+        return null;
+    }
+
+    @Override
+    public List<GameRestDto> findByReleasedDateBeforeAndSystemReqContaining(LocalDate date, String systemReq) {
+        return null;
+    }
+
+    @Override
+    public List<GameRestDto> findByReleasedDateBetweenAndSystemReqContaining(LocalDate date1, LocalDate date2, String systemReq) {
+        return null;
+    }
+
+    @Override
+    public List<GameRestDto> findByReleasedDateAfterAndPriceLessThanEqual(LocalDate date, Double price) {
+        return null;
+    }
+
+    @Override
+    public List<GameRestDto> findByReleasedDateAfterAndPriceGreaterThanEqual(LocalDate date, Double price) {
+        return null;
+    }
+
+    @Override
+    public List<GameRestDto> findByReleasedDateAfterAndPriceBetween(LocalDate date, Double price1, Double price2) {
+        return null;
+    }
+
+    @Override
+    public List<GameRestDto> findByReleasedDateBeforeAndPriceLessThanEqual(LocalDate date, Double price) {
+        return null;
+    }
+
+    @Override
+    public List<GameRestDto> findByReleasedDateBeforeAndPriceGreaterThanEqual(LocalDate date, Double price) {
+        return null;
+    }
+
+    @Override
+    public List<GameRestDto> findByReleasedDateBeforeAndPriceBetween(LocalDate date, Double price1, Double price2) {
+        return null;
+    }
+
+    @Override
+    public List<GameRestDto> findByReleasedDateBetweenAndPriceBetween(LocalDate date1, LocalDate date2, Double price1, Double price2) {
+        return null;
+    }
+
+
+    //Find by Game systemReq related services
+    @Override
+    public List<GameRestDto> findBySystemReqContaining(String req) {
+        return null;
+    }
+
+    @Override
+    public List<GameRestDto> findBySystemReqContainingAndPriceGreaterThanEqual(String req, Double price) {
+        return null;
+    }
+
+    @Override
+    public List<GameRestDto> findBySystemReqContainingAndPriceLessThanEqual(String req, Double price) {
+        return null;
+    }
+
+    @Override
+    public List<GameRestDto> findBySystemReqContainingAndPriceBetween(String req, Double price1, Double price2) {
+        return null;
+    }
+
+
+    //Find by Game price related services
+    @Override
+    public List<GameRestDto> findByPriceGreaterThan(Double price) {
+        return gameRepository.findByPriceGreaterThan(price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByPriceLessThan(Double price) {
+        return gameRepository.findByPriceLessThan(price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByPriceBetween(Double price1, Double price2) {
+        return null;
+    }
+
+    //Find by Game foreign keys related services
+
+    @Override
+    public List<GameRestDto> getByDeveloperId(Integer developerId) {
+        return gameRepository.getByDeveloperId(developerId).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> getByPublisherId(Integer publisherId) {
+        return gameRepository.getByPublisherId(publisherId).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> getByUserId(Integer userId) {
+        return gameRepository.getByUserId(userId).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> getByUsername(String username) {
+        return gameRepository.getByUsername(username).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> getByGenreId(Integer genreId) {
+        return gameRepository.getByGenreId(genreId).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> getByGenreName(String genreName) {
+        return gameRepository.getByGenreName(genreName).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> getBySubGenreId(Integer subGenreId) {
+        return gameRepository.getBySubGenreId(subGenreId).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> getBySubGenreName(String subGenreName) {
+        return gameRepository.getBySubGenreName(subGenreName).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public GameRestDto findById(Integer gameId) {
+        Game game = gameRepository.findById(gameId).orElseThrow(GameOnException::GameNotFound);
+        return gameMapper.toDto(game);
+    }
+
+
+
+//    @Override
+//    public List<GameRestDto> getByRatingAndReleasedDateBetween(Integer rating1, Integer rating2, LocalDate date1, LocalDate date2) {
+//        return null;
+//    }
+
+//    @Override
+//    public List<GameRestDto> getByRatingAndReleasedDateBetween(Integer rating1, Integer rating2, LocalDate date1, LocalDate date2) {
+//        return gameRepository.getByRatingAndReleasedDateBetween(rating1, rating2, date1, date2).stream().map(gameMapper::toDto).collect(Collectors.toList());
+//    }
+
 }

@@ -1,5 +1,6 @@
 package com.nonIt.GameOn.rest;
 
+import com.nonIt.GameOn.entity.Rating;
 import com.nonIt.GameOn.service.RatingService;
 import com.nonIt.GameOn.service.dto.RatingDto;
 import com.nonIt.GameOn.service.restDto.CommentRestDto;
@@ -50,5 +51,9 @@ public class RatingResources {
     @GetMapping("/by-user/{userId}")
     public ResponseEntity<List<RatingRestDto>> getRatingByUserId(@PathVariable("userId") Integer userId) {
         return ResponseEntity.ok(ratingService.getByUserId(userId));
+    }
+    @GetMapping("/demo")
+    public ResponseEntity<List<Rating>> getDemo(){
+        return ResponseEntity.ok(ratingService.demo());
     }
 }

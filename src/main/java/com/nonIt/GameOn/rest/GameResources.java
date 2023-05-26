@@ -92,8 +92,8 @@ public class GameResources {
     }
 
 //    @GetMapping(value = "/by-rating-and-released-date-between")
-//    public ResponseEntity<List<GameRestDto>> getByRatingAndReleasedDateBetween() {
-//        return ResponseEntity.ok(gameService.getByRatingAndReleasedDateBetween());
+//    public ResponseEntity<List<GameRestDto>> getByRatingAndReleasedDateBetween(@RequestParam("rating1") Integer rating1, @RequestParam("rating2") Integer rating2, @RequestParam("date1") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date1, @RequestParam("date2") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date2) {
+//        return ResponseEntity.ok(gameService.getByRatingAndReleasedDateBetween(rating1, rating2, date1, date2));
 //    }
 
     @PreAuthorize("hasRole('ADMIN')")
