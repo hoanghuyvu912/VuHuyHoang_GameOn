@@ -84,4 +84,9 @@ public class RatingServiceImpl implements RatingService {
         User user = userRepository.findById(userId).orElseThrow(GameOnException::UserNotFound);
         return ratingRepository.getRatingByUserId(userId).stream().map(ratingMapper::toDto).collect(Collectors.toList());
     }
+
+    @Override
+    public List<Rating> demo() {
+        return ratingRepository.findTop1ByOrderByRatingDescByGroupByGame();
+    }
 }

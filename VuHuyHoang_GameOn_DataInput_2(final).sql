@@ -1367,20 +1367,21 @@ join user_info ui on ui.id = r.user_id
 where ui.username like '%orth%';
 
 --Custom queries
---1/ List of games that have rating, releasedDate from A to B.
+--1/ List of games that have rating between x-y, releasedDate from A to B.
 select g, max(r.rating) 
 from game g join rating r on r.game_id = g.id 
 group by g.id, r.rating 
 having g.released_date between '2022-01-01' and '2023-01-01'
 and r.rating between 3 and 4;
 
-select "Game Rating".g, max("Rating") from 
-(select g, r.rating as "Rating"
+select tmp.game_id, tmp.rating, tmp.id, tmp.user_id from 
+(select g.id as "game_id", g.game_name as "game_name", ui.id as "user_id" , max(r.rating) rating, r.id
 from game g join rating r on r.game_id = g.id 
-group by g.id, r.rating
+join user_info ui on ui.id = r.user_id 
+group by g.id, r.rating, r.id, ui.id 
 HAVING r.rating between 3 and 4
-and g.released_date between '2022-01-01' and '2023-01-01') as "Game Rating"
-group by "Game Rating".g;
+and g.released_date between '2022-01-01' and '2023-01-01') tmp
+group by tmp.game_id, tmp.id, tmp.user_id;
 
 --2/ Find games based on Developer, Publisher, Genre, SubGenre and Game name (LIKE).
 

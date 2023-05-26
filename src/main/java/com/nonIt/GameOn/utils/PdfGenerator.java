@@ -1,4 +1,4 @@
-package com.nonIt.GameOn.service;
+package com.nonIt.GameOn.utils;
 
 import java.io.IOException;
 import java.util.List;
@@ -30,7 +30,7 @@ public class PdfGenerator {
         Font fontTitle = FontFactory.getFont(FontFactory.TIMES_ROMAN);
         fontTitle.setSize(20);
         // Creating paragraph
-        Paragraph paragraph1 = new Paragraph("List of the User", fontTitle);
+        Paragraph paragraph1 = new Paragraph("List of users", fontTitle);
         // Aligning the paragraph in the document
         paragraph1.setAlignment(Paragraph.ALIGN_CENTER);
         // Adding the created paragraph in the document

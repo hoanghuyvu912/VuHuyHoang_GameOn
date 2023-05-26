@@ -2,6 +2,7 @@ package com.nonIt.GameOn.repository;
 
 import com.nonIt.GameOn.entity.Game;
 import com.nonIt.GameOn.service.restDto.GameRestDto;
+import org.springframework.cglib.core.Local;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -12,15 +13,74 @@ import java.util.List;
 
 @Repository
 public interface GameRepository extends JpaRepository<Game, Integer> {
+    //Find by Game name related
     List<Game> findByNameContaining(String name);
 
+    List<Game> findByNameContainingAndSystemReqContaining(String name, String req);
+
+    List<Game> findByNameContainingAndPriceLessThanEqual(String name, Double price);
+
+    List<Game> findByNameContainingAndPriceGreaterThanEqual(String name, Double price);
+
+    List<Game> findByNameContainingAndPriceBetween(String name, Double price1, Double price2);
+
+    List<Game> findByNameContainingAndDeveloperNameContaining(String gameName, String developerName);
+
+    List<Game> findByNameContainingAndPublisherNameContaining(String gameName, String publisherName);
+
+    List<Game> findByNameContainingAndReleasedDateAfter(String gameName, LocalDate date);
+
+    List<Game> findByNameContainingAndReleasedDateBefore(String gameName, LocalDate date);
+
+    List<Game> findByNameContainingAndReleasedDateBetween(String gameName, LocalDate date1, LocalDate date2);
+
+
+    //Find by Game releasedDate related
     List<Game> findByReleasedDateAfter(LocalDate date);
 
     List<Game> findByReleasedDateBefore(LocalDate date);
 
+    List<Game> findByReleasedDateAfterAndSystemReqContaining(LocalDate date, String systemReq);
+
+    List<Game> findByReleasedDateBeforeAndSystemReqContaining(LocalDate date, String systemReq);
+
+    List<Game> findByReleasedDateBetweenAndSystemReqContaining(LocalDate date1, LocalDate date2, String systemReq);
+
+    List<Game> findByReleasedDateAfterAndPriceLessThanEqual(LocalDate date, Double price);
+
+    List<Game> findByReleasedDateAfterAndPriceGreaterThanEqual(LocalDate date, Double price);
+
+    List<Game> findByReleasedDateAfterAndPriceBetween(LocalDate date, Double price1, Double price2);
+
+    List<Game> findByReleasedDateBeforeAndPriceLessThanEqual(LocalDate date, Double price);
+
+    List<Game> findByReleasedDateBeforeAndPriceGreaterThanEqual(LocalDate date, Double price);
+
+    List<Game> findByReleasedDateBeforeAndPriceBetween(LocalDate date, Double price1, Double price2);
+
+    List<Game> findByReleasedDateBetweenAndPriceBetween(LocalDate date1, LocalDate date2, Double price1, Double price2);
+
+
+    //Find by Game systemReq related
+    List<Game> findBySystemReqContaining(String req);
+
+    List<Game> findBySystemReqContainingAndPriceGreaterThanEqual(String req, Double price);
+
+    List<Game> findBySystemReqContainingAndPriceLessThanEqual(String req, Double price);
+
+    List<Game> findBySystemReqContainingAndPriceBetween(String req, Double price1, Double price2);
+
+
+
+    //Find by Game price related
     List<Game> findByPriceGreaterThan(Double price);
 
     List<Game> findByPriceLessThan(Double price);
+
+    List<Game> findByPriceBetween(Double price1, Double price2);
+
+
+    //Find by foreign key
 
     @Query(value = "SELECT g from Game g join Developer d on g.developer.id = d.id where d.id = :developerId")
     List<Game> getByDeveloperId(@Param("developerId") Integer developerId);
@@ -46,12 +106,39 @@ public interface GameRepository extends JpaRepository<Game, Integer> {
     @Query(value = "SELECT g from Game g join GameSubGenre gsg on g.id = gsg.game.id join SubGenre sg on gsg.subGenre.id = sg.id where UPPER(sg.name) LIKE UPPER(:subGenreName)")
     List<Game> getBySubGenreName(@Param("subGenreName") String subGenreName);
 
-//    @Query(value = "select GameRating.g, max(Rating) as MaxRating from \n" +
-//            "(select g, r.rating as Rating\n" +
-//            "from Game g join Rating r on r.game.id = g.id \n" +
-//            "group by g.id, r.rating\n" +
-//            "HAVING r.rating between 3 and 4\n" +
-//            "and g.releasedDate between '2022-01-01' and '2023-01-01') as GameRating\n" +
-//            "group by GameRating.g")
-//    List<Game> getByRatingAndReleasedDateBetween();
+
+
+
+
+
+//    private Integer id;
+//
+//    private String name;
+//
+//    private String thumbnail;
+//
+//    private String description;
+//
+//    private String trailer;
+//
+//    private LocalDate releasedDate;
+//
+//    private String systemReq;
+//
+//    private Double price;
+//
+//    private String developerName;
+//
+//    private String publisherName;
+//
+//    private Integer rating;
+//    @Query(value = "select tmp.g, max(tmp.rating) from " +
+//            "(select g, r.rating " +
+//            "from game g join rating r on r.game_id = g.id " +
+//            "group by g.id, r.rating " +
+//            "HAVING r.rating between :rating1 and :rating2 " +
+//            "and g.released_date between :date1 and :date2) tmp " +
+//            "group by tmp.g;", nativeQuery = true)
+//    List<Game> getByRatingAndReleasedDateBetween(@Param("rating1") Integer rating1, @Param("rating2") Integer rating2, @Param("date1") LocalDate date1, @Param("date2") LocalDate date2);
+
 }

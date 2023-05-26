@@ -1,5 +1,6 @@
 package com.nonIt.GameOn.service;
 
+import com.nonIt.GameOn.entity.Rating;
 import com.nonIt.GameOn.service.dto.RatingDto;
 import com.nonIt.GameOn.service.restDto.CommentRestDto;
 import com.nonIt.GameOn.service.restDto.RatingRestDto;
@@ -18,4 +19,5 @@ public interface RatingService {
     void deleteRating(Integer ratingId);
 
     List<RatingRestDto> getByUserId(Integer userId);
+    List<Rating> demo();
 }
