@@ -231,6 +231,78 @@ public class GameResources {
     }
 
 
+    //Find by released date and price
+    @GetMapping(value = "/released-date-after-price-less-equal")
+    public ResponseEntity<List<GameRestDto>> findByReleasedDateAfterAndPriceLessThanEqual(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, @RequestParam("price") Double price) {
+        return ResponseEntity.ok(gameService.findByReleasedDateAfterAndPriceLessThanEqual(date, price));
+    }
+
+    @GetMapping(value = "/released-date-after-price-greater-equal")
+    public ResponseEntity<List<GameRestDto>> findByReleasedDateAfterAndPriceGreaterThanEqual(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, @RequestParam("price") Double price) {
+        return ResponseEntity.ok(gameService.findByReleasedDateAfterAndPriceGreaterThanEqual(date, price));
+    }
+
+    @GetMapping(value = "/released-date-after-price-between")
+    public ResponseEntity<List<GameRestDto>> findByReleasedDateAfterAndPriceBetween(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, @RequestParam("price1") Double price1, @RequestParam("price2") Double price2) {
+        return ResponseEntity.ok(gameService.findByReleasedDateAfterAndPriceBetween(date, price1, price2));
+    }
+
+    @GetMapping(value = "/released-date-before-price-less-equal")
+    public ResponseEntity<List<GameRestDto>> findByReleasedDateBeforeAndPriceLessThanEqual(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, @RequestParam("price") Double price) {
+        return ResponseEntity.ok(gameService.findByReleasedDateBeforeAndPriceLessThanEqual(date, price));
+    }
+
+    @GetMapping(value = "/released-date-before-price-greater-equal")
+    public ResponseEntity<List<GameRestDto>> findByReleasedDateBeforeAndPriceGreaterThanEqual(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, @RequestParam("price") Double price) {
+        return ResponseEntity.ok(gameService.findByReleasedDateBeforeAndPriceGreaterThanEqual(date, price));
+    }
+
+    @GetMapping(value = "/released-date-before-price-between")
+    public ResponseEntity<List<GameRestDto>> findByReleasedDateBeforeAndPriceBetween(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, @RequestParam("price1") Double price1, @RequestParam("price2") Double price2) {
+        return ResponseEntity.ok(gameService.findByReleasedDateBeforeAndPriceBetween(date, price1, price2));
+    }
+
+    @GetMapping(value = "/released-date-between-price-less-equal")
+    public ResponseEntity<List<GameRestDto>> findByReleasedDateBetweenAndPriceLessThanEqual(@RequestParam("date1") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date1, @RequestParam("date2") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date2, @RequestParam("price") Double price) {
+        return ResponseEntity.ok(gameService.findByReleasedDateBetweenAndPriceLessThanEqual(date1, date2, price));
+    }
+
+    @GetMapping(value = "/released-date-between-price-greater-equal")
+    public ResponseEntity<List<GameRestDto>> findByReleasedDateBetweenAndPriceGreaterThanEqual(@RequestParam("date1") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date1, @RequestParam("date2") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date2, @RequestParam("price") Double price) {
+        return ResponseEntity.ok(gameService.findByReleasedDateBetweenAndPriceGreaterThanEqual(date1, date2, price));
+    }
+
+    @GetMapping(value = "/released-date-between-price-between")
+    public ResponseEntity<List<GameRestDto>> findByReleasedDateBetweenAndPriceBetween(@RequestParam("date1") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date1, @RequestParam("date2") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date2, @RequestParam("price1") Double price1, @RequestParam("price2") Double price2) {
+        return ResponseEntity.ok(gameService.findByReleasedDateBetweenAndPriceBetween(date1, date2, price1, price2));
+    }
+
+
+    //Find by system req
+    @GetMapping(value = "/req")
+    public ResponseEntity<List<GameRestDto>> findBySystemReqIgnoreCaseContaining(@RequestParam("req") String req) {
+        return ResponseEntity.ok(gameService.findBySystemReqIgnoreCaseContaining(req));
+    }
+
+
+    //Find by system req and price
+    @GetMapping(value = "/req-price-less-equal")
+    public ResponseEntity<List<GameRestDto>> findBySystemReqIgnoreCaseContainingAndPriceLessThanEqual(@RequestParam("req") String req, @RequestParam("price") Double price) {
+        return ResponseEntity.ok(gameService.findBySystemReqIgnoreCaseContainingAndPriceLessThanEqual(req, price));
+    }
+
+    @GetMapping(value = "/req-price-greater-equal")
+    public ResponseEntity<List<GameRestDto>> findBySystemReqIgnoreCaseContainingAndPriceGreaterThanEqual(@RequestParam("req") String req, @RequestParam("price") Double price) {
+        return ResponseEntity.ok(gameService.findBySystemReqIgnoreCaseContainingAndPriceGreaterThanEqual(req, price));
+    }
+
+    @GetMapping(value = "/req-price-between")
+    public ResponseEntity<List<GameRestDto>> findBySystemReqIgnoreCaseContainingAndPriceBetween(@RequestParam("req") String req, @RequestParam("price1") Double price1, @RequestParam("price2") Double price2) {
+        return ResponseEntity.ok(gameService.findBySystemReqIgnoreCaseContainingAndPriceBetween(req, price1, price2));
+    }
+
+
+    //Find by price
     @GetMapping(value = "/price-greater-than")
     public ResponseEntity<List<GameRestDto>> findByPriceGreaterThan(@RequestParam("price") Double price) {
         return ResponseEntity.ok(gameService.findByPriceGreaterThan(price));
@@ -242,6 +314,7 @@ public class GameResources {
     }
 
 
+    //Find by foreign key
     @GetMapping(value = "/by-developer-id")
     public ResponseEntity<List<GameRestDto>> getByDeveloperId(@RequestParam("developerId") Integer developerId) {
         return ResponseEntity.ok(gameService.getByDeveloperId(developerId));
