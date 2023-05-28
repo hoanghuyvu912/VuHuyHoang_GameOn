@@ -1,9 +1,8 @@
 {
 	"info": {
-		"_postman_id": "32ccb8fe-9622-41e0-89e5-f3dbf1e533b0",
+		"_postman_id": "a3b19e3c-fa9f-4210-b454-12b8f61ef430",
 		"name": "GameOn",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "27087694"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
