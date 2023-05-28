@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a31cca5e-3219-4ceb-9483-2f4059a3f645",
+		"_postman_id": "32ccb8fe-9622-41e0-89e5-f3dbf1e533b0",
 		"name": "GameOn",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "27087694"
@@ -51,7 +51,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0OTAxODI1LCJleHAiOjE2ODQ5NDUwMjV9.J5PJS7i1-BPr_8s1iIMvg0hz4FeNM4YqcMvLw9LWifEcKWzzM48-v6KF4kcdBsMPGI5xdaOXdLJrp8-PMUEvrA",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg1MDcwMjk4LCJleHAiOjE2ODUxMTM0OTh9.OoQvObbQcYhwvayzLiDuR-ELyMq3o_b36zKrKObi7qUzpaXfZKC6LgcmzlGbWvqP6LmmawmG3EWvAfSaJjLz3w",
 									"type": "string"
 								}
 							]
@@ -80,7 +80,28 @@
 				},
 				{
 					"name": "getUserById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg1MDA5ODM0LCJleHAiOjE2ODUwNTMwMzR9.j4_iAUbGgYy11bmw_s5R33k9Ap2olIPDjAgCYScJ-G8EzBsblkuG4Z7ZLXIklmHiqRXf9RV9DkMBNcmmo3eAqw",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -90,7 +111,7 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/api/users/14",
+							"raw": "localhost:8080/api/users/25",
 							"host": [
 								"localhost"
 							],
@@ -98,7 +119,7 @@
 							"path": [
 								"api",
 								"users",
-								"14"
+								"25"
 							]
 						}
 					},
@@ -454,6 +475,53 @@
 					"response": []
 				},
 				{
+					"name": "updateUserProfileImageById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg1MDExODE2LCJleHAiOjE2ODUwNTUwMTZ9.-KbVAevLc2w1V7MwtFhGoJwoi5OVCRyj8ZCxHcdk_TiI1Z4mSqLHzMJme_hLL9hxbj735PrFa0yoReEGG3dGog",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0NzUwNzc2LCJleHAiOjE2ODQ3OTM5NzZ9.3uoTUdaaEei9-EkKeHrS_a334oSkq8fsRwzr6TeJA_lcmtLvNssM3z-9XIxBchdb3a8jvOeD3O-kQEg8NxDBPQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/vhhoang/Desktop/PNG_transparency_demonstration_1.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8080/api/users/25/update-profile-image",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"25",
+								"update-profile-image"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "createUser",
 					"request": {
 						"auth": {
@@ -461,7 +529,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0ODMxOTk5LCJleHAiOjE2ODQ4NzUxOTl9.OMpiCFf7mIsPN9mFv91sgwlClkMagSr3DExKBA9EMf9QuQdsdM1rh9qFfJOD1W1D-oThhNGX-uH1a0ksabeeLA",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0OTk5ODU0LCJleHAiOjE2ODUwNDMwNTR9.DgHRVoSruo_6yyZi1jQIrlaux23xvXGk0qYcuTS7rDXGI7tlEI1yer2JpRUhLAi46uVHBdgrOPgjJKQBsx1xfg",
 									"type": "string"
 								}
 							]
@@ -475,16 +543,17 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Margaret Persistn't\",\r\n    \"lastName\": \"Johnson\",\r\n    \"username\" : \"mjohnson123\",\r\n    \"password\": \"MTIzNDU2Nzg5\",\r\n    \"email\": \"mjohnson@gmail.com\",\r\n    \"tel\": \"0345612345\",\r\n    \"address\": \"34 DEF Street\",\r\n    \"dob\": \"1998-11-05\",\r\n    \"gender\": \"Female\",\r\n    \"profileImg\": null,\r\n    \"balance\": 4123.0,\r\n    \"roles\" : [\r\n            \"ROLE_USER\",\r\n            \"ROLE_ADMIN\"\r\n    ],\r\n    \"active\": true\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/vhhoang/Desktop/PNG_transparency_demonstration_1.png"
 								}
-							}
+							]
 						},
 						"url": {
-							"raw": "localhost:8080/api/users",
+							"raw": "localhost:8080/api/users?image",
 							"host": [
 								"localhost"
 							],
@@ -492,6 +561,12 @@
 							"path": [
 								"api",
 								"users"
+							],
+							"query": [
+								{
+									"key": "image",
+									"value": null
+								}
 							]
 						}
 					},
@@ -512,6 +587,97 @@
 								"api",
 								"users",
 								"27"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "exportUsersToExcel",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0OTg2MDU4LCJleHAiOjE2ODUwMjkyNTh9.3LGWfCuxxgmEDA5Ay1YaAHVQ-J08BwvMxwMhuDoMl-2A97fuENIi102bfWvykZebLlnQ3HVi25HfoWT5wGe-1Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/users/export-to-excel",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"export-to-excel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "exportUsersToPDF",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0OTg2MDU4LCJleHAiOjE2ODUwMjkyNTh9.3LGWfCuxxgmEDA5Ay1YaAHVQ-J08BwvMxwMhuDoMl-2A97fuENIi102bfWvykZebLlnQ3HVi25HfoWT5wGe-1Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/users/export-to-pdf",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"export-to-pdf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg1MDAwODk4LCJleHAiOjE2ODUwNDQwOTh9.DK2Q7-xjH0aAjR6rH_3L_a2zaTDUMVlpqesOjKDPmM_C8YhRM-rcYTGJxMnwIzh9cgCvq22gjWfXL6uNbVn-sw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/users/25/profile-image",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"25",
+								"profile-image"
 							]
 						}
 					},
@@ -549,7 +715,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg0ODI5MDE5LCJleHAiOjE2ODQ4NzIyMTl9.Sj4x3R6aKihvv_R_9JuPbcP0-hSRmbvYeZ1Unp0c_lbwmv1OuBtGws7QXtnCS3bhNPvTxK6NmRAUu8gKPuYtRw",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg1MDg4Mjc0LCJleHAiOjE2ODUxMzE0NzR9.V5RMRhA7R1NAJwFhPw7iunLx1gZsYd782vxhVhobai4glRMntY_FqDGwiToS_4Z0oHi8gewlcLS76OoF3ren0g",
 									"type": "string"
 								}
 							]
@@ -803,6 +969,1377 @@
 								"api",
 								"games",
 								"47"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByRatingAndReleasedDateBetween",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/by-rating-and-released-date-between?rating1=3&rating2=4&date1=2020-01-01&date2=2023-01-01",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"by-rating-and-released-date-between"
+							],
+							"query": [
+								{
+									"key": "rating1",
+									"value": "3"
+								},
+								{
+									"key": "rating2",
+									"value": "4"
+								},
+								{
+									"key": "date1",
+									"value": "2020-01-01"
+								},
+								{
+									"key": "date2",
+									"value": "2023-01-01"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AdvanceGameSearchAPIs",
+			"item": [
+				{
+					"name": "getByName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/name-containing?name=unc",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"name-containing"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "unc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByNameAndReleasedDateAfter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/name-containing-released-date-after?name&date",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"name-containing-released-date-after"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": null
+								},
+								{
+									"key": "date",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByNameAndReleasedDateBefore",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/name-containing-released-date-before?name=h&date=2023-01-01",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"name-containing-released-date-before"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "h"
+								},
+								{
+									"key": "date",
+									"value": "2023-01-01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByNameAndReleasedDateBetween",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/name-containing-released-date-between?name=h&date1=2022-01-01&date2=2022-12-31",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"name-containing-released-date-between"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "h"
+								},
+								{
+									"key": "date1",
+									"value": "2022-01-01"
+								},
+								{
+									"key": "date2",
+									"value": "2022-12-31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByNameAndReleasedDateAfterAndReq",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/name-containing-released-date-after-req?name=h&date=2022-05-01&req=i5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"name-containing-released-date-after-req"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "h"
+								},
+								{
+									"key": "date",
+									"value": "2022-05-01"
+								},
+								{
+									"key": "req",
+									"value": "i5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByNameAndReleasedDateBeforeAndReq",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/name-containing-released-date-before-req?name=h&date=2022-05-01&req=i5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"name-containing-released-date-before-req"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "h"
+								},
+								{
+									"key": "date",
+									"value": "2022-05-01"
+								},
+								{
+									"key": "req",
+									"value": "i5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByNameAndReleasedDateBetweenAndReq",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/name-containing-released-date-between-req?name=a&date1=2022-05-01&date2=2023-12-31&req=i5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"name-containing-released-date-between-req"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "a"
+								},
+								{
+									"key": "date1",
+									"value": "2022-05-01"
+								},
+								{
+									"key": "date2",
+									"value": "2023-12-31"
+								},
+								{
+									"key": "req",
+									"value": "i5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByNameAndReleasedDateAfterAndReqAndPriceLessEqual",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/name-containing-released-date-after-req-price-less-equal?name=h&date=2022-05-01&req=i5&price=60",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"name-containing-released-date-after-req-price-less-equal"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "h"
+								},
+								{
+									"key": "date",
+									"value": "2022-05-01"
+								},
+								{
+									"key": "req",
+									"value": "i5"
+								},
+								{
+									"key": "price",
+									"value": "60"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByNameAndReleasedDateAfterAndReqAndPriceGreaterEqual",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/name-containing-released-date-after-req-price-greater-equal?name=a&date=2022-05-01&req=i5&price=40",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"name-containing-released-date-after-req-price-greater-equal"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "a"
+								},
+								{
+									"key": "date",
+									"value": "2022-05-01"
+								},
+								{
+									"key": "req",
+									"value": "i5"
+								},
+								{
+									"key": "price",
+									"value": "40"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByNameAndReleasedDateAfterAndReqAndPriceBetween",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/name-containing-released-date-after-req-price-between?name=a&date=2022-05-01&req=i5&price1=40&price2=50",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"name-containing-released-date-after-req-price-between"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "a"
+								},
+								{
+									"key": "date",
+									"value": "2022-05-01"
+								},
+								{
+									"key": "req",
+									"value": "i5"
+								},
+								{
+									"key": "price1",
+									"value": "40"
+								},
+								{
+									"key": "price2",
+									"value": "50"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByNameAndReleasedDateBeforeAndReqAndPriceLessEqual",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/name-containing-released-date-before-req-price-less-equal?name=h&date=2022-05-01&req=i5&price=60",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"name-containing-released-date-before-req-price-less-equal"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "h"
+								},
+								{
+									"key": "date",
+									"value": "2022-05-01"
+								},
+								{
+									"key": "req",
+									"value": "i5"
+								},
+								{
+									"key": "price",
+									"value": "60"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByNameAndReleasedDateBeforeAndReqAndPriceGreaterEqual",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/name-containing-released-date-before-req-price-greater-equal?name=a&date=2022-05-01&req=i5&price=40",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"name-containing-released-date-before-req-price-greater-equal"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "a"
+								},
+								{
+									"key": "date",
+									"value": "2022-05-01"
+								},
+								{
+									"key": "req",
+									"value": "i5"
+								},
+								{
+									"key": "price",
+									"value": "40"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByNameAndReleasedDateBeforeAndReqAndPriceBetween",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/name-containing-released-date-before-req-price-between?name=a&date=2022-05-01&req=i5&price1=40&price2=50",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"name-containing-released-date-before-req-price-between"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "a"
+								},
+								{
+									"key": "date",
+									"value": "2022-05-01"
+								},
+								{
+									"key": "req",
+									"value": "i5"
+								},
+								{
+									"key": "price1",
+									"value": "40"
+								},
+								{
+									"key": "price2",
+									"value": "50"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByNameAndReleasedDateBetweenAndReqAndPriceLessEqual",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/name-containing-released-date-between-req-price-less-equal?name=a&date1=2022-05-01&date2=2022-12-31&req=i5&price=60",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"name-containing-released-date-between-req-price-less-equal"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "a"
+								},
+								{
+									"key": "date1",
+									"value": "2022-05-01"
+								},
+								{
+									"key": "date2",
+									"value": "2022-12-31"
+								},
+								{
+									"key": "req",
+									"value": "i5"
+								},
+								{
+									"key": "price",
+									"value": "60"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByNameAndReleasedDateBetweenAndReqAndPriceGreaterEqual",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/name-containing-released-date-between-req-price-greater-equal?name=a&date1=2022-05-01&date2=2022-12-31&req=i5&price=60",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"name-containing-released-date-between-req-price-greater-equal"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "a"
+								},
+								{
+									"key": "date1",
+									"value": "2022-05-01"
+								},
+								{
+									"key": "date2",
+									"value": "2022-12-31"
+								},
+								{
+									"key": "req",
+									"value": "i5"
+								},
+								{
+									"key": "price",
+									"value": "60"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByNameAndReleasedDateBetweenAndReqAndPriceBetween",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/name-containing-released-date-between-req-price-between?name=a&date1=2022-05-01&date2=2022-12-31&req=i5&price1=50&price2=60",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"name-containing-released-date-between-req-price-between"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "a"
+								},
+								{
+									"key": "date1",
+									"value": "2022-05-01"
+								},
+								{
+									"key": "date2",
+									"value": "2022-12-31"
+								},
+								{
+									"key": "req",
+									"value": "i5"
+								},
+								{
+									"key": "price1",
+									"value": "50"
+								},
+								{
+									"key": "price2",
+									"value": "60"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByNameAndReq",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/name-containing-req-containing?name=a&req=i5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"name-containing-req-containing"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "a"
+								},
+								{
+									"key": "req",
+									"value": "i5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByNameAndReqAndPriceLessThanEqual",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/name-containing-req-containing-price-less-equal?name=a&req=i5&price=55",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"name-containing-req-containing-price-less-equal"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "a"
+								},
+								{
+									"key": "req",
+									"value": "i5"
+								},
+								{
+									"key": "price",
+									"value": "55"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByNameAndReqAndPriceGreaterThanEqual",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/name-containing-req-containing-price-greater-equal?name=a&req=i5&price=55",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"name-containing-req-containing-price-greater-equal"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "a"
+								},
+								{
+									"key": "req",
+									"value": "i5"
+								},
+								{
+									"key": "price",
+									"value": "55"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByNameAndReqAndPriceBetween",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/name-containing-req-containing-price-between?name=a&req=i5&price1=30&price2=60",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"name-containing-req-containing-price-between"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "a"
+								},
+								{
+									"key": "req",
+									"value": "i5"
+								},
+								{
+									"key": "price1",
+									"value": "30"
+								},
+								{
+									"key": "price2",
+									"value": "60"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByNameAndPriceLessEqual",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/name-containing-price-less-equal?name=a&price=30",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"name-containing-price-less-equal"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "a"
+								},
+								{
+									"key": "price",
+									"value": "30"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByNameAndPriceGreaterEqual",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/name-containing-price-greater-equal?name=a&price=30",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"name-containing-price-greater-equal"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "a"
+								},
+								{
+									"key": "price",
+									"value": "30"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByNameAndPriceBetween",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/name-containing-price-between?name=a&price1=30&price2=40",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"name-containing-price-between"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "a"
+								},
+								{
+									"key": "price1",
+									"value": "30"
+								},
+								{
+									"key": "price2",
+									"value": "40"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByReleasedDateAfter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/released-date-after?date=2023-01-01",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"released-date-after"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2023-01-01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByReleasedDateBefore",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/released-date-before?date=2022-05-01",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"released-date-before"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2022-05-01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByReleasedDateBetween",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/released-date-between?date1=2022-01-01&date2=2022-05-01",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"released-date-between"
+							],
+							"query": [
+								{
+									"key": "date1",
+									"value": "2022-01-01"
+								},
+								{
+									"key": "date2",
+									"value": "2022-05-01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByReleasedDateAfterAndReq",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/released-date-after-req?date=2023-01-01&req=i5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"released-date-after-req"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2023-01-01"
+								},
+								{
+									"key": "req",
+									"value": "i5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByReleasedDateBeforeAndReq",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/released-date-before-req?date=2023-01-01&req=i5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"released-date-before-req"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2023-01-01"
+								},
+								{
+									"key": "req",
+									"value": "i5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByReleasedDateBetweenAndReq",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/released-date-between-req?date1=2022-12-01&date2=2023-05-01&req=i5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"released-date-between-req"
+							],
+							"query": [
+								{
+									"key": "date1",
+									"value": "2022-12-01"
+								},
+								{
+									"key": "date2",
+									"value": "2023-05-01"
+								},
+								{
+									"key": "req",
+									"value": "i5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByReleasedDateAfterAndReqAndPriceLessEqual",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/released-date-after-req-price-less-equal?date=2023-01-01&req=i5&price=40",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"released-date-after-req-price-less-equal"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2023-01-01"
+								},
+								{
+									"key": "req",
+									"value": "i5"
+								},
+								{
+									"key": "price",
+									"value": "40"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByReleasedDateAfterAndReqAndPriceGreaterEqual",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/released-date-after-req-price-greater-equal?date=2023-01-01&req=i5&price=40",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"released-date-after-req-price-greater-equal"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2023-01-01"
+								},
+								{
+									"key": "req",
+									"value": "i5"
+								},
+								{
+									"key": "price",
+									"value": "40"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByReleasedDateAfterAndReqAndPriceBetween",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/released-date-after-req-price-between?date=2023-01-01&req=i5&price1=40&price2=50",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"released-date-after-req-price-between"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2023-01-01"
+								},
+								{
+									"key": "req",
+									"value": "i5"
+								},
+								{
+									"key": "price1",
+									"value": "40"
+								},
+								{
+									"key": "price2",
+									"value": "50"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByReleasedDateBeforeAndReqAndPriceLessEqual",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/released-date-before-req-price-less-equal?date=2023-01-01&req=i5&price=40",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"released-date-before-req-price-less-equal"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2023-01-01"
+								},
+								{
+									"key": "req",
+									"value": "i5"
+								},
+								{
+									"key": "price",
+									"value": "40"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByReleasedDateBeforeAndReqAndPriceGreaterEqual",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/released-date-before-req-price-greater-equal?date=2023-01-01&req=i5&price=40",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"released-date-before-req-price-greater-equal"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2023-01-01"
+								},
+								{
+									"key": "req",
+									"value": "i5"
+								},
+								{
+									"key": "price",
+									"value": "40"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByReleasedDateBeforeAndReqAndPriceBetween",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/released-date-before-req-price-between?date=2022-03-31&req=i5&price1=40&price2=50",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"released-date-before-req-price-between"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2022-03-31"
+								},
+								{
+									"key": "req",
+									"value": "i5"
+								},
+								{
+									"key": "price1",
+									"value": "40"
+								},
+								{
+									"key": "price2",
+									"value": "50"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByReleasedDateBetweenAndReqAndPriceLessEqual",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/released-date-between-req-price-less-equal?date1=2022-05-01&date2=2022-12-31&req=i5&price=40",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"released-date-between-req-price-less-equal"
+							],
+							"query": [
+								{
+									"key": "date1",
+									"value": "2022-05-01"
+								},
+								{
+									"key": "date2",
+									"value": "2022-12-31"
+								},
+								{
+									"key": "req",
+									"value": "i5"
+								},
+								{
+									"key": "price",
+									"value": "40"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByReleasedDateBetweenAndReqAndPriceGreaterThanEqual",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/released-date-between-req-price-greater-equal?date1=2022-09-01&req=i5&price=40&date2=2022-12-31",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"released-date-between-req-price-greater-equal"
+							],
+							"query": [
+								{
+									"key": "date1",
+									"value": "2022-09-01"
+								},
+								{
+									"key": "req",
+									"value": "i5"
+								},
+								{
+									"key": "price",
+									"value": "40"
+								},
+								{
+									"key": "date2",
+									"value": "2022-12-31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByReleasedDateBetweenAndReqAndPriceBetween",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/released-date-between-req-price-between?date1=2022-09-01&date2=2023-03-31&req=i5&price1=40&price2=50",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"released-date-between-req-price-between"
+							],
+							"query": [
+								{
+									"key": "date1",
+									"value": "2022-09-01"
+								},
+								{
+									"key": "date2",
+									"value": "2023-03-31"
+								},
+								{
+									"key": "req",
+									"value": "i5"
+								},
+								{
+									"key": "price1",
+									"value": "40"
+								},
+								{
+									"key": "price2",
+									"value": "50"
+								}
 							]
 						}
 					},
@@ -1523,6 +3060,36 @@
 								"api",
 								"ratings",
 								"100"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg1MDg0MzYzLCJleHAiOjE2ODUxMjc1NjN9.y-o5b9QDXNGCnWqU8JJ7U4VV46njUB6yyzAJKbr1UieHXW6vhmFFbsA6jmD6s_akz5HGuUwTcf7eluEeUPV93Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/rating/demo",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"rating",
+								"demo"
 							]
 						}
 					},
@@ -2532,6 +4099,48 @@
 		{
 			"name": "CustomAPIs",
 			"item": []
+		},
+		{
+			"name": "getByReleasedDateBetweenAndReqAndPriceBetween",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/games/released-date-between-req-price-between?date1=2022-09-01&date2=2023-02-01&req=i5&price1=40&price2=50",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"games",
+						"released-date-between-req-price-between"
+					],
+					"query": [
+						{
+							"key": "date1",
+							"value": "2022-09-01"
+						},
+						{
+							"key": "date2",
+							"value": "2023-02-01"
+						},
+						{
+							"key": "req",
+							"value": "i5"
+						},
+						{
+							"key": "price1",
+							"value": "40"
+						},
+						{
+							"key": "price2",
+							"value": "50"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

@@ -139,45 +139,132 @@ public class GameServiceImpl implements GameService {
     }
 
 
-    //Find by Game name related services
+    //Find by name
     @Override
-    public List<GameRestDto> findByNameContaining(String name) {
-        return gameRepository.findByNameContaining(name).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    public List<GameRestDto> findByNameIgnoreCaseContaining(String name) {
+        return gameRepository.findByNameIgnoreCaseContaining(name).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+
+    //Find by name and released date
+    @Override
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateAfter(String gameName, LocalDate date) {
+        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateAfter(gameName, date).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<GameRestDto> findByNameContainingAndSystemReqContaining(String name, String req) {
-        return gameRepository.findByNameContainingAndSystemReqContaining(name, req).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateBefore(String gameName, LocalDate date) {
+        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateBefore(gameName, date).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<GameRestDto> findByNameContainingAndSystemReqContainingAndPriceLessThanEqual(String gameName, String req, Double price) {
-        return null;
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateBetween(String gameName, LocalDate date1, LocalDate date2) {
+        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateBetween(gameName, date1, date2).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+
+    //Find by name and released date and system req
+    @Override
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateAfterAndSystemReqIgnoreCaseContaining(String gameName, LocalDate date, String req) {
+        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateAfterAndSystemReqIgnoreCaseContaining(gameName, date, req).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<GameRestDto> findByNameContainingAndSystemReqContainingAndPriceGreaterThanEqual(String gameName, String req, Double price) {
-        return null;
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateBeforeAndSystemReqIgnoreCaseContaining(String gameName, LocalDate date, String req) {
+        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateBeforeAndSystemReqIgnoreCaseContaining(gameName, date, req).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<GameRestDto> findByNameContainingAndSystemReqContainingAndPriceBetween(String gameName, String req, Double price1, double price2) {
-        return null;
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateBetweenAndSystemReqIgnoreCaseContaining(String gameName, LocalDate date1, LocalDate date2, String req) {
+        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateBetweenAndSystemReqIgnoreCaseContaining(gameName, date1, date2, req).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+
+    //Find by name and released date and system req and price
+    @Override
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateAfterAndSystemReqIgnoreCaseContainingAndPriceLessThanEqual(String gameName, LocalDate date, String req, Double price) {
+        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateAfterAndSystemReqIgnoreCaseContainingAndPriceLessThanEqual(gameName, date, req, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<GameRestDto> findByNameContainingAndPriceLessThanEqual(String name, Double price) {
-        return gameRepository.findByNameContainingAndPriceLessThanEqual(name, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateAfterAndSystemReqIgnoreCaseContainingAndPriceGreaterThanEqual(String gameName, LocalDate date, String req, Double price) {
+        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateAfterAndSystemReqIgnoreCaseContainingAndPriceGreaterThanEqual(gameName, date, req, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<GameRestDto> findByNameContainingAndPriceGreaterThanEqual(String name, Double price) {
-        return gameRepository.findByNameContainingAndPriceLessThanEqual(name, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateAfterAndSystemReqIgnoreCaseContainingAndPriceBetween(String gameName, LocalDate date, String req, Double price1, Double price2) {
+        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateAfterAndSystemReqIgnoreCaseContainingAndPriceBetween(gameName, date, req, price1, price2).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<GameRestDto> findByNameContainingAndPriceBetween(String name, Double price1, Double price2) {
-        return gameRepository.findByNameContainingAndPriceBetween(name, price1, price2).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateBeforeAndSystemReqIgnoreCaseContainingAndPriceLessThanEqual(String gameName, LocalDate date, String req, Double price) {
+        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateBeforeAndSystemReqIgnoreCaseContainingAndPriceLessThanEqual(gameName, date, req, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateBeforeAndSystemReqIgnoreCaseContainingAndPriceGreaterThanEqual(String gameName, LocalDate date, String req, Double price) {
+        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateBeforeAndSystemReqIgnoreCaseContainingAndPriceGreaterThanEqual(gameName, date, req, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateBeforeAndSystemReqIgnoreCaseContainingAndPriceBetween(String gameName, LocalDate date, String req, Double price1, Double price2) {
+        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateBeforeAndSystemReqIgnoreCaseContainingAndPriceBetween(gameName, date, req, price1, price2).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateBetweenAndSystemReqIgnoreCaseContainingAndPriceLessThanEqual(String gameName, LocalDate date1, LocalDate date2, String req, Double price) {
+        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateBetweenAndSystemReqIgnoreCaseContainingAndPriceLessThanEqual(gameName, date1, date2, req, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateBetweenAndSystemReqIgnoreCaseContainingAndPriceGreaterThanEqual(String gameName, LocalDate date1, LocalDate date2, String req, Double price) {
+        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateBetweenAndSystemReqIgnoreCaseContainingAndPriceGreaterThanEqual(gameName, date1, date2, req, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateBetweenAndSystemReqIgnoreCaseContainingAndPriceBetween(String gameName, LocalDate date1, LocalDate date2, String req, Double price1, double price2) {
+        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateBetweenAndSystemReqIgnoreCaseContainingAndPriceBetween(gameName, date1, date2, req, price1, price2).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+
+    //Find by name and system req
+    @Override
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndSystemReqIgnoreCaseContaining(String name, String req) {
+        return gameRepository.findByNameIgnoreCaseContainingAndSystemReqIgnoreCaseContaining(name, req).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+
+    //Find by name and system req and price
+    @Override
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndSystemReqIgnoreCaseContainingAndPriceLessThanEqual(String name, String req, Double price) {
+        return gameRepository.findByNameIgnoreCaseContainingAndSystemReqIgnoreCaseContainingAndPriceLessThanEqual(name, req, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndSystemReqIgnoreCaseContainingAndPriceGreaterThanEqual(String name, String req, Double price) {
+        return gameRepository.findByNameIgnoreCaseContainingAndSystemReqIgnoreCaseContainingAndPriceGreaterThanEqual(name, req, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndSystemReqIgnoreCaseContainingAndPriceBetween(String name, String req, Double price1, Double price2) {
+        return gameRepository.findByNameIgnoreCaseContainingAndSystemReqIgnoreCaseContainingAndPriceBetween(name, req, price1, price2).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+
+    //Find by name and price
+    @Override
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndPriceLessThanEqual(String name, Double price) {
+        return gameRepository.findByNameIgnoreCaseContainingAndPriceLessThanEqual(name, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndPriceGreaterThanEqual(String name, Double price) {
+        return gameRepository.findByNameIgnoreCaseContainingAndPriceGreaterThanEqual(name, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndPriceBetween(String name, Double price1, Double price2) {
+        return gameRepository.findByNameIgnoreCaseContainingAndPriceBetween(name, price1, price2).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
@@ -190,88 +277,12 @@ public class GameServiceImpl implements GameService {
         return gameRepository.findByNameContainingAndDeveloperNameContaining(gameName, publisherName).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 
-    @Override
-    public List<GameRestDto> findByNameContainingAndReleasedDateAfter(String gameName, LocalDate date) {
-        return gameRepository.findByNameContainingAndReleasedDateAfter(gameName, date).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
 
-    @Override
-    public List<GameRestDto> findByNameContainingAndReleasedDateBefore(String gameName, LocalDate date) {
-        return gameRepository.findByNameContainingAndReleasedDateBefore(gameName, date).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GameRestDto> findByNameContainingAndReleasedDateBetween(String gameName, LocalDate date1, LocalDate date2) {
-        return gameRepository.findByNameContainingAndReleasedDateBetween(gameName, date1, date2).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GameRestDto> findByNameContainingAndReleasedDateAfterAndSystemReqContaining(String gameName, LocalDate date, String req) {
-        return gameRepository.findByNameContainingAndReleasedDateAfterAndSystemReqContaining(gameName, date, req).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GameRestDto> findByNameContainingAndReleasedDateBeforeAndSystemReqContaining(String gameName, LocalDate date, String req) {
-        return gameRepository.findByNameContainingAndReleasedDateBeforeAndSystemReqContaining(gameName, date, req).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GameRestDto> findByNameContainingAndReleasedDateBetweenAndSystemReqContaining(String gameName, LocalDate date1, LocalDate date2, String req) {
-        return gameRepository.findByNameContainingAndReleasedDateBetweenAndSystemReqContaining(gameName, date1, date2, req).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GameRestDto> findByNameContainingAndReleasedDateAfterAndSystemReqContainingAndPriceLessThanEqual(String gameName, LocalDate date, String req, Double price) {
-        return gameRepository.findByNameContainingAndReleasedDateAfterAndSystemReqContainingAndPriceLessThanEqual(gameName, date, req, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GameRestDto> findByNameContainingAndReleasedDateAfterAndSystemReqContainingAndPriceGreaterThanEqual(String gameName, LocalDate date, String req, Double price) {
-        return gameRepository.findByNameContainingAndReleasedDateAfterAndSystemReqContainingAndPriceGreaterThanEqual(gameName, date, req, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GameRestDto> findByNameContainingAndReleasedDateAfterAndSystemReqContainingAndPriceBetween(String gameName, LocalDate date, String req, Double price1, Double price2) {
-        return gameRepository.findByNameContainingAndReleasedDateAfterAndSystemReqContainingAndPriceBetween(gameName, date, req, price1, price2).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GameRestDto> findByNameContainingAndReleasedDateBeforeAndSystemReqContainingAndPriceLessThanEqual(String gameName, LocalDate date, String req, Double price) {
-        return gameRepository.findByNameContainingAndReleasedDateBeforeAndSystemReqContainingAndPriceLessThanEqual(gameName, date, req, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GameRestDto> findByNameContainingAndReleasedDateBeforeAndSystemReqContainingAndPriceGreaterThanEqual(String gameName, LocalDate date, String req, Double price) {
-        return gameRepository.findByNameContainingAndReleasedDateBeforeAndSystemReqContainingAndPriceGreaterThanEqual(gameName, date, req, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GameRestDto> findByNameContainingAndReleasedDateBeforeAndSystemReqContainingAndPriceBetween(String gameName, LocalDate date, String req, Double price1, Double price2) {
-        return gameRepository.findByNameContainingAndReleasedDateBeforeAndSystemReqContainingAndPriceBetween(gameName, date, req, price1, price2).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GameRestDto> findByNameContainingAndReleasedDateBetweenAndSystemReqContainingAndPriceLessThanEqual(String gameName, LocalDate date1, LocalDate date2, String req, Double price) {
-        return gameRepository.findByNameContainingAndReleasedDateBetweenAndSystemReqContainingAndPriceLessThanEqual(gameName, date1, date2, req, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GameRestDto> findByNameContainingAndReleasedDateBetweenAndSystemReqContainingAndPriceGreaterThanEqual(String gameName, LocalDate date1, LocalDate date2, String req, Double price) {
-        return gameRepository.findByNameContainingAndReleasedDateBetweenAndSystemReqContainingAndPriceGreaterThanEqual(gameName, date1, date2, req, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GameRestDto> findByNameContainingAndReleasedDateBetweenAndSystemReqContainingAndPriceBetween(String gameName, LocalDate date1, LocalDate date2, String req, Double price1, double price2) {
-        return gameRepository.findByNameContainingAndReleasedDateBetweenAndSystemReqContainingAndPriceBetween(gameName, date1, date2, req, price1, price2).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-
-    //Find by Game releasedDate related services
+    //Find by released date
     @Override
     public List<GameRestDto> findByReleasedDateAfter(LocalDate date) {
         return gameRepository.findByReleasedDateAfter(date).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
-
 
     @Override
     public List<GameRestDto> findByReleasedDateBefore(LocalDate date) {
@@ -279,19 +290,75 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public List<GameRestDto> findByReleasedDateAfterAndSystemReqContaining(LocalDate date, String systemReq) {
-        return gameRepository.findByReleasedDateAfterAndSystemReqContaining(date, systemReq).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    public List<GameRestDto> findByReleasedDateBetween(LocalDate date1, LocalDate date2) {
+        return gameRepository.findByReleasedDateBetween(date1, date2).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+
+    //Find by released date and system req
+    @Override
+    public List<GameRestDto> findByReleasedDateAfterAndSystemReqIgnoreCaseContaining(LocalDate date, String systemReq) {
+        return gameRepository.findByReleasedDateAfterAndSystemReqIgnoreCaseContaining(date, systemReq).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<GameRestDto> findByReleasedDateBeforeAndSystemReqContaining(LocalDate date, String systemReq) {
-        return gameRepository.findByReleasedDateBeforeAndSystemReqContaining(date, systemReq).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    public List<GameRestDto> findByReleasedDateBeforeAndSystemReqIgnoreCaseContaining(LocalDate date, String systemReq) {
+        return gameRepository.findByReleasedDateBeforeAndSystemReqIgnoreCaseContaining(date, systemReq).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<GameRestDto> findByReleasedDateBetweenAndSystemReqContaining(LocalDate date1, LocalDate date2, String systemReq) {
-        return gameRepository.findByReleasedDateBetweenAndSystemReqContaining(date1, date2, systemReq).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    public List<GameRestDto> findByReleasedDateBetweenAndSystemReqIgnoreCaseContaining(LocalDate date1, LocalDate date2, String systemReq) {
+        return gameRepository.findByReleasedDateBetweenAndSystemReqIgnoreCaseContaining(date1, date2, systemReq).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
+
+
+    //Find by released date and system req and price
+    @Override
+    public List<GameRestDto> findByReleasedDateAfterAndSystemReqIgnoreCaseContainingAndPriceLessThanEqual(LocalDate date, String systemReq, Double price) {
+        return gameRepository.findByReleasedDateAfterAndSystemReqIgnoreCaseContainingAndPriceLessThanEqual(date, systemReq, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByReleasedDateAfterAndSystemReqIgnoreCaseContainingAndPriceGreaterThanEqual(LocalDate date, String systemReq, Double price) {
+        return gameRepository.findByReleasedDateAfterAndSystemReqIgnoreCaseContainingAndPriceGreaterThanEqual(date, systemReq, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByReleasedDateAfterAndSystemReqIgnoreCaseContainingAndPriceBetween(LocalDate date, String systemReq, Double price1, Double price2) {
+        return gameRepository.findByReleasedDateAfterAndSystemReqIgnoreCaseContainingAndPriceBetween(date, systemReq, price1, price2).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByReleasedDateBeforeAndSystemReqIgnoreCaseContainingAndPriceLessThanEqual(LocalDate date, String systemReq, Double price) {
+        return gameRepository.findByReleasedDateBeforeAndSystemReqIgnoreCaseContainingAndPriceLessThanEqual(date, systemReq, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByReleasedDateBeforeAndSystemReqIgnoreCaseContainingAndPriceGreaterThanEqual(LocalDate date, String systemReq, Double price) {
+        return gameRepository.findByReleasedDateBeforeAndSystemReqIgnoreCaseContainingAndPriceGreaterThanEqual(date, systemReq, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByReleasedDateBeforeAndSystemReqIgnoreCaseContainingAndPriceBetween(LocalDate date, String systemReq, Double price1, Double price2) {
+        return gameRepository.findByReleasedDateBeforeAndSystemReqIgnoreCaseContainingAndPriceBetween(date, systemReq, price1, price2).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByReleasedDateBetweenAndSystemReqIgnoreCaseContainingAndPriceLessThanEqual(LocalDate date1, LocalDate date2, String systemReq, Double price) {
+        return gameRepository.findByReleasedDateBetweenAndSystemReqIgnoreCaseContainingAndPriceLessThanEqual(date1, date2, systemReq, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByReleasedDateBetweenAndSystemReqIgnoreCaseContainingAndPriceGreaterThanEqual(LocalDate date1, LocalDate date2, String systemReq, Double price) {
+        return gameRepository.findByReleasedDateBetweenAndSystemReqIgnoreCaseContainingAndPriceGreaterThanEqual(date1, date2, systemReq, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByReleasedDateBetweenAndSystemReqIgnoreCaseContainingAndPriceBetween(LocalDate date1, LocalDate date2, String systemReq, Double price1, Double price2) {
+        return gameRepository.findByReleasedDateBetweenAndSystemReqIgnoreCaseContainingAndPriceBetween(date1, date2, systemReq, price1, price2).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+
 
     @Override
     public List<GameRestDto> findByReleasedDateAfterAndPriceLessThanEqual(LocalDate date, Double price) {
