@@ -26,14 +26,44 @@ public interface GameService {
     List<GameRestDto> findByNameContaining(String name);
 
     List<GameRestDto> findByNameContainingAndReleasedDateAfter(String gameName, LocalDate date);
-    List<GameRestDto> findByNameContainingAndReleasedDateAfterAnd(String gameName, LocalDate date);
-
 
     List<GameRestDto> findByNameContainingAndReleasedDateBefore(String gameName, LocalDate date);
 
     List<GameRestDto> findByNameContainingAndReleasedDateBetween(String gameName, LocalDate date1, LocalDate date2);
 
+    List<GameRestDto> findByNameContainingAndReleasedDateAfterAndSystemReqContaining(String gameName, LocalDate date, String req);
+
+    List<GameRestDto> findByNameContainingAndReleasedDateBeforeAndSystemReqContaining(String gameName, LocalDate date, String req);
+
+    List<GameRestDto> findByNameContainingAndReleasedDateBetweenAndSystemReqContaining(String gameName, LocalDate date1, LocalDate date2, String req);
+
+    List<GameRestDto> findByNameContainingAndReleasedDateAfterAndSystemReqContainingAndPriceLessThanEqual(String gameName, LocalDate date, String req, Double price);
+
+    List<GameRestDto> findByNameContainingAndReleasedDateAfterAndSystemReqContainingAndPriceGreaterThanEqual(String gameName, LocalDate date, String req, Double price);
+
+    List<GameRestDto> findByNameContainingAndReleasedDateAfterAndSystemReqContainingAndPriceBetween(String gameName, LocalDate date, String req, Double price1, Double price2);
+
+    List<GameRestDto> findByNameContainingAndReleasedDateBeforeAndSystemReqContainingAndPriceLessThanEqual(String gameName, LocalDate date, String req, Double price);
+
+    List<GameRestDto> findByNameContainingAndReleasedDateBeforeAndSystemReqContainingAndPriceGreaterThanEqual(String gameName, LocalDate date, String req, Double price);
+
+    List<GameRestDto> findByNameContainingAndReleasedDateBeforeAndSystemReqContainingAndPriceBetween(String gameName, LocalDate date, String req, Double price1, Double price2);
+
+    List<GameRestDto> findByNameContainingAndReleasedDateBetweenAndSystemReqContainingAndPriceLessThanEqual(String gameName, LocalDate date1, LocalDate date2, String req, Double price);
+
+    List<GameRestDto> findByNameContainingAndReleasedDateBetweenAndSystemReqContainingAndPriceGreaterThanEqual(String gameName, LocalDate date1, LocalDate date2, String req, Double price);
+
+    List<GameRestDto> findByNameContainingAndReleasedDateBetweenAndSystemReqContainingAndPriceBetween(String gameName, LocalDate date1, LocalDate date2, String req, Double price1, double price2);
+
+
     List<GameRestDto> findByNameContainingAndSystemReqContaining(String name, String req);
+
+    List<GameRestDto> findByNameContainingAndSystemReqContainingAndPriceLessThanEqual(String gameName, String req, Double price);
+
+    List<GameRestDto> findByNameContainingAndSystemReqContainingAndPriceGreaterThanEqual(String gameName, String req, Double price);
+
+    List<GameRestDto> findByNameContainingAndSystemReqContainingAndPriceBetween(String gameName, String req, Double price1, double price2);
+
 
     List<GameRestDto> findByNameContainingAndPriceLessThanEqual(String name, Double price);
 

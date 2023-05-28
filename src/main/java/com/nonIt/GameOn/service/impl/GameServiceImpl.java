@@ -151,6 +151,21 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
+    public List<GameRestDto> findByNameContainingAndSystemReqContainingAndPriceLessThanEqual(String gameName, String req, Double price) {
+        return null;
+    }
+
+    @Override
+    public List<GameRestDto> findByNameContainingAndSystemReqContainingAndPriceGreaterThanEqual(String gameName, String req, Double price) {
+        return null;
+    }
+
+    @Override
+    public List<GameRestDto> findByNameContainingAndSystemReqContainingAndPriceBetween(String gameName, String req, Double price1, double price2) {
+        return null;
+    }
+
+    @Override
     public List<GameRestDto> findByNameContainingAndPriceLessThanEqual(String name, Double price) {
         return gameRepository.findByNameContainingAndPriceLessThanEqual(name, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
@@ -188,6 +203,66 @@ public class GameServiceImpl implements GameService {
     @Override
     public List<GameRestDto> findByNameContainingAndReleasedDateBetween(String gameName, LocalDate date1, LocalDate date2) {
         return gameRepository.findByNameContainingAndReleasedDateBetween(gameName, date1, date2).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByNameContainingAndReleasedDateAfterAndSystemReqContaining(String gameName, LocalDate date, String req) {
+        return gameRepository.findByNameContainingAndReleasedDateAfterAndSystemReqContaining(gameName, date, req).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByNameContainingAndReleasedDateBeforeAndSystemReqContaining(String gameName, LocalDate date, String req) {
+        return gameRepository.findByNameContainingAndReleasedDateBeforeAndSystemReqContaining(gameName, date, req).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByNameContainingAndReleasedDateBetweenAndSystemReqContaining(String gameName, LocalDate date1, LocalDate date2, String req) {
+        return gameRepository.findByNameContainingAndReleasedDateBetweenAndSystemReqContaining(gameName, date1, date2, req).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByNameContainingAndReleasedDateAfterAndSystemReqContainingAndPriceLessThanEqual(String gameName, LocalDate date, String req, Double price) {
+        return gameRepository.findByNameContainingAndReleasedDateAfterAndSystemReqContainingAndPriceLessThanEqual(gameName, date, req, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByNameContainingAndReleasedDateAfterAndSystemReqContainingAndPriceGreaterThanEqual(String gameName, LocalDate date, String req, Double price) {
+        return gameRepository.findByNameContainingAndReleasedDateAfterAndSystemReqContainingAndPriceGreaterThanEqual(gameName, date, req, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByNameContainingAndReleasedDateAfterAndSystemReqContainingAndPriceBetween(String gameName, LocalDate date, String req, Double price1, Double price2) {
+        return gameRepository.findByNameContainingAndReleasedDateAfterAndSystemReqContainingAndPriceBetween(gameName, date, req, price1, price2).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByNameContainingAndReleasedDateBeforeAndSystemReqContainingAndPriceLessThanEqual(String gameName, LocalDate date, String req, Double price) {
+        return gameRepository.findByNameContainingAndReleasedDateBeforeAndSystemReqContainingAndPriceLessThanEqual(gameName, date, req, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByNameContainingAndReleasedDateBeforeAndSystemReqContainingAndPriceGreaterThanEqual(String gameName, LocalDate date, String req, Double price) {
+        return gameRepository.findByNameContainingAndReleasedDateBeforeAndSystemReqContainingAndPriceGreaterThanEqual(gameName, date, req, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByNameContainingAndReleasedDateBeforeAndSystemReqContainingAndPriceBetween(String gameName, LocalDate date, String req, Double price1, Double price2) {
+        return gameRepository.findByNameContainingAndReleasedDateBeforeAndSystemReqContainingAndPriceBetween(gameName, date, req, price1, price2).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByNameContainingAndReleasedDateBetweenAndSystemReqContainingAndPriceLessThanEqual(String gameName, LocalDate date1, LocalDate date2, String req, Double price) {
+        return gameRepository.findByNameContainingAndReleasedDateBetweenAndSystemReqContainingAndPriceLessThanEqual(gameName, date1, date2, req, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByNameContainingAndReleasedDateBetweenAndSystemReqContainingAndPriceGreaterThanEqual(String gameName, LocalDate date1, LocalDate date2, String req, Double price) {
+        return gameRepository.findByNameContainingAndReleasedDateBetweenAndSystemReqContainingAndPriceGreaterThanEqual(gameName, date1, date2, req, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByNameContainingAndReleasedDateBetweenAndSystemReqContainingAndPriceBetween(String gameName, LocalDate date1, LocalDate date2, String req, Double price1, double price2) {
+        return gameRepository.findByNameContainingAndReleasedDateBetweenAndSystemReqContainingAndPriceBetween(gameName, date1, date2, req, price1, price2).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 
 

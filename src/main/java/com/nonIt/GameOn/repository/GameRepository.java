@@ -16,7 +16,43 @@ public interface GameRepository extends JpaRepository<Game, Integer> {
     //Find by Game name related
     List<Game> findByNameContaining(String name);
 
+    List<Game> findByNameContainingAndReleasedDateAfter(String gameName, LocalDate date);
+
+    List<Game> findByNameContainingAndReleasedDateBefore(String gameName, LocalDate date);
+
+    List<Game> findByNameContainingAndReleasedDateBetween(String gameName, LocalDate date1, LocalDate date2);
+
+    List<Game> findByNameContainingAndReleasedDateAfterAndSystemReqContaining(String gameName, LocalDate date, String req);
+
+    List<Game> findByNameContainingAndReleasedDateBeforeAndSystemReqContaining(String gameName, LocalDate date, String req);
+
+    List<Game> findByNameContainingAndReleasedDateBetweenAndSystemReqContaining(String gameName, LocalDate date1, LocalDate date2, String req);
+
+    List<Game> findByNameContainingAndReleasedDateAfterAndSystemReqContainingAndPriceLessThanEqual(String gameName, LocalDate date, String req, Double price);
+
+    List<Game> findByNameContainingAndReleasedDateAfterAndSystemReqContainingAndPriceGreaterThanEqual(String gameName, LocalDate date, String req, Double price);
+
+    List<Game> findByNameContainingAndReleasedDateAfterAndSystemReqContainingAndPriceBetween(String gameName, LocalDate date, String req, Double price1, Double price2);
+
+    List<Game> findByNameContainingAndReleasedDateBeforeAndSystemReqContainingAndPriceLessThanEqual(String gameName, LocalDate date, String req, Double price);
+
+    List<Game> findByNameContainingAndReleasedDateBeforeAndSystemReqContainingAndPriceGreaterThanEqual(String gameName, LocalDate date, String req, Double price);
+
+    List<Game> findByNameContainingAndReleasedDateBeforeAndSystemReqContainingAndPriceBetween(String gameName, LocalDate date, String req, Double price1, Double price2);
+
+    List<Game> findByNameContainingAndReleasedDateBetweenAndSystemReqContainingAndPriceLessThanEqual(String gameName, LocalDate date1, LocalDate date2, String req, Double price);
+
+    List<Game> findByNameContainingAndReleasedDateBetweenAndSystemReqContainingAndPriceGreaterThanEqual(String gameName, LocalDate date1, LocalDate date2, String req, Double price);
+
+    List<Game> findByNameContainingAndReleasedDateBetweenAndSystemReqContainingAndPriceBetween(String gameName, LocalDate date1, LocalDate date2, String req, Double price1, double price2);
+
     List<Game> findByNameContainingAndSystemReqContaining(String name, String req);
+
+    List<Game> findByNameContainingAndSystemReqContainingAndPriceLessThanEqual(String gameName, String req, Double price);
+
+    List<Game> findByNameContainingAndSystemReqContainingAndPriceGreaterThanEqual(String gameName, String req, Double price);
+
+    List<Game> findByNameContainingAndSystemReqContainingAndPriceBetween(String gameName, String req, Double price1, double price2);
 
     List<Game> findByNameContainingAndPriceLessThanEqual(String name, Double price);
 
@@ -27,12 +63,6 @@ public interface GameRepository extends JpaRepository<Game, Integer> {
     List<Game> findByNameContainingAndDeveloperNameContaining(String gameName, String developerName);
 
     List<Game> findByNameContainingAndPublisherNameContaining(String gameName, String publisherName);
-
-    List<Game> findByNameContainingAndReleasedDateAfter(String gameName, LocalDate date);
-
-    List<Game> findByNameContainingAndReleasedDateBefore(String gameName, LocalDate date);
-
-    List<Game> findByNameContainingAndReleasedDateBetween(String gameName, LocalDate date1, LocalDate date2);
 
 
     //Find by Game releasedDate related
@@ -71,7 +101,6 @@ public interface GameRepository extends JpaRepository<Game, Integer> {
     List<Game> findBySystemReqContainingAndPriceBetween(String req, Double price1, Double price2);
 
 
-
     //Find by Game price related
     List<Game> findByPriceGreaterThan(Double price);
 
@@ -105,10 +134,6 @@ public interface GameRepository extends JpaRepository<Game, Integer> {
 
     @Query(value = "SELECT g from Game g join GameSubGenre gsg on g.id = gsg.game.id join SubGenre sg on gsg.subGenre.id = sg.id where UPPER(sg.name) LIKE UPPER(:subGenreName)")
     List<Game> getBySubGenreName(@Param("subGenreName") String subGenreName);
-
-
-
-
 
 
 //    private Integer id;
