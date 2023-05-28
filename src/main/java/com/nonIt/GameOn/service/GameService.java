@@ -124,6 +124,7 @@ public interface GameService {
     List<GameRestDto> findByReleasedDateBetweenAndSystemReqIgnoreCaseContainingAndPriceBetween(LocalDate date1, LocalDate date2, String systemReq, Double price1, Double price2);
 
 
+    //Find by released date and price
     List<GameRestDto> findByReleasedDateAfterAndPriceLessThanEqual(LocalDate date, Double price);
 
     List<GameRestDto> findByReleasedDateAfterAndPriceGreaterThanEqual(LocalDate date, Double price);
@@ -136,17 +137,23 @@ public interface GameService {
 
     List<GameRestDto> findByReleasedDateBeforeAndPriceBetween(LocalDate date, Double price1, Double price2);
 
+    List<GameRestDto> findByReleasedDateBetweenAndPriceLessThanEqual(LocalDate date1, LocalDate date2, Double price);
+
+    List<GameRestDto> findByReleasedDateBetweenAndPriceGreaterThanEqual(LocalDate date1, LocalDate date2, Double price);
+
     List<GameRestDto> findByReleasedDateBetweenAndPriceBetween(LocalDate date1, LocalDate date2, Double price1, Double price2);
 
 
-    //Find by Game systemReq related
-    List<GameRestDto> findBySystemReqContaining(String req);
+    //Find by system req
+    List<GameRestDto> findBySystemReqIgnoreCaseContaining(String req);
 
-    List<GameRestDto> findBySystemReqContainingAndPriceGreaterThanEqual(String req, Double price);
 
-    List<GameRestDto> findBySystemReqContainingAndPriceLessThanEqual(String req, Double price);
+    //Find by system req and price
+    List<GameRestDto> findBySystemReqIgnoreCaseContainingAndPriceGreaterThanEqual(String req, Double price);
 
-    List<GameRestDto> findBySystemReqContainingAndPriceBetween(String req, Double price1, Double price2);
+    List<GameRestDto> findBySystemReqIgnoreCaseContainingAndPriceLessThanEqual(String req, Double price);
+
+    List<GameRestDto> findBySystemReqIgnoreCaseContainingAndPriceBetween(String req, Double price1, Double price2);
 
 
     //Find by Game price related
@@ -159,7 +166,6 @@ public interface GameService {
 
 
     //Find by foreign key
-
     List<GameRestDto> getByDeveloperId(Integer developerId);
 
     List<GameRestDto> getByPublisherId(Integer publisherId);
@@ -175,6 +181,9 @@ public interface GameService {
     List<GameRestDto> getBySubGenreId(Integer subGenreId);
 
     List<GameRestDto> getBySubGenreName(String subGenreName);
+
+    //Custom queries
+    List<GameRestDto> getByRatingAndReleasedDateBetween(Integer rating1, Integer rating2, LocalDate date1, LocalDate date2);
 
 //    List<GameRestDto> getByRatingAndReleasedDateBetween(Integer rating1, Integer rating2, LocalDate date1, LocalDate date2);
 }

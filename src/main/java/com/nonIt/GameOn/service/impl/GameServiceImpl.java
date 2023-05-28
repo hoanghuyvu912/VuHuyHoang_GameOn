@@ -3,15 +3,18 @@ package com.nonIt.GameOn.service.impl;
 import com.nonIt.GameOn.entity.Developer;
 import com.nonIt.GameOn.entity.Game;
 import com.nonIt.GameOn.entity.Publisher;
+import com.nonIt.GameOn.entity.Rating;
 import com.nonIt.GameOn.exception.GameOnException;
 import com.nonIt.GameOn.repository.DeveloperRepository;
 import com.nonIt.GameOn.repository.GameRepository;
 import com.nonIt.GameOn.repository.PublisherRepository;
+import com.nonIt.GameOn.repository.RatingRepository;
 import com.nonIt.GameOn.service.GameService;
 import com.nonIt.GameOn.service.dto.GameDto;
 import com.nonIt.GameOn.service.mapper.GameMapper;
 import com.nonIt.GameOn.service.restDto.GameRestDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +22,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -26,6 +30,8 @@ public class GameServiceImpl implements GameService {
     private final GameRepository gameRepository;
     private final DeveloperRepository developerRepository;
     private final PublisherRepository publisherRepository;
+
+    private final RatingRepository ratingRepository;
     private final GameMapper gameMapper;
 
     //CRUD Services
@@ -135,6 +141,7 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public void deleteGame(Integer gameId) {
+        Game game = gameRepository.findById(gameId).orElseThrow(GameOnException::GameNotFound);
         gameRepository.deleteById(gameId);
     }
 
@@ -142,58 +149,166 @@ public class GameServiceImpl implements GameService {
     //Find by name
     @Override
     public List<GameRestDto> findByNameIgnoreCaseContaining(String name) {
+        log.info("Search for a game that name contains {}", name);
+        if (name == null || name.trim().isBlank() || name.isEmpty()) {
+            throw GameOnException.badRequest("GameNameNotFound", "Game's name search input is missing");
+        }
         return gameRepository.findByNameIgnoreCaseContaining(name).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 
 
     //Find by name and released date
     @Override
-    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateAfter(String gameName, LocalDate date) {
-        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateAfter(gameName, date).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateAfter(String name, LocalDate date) {
+        if (name == null || name.trim().isBlank() || name.isEmpty()) {
+            throw GameOnException.badRequest("GameNameNotFound", "Game's name search input is missing");
+        }
+        if (date.isAfter(LocalDate.now())) {
+            throw GameOnException.badRequest("InvalidReleasedDate", "Released date cannot be after current date.");
+        }
+        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateAfter(name, date).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateBefore(String gameName, LocalDate date) {
-        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateBefore(gameName, date).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateBefore(String name, LocalDate date) {
+        if (name == null || name.trim().isBlank() || name.isEmpty()) {
+            throw GameOnException.badRequest("GameNameNotFound", "Game's name search input is missing");
+        }
+        if (date.isAfter(LocalDate.now())) {
+            throw GameOnException.badRequest("InvalidReleasedDate", "Released date cannot be after current date.");
+        }
+        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateBefore(name, date).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateBetween(String gameName, LocalDate date1, LocalDate date2) {
-        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateBetween(gameName, date1, date2).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateBetween(String name, LocalDate date1, LocalDate date2) {
+        if (name == null || name.trim().isBlank() || name.isEmpty()) {
+            throw GameOnException.badRequest("GameNameNotFound", "Game's name search input is missing");
+        }
+        if (date1.isAfter(LocalDate.now()) || date2.isAfter(LocalDate.now())) {
+            throw GameOnException.badRequest("InvalidReleasedDate", "Released date cannot be after current date.");
+        }
+
+        if (date1.isAfter(date2)) {
+            throw GameOnException.badRequest("InvalidComparingDates", "Begin date cannot be after end date.");
+        }
+        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateBetween(name, date1, date2).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 
 
     //Find by name and released date and system req
     @Override
-    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateAfterAndSystemReqIgnoreCaseContaining(String gameName, LocalDate date, String req) {
-        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateAfterAndSystemReqIgnoreCaseContaining(gameName, date, req).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateAfterAndSystemReqIgnoreCaseContaining(String name, LocalDate date, String req) {
+        if (name == null || name.trim().isBlank() || name.isEmpty()) {
+            throw GameOnException.badRequest("GameNameNotFound", "Game's name search input is missing");
+        }
+        if (date.isAfter(LocalDate.now())) {
+            throw GameOnException.badRequest("InvalidReleasedDate", "Released date cannot be after current date.");
+        }
+        if (req == null || req.trim().isBlank() || req.isEmpty()) {
+            throw GameOnException.badRequest("SystemRequirementNotFound", "System requirement search input is missing");
+        }
+        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateAfterAndSystemReqIgnoreCaseContaining(name, date, req).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateBeforeAndSystemReqIgnoreCaseContaining(String gameName, LocalDate date, String req) {
-        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateBeforeAndSystemReqIgnoreCaseContaining(gameName, date, req).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateBeforeAndSystemReqIgnoreCaseContaining(String name, LocalDate date, String req) {
+        if (name == null || name.trim().isBlank() || name.isEmpty()) {
+            throw GameOnException.badRequest("GameNameNotFound", "Game's name search input is missing");
+        }
+        if (date.isAfter(LocalDate.now())) {
+            throw GameOnException.badRequest("InvalidReleasedDate", "Released date cannot be after current date.");
+        }
+        if (req == null || req.trim().isBlank() || req.isEmpty()) {
+            throw GameOnException.badRequest("SystemRequirementNotFound", "System requirement search input is missing");
+        }
+        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateBeforeAndSystemReqIgnoreCaseContaining(name, date, req).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateBetweenAndSystemReqIgnoreCaseContaining(String gameName, LocalDate date1, LocalDate date2, String req) {
-        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateBetweenAndSystemReqIgnoreCaseContaining(gameName, date1, date2, req).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateBetweenAndSystemReqIgnoreCaseContaining(String name, LocalDate date1, LocalDate date2, String req) {
+        if (name == null || name.trim().isBlank() || name.isEmpty()) {
+            throw GameOnException.badRequest("GameNameNotFound", "Game's name search input is missing");
+        }
+
+        if (date1.isAfter(LocalDate.now()) || date2.isAfter(LocalDate.now())) {
+            throw GameOnException.badRequest("InvalidReleasedDate", "Released date cannot be after current date.");
+        }
+
+        if (date1.isAfter(date2)) {
+            throw GameOnException.badRequest("InvalidComparingDates", "Begin date cannot be after end date.");
+        }
+
+        if (req == null || req.trim().isBlank() || req.isEmpty()) {
+            throw GameOnException.badRequest("SystemRequirementNotFound", "System requirement search input is missing");
+        }
+        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateBetweenAndSystemReqIgnoreCaseContaining(name, date1, date2, req).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 
 
     //Find by name and released date and system req and price
     @Override
-    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateAfterAndSystemReqIgnoreCaseContainingAndPriceLessThanEqual(String gameName, LocalDate date, String req, Double price) {
-        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateAfterAndSystemReqIgnoreCaseContainingAndPriceLessThanEqual(gameName, date, req, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateAfterAndSystemReqIgnoreCaseContainingAndPriceLessThanEqual(String name, LocalDate date, String req, Double price) {
+        if (name == null || name.trim().isBlank() || name.isEmpty()) {
+            throw GameOnException.badRequest("GameNameNotFound", "Game's name search input is missing");
+        }
+
+        if (date.isAfter(LocalDate.now())) {
+            throw GameOnException.badRequest("InvalidReleasedDate", "Released date cannot be after current date.");
+        }
+
+        if (req == null || req.trim().isBlank() || req.isEmpty()) {
+            throw GameOnException.badRequest("SystemRequirementNotFound", "System requirement search input is missing.");
+        }
+
+        if(price < 0) {
+            throw GameOnException.badRequest("InvalidPriceNumber", "Price searching input must be a positive number.");
+        }
+        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateAfterAndSystemReqIgnoreCaseContainingAndPriceLessThanEqual(name, date, req, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateAfterAndSystemReqIgnoreCaseContainingAndPriceGreaterThanEqual(String gameName, LocalDate date, String req, Double price) {
-        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateAfterAndSystemReqIgnoreCaseContainingAndPriceGreaterThanEqual(gameName, date, req, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateAfterAndSystemReqIgnoreCaseContainingAndPriceGreaterThanEqual(String name, LocalDate date, String req, Double price) {
+        if (name == null || name.trim().isBlank() || name.isEmpty()) {
+            throw GameOnException.badRequest("GameNameNotFound", "Game's name search input is missing");
+        }
+
+        if (date.isAfter(LocalDate.now())) {
+            throw GameOnException.badRequest("InvalidReleasedDate", "Released date cannot be after current date.");
+        }
+
+        if (req == null || req.trim().isBlank() || req.isEmpty()) {
+            throw GameOnException.badRequest("SystemRequirementNotFound", "System requirement search input is missing.");
+        }
+
+        if(price < 0) {
+            throw GameOnException.badRequest("InvalidPriceNumber", "Price searching input must be a positive number.");
+        }
+        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateAfterAndSystemReqIgnoreCaseContainingAndPriceGreaterThanEqual(name, date, req, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateAfterAndSystemReqIgnoreCaseContainingAndPriceBetween(String gameName, LocalDate date, String req, Double price1, Double price2) {
-        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateAfterAndSystemReqIgnoreCaseContainingAndPriceBetween(gameName, date, req, price1, price2).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    public List<GameRestDto> findByNameIgnoreCaseContainingAndReleasedDateAfterAndSystemReqIgnoreCaseContainingAndPriceBetween(String name, LocalDate date, String req, Double price1, Double price2) {
+        if (name == null || name.trim().isBlank() || name.isEmpty()) {
+            throw GameOnException.badRequest("GameNameNotFound", "Game's name search input is missing");
+        }
+
+        if (date.isAfter(LocalDate.now())) {
+            throw GameOnException.badRequest("InvalidReleasedDate", "Released date cannot be after current date.");
+        }
+
+        if (req == null || req.trim().isBlank() || req.isEmpty()) {
+            throw GameOnException.badRequest("SystemRequirementNotFound", "System requirement search input is missing.");
+        }
+
+        if(price1 < 0 || price2 < 0) {
+            throw GameOnException.badRequest("InvalidPriceNumbers", "Price searching inputs must be a positive number.");
+        }
+
+        if(price1 > price2 ) {
+            throw GameOnException.badRequest("InvalidPriceNumbers", "Starting price must be smaller than ending price.");
+        }
+        return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateAfterAndSystemReqIgnoreCaseContainingAndPriceBetween(name, date, req, price1, price2).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
@@ -359,7 +474,7 @@ public class GameServiceImpl implements GameService {
     }
 
 
-
+    //Find by released date and price
     @Override
     public List<GameRestDto> findByReleasedDateAfterAndPriceLessThanEqual(LocalDate date, Double price) {
         return gameRepository.findByReleasedDateAfterAndPriceLessThanEqual(date, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
@@ -391,34 +506,46 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
+    public List<GameRestDto> findByReleasedDateBetweenAndPriceLessThanEqual(LocalDate date1, LocalDate date2, Double price) {
+        return gameRepository.findByReleasedDateBetweenAndPriceLessThanEqual(date1, date2, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findByReleasedDateBetweenAndPriceGreaterThanEqual(LocalDate date1, LocalDate date2, Double price) {
+        return gameRepository.findByReleasedDateBetweenAndPriceGreaterThanEqual(date1, date2, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
     public List<GameRestDto> findByReleasedDateBetweenAndPriceBetween(LocalDate date1, LocalDate date2, Double price1, Double price2) {
         return gameRepository.findByReleasedDateBetweenAndPriceBetween(date1, date2, price1, price2).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 
 
-    //Find by Game systemReq related services
+    //Find by system req
     @Override
-    public List<GameRestDto> findBySystemReqContaining(String req) {
-        return gameRepository.findBySystemReqContaining(req).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GameRestDto> findBySystemReqContainingAndPriceGreaterThanEqual(String req, Double price) {
-        return gameRepository.findBySystemReqContainingAndPriceGreaterThanEqual(req, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GameRestDto> findBySystemReqContainingAndPriceLessThanEqual(String req, Double price) {
-        return gameRepository.findBySystemReqContainingAndPriceLessThanEqual(req, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GameRestDto> findBySystemReqContainingAndPriceBetween(String req, Double price1, Double price2) {
-        return gameRepository.findBySystemReqContainingAndPriceBetween(req, price1, price2).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    public List<GameRestDto> findBySystemReqIgnoreCaseContaining(String req) {
+        return gameRepository.findBySystemReqIgnoreCaseContaining(req).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 
 
-    //Find by Game price related services
+    //Find by system req and price
+    @Override
+    public List<GameRestDto> findBySystemReqIgnoreCaseContainingAndPriceGreaterThanEqual(String req, Double price) {
+        return gameRepository.findBySystemReqIgnoreCaseContainingAndPriceGreaterThanEqual(req, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findBySystemReqIgnoreCaseContainingAndPriceLessThanEqual(String req, Double price) {
+        return gameRepository.findBySystemReqIgnoreCaseContainingAndPriceLessThanEqual(req, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameRestDto> findBySystemReqIgnoreCaseContainingAndPriceBetween(String req, Double price1, Double price2) {
+        return gameRepository.findBySystemReqIgnoreCaseContainingAndPriceBetween(req, price1, price2).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+
+    //Find by price
     @Override
     public List<GameRestDto> findByPriceGreaterThan(Double price) {
         return gameRepository.findByPriceGreaterThan(price).stream().map(gameMapper::toDto).collect(Collectors.toList());
@@ -434,8 +561,7 @@ public class GameServiceImpl implements GameService {
         return null;
     }
 
-    //Find by Game foreign keys related services
-
+    //Find by foreign keys
     @Override
     public List<GameRestDto> getByDeveloperId(Integer developerId) {
         return gameRepository.getByDeveloperId(developerId).stream().map(gameMapper::toDto).collect(Collectors.toList());
@@ -482,6 +608,23 @@ public class GameServiceImpl implements GameService {
         return gameMapper.toDto(game);
     }
 
+
+    //Custom queries
+    @Override
+    public List<GameRestDto> getByRatingAndReleasedDateBetween(Integer rating1, Integer rating2, LocalDate date1, LocalDate date2) {
+        List<Game> allGamesList = gameRepository.findAll();
+        List<Rating> allRatingsList = ratingRepository.findAll();
+
+        return allRatingsList.stream()
+                .filter(r -> r.getGame().getReleasedDate().isAfter(date1))
+                .filter(r -> r.getGame().getReleasedDate().isBefore(date2))
+                .filter(r -> r.getRating() > rating1)
+                .filter(r -> r.getRating() < rating2)
+                .distinct()
+                .map(Rating::getGame)
+                .map(gameMapper::toDto)
+                .collect(Collectors.toList());
+    }
 
 //    @Override
 //    public List<GameRestDto> getByRatingAndReleasedDateBetween(Integer rating1, Integer rating2, LocalDate date1, LocalDate date2) {

@@ -127,20 +127,26 @@ public interface GameRepository extends JpaRepository<Game, Integer> {
 
     List<Game> findByReleasedDateBeforeAndPriceBetween(LocalDate date, Double price1, Double price2);
 
+    List<Game> findByReleasedDateBetweenAndPriceLessThanEqual(LocalDate date1, LocalDate date2, Double price);
+
+    List<Game> findByReleasedDateBetweenAndPriceGreaterThanEqual(LocalDate date1, LocalDate date2, Double price);
+
     List<Game> findByReleasedDateBetweenAndPriceBetween(LocalDate date1, LocalDate date2, Double price1, Double price2);
 
 
-    //Find by Game systemReq related
-    List<Game> findBySystemReqContaining(String req);
-
-    List<Game> findBySystemReqContainingAndPriceGreaterThanEqual(String req, Double price);
-
-    List<Game> findBySystemReqContainingAndPriceLessThanEqual(String req, Double price);
-
-    List<Game> findBySystemReqContainingAndPriceBetween(String req, Double price1, Double price2);
+    //Find by system req
+    List<Game> findBySystemReqIgnoreCaseContaining(String req);
 
 
-    //Find by Game price related
+    //Find by system req and price
+    List<Game> findBySystemReqIgnoreCaseContainingAndPriceGreaterThanEqual(String req, Double price);
+
+    List<Game> findBySystemReqIgnoreCaseContainingAndPriceLessThanEqual(String req, Double price);
+
+    List<Game> findBySystemReqIgnoreCaseContainingAndPriceBetween(String req, Double price1, Double price2);
+
+
+    //Find by price
     List<Game> findByPriceGreaterThan(Double price);
 
     List<Game> findByPriceLessThan(Double price);
