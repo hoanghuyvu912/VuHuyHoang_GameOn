@@ -10,17 +10,23 @@ import com.nonIt.GameOn.repository.GameRepository;
 import com.nonIt.GameOn.repository.PublisherRepository;
 import com.nonIt.GameOn.repository.RatingRepository;
 import com.nonIt.GameOn.service.GameService;
+import com.nonIt.GameOn.service.customDto.GameSearchDto;
 import com.nonIt.GameOn.service.dto.GameDto;
 import com.nonIt.GameOn.service.mapper.GameMapper;
+import com.nonIt.GameOn.service.mapper.RatingMapper;
 import com.nonIt.GameOn.service.restDto.GameRestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.nonIt.GameOn.repository.Specification.GameSpecifications.priceLessThanEqual;
+import static com.nonIt.GameOn.repository.Specification.GameSpecifications.systemReqContains;
 
 @Slf4j
 @Service
@@ -30,9 +36,9 @@ public class GameServiceImpl implements GameService {
     private final GameRepository gameRepository;
     private final DeveloperRepository developerRepository;
     private final PublisherRepository publisherRepository;
-
     private final RatingRepository ratingRepository;
     private final GameMapper gameMapper;
+    private final RatingMapper ratingMapper;
 
     //CRUD Services
     @Override
@@ -134,6 +140,17 @@ public class GameServiceImpl implements GameService {
                 throw GameOnException.badRequest("InvalidPrice", "Game's price must be a positive number.");
             }
         }
+
+        if(gameDto.getDeveloperId() != null) {
+            Developer developer = developerRepository.findById(gameDto.getDeveloperId()).orElseThrow(GameOnException::DeveloperNotFound);
+            game.setDeveloper(developer);
+        }
+
+        if(gameDto.getPublisherId() != null) {
+            Publisher publisher = publisherRepository.findById(gameDto.getPublisherId()).orElseThrow(GameOnException::PublisherNotFound);
+            game.setPublisher(publisher);
+        }
+
         gameMapper.mapFromDto(gameDto, game);
         game = gameRepository.save(game);
         return gameMapper.toDto(game);
@@ -261,7 +278,7 @@ public class GameServiceImpl implements GameService {
             throw GameOnException.badRequest("SystemRequirementNotFound", "System requirement search input is missing.");
         }
 
-        if(price < 0) {
+        if (price < 0) {
             throw GameOnException.badRequest("InvalidPriceNumber", "Price searching input must be a positive number.");
         }
         return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateAfterAndSystemReqIgnoreCaseContainingAndPriceLessThanEqual(name, date, req, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
@@ -281,7 +298,7 @@ public class GameServiceImpl implements GameService {
             throw GameOnException.badRequest("SystemRequirementNotFound", "System requirement search input is missing.");
         }
 
-        if(price < 0) {
+        if (price < 0) {
             throw GameOnException.badRequest("InvalidPriceNumber", "Price searching input must be a positive number.");
         }
         return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateAfterAndSystemReqIgnoreCaseContainingAndPriceGreaterThanEqual(name, date, req, price).stream().map(gameMapper::toDto).collect(Collectors.toList());
@@ -301,11 +318,11 @@ public class GameServiceImpl implements GameService {
             throw GameOnException.badRequest("SystemRequirementNotFound", "System requirement search input is missing.");
         }
 
-        if(price1 < 0 || price2 < 0) {
+        if (price1 < 0 || price2 < 0) {
             throw GameOnException.badRequest("InvalidPriceNumbers", "Price searching inputs must be a positive number.");
         }
 
-        if(price1 > price2 ) {
+        if (price1 > price2) {
             throw GameOnException.badRequest("InvalidPriceNumbers", "Starting price must be smaller than ending price.");
         }
         return gameRepository.findByNameIgnoreCaseContainingAndReleasedDateAfterAndSystemReqIgnoreCaseContainingAndPriceBetween(name, date, req, price1, price2).stream().map(gameMapper::toDto).collect(Collectors.toList());
@@ -528,6 +545,12 @@ public class GameServiceImpl implements GameService {
     }
 
 
+//    @Override
+//    public List<GameRestDto> getBySystemReqIgnoreCaseContainingAndPriceLessThanEqual(String req, Double price) {
+//        return null;
+//    }
+
+
     //Find by system req and price
     @Override
     public List<GameRestDto> findBySystemReqIgnoreCaseContainingAndPriceGreaterThanEqual(String req, Double price) {
@@ -558,7 +581,7 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public List<GameRestDto> findByPriceBetween(Double price1, Double price2) {
-        return null;
+        return gameRepository.findByPriceBetween(price1, price2).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 
     //Find by foreign keys
@@ -612,28 +635,20 @@ public class GameServiceImpl implements GameService {
     //Custom queries
     @Override
     public List<GameRestDto> getByRatingAndReleasedDateBetween(Integer rating1, Integer rating2, LocalDate date1, LocalDate date2) {
-        List<Game> allGamesList = gameRepository.findAll();
-        List<Rating> allRatingsList = ratingRepository.findAll();
-
-        return allRatingsList.stream()
-                .filter(r -> r.getGame().getReleasedDate().isAfter(date1))
-                .filter(r -> r.getGame().getReleasedDate().isBefore(date2))
+        return ratingRepository.findAll().stream()
                 .filter(r -> r.getRating() > rating1)
                 .filter(r -> r.getRating() < rating2)
-                .distinct()
                 .map(Rating::getGame)
+                .filter(game -> game.getReleasedDate().isAfter(date1))
+                .filter(game -> game.getReleasedDate().isBefore(date2))
+                .distinct()
                 .map(gameMapper::toDto)
                 .collect(Collectors.toList());
     }
 
-//    @Override
-//    public List<GameRestDto> getByRatingAndReleasedDateBetween(Integer rating1, Integer rating2, LocalDate date1, LocalDate date2) {
-//        return null;
-//    }
 
-//    @Override
-//    public List<GameRestDto> getByRatingAndReleasedDateBetween(Integer rating1, Integer rating2, LocalDate date1, LocalDate date2) {
-//        return gameRepository.getByRatingAndReleasedDateBetween(rating1, rating2, date1, date2).stream().map(gameMapper::toDto).collect(Collectors.toList());
-//    }
-
+    //TEST ADVANCED SEARCH
+    public List<GameRestDto> getGamesByGameSearchDto(GameSearchDto gameSearchDto) {
+        return gameRepository.findGamesByDto(gameSearchDto).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
 }

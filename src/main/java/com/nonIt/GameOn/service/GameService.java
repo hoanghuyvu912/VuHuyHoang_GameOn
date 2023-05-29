@@ -1,14 +1,17 @@
 package com.nonIt.GameOn.service;
 
 import com.nonIt.GameOn.entity.Game;
+import com.nonIt.GameOn.service.customDto.GameSearchDto;
 import com.nonIt.GameOn.service.dto.GameDto;
 import com.nonIt.GameOn.service.restDto.GameRestDto;
 import org.springframework.cglib.core.Local;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface GameService {
     //CRUD APIs
@@ -148,6 +151,8 @@ public interface GameService {
     List<GameRestDto> findBySystemReqIgnoreCaseContaining(String req);
 
 
+
+
     //Find by system req and price
     List<GameRestDto> findBySystemReqIgnoreCaseContainingAndPriceGreaterThanEqual(String req, Double price);
 
@@ -185,5 +190,9 @@ public interface GameService {
     //Custom queries
     List<GameRestDto> getByRatingAndReleasedDateBetween(Integer rating1, Integer rating2, LocalDate date1, LocalDate date2);
 
-//    List<GameRestDto> getByRatingAndReleasedDateBetween(Integer rating1, Integer rating2, LocalDate date1, LocalDate date2);
+
+//    TEST ADVANCED SEARCH
+//    List<GameRestDto> getGamesBySystemReqAndPriceLessThan(String systemReq, Double price);
+
+    List<GameRestDto> getGamesByGameSearchDto(GameSearchDto gameSearchDto);
 }

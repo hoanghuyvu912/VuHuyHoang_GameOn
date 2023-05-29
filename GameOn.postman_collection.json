@@ -1,9 +1,8 @@
 {
 	"info": {
-		"_postman_id": "32ccb8fe-9622-41e0-89e5-f3dbf1e533b0",
+		"_postman_id": "a3b19e3c-fa9f-4210-b454-12b8f61ef430",
 		"name": "GameOn",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "27087694"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -929,11 +928,21 @@
 				{
 					"name": "createGame",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg1MzUxNDU5LCJleHAiOjE2ODUzOTQ2NTl9.iA9ANsCYxy0k0TQafn_X28Z5mNhHILs3m-BFVldXP-fs0Qdo4Xe9tprPDzTepOUULnMcoZWvrZhtkI80_oFr0w",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Assassin's Creed Valhalla Fake\",\r\n    \"thumbnail\": \"https://cdn.cloudflare.steamstatic.com/steam/apps/2208920/header.jpg?t=1671135934\",\r\n    \"description\": \"Become a legendary Viking on a quest for glory. Raid your enemies, grow your settlement, and build your political power.\",\r\n    \"trailer\": \"https://www.youtube.com/watch?v=rKjUAWlbTJk\",\r\n    \"releasedDate\": \"2022-12-07\",\r\n    \"systemReq\": \"MINIMUM:\\r\\nRequires a 64-bit processor and operating system\\r\\nOS: Windows 10 (versions 64 bits uniquement)\\r\\nProcessor: AMD Ryzen 3 1200 3.1 GHz / Intel Core i5-4460 3.2 GHz\\r\\nMemory: 8 GB RAM\\r\\nGraphics: AMD R9 380 /NVIDIA GeForce GTX 960\\r\\nDirectX: Version 12\\r\\nStorage: 160 GB available space\",\r\n    \"price\": 19.99,\r\n    \"developerId\": 10,\r\n    \"publisherId\": 10\r\n}",
+							"raw": "{\r\n    \"name\": \"Assassin's Creed Valhalla Fake 2\",\r\n    \"thumbnail\": \"https://cdn.cloudflare.steamstatic.com/steam/apps/2208920/header.jpg?t=1671135934\",\r\n    \"description\": \"Become a legendary Viking on a quest for glory. Raid your enemies, grow your settlement, and build your political power.\",\r\n    \"trailer\": \"https://www.youtube.com/watch?v=rKjUAWlbTJk\",\r\n    \"releasedDate\": \"2022-12-07\",\r\n    \"systemReq\": \"MINIMUM:\\r\\nRequires a 64-bit processor and operating system\\r\\nOS: Windows 10 (versions 64 bits uniquement)\\r\\nProcessor: AMD Ryzen 3 1200 3.1 GHz / Intel Core i5-4460 3.2 GHz\\r\\nMemory: 8 GB RAM\\r\\nGraphics: AMD R9 380 /NVIDIA GeForce GTX 960\\r\\nDirectX: Version 12\\r\\nStorage: 160 GB available space\",\r\n    \"price\": 19.99,\r\n    \"developerId\": 10,\r\n    \"publisherId\": 10\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -4098,49 +4107,174 @@
 		},
 		{
 			"name": "CustomAPIs",
-			"item": []
+			"item": [
+				{
+					"name": "getRevenuePerDateBetweenDates",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ3Z1IiwiaWF0IjoxNjg1MzU4ODMyLCJleHAiOjE2ODU0MDIwMzJ9.FmMGz86vWN2i2r8lsxpJ98ckjZDaHM3Cl_EqtWs5ophl4Lp_LoiGOKS-7fw040cOKMrlCtXve8JrO8hrF2T2Vg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/receipt-details/revenue-per-date?date1=2020-01-01&date2=2023-01-01",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"receipt-details",
+								"revenue-per-date"
+							],
+							"query": [
+								{
+									"key": "date1",
+									"value": "2020-01-01"
+								},
+								{
+									"key": "date2",
+									"value": "2023-01-01"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
-			"name": "getByReleasedDateBetweenAndReqAndPriceBetween",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/api/games/released-date-between-req-price-between?date1=2022-09-01&date2=2023-02-01&req=i5&price1=40&price2=50",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"games",
-						"released-date-between-req-price-between"
-					],
-					"query": [
-						{
-							"key": "date1",
-							"value": "2022-09-01"
-						},
-						{
-							"key": "date2",
-							"value": "2023-02-01"
-						},
-						{
-							"key": "req",
-							"value": "i5"
-						},
-						{
-							"key": "price1",
-							"value": "40"
-						},
-						{
-							"key": "price2",
-							"value": "50"
+			"name": "CombinedGameSearchAPIs",
+			"item": [
+				{
+					"name": "getByOptionalFields",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/search-for-game?name=a&date1=2022-01-01&date2=2023-03-13&req=i5&price1=30",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"search-for-game"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "a"
+								},
+								{
+									"key": "date1",
+									"value": "2022-01-01"
+								},
+								{
+									"key": "date2",
+									"value": "2023-03-13"
+								},
+								{
+									"key": "req",
+									"value": "i5"
+								},
+								{
+									"key": "price1",
+									"value": "30"
+								},
+								{
+									"key": "price2",
+									"value": "60",
+									"disabled": true
+								}
+							]
 						}
-					]
+					},
+					"response": []
+				},
+				{
+					"name": "getByDto",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"releasedDateAfter\" : \"2022-01-01\",\r\n    \"releasedDateBefore\" : \"2023-01-01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/games/search-by-dto",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"search-by-dto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByReleasedDateBetweenAndReqAndPriceBetween",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/games/released-date-between-req-price-between?date1=2022-09-01&date2=2023-02-01&req=i5&price1=40&price2=50",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"games",
+								"released-date-between-req-price-between"
+							],
+							"query": [
+								{
+									"key": "date1",
+									"value": "2022-09-01"
+								},
+								{
+									"key": "date2",
+									"value": "2023-02-01"
+								},
+								{
+									"key": "req",
+									"value": "i5"
+								},
+								{
+									"key": "price1",
+									"value": "40"
+								},
+								{
+									"key": "price2",
+									"value": "50"
+								}
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		}
 	]
 }

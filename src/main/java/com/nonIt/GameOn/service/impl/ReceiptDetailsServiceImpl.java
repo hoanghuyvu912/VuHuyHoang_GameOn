@@ -8,6 +8,7 @@ import com.nonIt.GameOn.repository.GameRepository;
 import com.nonIt.GameOn.repository.ReceiptDetailsRepository;
 import com.nonIt.GameOn.repository.ReceiptRepository;
 import com.nonIt.GameOn.service.ReceiptDetailsService;
+import com.nonIt.GameOn.service.customDto.RevenuePerDateDto;
 import com.nonIt.GameOn.service.dto.ReceiptDetailsDto;
 import com.nonIt.GameOn.service.mapper.ReceiptDetailsMapper;
 import com.nonIt.GameOn.service.restDto.ReceiptDetailsRestDto;
@@ -16,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -70,4 +72,19 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
     public void deleteReceiptDetails(Integer receiptDetailsId) {
         receiptDetailsRepository.deleteById(receiptDetailsId);
     }
+
+    @Override
+    public List<RevenuePerDateDto> getRevenuePerDateBetweenDates(LocalDate date1, LocalDate date2) {
+        return receiptDetailsRepository.getRevenuePerDateBetweenDates(date1, date2);
+    }
+
+//    @Override
+//    public List<ReceiptDetailsRestDto> getRevenueOfReceiptDetailsBetweenDates(LocalDate date1, LocalDate date2) {
+//        List<ReceiptDetailsRestDto> receiptDetailsRestDtoList = receiptDetailsRepository.findAll().stream()
+//                .filter(rd -> rd.getReceipt().getReceiptDate().isAfter(date1))
+//                .filter(rd -> rd.getReceipt().getReceiptDate().isBefore(date2))
+//                .
+//    }
+
+
 }
