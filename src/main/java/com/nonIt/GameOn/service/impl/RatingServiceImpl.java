@@ -9,13 +9,16 @@ import com.nonIt.GameOn.repository.RatingRepository;
 import com.nonIt.GameOn.repository.UserRepository;
 import com.nonIt.GameOn.service.RatingService;
 import com.nonIt.GameOn.service.dto.RatingDto;
+import com.nonIt.GameOn.service.mapper.GameMapper;
 import com.nonIt.GameOn.service.mapper.RatingMapper;
+import com.nonIt.GameOn.service.restDto.GameRestDto;
 import com.nonIt.GameOn.service.restDto.RatingRestDto;
 //import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +30,7 @@ public class RatingServiceImpl implements RatingService {
     private final RatingMapper ratingMapper;
     private final UserRepository userRepository;
     private final GameRepository gameRepository;
+    private final GameMapper gameMapper;
 
     @Override
     public List<RatingRestDto> getAll() {
@@ -88,5 +92,18 @@ public class RatingServiceImpl implements RatingService {
     @Override
     public List<Rating> demo() {
         return ratingRepository.findTop1ByOrderByRatingDescByGroupByGame();
+    }
+
+    @Override
+    public List<GameRestDto> getGameByRatingBetweenAndReleasedDateBetween(Integer rating1, Integer rating2, LocalDate date1, LocalDate date2) {
+        return ratingRepository.findAll().stream()
+                .filter(r -> r.getRating() < rating2)
+                .filter(r -> r.getRating() > rating1)
+                .map(Rating::getGame)
+                .filter(game -> game.getReleasedDate().isAfter(date1))
+                .filter(game -> game.getReleasedDate().isBefore(date2))
+                .distinct()
+                .map(gameMapper::toDto)
+                .collect(Collectors.toList());
     }
 }

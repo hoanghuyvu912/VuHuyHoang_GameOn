@@ -1,6 +1,7 @@
 package com.nonIt.GameOn.rest;
 
 import com.nonIt.GameOn.service.GameService;
+import com.nonIt.GameOn.service.customDto.GameSearchDto;
 import com.nonIt.GameOn.service.dto.GameDto;
 import com.nonIt.GameOn.service.restDto.GameRestDto;
 //import jakarta.validation.Valid;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,6 +22,33 @@ import java.util.List;
 public class GameResources {
     private final GameService gameService;
 
+    //CRUD APIs
+    @GetMapping
+    public ResponseEntity<List<GameRestDto>> getAllGame() {
+        return ResponseEntity.ok(gameService.getAll());
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping
+    public ResponseEntity<GameRestDto> createGame(@Valid @RequestBody GameDto gameDto) {
+        return ResponseEntity.ok(gameService.createGame(gameDto));
+    }
+
+    @GetMapping(value = "/{gameId}")
+    public ResponseEntity<GameRestDto> getGameById(@PathVariable("gameId") Integer userId) {
+        return ResponseEntity.ok(gameService.findById(userId));
+    }
+
+    @PutMapping(value = "/{gameId}")
+    public ResponseEntity<GameRestDto> updateGameById(@PathVariable("gameId") Integer gameId, @RequestBody GameDto gameDto) {
+        return ResponseEntity.ok(gameService.updateGame(gameId, gameDto));
+    }
+
+    @DeleteMapping(value = "/{gameId}")
+    public ResponseEntity<Void> deleteGameById(@PathVariable("gameId") Integer gameId) {
+        gameService.deleteGame(gameId);
+        return ResponseEntity.noContent().build();
+    }
 
     //Find by name
     @GetMapping(value = "/name-containing")
@@ -286,10 +315,10 @@ public class GameResources {
 
 
     //Find by system req and price
-    @GetMapping(value = "/req-price-less-equal")
-    public ResponseEntity<List<GameRestDto>> findBySystemReqIgnoreCaseContainingAndPriceLessThanEqual(@RequestParam("req") String req, @RequestParam("price") Double price) {
-        return ResponseEntity.ok(gameService.findBySystemReqIgnoreCaseContainingAndPriceLessThanEqual(req, price));
-    }
+//    @GetMapping(value = "/req-price-less-equal")
+//    public ResponseEntity<List<GameRestDto>> findBySystemReqIgnoreCaseContainingAndPriceLessThanEqual(@RequestParam("req") String req, @RequestParam("price") Double price) {
+//        return ResponseEntity.ok(gameService.findBySystemReqIgnoreCaseContainingAndPriceLessThanEqual(req, price));
+//    }
 
     @GetMapping(value = "/req-price-greater-equal")
     public ResponseEntity<List<GameRestDto>> findBySystemReqIgnoreCaseContainingAndPriceGreaterThanEqual(@RequestParam("req") String req, @RequestParam("price") Double price) {
@@ -311,6 +340,11 @@ public class GameResources {
     @GetMapping(value = "/price-less-than")
     public ResponseEntity<List<GameRestDto>> findByPriceLessThan(@RequestParam("price") Double price) {
         return ResponseEntity.ok(gameService.findByPriceLessThan(price));
+    }
+
+    @GetMapping(value = "/price-between")
+    public ResponseEntity<List<GameRestDto>> findByPriceBetween(@RequestParam("price1") Double price1, @RequestParam("price2") Double price2) {
+        return ResponseEntity.ok(gameService.findByPriceBetween(price1, price2));
     }
 
 
@@ -360,32 +394,21 @@ public class GameResources {
 //        return ResponseEntity.ok(gameService.getByRatingAndReleasedDateBetween(rating1, rating2, date1, date2));
 //    }
 
-
-    //CRUD APIs
-    @GetMapping
-    public ResponseEntity<List<GameRestDto>> getAllGame() {
-        return ResponseEntity.ok(gameService.getAll());
+    //TEST ADVANCED SEARCH
+    @GetMapping("/search-for-game")
+    public ResponseEntity<List<GameRestDto>> searchGame(@RequestParam("name") String name, @RequestParam("date1") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Optional<LocalDate> date1, @RequestParam("date2") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Optional<LocalDate> date2, @RequestParam("req") Optional<String> req, @RequestParam("price1") Optional<Double> price1, @RequestParam("price2") Optional<Double> price2) {
+        ResponseEntity<List<GameRestDto>> resultGamesList = null;
+        if (date1.isPresent() && date2.isPresent() && req.isPresent() && price1.isPresent() && price2.isPresent()) {
+            resultGamesList = ResponseEntity.ok(gameService.findByNameIgnoreCaseContainingAndReleasedDateBetweenAndSystemReqIgnoreCaseContainingAndPriceBetween(name, date1.get(), date2.get(), req.get(), price1.get(), price2.get()));
+        }
+        if (date1.isPresent() && date2.isPresent() && req.isPresent() && price1.isPresent()) {
+            resultGamesList = ResponseEntity.ok(gameService.findByNameIgnoreCaseContainingAndReleasedDateBetweenAndSystemReqIgnoreCaseContainingAndPriceLessThanEqual(name, date1.get(), date2.get(), req.get(), price1.get()));
+        }
+        return resultGamesList;
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping
-    public ResponseEntity<GameRestDto> createGame(@Valid @RequestBody GameDto gameDto) {
-        return ResponseEntity.ok(gameService.createGame(gameDto));
-    }
-
-    @GetMapping(value = "/{gameId}")
-    public ResponseEntity<GameRestDto> getGameById(@PathVariable("gameId") Integer userId) {
-        return ResponseEntity.ok(gameService.findById(userId));
-    }
-
-    @PutMapping(value = "/{gameId}")
-    public ResponseEntity<GameRestDto> updateGameById(@PathVariable("gameId") Integer gameId, @RequestBody GameDto gameDto) {
-        return ResponseEntity.ok(gameService.updateGame(gameId, gameDto));
-    }
-
-    @DeleteMapping(value = "/{gameId}")
-    public ResponseEntity<Void> deleteGameById(@PathVariable("gameId") Integer gameId) {
-        gameService.deleteGame(gameId);
-        return ResponseEntity.noContent().build();
+    @GetMapping("/search-by-dto")
+    public ResponseEntity<List<GameRestDto>> searchByDto(@RequestBody GameSearchDto gameSearchDto){
+        return ResponseEntity.ok(gameService.getGamesByGameSearchDto(gameSearchDto));
     }
 }

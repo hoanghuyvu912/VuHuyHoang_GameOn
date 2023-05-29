@@ -1,13 +1,17 @@
 package com.nonIt.GameOn.rest;
 
 import com.nonIt.GameOn.service.ReceiptDetailsService;
+import com.nonIt.GameOn.service.customDto.RevenuePerDateDto;
 import com.nonIt.GameOn.service.dto.ReceiptDetailsDto;
 import com.nonIt.GameOn.service.restDto.ReceiptDetailsRestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -46,5 +50,10 @@ public class ReceiptDetailsResources {
     public ResponseEntity<Void> deleteReceiptDetailsById(@PathVariable("receiptDetailsId") Integer receiptDetailsId) {
         receiptDetailsService.deleteReceiptDetails(receiptDetailsId);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/revenue-per-date")
+    public ResponseEntity<List<RevenuePerDateDto>> getRevenuePerDateBetweenDates(@RequestParam("date1") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date1, @RequestParam("date2") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date2) {
+        return ResponseEntity.ok(receiptDetailsService.getRevenuePerDateBetweenDates(date1, date2));
     }
 }

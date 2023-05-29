@@ -1,9 +1,9 @@
 package com.nonIt.GameOn.repository;
 
 import com.nonIt.GameOn.entity.Game;
-import com.nonIt.GameOn.service.restDto.GameRestDto;
-import org.springframework.cglib.core.Local;
+import com.nonIt.GameOn.repository.CustomRepository.GameCustomRespository.CustomGameRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -12,7 +12,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface GameRepository extends JpaRepository<Game, Integer> {
+public interface GameRepository extends JpaRepository<Game, Integer>, CustomGameRepository {
+
     //Find by name
     List<Game> findByNameIgnoreCaseContaining(String name);
 
@@ -179,6 +180,9 @@ public interface GameRepository extends JpaRepository<Game, Integer> {
 
     @Query(value = "SELECT g from Game g join GameSubGenre gsg on g.id = gsg.game.id join SubGenre sg on gsg.subGenre.id = sg.id where UPPER(sg.name) LIKE UPPER(:subGenreName)")
     List<Game> getBySubGenreName(@Param("subGenreName") String subGenreName);
+
+
+    //Combined queries
 
 
 //    private Integer id;
