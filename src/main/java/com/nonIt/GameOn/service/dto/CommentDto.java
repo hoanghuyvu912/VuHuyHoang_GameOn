@@ -17,5 +17,5 @@ public class CommentDto {
 //    @NotNull
     private Integer gameId;
     private String commentContent;
-    private LocalDate commentDate;
+    private LocalDate commentDate = LocalDate.now();
 }
