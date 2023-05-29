@@ -1,6 +1,7 @@
 package com.nonIt.GameOn.rest;
 
 import com.nonIt.GameOn.entity.Comment;
+import com.nonIt.GameOn.exception.GameOnException;
 import com.nonIt.GameOn.service.CommentService;
 import com.nonIt.GameOn.service.dto.CommentDto;
 import com.nonIt.GameOn.service.restDto.CommentRestDto;
@@ -29,8 +30,24 @@ public class CommentResources {
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value = "/{commentId}")
-    public ResponseEntity<CommentRestDto> getCommentById(@PathVariable("commentId") Integer commentId) {
-        return ResponseEntity.ok(commentService.findById(commentId));
+    public ResponseEntity<CommentRestDto> getCommentById(@PathVariable("commentId") String commentId) {
+        boolean valid = true;
+        int commentIdInt = 0;
+        if (commentId == null || commentId.trim().isBlank() || commentId.isEmpty()) {
+            valid = false;
+        } else {
+            try {
+                commentIdInt = Integer.parseInt(commentId);
+            } catch (Exception e) {
+                valid = false;
+                throw GameOnException.badRequest("MissingCommentId", "Comment Id search query not found.");
+            }
+        }
+        if (valid) {
+            return ResponseEntity.ok(commentService.findById(commentIdInt));
+        } else {
+            throw GameOnException.badRequest("InvalidCommentId", "Invalid comment ID!");
+        }
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -51,20 +68,20 @@ public class CommentResources {
         return ResponseEntity.ok(commentService.createComment(commentDto));
     }
 
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(value = "/{commentId}")
     public ResponseEntity<CommentRestDto> updateCommentById(@PathVariable("commentId") Integer commentId, @RequestBody CommentDto commentDto) {
         return ResponseEntity.ok(commentService.updateComment(commentId, commentDto));
     }
 
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @PreAuthorize("hasRole( 'ADMIN')")
     @DeleteMapping(value = "/{commentId}")
     public ResponseEntity<Void> deleteCommentById(@PathVariable("commentId") Integer commentId) {
         commentService.deleteComment(commentId);
         return ResponseEntity.noContent().build();
     }
 
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value = "/by-user-id/{userId}")
     public ResponseEntity<List<CommentRestDto>> getCommentByUserId(@PathVariable("userId") Integer userId) {
         return ResponseEntity.ok(commentService.getByUserId(userId));
@@ -73,18 +90,40 @@ public class CommentResources {
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value = "/by-username")
     public ResponseEntity<List<CommentRestDto>> getCommentByUsername(@RequestParam("username") String username) {
+        if (username == null || username.trim().isBlank() || username.isEmpty()) {
+            throw GameOnException.badRequest("UsernameNotFound", "Username search query is missing.");
+        }
         return ResponseEntity.ok(commentService.getByUsername("%" + username + "%"));
     }
 
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value = "/by-game-id/{gameId}")
-    public ResponseEntity<List<CommentRestDto>> getCommentByGameId(@PathVariable("gameId") Integer gameId) {
-        return ResponseEntity.ok(commentService.getByGameId(gameId));
+    public ResponseEntity<List<CommentRestDto>> getCommentByGameId(@PathVariable("gameId") String gameId) {
+        boolean valid = true;
+        int gameIdInt = 0;
+        if (gameId == null || gameId.trim().isBlank() || gameId.isEmpty()) {
+            valid = false;
+        } else {
+            try {
+                gameIdInt = Integer.parseInt(gameId);
+            } catch (Exception e) {
+                valid = false;
+                throw GameOnException.badRequest("MissingGameId", "Game Id search query not found.");
+            }
+        }
+        if (valid) {
+            return ResponseEntity.ok(commentService.getByGameId(gameIdInt));
+        } else {
+            throw GameOnException.badRequest("InvalidCommentId", "Invalid comment ID!");
+        }
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value = "/by-game-name")
     public ResponseEntity<List<CommentRestDto>> getCommentByGameName(@RequestParam("gameName") String gameName) {
+        if (gameName == null || gameName.trim().isBlank() || gameName.isEmpty()) {
+            throw GameOnException.badRequest("UsernameNotFound", "Username search query is missing.");
+        }
         return ResponseEntity.ok(commentService.getByGameName("%" + gameName + "%"));
     }
 }

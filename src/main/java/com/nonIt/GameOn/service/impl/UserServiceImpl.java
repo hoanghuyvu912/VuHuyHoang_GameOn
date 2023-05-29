@@ -279,6 +279,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<UserRestDto> findByMonthOfRegisteredDate(Integer month) {
+        return userRepository.findAll().stream()
+                .filter(u -> month == u.getRegisteredDate().getMonthValue())
+                .map(userMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public void deleteUser(Integer userId) {
         userRepository.deleteById(userId);
     }

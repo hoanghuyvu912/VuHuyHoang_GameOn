@@ -42,25 +42,28 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<CommentRestDto> getByUsername(String username) {
         if (username == null || username.trim().isBlank() || username.isEmpty()) {
-            throw GameOnException.badRequest("UsernameNotFound", "Username is missing.");
+            throw GameOnException.badRequest("UsernameNotFound", "Username search query is missing.");
         }
         return commentRepository.getCommentByUsername(username).stream().map(commentMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
     public List<CommentRestDto> getByGameId(Integer gameId) {
-        Game game = gameRepository.findById(gameId).orElseThrow(GameOnException::GameNotFound);
+        gameRepository.findById(gameId).orElseThrow(GameOnException::GameNotFound);
         return commentRepository.getCommentByGameId(gameId).stream().map(commentMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
     public List<CommentRestDto> getByGameName(String gameName) {
+        if (gameName == null || gameName.trim().isBlank() || gameName.isEmpty()) {
+            throw GameOnException.badRequest("UsernameNotFound", "Username search query is missing.");
+        }
         return commentRepository.getCommentByGameName(gameName).stream().map(commentMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
     public List<CommentRestDto> findByCommentDateAfter(LocalDate date) {
-        if(date.isAfter(LocalDate.now())){
+        if (date.isAfter(LocalDate.now())) {
             throw GameOnException.badRequest("InvalidDate", "Comment date cannot be after current date.");
         }
         return commentRepository.findByCommentDateAfter(date).stream().map(commentMapper::toDto).collect(Collectors.toList());
@@ -73,6 +76,9 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public CommentRestDto findById(Integer commentId) {
+        if (commentId < 0) {
+            throw GameOnException.badRequest("InvalidCommentId", "Comment ID search query must be a positive number.");
+        }
         return commentRepository.findById(commentId).map(commentMapper::toDto).orElseThrow(GameOnException::CommentNotFound);
     }
 
@@ -89,6 +95,7 @@ public class CommentServiceImpl implements CommentService {
                 .commentContent(commentDto.getCommentContent())
                 .user(user)
                 .game(game)
+                .commentDate(LocalDate.now())
                 .build();
 
         comment = commentRepository.save(comment);
@@ -118,6 +125,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public void deleteComment(Integer commentId) {
+        commentRepository.findById(commentId).orElseThrow(GameOnException::CommentNotFound);
         commentRepository.deleteById(commentId);
     }
 

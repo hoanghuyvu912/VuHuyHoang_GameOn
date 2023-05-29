@@ -11,6 +11,7 @@ import com.nonIt.GameOn.service.ReceiptDetailsService;
 import com.nonIt.GameOn.service.customDto.RevenuePerDateDto;
 import com.nonIt.GameOn.service.dto.ReceiptDetailsDto;
 import com.nonIt.GameOn.service.mapper.ReceiptDetailsMapper;
+import com.nonIt.GameOn.service.restDto.GameRestDto;
 import com.nonIt.GameOn.service.restDto.ReceiptDetailsRestDto;
 //import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -78,13 +79,74 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
         return receiptDetailsRepository.getRevenuePerDateBetweenDates(date1, date2);
     }
 
-//    @Override
-//    public List<ReceiptDetailsRestDto> getRevenueOfReceiptDetailsBetweenDates(LocalDate date1, LocalDate date2) {
-//        List<ReceiptDetailsRestDto> receiptDetailsRestDtoList = receiptDetailsRepository.findAll().stream()
-//                .filter(rd -> rd.getReceipt().getReceiptDate().isAfter(date1))
-//                .filter(rd -> rd.getReceipt().getReceiptDate().isBefore(date2))
-//                .
-//    }
+    private List<Game> getGamesBetweenDates(LocalDate date1, LocalDate date2) {
+        return receiptDetailsRepository.findAll().stream()
+                .filter(rd -> rd.getReceipt().getReceiptDate().isAfter(date1))
+                .filter(rd -> rd.getReceipt().getReceiptDate().isBefore(date2))
+                .map(ReceiptDetails::getGame)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Map<Game, Long> getBestSellerGamesBetweenDates(LocalDate date1, LocalDate date2) {
+        List<Game> gamesByReceiptDate = getGamesBetweenDates(date1, date2);
+
+        Map<Game, Long> gamesWithCopiesSold = new HashMap<>();
+        for (Game game : gamesByReceiptDate) {
+            gamesWithCopiesSold.put(game, 0L);
+        }
+
+        for (Map.Entry<Game, Long> entry : gamesWithCopiesSold.entrySet()) {
+            Game key = entry.getKey();
+            Long value = entry.getValue();
+
+            for (Game game : gamesByReceiptDate) {
+                if (Objects.equals(game.getId(), key.getId())) {
+                    value++;
+                    entry.setValue(value);
+                }
+            }
+        }
+//        return gamesWithCopiesSold;
+        return gamesWithCopiesSold.entrySet()
+                .stream()
+                .sorted(Comparator.comparing(Map.Entry<Game, Long>::getValue).reversed())
+                .limit(5)
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+    }
 
 
+    @Override
+    public Map<Game, Long> getWorstSellerGamesBetweenDates(LocalDate date1, LocalDate date2) {
+        List<Game> gamesByReceiptDate = getGamesBetweenDates(date1, date2);
+
+        Map<Game, Long> gamesWithCopiesSold = new HashMap<>();
+        for (Game game : gamesByReceiptDate) {
+            gamesWithCopiesSold.put(game, 0L);
+        }
+
+        for (Map.Entry<Game, Long> entry : gamesWithCopiesSold.entrySet()) {
+            Game key = entry.getKey();
+            Long value = entry.getValue();
+
+            for (Game game : gamesByReceiptDate) {
+                if (Objects.equals(game.getId(), key.getId())) {
+                    value++;
+                    entry.setValue(value);
+                }
+            }
+        }
+
+        return gamesWithCopiesSold.entrySet()
+                .stream()
+                .sorted(Comparator.comparing(Map.Entry<Game, Long>::getValue))
+                .limit(5)
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+    }
 }

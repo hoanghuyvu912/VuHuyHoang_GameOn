@@ -180,39 +180,4 @@ public interface GameRepository extends JpaRepository<Game, Integer>, CustomGame
 
     @Query(value = "SELECT g from Game g join GameSubGenre gsg on g.id = gsg.game.id join SubGenre sg on gsg.subGenre.id = sg.id where UPPER(sg.name) LIKE UPPER(:subGenreName)")
     List<Game> getBySubGenreName(@Param("subGenreName") String subGenreName);
-
-
-    //Combined queries
-
-
-//    private Integer id;
-//
-//    private String name;
-//
-//    private String thumbnail;
-//
-//    private String description;
-//
-//    private String trailer;
-//
-//    private LocalDate releasedDate;
-//
-//    private String systemReq;
-//
-//    private Double price;
-//
-//    private String developerName;
-//
-//    private String publisherName;
-//
-//    private Integer rating;
-//    @Query(value = "select tmp.g, max(tmp.rating) from " +
-//            "(select g, r.rating " +
-//            "from game g join rating r on r.game_id = g.id " +
-//            "group by g.id, r.rating " +
-//            "HAVING r.rating between :rating1 and :rating2 " +
-//            "and g.released_date between :date1 and :date2) tmp " +
-//            "group by tmp.g;", nativeQuery = true)
-//    List<Game> getByRatingAndReleasedDateBetween(@Param("rating1") Integer rating1, @Param("rating2") Integer rating2, @Param("date1") LocalDate date1, @Param("date2") LocalDate date2);
-
 }

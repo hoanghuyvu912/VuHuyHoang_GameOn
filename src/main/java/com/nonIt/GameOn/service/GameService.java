@@ -192,7 +192,6 @@ public interface GameService {
 
 
 //    TEST ADVANCED SEARCH
-//    List<GameRestDto> getGamesBySystemReqAndPriceLessThan(String systemReq, Double price);
-
     List<GameRestDto> getGamesByGameSearchDto(GameSearchDto gameSearchDto);
+
 }

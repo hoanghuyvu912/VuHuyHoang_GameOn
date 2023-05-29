@@ -40,5 +40,7 @@ public interface UserService {
 
     List<UserRestDto> findByActiveFalse();
 
+    List<UserRestDto> findByMonthOfRegisteredDate(Integer month);
+
     void deleteUser(Integer userId);
 }
