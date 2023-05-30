@@ -12,6 +12,7 @@ import com.nonIt.GameOn.service.dto.CommentDto;
 import com.nonIt.GameOn.service.mapper.CommentMapper;
 import com.nonIt.GameOn.service.restDto.CommentRestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -125,7 +126,11 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public void deleteComment(Integer commentId) {
-        commentRepository.findById(commentId).orElseThrow(GameOnException::CommentNotFound);
+        var auth = SecurityContextHolder.getContext().getAuthentication();
+        var comment = commentRepository.findById(commentId).orElseThrow(GameOnException::CommentNotFound);
+        if (!comment.getUser().getUsername().equalsIgnoreCase(auth.getName())) {
+            throw new RuntimeException();
+        }
         commentRepository.deleteById(commentId);
     }
 

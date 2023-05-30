@@ -2,6 +2,7 @@ package com.nonIt.GameOn.rest;
 
 import com.lowagie.text.DocumentException;
 import com.nonIt.GameOn.entity.Gender;
+import com.nonIt.GameOn.service.restDto.GameRestDto;
 import com.nonIt.GameOn.utils.PdfGenerator;
 import com.nonIt.GameOn.service.UserService;
 import com.nonIt.GameOn.service.dto.UserDto;
@@ -112,6 +113,7 @@ public class UserResources {
     public ResponseEntity<List<UserRestDto>> getByActiveFalse() {
         return ResponseEntity.ok(userService.findByActiveFalse());
     }
+
 
     @GetMapping("/export-to-pdf")
     public void generatePdfFile(HttpServletResponse response) throws DocumentException, IOException

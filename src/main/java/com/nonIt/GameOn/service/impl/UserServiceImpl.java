@@ -92,7 +92,8 @@ public class UserServiceImpl implements UserService {
                 .gender(userDto.getGender())
                 .profileImg(userDto.getProfileImg())
                 .balance(userDto.getBalance())
-                .active(userDto.isActive())
+                .registeredDate(LocalDate.now())
+                .active(true)
                 .build();
 
         List<UserRoleAssignment> tempList = new ArrayList<>();

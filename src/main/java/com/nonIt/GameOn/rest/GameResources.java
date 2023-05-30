@@ -5,6 +5,7 @@ import com.nonIt.GameOn.service.customDto.GameSearchDto;
 import com.nonIt.GameOn.service.dto.GameDto;
 import com.nonIt.GameOn.service.restDto.GameRestDto;
 //import jakarta.validation.Valid;
+import com.nonIt.GameOn.service.restDto.UserRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -405,6 +406,12 @@ public class GameResources {
             resultGamesList = ResponseEntity.ok(gameService.findByNameIgnoreCaseContainingAndReleasedDateBetweenAndSystemReqIgnoreCaseContainingAndPriceLessThanEqual(name, date1.get(), date2.get(), req.get(), price1.get()));
         }
         return resultGamesList;
+    }
+
+
+    @GetMapping("/rating-released-date-between")
+    public ResponseEntity<List<GameRestDto>> getByRatingAndReleasedDateBetween(@RequestParam("rating1") Integer rating1,@RequestParam("rating2") Integer rating2, @RequestParam("date1")LocalDate date1, @RequestParam("date2") LocalDate date2) {
+        return ResponseEntity.ok(gameService.getByRatingAndReleasedDateBetween(rating1, rating2, date1, date2));
     }
 
     @GetMapping("/search-by-dto")

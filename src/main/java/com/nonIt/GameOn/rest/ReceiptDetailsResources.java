@@ -17,7 +17,6 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/receipt-details")
-@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 public class ReceiptDetailsResources {
     private final ReceiptDetailsService receiptDetailsService;
 
@@ -27,7 +26,7 @@ public class ReceiptDetailsResources {
         return ResponseEntity.ok(receiptDetailsService.getAll());
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping(value = "/{receiptDetailsId}")
     public ResponseEntity<ReceiptDetailsRestDto> getReceiptDetailsById(@PathVariable("receiptDetailsId") Integer receiptDetailsId) {
         return ResponseEntity.ok(receiptDetailsService.findById(receiptDetailsId));
@@ -52,6 +51,7 @@ public class ReceiptDetailsResources {
         return ResponseEntity.noContent().build();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/revenue-per-date")
     public ResponseEntity<List<RevenuePerDateDto>> getRevenuePerDateBetweenDates(@RequestParam("date1") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date1, @RequestParam("date2") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date2) {
         return ResponseEntity.ok(receiptDetailsService.getRevenuePerDateBetweenDates(date1, date2));
