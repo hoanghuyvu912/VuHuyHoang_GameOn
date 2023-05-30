@@ -7,6 +7,7 @@ import com.nonIt.GameOn.service.dto.CommentDto;
 import com.nonIt.GameOn.service.restDto.CommentRestDto;
 import com.nonIt.GameOn.service.restDto.DeveloperRestDto;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.http.parser.Authorization;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -74,7 +75,7 @@ public class CommentResources {
         return ResponseEntity.ok(commentService.updateComment(commentId, commentDto));
     }
 
-    @PreAuthorize("hasRole( 'ADMIN')")
+//    @PreAuthorize("hasRole( 'ADMIN')")
     @DeleteMapping(value = "/{commentId}")
     public ResponseEntity<Void> deleteCommentById(@PathVariable("commentId") Integer commentId) {
         commentService.deleteComment(commentId);
