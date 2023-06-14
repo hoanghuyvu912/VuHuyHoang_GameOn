@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -61,7 +62,9 @@ public class User {
 //    @Column(name = "profile_img", length = 5000)
 //    private String profileImg;
 
-    @Column(name = "profile_img", length = 5000)
+    @Lob
+    @Type(type = "org.hibernate.type.ImageType")
+    @Column(name = "profile_img")
     private byte[] profileImg;
 
     @Column(name = "balance", columnDefinition = "Decimal(20,2)")

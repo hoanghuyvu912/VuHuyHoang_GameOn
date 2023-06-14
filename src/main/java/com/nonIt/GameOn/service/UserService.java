@@ -20,7 +20,7 @@ public interface UserService {
 
     UserRestDto updateUser(Integer userId, UserDto userDto);
 
-    UserRestDto updateUserProfileImage(Integer userId, File file) throws IOException;
+    UserRestDto updateUserProfileImage(Integer userId, MultipartFile file) throws IOException;
 
     void showUserProfileImage(Integer userId) throws IOException;
 

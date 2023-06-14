@@ -209,20 +209,11 @@ public class UserServiceImpl implements UserService {
         return userMapper.toDto(user);
     }
 
-    @Override
+     @Override
     public UserRestDto updateUserProfileImage(Integer userId, MultipartFile file) throws IOException {
         User user = userRepository.findById(userId).orElseThrow(GameOnException::UserNotFound);
 
-//        BufferedImage bImage = ImageIO.read(file);
-//        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-//        ImageIO.write(bImage, "png", bos);
-//        byte[] data = bos.toByteArray();
-
-
-        byte[] bytes = FileUtils.read.readFileToByteArray(file);
-
-        user.setProfileImg(bytes);
-
+        user.setProfileImg(file.getBytes());
         user = userRepository.save(user);
         return userMapper.toDto(user);
     }
@@ -231,18 +222,18 @@ public class UserServiceImpl implements UserService {
     public void showUserProfileImage(Integer userId) throws IOException {
         User user = userRepository.findById(userId).orElseThrow(GameOnException::UserNotFound);
 
-        ByteArrayInputStream bis = new ByteArrayInputStream(user.getProfileImg());
-        BufferedImage bImage2 = ImageIO.read(bis);
-
-        JLabel ic = new JLabel(new ImageIcon(bImage2));
-        JScrollPane scroller = new JScrollPane(ic);
-        JDialog popup = new JDialog();
-        popup.getContentPane().setLayout(new FlowLayout());
-        popup.getContentPane().add(scroller);
-        popup.getContentPane().validate();
-        popup.setModal(true);
-        popup.pack();
-        popup.setVisible(true);
+//        ByteArrayInputStream bis = new ByteArrayInputStream(user.getProfileImg());
+//        BufferedImage bImage2 = ImageIO.read(bis);
+//
+//        JLabel ic = new JLabel(new ImageIcon(bImage2));
+//        JScrollPane scroller = new JScrollPane(ic);
+//        JDialog popup = new JDialog();
+//        popup.getContentPane().setLayout(new FlowLayout());
+//        popup.getContentPane().add(scroller);
+//        popup.getContentPane().validate();
+//        popup.setModal(true);
+//        popup.pack();
+//        popup.setVisible(true);
 //        return imageService.getImage(user.getProfileImg());
     }
 
