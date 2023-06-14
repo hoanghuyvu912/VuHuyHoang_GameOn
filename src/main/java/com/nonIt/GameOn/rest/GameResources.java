@@ -1,11 +1,13 @@
 package com.nonIt.GameOn.rest;
 
+import com.nonIt.GameOn.exception.GameOnException;
 import com.nonIt.GameOn.service.GameService;
 import com.nonIt.GameOn.service.customDto.GameSearchDto;
 import com.nonIt.GameOn.service.dto.GameDto;
 import com.nonIt.GameOn.service.restDto.GameRestDto;
 //import jakarta.validation.Valid;
 import com.nonIt.GameOn.service.restDto.UserRestDto;
+import com.nonIt.GameOn.utils.NullChecker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -410,12 +412,19 @@ public class GameResources {
 
 
     @GetMapping("/rating-released-date-between")
-    public ResponseEntity<List<GameRestDto>> getByRatingAndReleasedDateBetween(@RequestParam("rating1") Integer rating1,@RequestParam("rating2") Integer rating2, @RequestParam("date1")LocalDate date1, @RequestParam("date2") LocalDate date2) {
+    public ResponseEntity<List<GameRestDto>> getByRatingAndReleasedDateBetween(@RequestParam("rating1") Integer rating1, @RequestParam("rating2") Integer rating2, @RequestParam("date1") LocalDate date1, @RequestParam("date2") LocalDate date2) {
         return ResponseEntity.ok(gameService.getByRatingAndReleasedDateBetween(rating1, rating2, date1, date2));
     }
 
     @GetMapping("/search-by-dto")
-    public ResponseEntity<List<GameRestDto>> searchByDto(@RequestBody GameSearchDto gameSearchDto){
+    public ResponseEntity<List<GameRestDto>> searchByDto(@RequestBody GameSearchDto gameSearchDto) {
+//        if (gameSearchDto == null) {
+//            throw GameOnException.badRequest("MissingSearchCriteria", "Search criteria not found.");
+//        }
+        boolean isGameSearchDtoNull = NullChecker.allNull(gameSearchDto);
+        if (isGameSearchDtoNull) {
+            throw GameOnException.badRequest("MissingSearchCriteria", "Search criteria not found.");
+        }
         return ResponseEntity.ok(gameService.getGamesByGameSearchDto(gameSearchDto));
     }
 }

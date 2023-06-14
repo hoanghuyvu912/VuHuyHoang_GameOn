@@ -1,5 +1,6 @@
 package com.nonIt.GameOn.rest;
 
+import com.nonIt.GameOn.rest.resources_dto.ReceiptCreateDto;
 import com.nonIt.GameOn.service.ReceiptService;
 import com.nonIt.GameOn.service.dto.ReceiptDto;
 import com.nonIt.GameOn.service.restDto.ReceiptRestDto;
@@ -40,8 +41,8 @@ public class ReceiptResources {
     }
 
     @PostMapping
-    public ResponseEntity<ReceiptRestDto> createReceipt(@RequestBody ReceiptDto receiptDto) {
-        return ResponseEntity.ok(receiptService.createReceipt(receiptDto));
+    public ResponseEntity<ReceiptRestDto> createReceipt(@RequestBody ReceiptCreateDto receiptCreateDto) {
+        return ResponseEntity.ok(receiptService.createReceipt(receiptCreateDto));
     }
 
     @PutMapping(value = "/{receiptId}")

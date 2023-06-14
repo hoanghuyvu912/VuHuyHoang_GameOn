@@ -1,6 +1,7 @@
 package com.nonIt.GameOn.service;
 
 import com.nonIt.GameOn.entity.Game;
+import com.nonIt.GameOn.rest.resources_dto.SimplifiedReceiptDetailsDto;
 import com.nonIt.GameOn.service.customDto.RevenuePerDateDto;
 import com.nonIt.GameOn.service.dto.ReceiptDetailsDto;
 import com.nonIt.GameOn.service.restDto.GameRestDto;
@@ -13,6 +14,8 @@ import java.util.Map;
 
 public interface ReceiptDetailsService {
     List<ReceiptDetailsRestDto> getAll();
+
+    List<SimplifiedReceiptDetailsDto> findByReceiptUserId(Integer userId);
 
     ReceiptDetailsRestDto findById(Integer receiptDetailsId);
 

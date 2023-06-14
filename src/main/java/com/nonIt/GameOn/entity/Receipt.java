@@ -8,8 +8,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -27,6 +30,10 @@ public class Receipt {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @CreationTimestamp
     @Column(name = "receipt_date")
     private LocalDate receiptDate;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "receipt", cascade = CascadeType.PERSIST)
+    private List<ReceiptDetails> receiptDetailsList = new ArrayList<>();
 }

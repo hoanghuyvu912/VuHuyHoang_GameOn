@@ -22,5 +22,7 @@ public interface ReceiptDetailsRepository extends JpaRepository<ReceiptDetails, 
             "GROUP BY r.receiptDate " +
             "HAVING r.receiptDate between :date1 and :date2")
     List<RevenuePerDateDto> getRevenuePerDateBetweenDates(@Param("date1")LocalDate date1, @Param("date2")LocalDate date2);
+
+    List<ReceiptDetails> findByReceiptUserId(@Param("userId") Integer userId);
 }
 

@@ -7,6 +7,7 @@ import com.nonIt.GameOn.exception.GameOnException;
 import com.nonIt.GameOn.repository.GameRepository;
 import com.nonIt.GameOn.repository.ReceiptDetailsRepository;
 import com.nonIt.GameOn.repository.ReceiptRepository;
+import com.nonIt.GameOn.rest.resources_dto.SimplifiedReceiptDetailsDto;
 import com.nonIt.GameOn.service.ReceiptDetailsService;
 import com.nonIt.GameOn.service.customDto.RevenuePerDateDto;
 import com.nonIt.GameOn.service.dto.ReceiptDetailsDto;
@@ -34,6 +35,11 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
     @Override
     public List<ReceiptDetailsRestDto> getAll() {
         return receiptDetailsRepository.findAll().stream().map(receiptDetailsMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<SimplifiedReceiptDetailsDto> findByReceiptUserId(Integer userId) {
+        return receiptDetailsRepository.findByReceiptUserId(userId).stream().map(receiptDetailsMapper::toSimplifiedDto).collect(Collectors.toList());
     }
 
     @Override

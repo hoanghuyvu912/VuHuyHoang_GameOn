@@ -141,12 +141,12 @@ public class GameServiceImpl implements GameService {
             }
         }
 
-        if(gameDto.getDeveloperId() != null) {
+        if (gameDto.getDeveloperId() != null) {
             Developer developer = developerRepository.findById(gameDto.getDeveloperId()).orElseThrow(GameOnException::DeveloperNotFound);
             game.setDeveloper(developer);
         }
 
-        if(gameDto.getPublisherId() != null) {
+        if (gameDto.getPublisherId() != null) {
             Publisher publisher = publisherRepository.findById(gameDto.getPublisherId()).orElseThrow(GameOnException::PublisherNotFound);
             game.setPublisher(publisher);
         }
@@ -649,6 +649,9 @@ public class GameServiceImpl implements GameService {
 
     //TEST ADVANCED SEARCH
     public List<GameRestDto> getGamesByGameSearchDto(GameSearchDto gameSearchDto) {
+        if (gameSearchDto == null) {
+            throw GameOnException.badRequest("MissingSearchCriteria", "Search criteria not found.");
+        }
         return gameRepository.findGamesByDto(gameSearchDto).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 }
