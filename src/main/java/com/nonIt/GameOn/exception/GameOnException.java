@@ -46,7 +46,8 @@ public class GameOnException {
     private static final String USER_ROLE_ASSIGNMENT_NOT_FOUND_MSG = "User Role Assignment Not Found";
 
 
-
+    private static final String GAME_CODE_NOT_FOUND_MSG_KEY = "GameCodeNotExisted";
+    private static final String GAME_CODE_NOT_FOUND_MSG = "Game Code NOt Found";
     public static ResponseException notFound(String msgKey, String msg) {
         return new ResponseException(msgKey, msg, HttpStatus.NOT_FOUND);
     }
@@ -115,4 +116,7 @@ public class GameOnException {
         return notFound(USER_ROLE_ASSIGNMENT_NOT_FOUND_MSG_KEY, USER_ROLE_ASSIGNMENT_NOT_FOUND_MSG);
     }
 
+    public static ResponseException GameCodeNotFound() {
+        return notFound(GAME_CODE_NOT_FOUND_MSG_KEY, GAME_NOT_FOUND_MSG);
+    }
 }

@@ -51,6 +51,6 @@ public class Game {
     private Publisher publisher;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "game", cascade = CascadeType.PERSIST)
-    private List<ReceiptDetails> receiptDetailsList = new ArrayList<>();
+    private List<GameCode> gameCodeList = new ArrayList<>();
 
 }

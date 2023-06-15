@@ -13,7 +13,7 @@ import java.util.List;
 public interface ReceiptDetailsMapper extends EntityMapper<ReceiptDetailsRestDto, ReceiptDetails, ReceiptDetailsDto> {
     @Mapping(source = "receipt.id", target = "receiptId")
     @Mapping(source = "id", target = "receiptDetailsId")
-    @Mapping(source = "game.id", target = "gameId")
+    @Mapping(source = "gameCode.id ", target = "gameCodeId")
     SimplifiedReceiptDetailsDto toSimplifiedDto(ReceiptDetails receiptDetails);
 //    ReceiptDetailsDto toDto(ReceiptDetails receiptDetails);
 //
