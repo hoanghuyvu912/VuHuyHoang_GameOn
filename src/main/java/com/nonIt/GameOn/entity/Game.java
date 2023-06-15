@@ -6,6 +6,8 @@ import javax.persistence.*;
 
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -47,4 +49,7 @@ public class Game {
     @ManyToOne
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "game", cascade = CascadeType.PERSIST)
+    private List<ReceiptDetails> receiptDetailsList = new ArrayList<>();
 }

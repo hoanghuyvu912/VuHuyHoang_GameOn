@@ -1,19 +1,16 @@
-package com.nonIt.GameOn.service.dto;
+package com.nonIt.GameOn.rest.resources_dto;
 
-import com.nonIt.GameOn.entity.ReceiptDetails;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReceiptDto {
+public class ReceiptCreateDto {
     private Integer userId;
-    private LocalDate receiptDate;
-
+    private List<Integer> gameIdList;
 }

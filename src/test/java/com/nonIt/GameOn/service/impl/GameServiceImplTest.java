@@ -37,4 +37,10 @@ class GameServiceImplTest {
 
         tempList.forEach(System.out::println);
     }
+
+//    @Test
+//    void getGamesByGameSearchDto() {
+//
+//        List<GameRestDto> gamesListByCriteria = gameService.getGamesByGameSearchDto();
+//    }
 }
