@@ -68,9 +68,6 @@ public class ReceiptServiceImpl implements ReceiptService {
         List<Integer> gamesIdListOfUser = receiptDetailsRepository.findByReceiptUserId(receiptCreateDto.getUserId()).stream()
                 .map(receiptDetailsMapper::toSimplifiedDto)
                 .map(SimplifiedReceiptDetailsDto::getGameId).collect(Collectors.toList());
-//        if (receiptCreateDto.getReceiptDate().isAfter(LocalDate.now())) {
-//            throw GameOnException.badRequest("InvalidReceiptDate", "Receipt date cannot be after current date.");
-//        }
         Receipt receipt = Receipt.builder()
                 .user(user)
                 .build();
@@ -94,6 +91,8 @@ public class ReceiptServiceImpl implements ReceiptService {
         if (totalPriceOfCart > user.getBalance()) {
             throw GameOnException.badRequest("InsufficientBalance", "Insufficient balance. \nYour current balance: $" + user.getBalance() + ". \nTotal price of cart: $" + totalPriceOfCart);
         }
+
+        user.setBalance(user.getBalance() - totalPriceOfCart);
 
         receipt.setReceiptDetailsList(receiptDetailsList);
 
