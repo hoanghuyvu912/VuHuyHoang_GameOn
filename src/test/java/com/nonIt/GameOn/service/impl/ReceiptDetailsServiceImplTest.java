@@ -1,8 +1,11 @@
 package com.nonIt.GameOn.service.impl;
 
 import com.nonIt.GameOn.entity.Game;
+import com.nonIt.GameOn.rest.resources_dto.SimplifiedReceiptDetailsDto;
 import com.nonIt.GameOn.service.GameService;
 import com.nonIt.GameOn.service.ReceiptDetailsService;
+import com.nonIt.GameOn.service.restDto.ReceiptDetailsRestDto;
+import org.hibernate.Hibernate;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -59,5 +63,11 @@ class ReceiptDetailsServiceImplTest {
             System.out.println(key.getName());
             System.out.println(value);
         }
+    }
+
+    @Test
+    void findByReceiptUserId() {
+        List<SimplifiedReceiptDetailsDto> listOfReceiptDetailsOfUser = receiptDetailsService.findByReceiptUserId(2);
+        listOfReceiptDetailsOfUser.forEach(System.out::println);
     }
 }

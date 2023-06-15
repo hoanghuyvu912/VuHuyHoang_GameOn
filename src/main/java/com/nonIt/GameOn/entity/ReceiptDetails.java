@@ -3,6 +3,7 @@ package com.nonIt.GameOn.entity;
 //import jakarta.persistence.*;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,10 +21,12 @@ public class ReceiptDetails {
     @Column(name = "id")
     private Integer id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "receipt_id")
     private Receipt receipt;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "game_id")
     private Game game;

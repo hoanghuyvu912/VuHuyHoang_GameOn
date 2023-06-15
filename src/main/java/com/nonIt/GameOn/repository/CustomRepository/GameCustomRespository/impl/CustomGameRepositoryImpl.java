@@ -2,6 +2,7 @@ package com.nonIt.GameOn.repository.CustomRepository.GameCustomRespository.impl;
 
 import com.nonIt.GameOn.entity.Developer;
 import com.nonIt.GameOn.entity.Game;
+import com.nonIt.GameOn.entity.GameGenre;
 import com.nonIt.GameOn.entity.Publisher;
 import com.nonIt.GameOn.repository.CustomRepository.GameCustomRespository.CustomGameRepository;
 import com.nonIt.GameOn.service.customDto.GameSearchDto;
@@ -45,6 +46,8 @@ public class CustomGameRepositoryImpl implements CustomGameRepository {
 
 
         Root<Game> game = cq.from(Game.class);
+        Root<GameGenre> gameGenre = cq.from(GameGenre.class);
+
         Join<Game, Developer> developerJoin = game.join("developer");
         Join<Game, Publisher> publisherJoin = game.join("publisher");
 
@@ -54,7 +57,6 @@ public class CustomGameRepositoryImpl implements CustomGameRepository {
         if (gameSearchDto.getName() != null) {
             predicates.add(cb.like(cb.upper(game.get("name")), "%" + gameSearchDto.getName().toUpperCase() + "%"));
         }
-
 
         if (gameSearchDto.getPriceLessThan() != null) {
             predicates.add(cb.lessThanOrEqualTo(game.get("price"), gameSearchDto.getPriceLessThan()));

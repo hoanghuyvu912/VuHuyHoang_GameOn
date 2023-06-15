@@ -73,9 +73,6 @@ public class UserServiceImpl implements UserService {
         if (userDto.getGender() != Gender.Female && userDto.getGender() != Gender.Male) {
             throw GameOnException.badRequest("InvalidGender", "Gender must be MALE or FEMALE.");
         }
-//        if (userDto.getProfileImg() == null || userDto.getProfileImg().trim().isBlank() || userDto.getProfileImg().isEmpty()) {
-//            throw GameOnException.badRequest("ProfileImageNotFound", "Profile image is missing");
-//        }
         if (userDto.getBalance() < 0) {
             throw GameOnException.badRequest("InvalidBalance", "Balance must be a positive number");
         }
@@ -97,7 +94,6 @@ public class UserServiceImpl implements UserService {
                 .build();
 
         List<UserRoleAssignment> tempList = new ArrayList<>();
-
 
         if (userDto.getRoles().size() == 0) {
             UserRoleAssignment role = new UserRoleAssignment();

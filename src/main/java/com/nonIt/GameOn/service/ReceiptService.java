@@ -1,5 +1,6 @@
 package com.nonIt.GameOn.service;
 
+import com.nonIt.GameOn.rest.resources_dto.ReceiptCreateDto;
 import com.nonIt.GameOn.service.dto.ReceiptDto;
 import com.nonIt.GameOn.service.restDto.ReceiptRestDto;
 
@@ -15,7 +16,7 @@ public interface ReceiptService {
 
     List<ReceiptRestDto> findByReceiptDateBefore(LocalDate date);
 
-    ReceiptRestDto createReceipt(ReceiptDto receiptDto);
+    ReceiptRestDto createReceipt(ReceiptCreateDto receiptCreateDto);
 
     ReceiptRestDto updateReceipt(Integer receiptId, ReceiptDto receiptDto);
 

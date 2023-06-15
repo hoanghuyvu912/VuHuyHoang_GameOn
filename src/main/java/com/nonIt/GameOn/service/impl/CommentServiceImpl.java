@@ -11,6 +11,7 @@ import com.nonIt.GameOn.service.CommentService;
 import com.nonIt.GameOn.service.dto.CommentDto;
 import com.nonIt.GameOn.service.mapper.CommentMapper;
 import com.nonIt.GameOn.service.restDto.CommentRestDto;
+import com.nonIt.GameOn.utils.NullChecker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -77,6 +78,10 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public CommentRestDto findById(Integer commentId) {
+        boolean isCommentIdNull = NullChecker.allNull(commentId);
+        if(isCommentIdNull) {
+            throw GameOnException.badRequest("InvalidCommentId", "Invalid comment ID!");
+        }
         if (commentId < 0) {
             throw GameOnException.badRequest("InvalidCommentId", "Comment ID search query must be a positive number.");
         }
@@ -126,12 +131,11 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public void deleteComment(Integer commentId) {
-        var auth = SecurityContextHolder.getContext().getAuthentication();
-        var comment = commentRepository.findById(commentId).orElseThrow(GameOnException::CommentNotFound);
-        if (!comment.getUser().getUsername().equalsIgnoreCase(auth.getName())) {
-            throw new RuntimeException();
-        }
+//        var auth = SecurityContextHolder.getContext().getAuthentication();
+//        var comment = commentRepository.findById(commentId).orElseThrow(GameOnException::CommentNotFound);
+//        if (!comment.getUser().getUsername().equalsIgnoreCase(auth.getName())) {
+//            throw new RuntimeException();
+//        }
         commentRepository.deleteById(commentId);
     }
-
 }
