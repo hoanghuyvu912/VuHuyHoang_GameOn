@@ -78,9 +78,10 @@ public class ReceiptServiceImpl implements ReceiptService {
         for (Integer gameId : receiptCreateDto.getGameIdList()) {
             for (Integer gameIdOfUser : gamesIdListOfUser) {
                 if (Objects.equals(gameId, gameIdOfUser)) {
-                    throw GameOnException.badRequest("CannotBuyGame", "User has already bought this game!");
+                    throw GameOnException.badRequest("CannotBuyGame", "Game ID: " + gameId + " already existed in user's library!");
                 }
             }
+
             ReceiptDetails receiptDetails = new ReceiptDetails();
             Game game = gameRepository.findById(gameId).orElseThrow(GameOnException::GameNotFound);
             totalPriceOfCart += game.getPrice();
