@@ -68,9 +68,7 @@ public class ReceiptServiceImpl implements ReceiptService {
         List<Integer> gamesIdListOfUser = receiptDetailsRepository.findByReceiptUserId(receiptCreateDto.getUserId()).stream()
                 .map(receiptDetailsMapper::toSimplifiedDto)
                 .map(SimplifiedReceiptDetailsDto::getGameId).collect(Collectors.toList());
-        Receipt receipt = Receipt.builder()
-                .user(user)
-                .build();
+        Receipt receipt = new Receipt();
 
         List<ReceiptDetails> receiptDetailsList = new ArrayList<>();
         Double totalPriceOfCart = 0D;
@@ -94,6 +92,8 @@ public class ReceiptServiceImpl implements ReceiptService {
         }
 
         user.setBalance(user.getBalance() - totalPriceOfCart);
+
+        receipt.setUser(user);
 
         receipt.setReceiptDetailsList(receiptDetailsList);
 
