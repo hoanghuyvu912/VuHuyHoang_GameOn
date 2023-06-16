@@ -9,5 +9,6 @@ import java.util.List;
 
 public interface GameCodeService {
     List<GameCodeRestDto> getAll();
-    GameCode createGameCodeForGame(GameCodeDto gameCodeDto, GameDto game);
+    GameCodeRestDto createGameCodeForGame(GameCodeDto gameCodeDto);
+
 }
