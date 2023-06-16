@@ -2,6 +2,7 @@ package com.nonIt.GameOn.service.impl;
 
 import com.nonIt.GameOn.entity.Game;
 import com.nonIt.GameOn.entity.GameCode;
+import com.nonIt.GameOn.entity.GameCodeStatus;
 import com.nonIt.GameOn.exception.GameOnException;
 import com.nonIt.GameOn.repository.GameCodeRepository;
 import com.nonIt.GameOn.repository.GameRepository;
@@ -14,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,7 +41,19 @@ public class GameCodeServiceImpl implements GameCodeService {
                 .gameCodeStatus(gameCodeDto.getGameCodeStatus())
                 .build();
 
+        game.getGameCodeList().add(newGameCode);
+
         gameCodeRepository.save(newGameCode);
         return gameCodeMapper.toDto(newGameCode);
+    }
+
+    @Override
+    public GameCodeRestDto updateGameCode(Integer gameCodeId, GameCodeStatus gameCodeStatus) {
+        GameCode gameCode = gameCodeRepository.findById(gameCodeId).orElseThrow(GameOnException::GameCodeNotFound);
+
+        gameCode.setGameCodeStatus(gameCodeStatus);
+
+        gameCodeRepository.save(gameCode);
+        return gameCodeMapper.toDto(gameCode);
     }
 }
