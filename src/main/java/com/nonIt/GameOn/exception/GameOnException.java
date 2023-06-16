@@ -117,6 +117,6 @@ public class GameOnException {
     }
 
     public static ResponseException GameCodeNotFound() {
-        return notFound(GAME_CODE_NOT_FOUND_MSG_KEY, GAME_NOT_FOUND_MSG);
+        return notFound(GAME_CODE_NOT_FOUND_MSG_KEY, GAME_CODE_NOT_FOUND_MSG);
     }
 }

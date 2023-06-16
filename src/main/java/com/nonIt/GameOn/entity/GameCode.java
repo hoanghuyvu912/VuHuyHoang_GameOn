@@ -29,5 +29,6 @@ public class GameCode {
     private Game game;
 
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private GameCodeStatus gameCodeStatus;
 }

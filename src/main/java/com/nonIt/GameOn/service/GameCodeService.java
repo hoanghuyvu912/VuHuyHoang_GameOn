@@ -11,7 +11,7 @@ import java.util.List;
 public interface GameCodeService {
     List<GameCodeRestDto> getAll();
     GameCodeRestDto createGameCodeForGame(GameCodeDto gameCodeDto);
-    GameCodeRestDto updateGameCode(Integer gameCodeId, GameCodeStatus gameCodeStatus);
+    GameCodeRestDto updateGameCode(Integer gameCodeId, GameCodeDto gameCodeDto);
 
     void deleteGameCode(Integer gameCodeId);
 }

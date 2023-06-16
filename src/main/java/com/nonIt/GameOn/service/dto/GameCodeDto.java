@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GameCodeDto {
-    private Integer id;
     private String gameCode;
     private Integer gameId;
     private GameCodeStatus gameCodeStatus;

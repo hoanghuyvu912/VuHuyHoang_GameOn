@@ -33,8 +33,8 @@ public class GameCodeResources {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{gameCodeId}")
-    public ResponseEntity<GameCodeRestDto> updateGameCode(@PathVariable("gameCodeId") Integer gameCodeId ,@PathParam("gameCodeStatus") GameCodeStatus gameCodeStatus){
-        return ResponseEntity.ok(gameCodeService.updateGameCode(gameCodeId,gameCodeStatus));
+    public ResponseEntity<GameCodeRestDto> updateGameCode(@PathVariable("gameCodeId") Integer gameCodeId ,@RequestBody GameCodeDto gameCodeDto){
+        return ResponseEntity.ok(gameCodeService.updateGameCode(gameCodeId,gameCodeDto));
     }
 
     @DeleteMapping("/{gameCodeId}")
