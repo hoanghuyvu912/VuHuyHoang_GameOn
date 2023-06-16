@@ -20,7 +20,7 @@ public class GameCode {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "game_code")
+    @Column(name = "game_code", unique = true, updatable = false)
     private String gameCode;
 
     @JsonIgnore

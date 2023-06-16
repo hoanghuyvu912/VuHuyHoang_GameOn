@@ -362,15 +362,15 @@ public class GameResources {
         return ResponseEntity.ok(gameService.getByPublisherId(publisherId));
     }
 
-    @GetMapping(value = "/by-user-id")
-    public ResponseEntity<List<GameRestDto>> getByUserId(@RequestParam("userId") Integer userId) {
-        return ResponseEntity.ok(gameService.getByUserId(userId));
-    }
-
-    @GetMapping(value = "/by-username")
-    public ResponseEntity<List<GameRestDto>> getByUsername(@RequestParam("username") String username) {
-        return ResponseEntity.ok(gameService.getByUsername("%" + username + "%"));
-    }
+//    @GetMapping(value = "/by-user-id")
+//    public ResponseEntity<List<GameRestDto>> getByUserId(@RequestParam("userId") Integer userId) {
+//        return ResponseEntity.ok(gameService.getByUserId(userId));
+//    }
+//
+//    @GetMapping(value = "/by-username")
+//    public ResponseEntity<List<GameRestDto>> getByUsername(@RequestParam("username") String username) {
+//        return ResponseEntity.ok(gameService.getByUsername("%" + username + "%"));
+//    }
 
     @GetMapping(value = "/by-genre-id")
     public ResponseEntity<List<GameRestDto>> getByGenreId(@RequestParam("genreId") Integer genreId) {

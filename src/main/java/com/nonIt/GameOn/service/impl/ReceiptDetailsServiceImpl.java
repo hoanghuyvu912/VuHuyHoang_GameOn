@@ -83,27 +83,29 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
         receiptDetailsRepository.deleteById(receiptDetailsId);
     }
 
-    @Override
-    public List<RevenuePerDateDto> getRevenuePerDateBetweenDates(LocalDate date1, LocalDate date2) {
-        return receiptDetailsRepository.getRevenuePerDateBetweenDates(date1, date2);
-    }
-
-//    private List<Game> getGamesBetweenDates(LocalDate date1, LocalDate date2) {
-//        return receiptDetailsRepository.findAll().stream()
-//                .filter(rd -> rd.getReceipt().getReceiptDate().isAfter(date1))
-//                .filter(rd -> rd.getReceipt().getReceiptDate().isBefore(date2))
-//                .map(ReceiptDetails::getGame)
-//                .collect(Collectors.toList());
+//    @Override
+//    public List<RevenuePerDateDto> getRevenuePerDateBetweenDates(LocalDate date1, LocalDate date2) {
+//        return receiptDetailsRepository.getRevenuePerDateBetweenDates(date1, date2);
 //    }
+
+    private List<GameCode> getGameCodesBetweenDates(LocalDate date1, LocalDate date2) {
+        return receiptDetailsRepository.findAll().stream()
+                .filter(rd -> rd.getReceipt().getReceiptDate().isAfter(date1))
+                .filter(rd -> rd.getReceipt().getReceiptDate().isBefore(date2))
+                .map(ReceiptDetails::getGameCode)
+                .collect(Collectors.toList());
+
+    }
 
 //    @Override
 //    public Map<Game, Long> getBestSellerGamesBetweenDates(LocalDate date1, LocalDate date2) {
-//        List<Game> gamesByReceiptDate = getGamesBetweenDates(date1, date2);
+//        List<GameCode> gameCodesByReceiptDate = getGameCodesBetweenDates(date1, date2);
 //
 //        Map<Game, Long> gamesWithCopiesSold = new HashMap<>();
 //        for (Game game : gamesByReceiptDate) {
 //            gamesWithCopiesSold.put(game, 0L);
 //        }
+//
 //
 //        for (Map.Entry<Game, Long> entry : gamesWithCopiesSold.entrySet()) {
 //            Game key = entry.getKey();

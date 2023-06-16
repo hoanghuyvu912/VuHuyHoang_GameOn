@@ -595,15 +595,15 @@ public class GameServiceImpl implements GameService {
         return gameRepository.getByPublisherId(publisherId).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 
-    @Override
-    public List<GameRestDto> getByUserId(Integer userId) {
-        return gameRepository.getByUserId(userId).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GameRestDto> getByUsername(String username) {
-        return gameRepository.getByUsername(username).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
+//    @Override
+//    public List<GameRestDto> getByUserId(Integer userId) {
+//        return gameRepository.getByUserId(userId).stream().map(gameMapper::toDto).collect(Collectors.toList());
+//    }
+//
+//    @Override
+//    public List<GameRestDto> getByUsername(String username) {
+//        return gameRepository.getByUsername(username).stream().map(gameMapper::toDto).collect(Collectors.toList());
+//    }
 
     @Override
     public List<GameRestDto> getByGenreId(Integer genreId) {

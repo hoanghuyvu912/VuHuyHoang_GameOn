@@ -52,5 +52,4 @@ public class Game {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "game", cascade = CascadeType.PERSIST)
     private List<GameCode> gameCodeList = new ArrayList<>();
-
 }

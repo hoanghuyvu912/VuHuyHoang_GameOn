@@ -16,12 +16,12 @@ import java.util.List;
 public interface ReceiptDetailsRepository extends JpaRepository<ReceiptDetails, Integer> {
 //    List<ReceiptDetails> findByReceiptReceiptDateBetween
 
-    @Query("SELECT new com.nonIt.GameOn.service.customDto.RevenuePerDateDto(r.receiptDate, count(g.id), sum(g.price)) " +
-            "FROM Game g join ReceiptDetails rd ON g.id = rd.game.id " +
-            "JOIN Receipt r on r.id = rd.receipt.id " +
-            "GROUP BY r.receiptDate " +
-            "HAVING r.receiptDate between :date1 and :date2")
-    List<RevenuePerDateDto> getRevenuePerDateBetweenDates(@Param("date1")LocalDate date1, @Param("date2")LocalDate date2);
+//    @Query("SELECT new com.nonIt.GameOn.service.customDto.RevenuePerDateDto(r.receiptDate, count(g.id), sum(g.price)) " +
+//            "FROM Game g join ReceiptDetails rd ON g.id = rd.game.id " +
+//            "JOIN Receipt r on r.id = rd.receipt.id " +
+//            "GROUP BY r.receiptDate " +
+//            "HAVING r.receiptDate between :date1 and :date2")
+//    List<RevenuePerDateDto> getRevenuePerDateBetweenDates(@Param("date1")LocalDate date1, @Param("date2")LocalDate date2);
 
     List<ReceiptDetails> findByReceiptUserId(@Param("userId") Integer userId);
 }

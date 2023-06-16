@@ -11,4 +11,5 @@ public class ReceiptDetailsDto {
     private Integer receiptId;
 
     private Integer gameCodeId;
+    private Double gamePrice;
 }

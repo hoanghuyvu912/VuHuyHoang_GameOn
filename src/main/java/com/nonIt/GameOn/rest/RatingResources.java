@@ -52,8 +52,8 @@ public class RatingResources {
     public ResponseEntity<List<RatingRestDto>> getRatingByUserId(@PathVariable("userId") Integer userId) {
         return ResponseEntity.ok(ratingService.getByUserId(userId));
     }
-    @GetMapping("/demo")
-    public ResponseEntity<List<Rating>> getDemo(){
-        return ResponseEntity.ok(ratingService.demo());
-    }
+//    @GetMapping("/demo")
+//    public ResponseEntity<List<Rating>> getDemo(){
+//        return ResponseEntity.ok(ratingService.demo());
+//    }
 }

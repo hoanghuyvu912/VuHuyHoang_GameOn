@@ -1,8 +1,10 @@
 package com.nonIt.GameOn.service.impl;
 
+import com.nonIt.GameOn.entity.GameCode;
 import com.nonIt.GameOn.repository.GameCodeRepository;
 import com.nonIt.GameOn.service.GameCodeService;
 import com.nonIt.GameOn.service.dto.GameCodeDto;
+import com.nonIt.GameOn.service.dto.GameDto;
 import com.nonIt.GameOn.service.mapper.GameCodeMapper;
 import com.nonIt.GameOn.service.restDto.GameCodeRestDto;
 import lombok.RequiredArgsConstructor;
@@ -21,5 +23,10 @@ public class GameCodeServiceImpl implements GameCodeService {
     @Override
     public List<GameCodeRestDto> getAll() {
         return gameCodeRepository.findAll().stream().map(gameCodeMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public GameCode createGameCodeForGame(GameCodeDto gameCodeDto, GameDto game) {
+        return null;
     }
 }
