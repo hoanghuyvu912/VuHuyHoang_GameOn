@@ -65,12 +65,10 @@ public class ReceiptServiceImpl implements ReceiptService {
     @Override
     public ReceiptRestDto createReceipt(ReceiptCreateDto receiptCreateDto) {
         User user = userRepository.findById(receiptCreateDto.getUserId()).orElseThrow(GameOnException::UserNotFound);
-        List<Integer> gamesIdListOfUser = receiptDetailsRepository.findByReceiptUserId(receiptCreateDto.getUserId()).stream()
+        List<Integer> gamesIdListOfUser = receiptDetailsRepository.findByReceiptUserId(user.getId()).stream()
                 .map(receiptDetailsMapper::toSimplifiedDto)
                 .map(SimplifiedReceiptDetailsDto::getGameId).collect(Collectors.toList());
-        Receipt receipt = Receipt.builder()
-                .user(user)
-                .build();
+        Receipt receipt = new Receipt();
 
         List<ReceiptDetails> receiptDetailsList = new ArrayList<>();
         Double totalPriceOfCart = 0D;
@@ -78,7 +76,7 @@ public class ReceiptServiceImpl implements ReceiptService {
         for (Integer gameId : receiptCreateDto.getGameIdList()) {
             for (Integer gameIdOfUser : gamesIdListOfUser) {
                 if (Objects.equals(gameId, gameIdOfUser)) {
-                    throw GameOnException.badRequest("CannotBuyGame", "User has already bought this game!");
+                    throw GameOnException.badRequest("CannotBuyGame", "Game Id: " + gameIdOfUser + " already existed in user's library.");
                 }
             }
             ReceiptDetails receiptDetails = new ReceiptDetails();
@@ -86,6 +84,7 @@ public class ReceiptServiceImpl implements ReceiptService {
             totalPriceOfCart += game.getPrice();
             receiptDetails.setReceipt(receipt);
             receiptDetails.setGame(game);
+
             receiptDetailsList.add(receiptDetails);
         }
         if (totalPriceOfCart > user.getBalance()) {
@@ -93,6 +92,7 @@ public class ReceiptServiceImpl implements ReceiptService {
         }
 
         user.setBalance(user.getBalance() - totalPriceOfCart);
+        receipt.setUser(user);
 
         receipt.setReceiptDetailsList(receiptDetailsList);
 
