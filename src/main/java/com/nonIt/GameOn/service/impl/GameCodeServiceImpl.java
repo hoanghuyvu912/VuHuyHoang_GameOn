@@ -26,6 +26,7 @@ public class GameCodeServiceImpl implements GameCodeService {
     private final GameCodeRepository gameCodeRepository;
     private final GameCodeMapper gameCodeMapper;
     private final GameRepository gameRepository;
+
     @Override
     public List<GameCodeRestDto> getAll() {
         return gameCodeRepository.findAll().stream().map(gameCodeMapper::toDto).collect(Collectors.toList());
@@ -35,11 +36,7 @@ public class GameCodeServiceImpl implements GameCodeService {
     public GameCodeRestDto createGameCodeForGame(GameCodeDto gameCodeDto) {
         Game game = gameRepository.findById(gameCodeDto.getGameId()).orElseThrow(GameOnException::GameNotFound);
 
-        GameCode newGameCode = GameCode.builder()
-                .gameCode(gameCodeDto.getGameCode())
-                .game(game)
-                .gameCodeStatus(GameCodeStatus.Available)
-                .build();
+        GameCode newGameCode = GameCode.builder().gameCode(gameCodeDto.getGameCode()).game(game).gameCodeStatus(GameCodeStatus.Available).build();
 
         game.getGameCodeList().add(newGameCode);
 
@@ -50,11 +47,14 @@ public class GameCodeServiceImpl implements GameCodeService {
     @Override
     public GameCodeRestDto updateGameCode(Integer gameCodeId, GameCodeDto gameCodeDto) {
         GameCode gameCode = gameCodeRepository.findById(gameCodeId).orElseThrow(GameOnException::GameCodeNotFound);
-        Game game = gameRepository.findById(gameCodeDto.getGameId()).orElseThrow(GameOnException::GameNotFound);
 
-        if(gameCodeDto.getGameCode() != null){
-            if(gameCodeDto.getGameCode().trim().isBlank() || gameCodeDto.getGameCode().trim().isEmpty()){
-                throw GameOnException.badRequest("GameCodeNotFound","Game Code is missing");
+        if (gameCodeDto.getGameId() != null) {
+            Game game = gameRepository.findById(gameCodeDto.getGameId()).orElseThrow(GameOnException::GameNotFound);
+        }
+
+        if (gameCodeDto.getGameCode() != null) {
+            if (gameCodeDto.getGameCode().trim().isBlank() || gameCodeDto.getGameCode().trim().isEmpty()) {
+                throw GameOnException.badRequest("GameCodeNotFound", "Game Code is missing");
             }
         }
 
