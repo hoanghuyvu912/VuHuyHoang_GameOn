@@ -65,7 +65,7 @@ public class ReceiptServiceImpl implements ReceiptService {
     @Override
     public ReceiptRestDto createReceipt(ReceiptCreateDto receiptCreateDto) {
         User user = userRepository.findById(receiptCreateDto.getUserId()).orElseThrow(GameOnException::UserNotFound);
-        List<Integer> gamesIdListOfUser = receiptDetailsRepository.findByReceiptUserId(user.getId()).stream()
+        List<Integer> gamesIdListOfUser = receiptDetailsRepository.findByReceiptUserId(receiptCreateDto.getUserId()).stream()
                 .map(receiptDetailsMapper::toSimplifiedDto)
                 .map(SimplifiedReceiptDetailsDto::getGameId).collect(Collectors.toList());
         Receipt receipt = new Receipt();
@@ -76,15 +76,15 @@ public class ReceiptServiceImpl implements ReceiptService {
         for (Integer gameId : receiptCreateDto.getGameIdList()) {
             for (Integer gameIdOfUser : gamesIdListOfUser) {
                 if (Objects.equals(gameId, gameIdOfUser)) {
-                    throw GameOnException.badRequest("CannotBuyGame", "Game Id: " + gameIdOfUser + " already existed in user's library.");
+                    throw GameOnException.badRequest("CannotBuyGame", "Game ID: " + gameId + " already existed in user's library!");
                 }
             }
+
             ReceiptDetails receiptDetails = new ReceiptDetails();
             Game game = gameRepository.findById(gameId).orElseThrow(GameOnException::GameNotFound);
             totalPriceOfCart += game.getPrice();
             receiptDetails.setReceipt(receipt);
             receiptDetails.setGame(game);
-
             receiptDetailsList.add(receiptDetails);
         }
         if (totalPriceOfCart > user.getBalance()) {
@@ -92,6 +92,7 @@ public class ReceiptServiceImpl implements ReceiptService {
         }
 
         user.setBalance(user.getBalance() - totalPriceOfCart);
+
         receipt.setUser(user);
 
         receipt.setReceiptDetailsList(receiptDetailsList);
