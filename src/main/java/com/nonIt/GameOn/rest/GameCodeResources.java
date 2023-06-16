@@ -36,4 +36,10 @@ public class GameCodeResources {
     public ResponseEntity<GameCodeRestDto> updateGameCode(@PathVariable("gameCodeId") Integer gameCodeId ,@PathParam("gameCodeStatus") GameCodeStatus gameCodeStatus){
         return ResponseEntity.ok(gameCodeService.updateGameCode(gameCodeId,gameCodeStatus));
     }
+
+    @DeleteMapping("/{gameCodeId}")
+    public ResponseEntity<Void> deleteGameCode(@PathVariable("gameCodeId") Integer gameCodeId){
+        gameCodeService.deleteGameCode(gameCodeId);
+        return ResponseEntity.noContent().build();
+    }
 }

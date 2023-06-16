@@ -12,4 +12,6 @@ public interface GameCodeService {
     List<GameCodeRestDto> getAll();
     GameCodeRestDto createGameCodeForGame(GameCodeDto gameCodeDto);
     GameCodeRestDto updateGameCode(Integer gameCodeId, GameCodeStatus gameCodeStatus);
+
+    void deleteGameCode(Integer gameCodeId);
 }

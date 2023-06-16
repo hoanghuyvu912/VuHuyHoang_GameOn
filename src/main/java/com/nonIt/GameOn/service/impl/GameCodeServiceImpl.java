@@ -56,4 +56,11 @@ public class GameCodeServiceImpl implements GameCodeService {
         gameCodeRepository.save(gameCode);
         return gameCodeMapper.toDto(gameCode);
     }
+
+    @Override
+    public void deleteGameCode(Integer gameCodeId) {
+        GameCode gameCode = gameCodeRepository.findById(gameCodeId).orElseThrow(GameOnException::GameCodeNotFound);
+
+        gameCodeRepository.deleteById(gameCodeId);
+    }
 }
