@@ -7,6 +7,7 @@ import com.nonIt.GameOn.exception.GameOnException;
 import com.nonIt.GameOn.repository.GameCodeRepository;
 import com.nonIt.GameOn.repository.GameRepository;
 import com.nonIt.GameOn.service.GameCodeService;
+import com.nonIt.GameOn.service.customDto.GameCodeResponseDto;
 import com.nonIt.GameOn.service.customDto.GameWithUsedGameCodeListDto;
 import com.nonIt.GameOn.service.dto.GameCodeDto;
 import com.nonIt.GameOn.service.dto.GameDto;
@@ -36,7 +37,7 @@ public class GameCodeServiceImpl implements GameCodeService {
     }
 
     @Override
-    public List<GameCodeRestDto> createListGameCodeForGame(GameCodeDto gameCodeDto) {
+    public GameCodeResponseDto createListGameCodeForGame(GameCodeDto gameCodeDto) {
         Game game = gameRepository.findById(gameCodeDto.getGameId()).orElseThrow(GameOnException::GameNotFound);
 
         Set<String> uniqueCodes = new HashSet<>();
@@ -55,7 +56,7 @@ public class GameCodeServiceImpl implements GameCodeService {
             gameCodeRepository.save(newGameCode);
         });
 
-        return gameCodeMapper.toDtos(game.getGameCodeList());
+        return gameCodeMapper.toGameCodeResponseDto(gameCodeDto);
     }
 
     @Override

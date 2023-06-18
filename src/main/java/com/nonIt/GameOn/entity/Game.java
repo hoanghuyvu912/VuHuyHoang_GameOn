@@ -50,6 +50,6 @@ public class Game {
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "game", cascade = CascadeType.PERSIST)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "game", cascade = CascadeType.PERSIST)
     private List<GameCode> gameCodeList = new ArrayList<>();
 }

@@ -1,6 +1,8 @@
 package com.nonIt.GameOn.rest;
 
+import com.nonIt.GameOn.entity.Game;
 import com.nonIt.GameOn.service.ReceiptDetailsService;
+import com.nonIt.GameOn.service.customDto.GameWithUsedGameCodeListDto;
 import com.nonIt.GameOn.service.customDto.RevenuePerDateDto;
 import com.nonIt.GameOn.service.dto.ReceiptDetailsDto;
 import com.nonIt.GameOn.service.restDto.ReceiptDetailsRestDto;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -49,6 +52,12 @@ public class ReceiptDetailsResources {
     public ResponseEntity<Void> deleteReceiptDetailsById(@PathVariable("receiptDetailsId") Integer receiptDetailsId) {
         receiptDetailsService.deleteReceiptDetails(receiptDetailsId);
         return ResponseEntity.noContent().build();
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping(value = "/bestseller-games")
+    public ResponseEntity<List<GameWithUsedGameCodeListDto>> getBestSellerGamesBetweenDates(@RequestParam("date1") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)  LocalDate dateOne, @RequestParam("date2") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateTwo ) {
+            return ResponseEntity.ok(receiptDetailsService.getBestSellerGamesBetweenDates(dateOne, dateTwo));
     }
 
 //    @PreAuthorize("hasRole('ADMIN')")

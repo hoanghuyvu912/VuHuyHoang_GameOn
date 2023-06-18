@@ -11,6 +11,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface GameMapper extends EntityMapper<GameRestDto, Game, GameDto> {
     GameWithRatingDto toGameWithRatingDto(Game game);
+
 //    GameDto toDto(Game game);
 //
 //    List<GameDto> toDtos(List<Game> games);

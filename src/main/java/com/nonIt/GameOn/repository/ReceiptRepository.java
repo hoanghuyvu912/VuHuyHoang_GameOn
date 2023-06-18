@@ -14,6 +14,7 @@ public interface ReceiptRepository extends JpaRepository<Receipt, Integer> {
     @Query(value = "SELECT r from Receipt r join User u on r.user.id = u.id where u.id = :id")
     List<Receipt> getReceiptByUserId(@Param("id") Integer userId);
 
+
     List<Receipt> findByReceiptDateAfter(LocalDate date);
 
     List<Receipt> findByReceiptDateBefore(LocalDate date);

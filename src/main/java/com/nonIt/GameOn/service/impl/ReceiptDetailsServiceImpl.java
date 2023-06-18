@@ -1,9 +1,6 @@
 package com.nonIt.GameOn.service.impl;
 
-import com.nonIt.GameOn.entity.Game;
-import com.nonIt.GameOn.entity.GameCode;
-import com.nonIt.GameOn.entity.Receipt;
-import com.nonIt.GameOn.entity.ReceiptDetails;
+import com.nonIt.GameOn.entity.*;
 import com.nonIt.GameOn.exception.GameOnException;
 import com.nonIt.GameOn.repository.GameCodeRepository;
 import com.nonIt.GameOn.repository.GameRepository;
@@ -11,6 +8,8 @@ import com.nonIt.GameOn.repository.ReceiptDetailsRepository;
 import com.nonIt.GameOn.repository.ReceiptRepository;
 import com.nonIt.GameOn.rest.resources_dto.SimplifiedReceiptDetailsDto;
 import com.nonIt.GameOn.service.ReceiptDetailsService;
+import com.nonIt.GameOn.service.customDto.GameCodeCustomDto;
+import com.nonIt.GameOn.service.customDto.GameWithUsedGameCodeListDto;
 import com.nonIt.GameOn.service.customDto.RevenuePerDateDto;
 import com.nonIt.GameOn.service.dto.ReceiptDetailsDto;
 import com.nonIt.GameOn.service.mapper.ReceiptDetailsMapper;
@@ -23,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -87,27 +87,56 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
 //    public List<RevenuePerDateDto> getRevenuePerDateBetweenDates(LocalDate date1, LocalDate date2) {
 //        return receiptDetailsRepository.getRevenuePerDateBetweenDates(date1, date2);
 //    }
-
-    private List<GameCode> getGameCodesBetweenDates(LocalDate date1, LocalDate date2) {
+    @Override
+    @Transactional
+    public List<GameCode> getUsedGameCodeListBetweenDates(LocalDate date1, LocalDate date2) {
         return receiptDetailsRepository.findAll().stream()
-                .filter(rd -> rd.getReceipt().getReceiptDate().isAfter(date1))
-                .filter(rd -> rd.getReceipt().getReceiptDate().isBefore(date2))
+                .filter(rd -> rd.getReceipt().getReceiptDate().isAfter(date1.minusDays(1)))
+                .filter(rd -> rd.getReceipt().getReceiptDate().isBefore(date2.plusDays(1)))
                 .map(ReceiptDetails::getGameCode)
+                .filter(gc -> gc.getGameCodeStatus().equals(GameCodeStatus.Used))
                 .collect(Collectors.toList());
-
     }
 
-//    @Override
-//    public Map<Game, Long> getBestSellerGamesBetweenDates(LocalDate date1, LocalDate date2) {
-//        List<GameCode> gameCodesByReceiptDate = getGameCodesBetweenDates(date1, date2);
-//
-//        Map<Game, Long> gamesWithCopiesSold = new HashMap<>();
-//        for (Game game : gamesByReceiptDate) {
-//            gamesWithCopiesSold.put(game, 0L);
-//        }
-//
-//
-//        for (Map.Entry<Game, Long> entry : gamesWithCopiesSold.entrySet()) {
+
+    @Override
+    public List<GameWithUsedGameCodeListDto> getBestSellerGamesBetweenDates(LocalDate date1, LocalDate date2) {
+        List<GameCode> usedGameCodes = getUsedGameCodeListBetweenDates(date1, date2);
+
+        Map<Game, Long> gameWithUsedGameCodeList = usedGameCodes.stream()
+                .collect(Collectors.groupingBy(GameCode::getGame, Collectors.counting()));
+
+        List<GameWithUsedGameCodeListDto> gameWithUsedGameCodeListDtos = gameWithUsedGameCodeList.entrySet().stream()
+                .map(entry -> new GameWithUsedGameCodeListDto(entry.getKey(), entry.getValue().intValue()))
+                .sorted(Comparator.comparingInt(GameWithUsedGameCodeListDto::getNumberOfUsedGameCode))
+                .collect(Collectors.toList());
+
+        return gameWithUsedGameCodeListDtos.subList(0, Math.min(gameWithUsedGameCodeListDtos.size(), 5));
+    }
+
+    @Override
+    public List<ReceiptDetailsDto> getReceiptDetailListBetweenDates(LocalDate date1, LocalDate date2) {
+        List<ReceiptDetailsDto> receiptDetailsDtos = new ArrayList<>();
+
+        receiptDetailsRepository.findAll().stream()
+                .filter(rd -> rd.getReceipt().getReceiptDate().isAfter(date1))
+                .filter(rd -> rd.getReceipt().getReceiptDate().isBefore(date2))
+                .collect(Collectors.toList())
+                .forEach(receiptDetails -> {
+                    ReceiptDetailsDto receiptDetailsDto = new ReceiptDetailsDto(
+                            receiptDetails.getReceipt().getId(),
+                            receiptDetails.getGameCode().getId(),
+                            receiptDetails.getGamePrice()
+                    );
+                    receiptDetailsDtos.add(receiptDetailsDto);
+                });
+
+        return receiptDetailsDtos;
+    }
+
+
+
+//        for (Map.Entry<Game, Long> entry : gameWithUsedGameCodeList.entrySet()) {
 //            Game key = entry.getKey();
 //            Long value = entry.getValue();
 //
@@ -119,7 +148,7 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
 //            }
 //        }
 //        return gamesWithCopiesSold;
-//        return gamesWithCopiesSold.entrySet()
+//        return gameWithUsedGameCodeList.entrySet()
 //                .stream()
 //                .sorted(Comparator.comparing(Map.Entry<Game, Long>::getValue).reversed())
 //                .limit(5)
@@ -128,7 +157,6 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
 //                        Map.Entry::getValue,
 //                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
 //    }
-
 
 //    @Override
 //    public Map<Game, Long> getWorstSellerGamesBetweenDates(LocalDate date1, LocalDate date2) {

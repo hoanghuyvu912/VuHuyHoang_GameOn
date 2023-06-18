@@ -2,6 +2,7 @@ package com.nonIt.GameOn.rest;
 
 import com.nonIt.GameOn.entity.GameCodeStatus;
 import com.nonIt.GameOn.service.GameCodeService;
+import com.nonIt.GameOn.service.customDto.GameCodeResponseDto;
 import com.nonIt.GameOn.service.dto.GameCodeDto;
 import com.nonIt.GameOn.service.restDto.DeveloperRestDto;
 import com.nonIt.GameOn.service.restDto.GameCodeRestDto;
@@ -27,7 +28,7 @@ public class GameCodeResources {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<List<GameCodeRestDto>> createGameCodeForGame(@RequestBody GameCodeDto gameCodeDto) {
+    public ResponseEntity<GameCodeResponseDto> createGameCodeForGame(@RequestBody GameCodeDto gameCodeDto) {
         return ResponseEntity.ok(gameCodeService.createListGameCodeForGame(gameCodeDto));
     }
 

@@ -1,7 +1,10 @@
 package com.nonIt.GameOn.service;
 
 import com.nonIt.GameOn.entity.Game;
+import com.nonIt.GameOn.entity.GameCode;
+import com.nonIt.GameOn.entity.ReceiptDetails;
 import com.nonIt.GameOn.rest.resources_dto.SimplifiedReceiptDetailsDto;
+import com.nonIt.GameOn.service.customDto.GameWithUsedGameCodeListDto;
 import com.nonIt.GameOn.service.customDto.RevenuePerDateDto;
 import com.nonIt.GameOn.service.dto.ReceiptDetailsDto;
 import com.nonIt.GameOn.service.restDto.GameRestDto;
@@ -28,8 +31,9 @@ public interface ReceiptDetailsService {
 //    List<ReceiptDetailsRestDto> getRevenueOfReceiptDetailsBetweenDates(LocalDate date1, LocalDate date2);
 //    List<RevenuePerDateDto> getRevenuePerDateBetweenDates(@Param("date1")LocalDate date1, @Param("date2")LocalDate date2);
 //
-//    Map<Game, Long> getBestSellerGamesBetweenDates(@Param("date1")LocalDate date1, @Param("date2")LocalDate date2);
-//
+    List<GameWithUsedGameCodeListDto> getBestSellerGamesBetweenDates(LocalDate date1, LocalDate date2);
+    List<ReceiptDetailsDto> getReceiptDetailListBetweenDates(LocalDate date1, LocalDate date2);
+    List<GameCode> getUsedGameCodeListBetweenDates(LocalDate date1, LocalDate date2);
 //    Map<Game, Long> getWorstSellerGamesBetweenDates(@Param("date1")LocalDate date1, @Param("date2")LocalDate date2);
 
 }
