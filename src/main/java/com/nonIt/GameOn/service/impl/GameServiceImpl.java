@@ -1,32 +1,28 @@
 package com.nonIt.GameOn.service.impl;
 
-import com.nonIt.GameOn.entity.Developer;
-import com.nonIt.GameOn.entity.Game;
-import com.nonIt.GameOn.entity.Publisher;
-import com.nonIt.GameOn.entity.Rating;
+import com.nonIt.GameOn.entity.*;
 import com.nonIt.GameOn.exception.GameOnException;
 import com.nonIt.GameOn.repository.DeveloperRepository;
 import com.nonIt.GameOn.repository.GameRepository;
 import com.nonIt.GameOn.repository.PublisherRepository;
 import com.nonIt.GameOn.repository.RatingRepository;
+import com.nonIt.GameOn.rest.resourcesdto.SimplifiedCommentDto;
+import com.nonIt.GameOn.rest.resourcesdto.SimplifiedGameDto;
 import com.nonIt.GameOn.service.GameService;
 import com.nonIt.GameOn.service.customDto.GameSearchDto;
-import com.nonIt.GameOn.service.dto.GameDto;
+import com.nonIt.GameOn.service.createdto.GameDto;
+import com.nonIt.GameOn.service.mapper.CommentMapper;
 import com.nonIt.GameOn.service.mapper.GameMapper;
 import com.nonIt.GameOn.service.mapper.RatingMapper;
-import com.nonIt.GameOn.service.restDto.GameRestDto;
+import com.nonIt.GameOn.service.restdto.GameRestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static com.nonIt.GameOn.repository.Specification.GameSpecifications.priceLessThanEqual;
-import static com.nonIt.GameOn.repository.Specification.GameSpecifications.systemReqContains;
 
 @Slf4j
 @Service
@@ -39,6 +35,7 @@ public class GameServiceImpl implements GameService {
     private final RatingRepository ratingRepository;
     private final GameMapper gameMapper;
     private final RatingMapper ratingMapper;
+    private final CommentMapper commentMapper;
 
     //CRUD Services
     @Override
@@ -162,6 +159,20 @@ public class GameServiceImpl implements GameService {
         gameRepository.deleteById(gameId);
     }
 
+    // Find featured games
+    @Override
+    public List<SimplifiedGameDto> getFeaturedGame() {
+        return gameRepository.findByReleasedDateBetween(LocalDate.now().minusMonths(6), LocalDate.now()).stream().map(gameMapper::toSimplifiedDto).collect(Collectors.toList());
+    }
+
+    // Find best-seller games between period
+//    @Override
+//    public List<GameRestDto> getBestSellerGamesBetweenAPeriod() {
+//        return gameRepository.findByReleasedDateBetween(LocalDate.now().minusMonths(6), LocalDate.now()).stream()
+//                .filter(g -> g.getRatingList().stream().map(rating -> rating.getRating()).anyMatch(g.getRatingList().stream().filter(rating -> rating.getRating() >= 4)))
+//                .map(gameMapper::toDto)
+//                .collect(Collectors.toList());
+//    }
 
     //Find by name
     @Override
@@ -626,9 +637,14 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public GameRestDto findById(Integer gameId) {
+    public SimplifiedGameDto findById(Integer gameId) {
         Game game = gameRepository.findById(gameId).orElseThrow(GameOnException::GameNotFound);
-        return gameMapper.toDto(game);
+        List<SimplifiedCommentDto> simplifiedCommentDtoList = game.getCommentList().stream()
+                .map(commentMapper::toSimplifiedDto)
+                .collect(Collectors.toList());
+        SimplifiedGameDto simplifiedGameDto = gameMapper.toSimplifiedDto(game);
+        simplifiedGameDto.setSimplifiedCommentDtoList(simplifiedCommentDtoList);
+        return simplifiedGameDto;
     }
 
 

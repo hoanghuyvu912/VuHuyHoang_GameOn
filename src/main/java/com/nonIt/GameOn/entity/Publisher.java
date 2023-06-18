@@ -7,6 +7,8 @@ import javax.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -34,4 +36,7 @@ public class Publisher {
 
     @Column(name = "established_date")
     private LocalDate establishedDate;
+
+    @OneToMany(mappedBy = "publisher", cascade = CascadeType.PERSIST)
+    private List<Game> game  = new ArrayList<>();
 }

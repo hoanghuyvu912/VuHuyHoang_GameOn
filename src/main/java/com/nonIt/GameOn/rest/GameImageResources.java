@@ -1,12 +1,11 @@
 package com.nonIt.GameOn.rest;
 
 import com.nonIt.GameOn.service.GameImageService;
-import com.nonIt.GameOn.service.dto.GameImageDto;
-import com.nonIt.GameOn.service.restDto.GameImageRestDto;
+import com.nonIt.GameOn.service.createdto.GameImageDto;
+import com.nonIt.GameOn.service.restdto.GameImageRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

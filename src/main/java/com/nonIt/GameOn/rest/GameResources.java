@@ -1,12 +1,12 @@
 package com.nonIt.GameOn.rest;
 
 import com.nonIt.GameOn.exception.GameOnException;
+import com.nonIt.GameOn.rest.resourcesdto.SimplifiedGameDto;
 import com.nonIt.GameOn.service.GameService;
 import com.nonIt.GameOn.service.customDto.GameSearchDto;
-import com.nonIt.GameOn.service.dto.GameDto;
-import com.nonIt.GameOn.service.restDto.GameRestDto;
+import com.nonIt.GameOn.service.createdto.GameDto;
+import com.nonIt.GameOn.service.restdto.GameRestDto;
 //import jakarta.validation.Valid;
-import com.nonIt.GameOn.service.restDto.UserRestDto;
 import com.nonIt.GameOn.utils.NullChecker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -38,7 +38,7 @@ public class GameResources {
     }
 
     @GetMapping(value = "/{gameId}")
-    public ResponseEntity<GameRestDto> getGameById(@PathVariable("gameId") Integer userId) {
+    public ResponseEntity<SimplifiedGameDto> getGameById(@PathVariable("gameId") Integer userId) {
         return ResponseEntity.ok(gameService.findById(userId));
     }
 
@@ -57,6 +57,12 @@ public class GameResources {
     @GetMapping(value = "/name-containing")
     public ResponseEntity<List<GameRestDto>> findByNameIgnoreCaseContaining(@RequestParam("name") String name) {
         return ResponseEntity.ok(gameService.findByNameIgnoreCaseContaining(name));
+    }
+
+    //Find featured games
+    @GetMapping(value = "/featured")
+    public ResponseEntity<List<SimplifiedGameDto>> getFeaturedGames() {
+        return ResponseEntity.ok(gameService.getFeaturedGame());
     }
 
 

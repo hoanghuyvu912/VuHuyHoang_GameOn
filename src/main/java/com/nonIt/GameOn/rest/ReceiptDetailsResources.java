@@ -2,8 +2,8 @@ package com.nonIt.GameOn.rest;
 
 import com.nonIt.GameOn.service.ReceiptDetailsService;
 import com.nonIt.GameOn.service.customDto.RevenuePerDateDto;
-import com.nonIt.GameOn.service.dto.ReceiptDetailsDto;
-import com.nonIt.GameOn.service.restDto.ReceiptDetailsRestDto;
+import com.nonIt.GameOn.service.createdto.ReceiptDetailsDto;
+import com.nonIt.GameOn.service.restdto.ReceiptDetailsRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +11,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController

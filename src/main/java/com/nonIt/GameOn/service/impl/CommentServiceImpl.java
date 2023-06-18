@@ -7,13 +7,13 @@ import com.nonIt.GameOn.exception.GameOnException;
 import com.nonIt.GameOn.repository.CommentRepository;
 import com.nonIt.GameOn.repository.GameRepository;
 import com.nonIt.GameOn.repository.UserRepository;
+import com.nonIt.GameOn.rest.resourcesdto.SimplifiedCommentDto;
 import com.nonIt.GameOn.service.CommentService;
-import com.nonIt.GameOn.service.dto.CommentDto;
+import com.nonIt.GameOn.service.createdto.CommentDto;
 import com.nonIt.GameOn.service.mapper.CommentMapper;
-import com.nonIt.GameOn.service.restDto.CommentRestDto;
+import com.nonIt.GameOn.service.restdto.CommentRestDto;
 import com.nonIt.GameOn.utils.NullChecker;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,9 +36,9 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<CommentRestDto> getByUserId(Integer userId) {
-        User user = userRepository.findById(userId).orElseThrow(GameOnException::UserNotFound);
-        return commentRepository.getCommentByUserId(userId).stream().map(commentMapper::toDto).collect(Collectors.toList());
+    public List<SimplifiedCommentDto> getByUserId(Integer userId) {
+        userRepository.findById(userId).orElseThrow(GameOnException::UserNotFound);
+        return commentRepository.getCommentByUserId(userId).stream().map(commentMapper::toSimplifiedDto).collect(Collectors.toList());
     }
 
     @Override
@@ -50,9 +50,9 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<CommentRestDto> getByGameId(Integer gameId) {
+    public List<SimplifiedCommentDto> getByGameId(Integer gameId) {
         gameRepository.findById(gameId).orElseThrow(GameOnException::GameNotFound);
-        return commentRepository.getCommentByGameId(gameId).stream().map(commentMapper::toDto).collect(Collectors.toList());
+        return commentRepository.getCommentByGameId(gameId).stream().map(commentMapper::toSimplifiedDto).collect(Collectors.toList());
     }
 
     @Override

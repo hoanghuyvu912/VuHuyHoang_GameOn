@@ -5,17 +5,13 @@ import com.nonIt.GameOn.entity.UserRoleAssignment;
 import com.nonIt.GameOn.exception.GameOnException;
 import com.nonIt.GameOn.repository.UserRepository;
 import com.nonIt.GameOn.repository.UserRoleAssignmentRepository;
-import com.nonIt.GameOn.security.service.UserSecurityService;
-import com.nonIt.GameOn.security.service.dto.UserSecurityDto;
 import com.nonIt.GameOn.service.UserRoleAssignmentService;
-import com.nonIt.GameOn.service.dto.UserRoleAssignmentDto;
+import com.nonIt.GameOn.service.createdto.UserRoleAssignmentDto;
 import com.nonIt.GameOn.service.mapper.UserRoleAssignmentMapper;
-import com.nonIt.GameOn.service.restDto.UserRoleAssignmentRestDto;
+import com.nonIt.GameOn.service.restdto.UserRoleAssignmentRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional

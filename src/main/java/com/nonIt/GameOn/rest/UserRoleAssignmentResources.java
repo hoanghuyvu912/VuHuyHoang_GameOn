@@ -1,8 +1,8 @@
 package com.nonIt.GameOn.rest;
 
 import com.nonIt.GameOn.service.UserRoleAssignmentService;
-import com.nonIt.GameOn.service.dto.UserRoleAssignmentDto;
-import com.nonIt.GameOn.service.restDto.UserRoleAssignmentRestDto;
+import com.nonIt.GameOn.service.createdto.UserRoleAssignmentDto;
+import com.nonIt.GameOn.service.restdto.UserRoleAssignmentRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

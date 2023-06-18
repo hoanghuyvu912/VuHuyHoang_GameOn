@@ -1,10 +1,9 @@
 package com.nonIt.GameOn.service;
 
 import com.nonIt.GameOn.entity.Rating;
-import com.nonIt.GameOn.service.dto.RatingDto;
-import com.nonIt.GameOn.service.restDto.CommentRestDto;
-import com.nonIt.GameOn.service.restDto.GameRestDto;
-import com.nonIt.GameOn.service.restDto.RatingRestDto;
+import com.nonIt.GameOn.service.createdto.RatingDto;
+import com.nonIt.GameOn.service.restdto.GameRestDto;
+import com.nonIt.GameOn.service.restdto.RatingRestDto;
 
 import java.time.LocalDate;
 import java.util.List;
