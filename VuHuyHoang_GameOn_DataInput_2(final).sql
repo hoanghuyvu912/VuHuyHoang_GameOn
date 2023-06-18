@@ -1217,7 +1217,7 @@ create table receipt_details(
 	constraint receipt_details_fk_receipt_id foreign key(receipt_id) references receipt(id),
 );
 
-insert into receipt_details(id, receipt_id, game_id)
+insert into receipt_details(id, receipt_id, game_code_id)
 values(1, 59,21),
 (2, 12,19),
 (3, 23,16),

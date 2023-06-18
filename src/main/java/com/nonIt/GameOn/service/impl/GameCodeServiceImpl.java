@@ -16,7 +16,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,38 +38,49 @@ public class GameCodeServiceImpl implements GameCodeService {
     public GameCodeRestDto createGameCodeForGame(GameCodeDto gameCodeDto) {
         Game game = gameRepository.findById(gameCodeDto.getGameId()).orElseThrow(GameOnException::GameNotFound);
 
-        GameCode newGameCode = GameCode.builder().gameCode(gameCodeDto.getGameCode()).game(game).gameCodeStatus(GameCodeStatus.Available).build();
+        Set<String> uniqueCodes = new HashSet<>();
 
-        game.getGameCodeList().add(newGameCode);
+        gameCodeDto.getGameCodeList().forEach(gameCode -> {
+            if (uniqueCodes.contains(gameCode)) {
+                throw GameOnException.badRequest("DuplicateGameCodeFound" ,"Duplicate Game Code Found");
+            }
+            uniqueCodes.add(gameCode);
+            GameCode newGameCode = GameCode.builder()
+                    .gameCodeStatus(GameCodeStatus.Available)
+                    .gameCode(gameCode)
+                    .game(game)
+                    .build();
+            game.getGameCodeList().add(newGameCode);
+            gameCodeRepository.save(newGameCode);
+        });
 
-        gameCodeRepository.save(newGameCode);
-        return gameCodeMapper.toDto(newGameCode);
+        return gameCodeMapper.toDto(game);
     }
 
-    @Override
-    public GameCodeRestDto updateGameCode(Integer gameCodeId, GameCodeDto gameCodeDto) {
-        GameCode gameCode = gameCodeRepository.findById(gameCodeId).orElseThrow(GameOnException::GameCodeNotFound);
-
-        if (gameCodeDto.getGameId() != null) {
-            Game game = gameRepository.findById(gameCodeDto.getGameId()).orElseThrow(GameOnException::GameNotFound);
-        }
-
-        if (gameCodeDto.getGameCode() != null) {
-            if (gameCodeDto.getGameCode().trim().isBlank() || gameCodeDto.getGameCode().trim().isEmpty()) {
-                throw GameOnException.badRequest("GameCodeNotFound", "Game Code is missing");
-            }
-        }
-
-        if (gameCodeDto.getGameCodeStatus() != null) {
-            if (!gameCodeDto.getGameCodeStatus().equals(GameCodeStatus.Available) && !gameCodeDto.getGameCodeStatus().equals(GameCodeStatus.Used)) {
-                throw GameOnException.badRequest("InvalidGameCodeStatus", "Game code status must be AVAILABLE or USED");
-            }
-        }
-
-        gameCodeMapper.mapFromDto(gameCodeDto, gameCode);
-        gameCodeRepository.save(gameCode);
-        return gameCodeMapper.toDto(gameCode);
-    }
+//    @Override
+//    public GameCodeRestDto updateGameCode(Integer gameCodeId, GameCodeDto gameCodeDto) {
+//        GameCode gameCode = gameCodeRepository.findById(gameCodeId).orElseThrow(GameOnException::GameCodeNotFound);
+//
+//        if (gameCodeDto.getGameId() != null) {
+//            Game game = gameRepository.findById(gameCodeDto.getGameId()).orElseThrow(GameOnException::GameNotFound);
+//        }
+//
+//        if (gameCodeDto.getGameCodeList().get() != null) {
+//            if (gameCodeDto.getGameCode().trim().isBlank() || gameCodeDto.getGameCode().trim().isEmpty()) {
+//                throw GameOnException.badRequest("GameCodeNotFound", "Game Code is missing");
+//            }
+//        }
+//
+//        if (gameCodeDto.getGameCodeStatus() != null) {
+//            if (!gameCodeDto.getGameCodeStatus().equals(GameCodeStatus.Available) && !gameCodeDto.getGameCodeStatus().equals(GameCodeStatus.Used)) {
+//                throw GameOnException.badRequest("InvalidGameCodeStatus", "Game code status must be AVAILABLE or USED");
+//            }
+//        }
+//
+//        gameCodeMapper.mapFromDto(gameCodeDto, gameCode);
+//        gameCodeRepository.save(gameCode);
+//        return gameCodeMapper.toDto(gameCode);
+//    }
 
     @Override
     public void deleteGameCode(Integer gameCodeId) {
@@ -76,3 +89,4 @@ public class GameCodeServiceImpl implements GameCodeService {
         gameCodeRepository.deleteById(gameCodeId);
     }
 }
+

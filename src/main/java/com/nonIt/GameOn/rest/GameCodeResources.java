@@ -27,15 +27,15 @@ public class GameCodeResources {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<GameCodeRestDto> createGameCodeForGame(@RequestBody GameCodeDto gameCodeDto) {
+    public ResponseEntity<List<GameCodeRestDto>> createGameCodeForGame(@RequestBody GameCodeDto gameCodeDto) {
         return ResponseEntity.ok(gameCodeService.createGameCodeForGame(gameCodeDto));
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @PutMapping("/{gameCodeId}")
-    public ResponseEntity<GameCodeRestDto> updateGameCode(@PathVariable("gameCodeId") Integer gameCodeId ,@RequestBody GameCodeDto gameCodeDto){
-        return ResponseEntity.ok(gameCodeService.updateGameCode(gameCodeId,gameCodeDto));
-    }
+//    @PreAuthorize("hasRole('ADMIN')")
+//    @PutMapping("/{gameCodeId}")
+//    public ResponseEntity<GameCodeRestDto> updateGameCode(@PathVariable("gameCodeId") Integer gameCodeId ,@RequestBody GameCodeDto gameCodeDto){
+//        return ResponseEntity.ok(gameCodeService.updateGameCode(gameCodeId,gameCodeDto));
+//    }
 
     @DeleteMapping("/{gameCodeId}")
     public ResponseEntity<Void> deleteGameCode(@PathVariable("gameCodeId") Integer gameCodeId){
