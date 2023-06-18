@@ -1,8 +1,7 @@
 package com.nonIt.GameOn.service.impl;
 
 import com.nonIt.GameOn.service.GameService;
-import com.nonIt.GameOn.service.restDto.GameRestDto;
-import com.nonIt.GameOn.service.restDto.RatingRestDto;
+import com.nonIt.GameOn.service.restdto.GameRestDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +12,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)

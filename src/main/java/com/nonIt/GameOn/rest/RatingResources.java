@@ -2,9 +2,8 @@ package com.nonIt.GameOn.rest;
 
 import com.nonIt.GameOn.entity.Rating;
 import com.nonIt.GameOn.service.RatingService;
-import com.nonIt.GameOn.service.dto.RatingDto;
-import com.nonIt.GameOn.service.restDto.CommentRestDto;
-import com.nonIt.GameOn.service.restDto.RatingRestDto;
+import com.nonIt.GameOn.service.createdto.RatingDto;
+import com.nonIt.GameOn.service.restdto.RatingRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

@@ -15,7 +15,7 @@ import com.lowagie.text.pdf.CMYKColor;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
-import com.nonIt.GameOn.service.restDto.UserRestDto;
+import com.nonIt.GameOn.service.restdto.UserRestDto;
 
 public class PdfGenerator {
     public void generate(List<UserRestDto> userRestDtoList, HttpServletResponse response) throws DocumentException, IOException {

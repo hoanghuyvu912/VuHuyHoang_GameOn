@@ -1,13 +1,11 @@
 package com.nonIt.GameOn.service.mapper;
 
 import com.nonIt.GameOn.entity.ReceiptDetails;
-import com.nonIt.GameOn.rest.resources_dto.SimplifiedReceiptDetailsDto;
-import com.nonIt.GameOn.service.dto.ReceiptDetailsDto;
-import com.nonIt.GameOn.service.restDto.ReceiptDetailsRestDto;
+import com.nonIt.GameOn.rest.resourcesdto.SimplifiedReceiptDetailsDto;
+import com.nonIt.GameOn.service.createdto.ReceiptDetailsDto;
+import com.nonIt.GameOn.service.restdto.ReceiptDetailsRestDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-
-import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ReceiptDetailsMapper extends EntityMapper<ReceiptDetailsRestDto, ReceiptDetails, ReceiptDetailsDto> {

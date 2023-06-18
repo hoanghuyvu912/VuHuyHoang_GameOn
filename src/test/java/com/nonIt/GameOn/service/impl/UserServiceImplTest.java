@@ -1,7 +1,7 @@
 package com.nonIt.GameOn.service.impl;
 
 import com.nonIt.GameOn.service.UserService;
-import com.nonIt.GameOn.service.restDto.UserRestDto;
+import com.nonIt.GameOn.service.restdto.UserRestDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +10,6 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)

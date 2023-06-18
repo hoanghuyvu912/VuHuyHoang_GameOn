@@ -1,8 +1,8 @@
 package com.nonIt.GameOn.service.mapper;
 
 import com.nonIt.GameOn.entity.UserRoleAssignment;
-import com.nonIt.GameOn.service.dto.UserRoleAssignmentDto;
-import com.nonIt.GameOn.service.restDto.UserRoleAssignmentRestDto;
+import com.nonIt.GameOn.service.createdto.UserRoleAssignmentDto;
+import com.nonIt.GameOn.service.restdto.UserRoleAssignmentRestDto;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

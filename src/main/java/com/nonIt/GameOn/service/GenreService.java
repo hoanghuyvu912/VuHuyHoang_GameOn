@@ -1,7 +1,7 @@
 package com.nonIt.GameOn.service;
 
-import com.nonIt.GameOn.service.dto.GenreDto;
-import com.nonIt.GameOn.service.restDto.GenreRestDto;
+import com.nonIt.GameOn.service.createdto.GenreDto;
+import com.nonIt.GameOn.service.restdto.GenreRestDto;
 
 import java.util.List;
 

@@ -1,11 +1,9 @@
 package com.nonIt.GameOn.service.mapper;
 
 import com.nonIt.GameOn.entity.Rating;
-import com.nonIt.GameOn.service.dto.RatingDto;
-import com.nonIt.GameOn.service.restDto.RatingRestDto;
+import com.nonIt.GameOn.service.createdto.RatingDto;
+import com.nonIt.GameOn.service.restdto.RatingRestDto;
 import org.mapstruct.Mapper;
-
-import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface RatingMapper extends EntityMapper<RatingRestDto, Rating, RatingDto>{

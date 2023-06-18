@@ -70,6 +70,15 @@ public class User {
     @Column(name = "active")
     private boolean active;
 
-    @OneToMany(mappedBy = "users", cascade = CascadeType.PERSIST)
+    @OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "users", cascade = CascadeType.PERSIST)
     private List<UserRoleAssignment> roles = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private List<Receipt> receiptList = new ArrayList<>();
+
+    @OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.PERSIST)
+    private List<Comment> commentList = new ArrayList<>();
+
+    @OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.PERSIST)
+    private List<Rating> ratingList = new ArrayList<>();
 }

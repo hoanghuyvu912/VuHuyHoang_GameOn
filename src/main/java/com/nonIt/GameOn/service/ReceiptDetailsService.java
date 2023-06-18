@@ -1,11 +1,10 @@
 package com.nonIt.GameOn.service;
 
 import com.nonIt.GameOn.entity.Game;
-import com.nonIt.GameOn.rest.resources_dto.SimplifiedReceiptDetailsDto;
+import com.nonIt.GameOn.rest.resourcesdto.SimplifiedReceiptDetailsDto;
 import com.nonIt.GameOn.service.customDto.RevenuePerDateDto;
-import com.nonIt.GameOn.service.dto.ReceiptDetailsDto;
-import com.nonIt.GameOn.service.restDto.GameRestDto;
-import com.nonIt.GameOn.service.restDto.ReceiptDetailsRestDto;
+import com.nonIt.GameOn.service.createdto.ReceiptDetailsDto;
+import com.nonIt.GameOn.service.restdto.ReceiptDetailsRestDto;
 import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
