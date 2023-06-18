@@ -40,10 +40,10 @@ public class ReceiptResources {
         return ResponseEntity.ok(receiptService.findByReceiptDateBefore(date));
     }
 
-//    @PostMapping
-//    public ResponseEntity<ReceiptRestDto> createReceipt(@RequestBody ReceiptCreateDto receiptCreateDto) {
-//        return ResponseEntity.ok(receiptService.createReceipt(receiptCreateDto));
-//    }
+    @PostMapping
+    public ResponseEntity<ReceiptRestDto> createReceipt(@RequestBody ReceiptCreateDto receiptCreateDto) {
+        return ResponseEntity.ok(receiptService.createReceipt(receiptCreateDto));
+    }
 
     @PutMapping(value = "/{receiptId}")
     public ResponseEntity<ReceiptRestDto> updateReceiptById(@PathVariable("receiptId") Integer receiptId, @RequestBody ReceiptDto receiptDto) {

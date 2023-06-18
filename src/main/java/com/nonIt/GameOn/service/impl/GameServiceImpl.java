@@ -1,16 +1,11 @@
 package com.nonIt.GameOn.service.impl;
 
-import com.nonIt.GameOn.entity.Developer;
-import com.nonIt.GameOn.entity.Game;
-import com.nonIt.GameOn.entity.Publisher;
-import com.nonIt.GameOn.entity.Rating;
+import com.nonIt.GameOn.entity.*;
 import com.nonIt.GameOn.exception.GameOnException;
-import com.nonIt.GameOn.repository.DeveloperRepository;
-import com.nonIt.GameOn.repository.GameRepository;
-import com.nonIt.GameOn.repository.PublisherRepository;
-import com.nonIt.GameOn.repository.RatingRepository;
+import com.nonIt.GameOn.repository.*;
 import com.nonIt.GameOn.service.GameService;
 import com.nonIt.GameOn.service.customDto.GameSearchDto;
+import com.nonIt.GameOn.service.customDto.GameWithUsedGameCodeListDto;
 import com.nonIt.GameOn.service.dto.GameDto;
 import com.nonIt.GameOn.service.mapper.GameMapper;
 import com.nonIt.GameOn.service.mapper.RatingMapper;
@@ -23,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.nonIt.GameOn.repository.Specification.GameSpecifications.priceLessThanEqual;
@@ -39,6 +35,7 @@ public class GameServiceImpl implements GameService {
     private final RatingRepository ratingRepository;
     private final GameMapper gameMapper;
     private final RatingMapper ratingMapper;
+    private final GameCodeRepository gameCodeRepository;
 
     //CRUD Services
     @Override
@@ -654,4 +651,11 @@ public class GameServiceImpl implements GameService {
         }
         return gameRepository.findGamesByDto(gameSearchDto).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
+    public Integer getUsedGameCodeListOfGame(Integer gameId){
+        Integer numberOfUsedGameCode = (int) gameCodeRepository.findAll().stream()
+                .filter(gameCode -> gameCode.getGame().getId() == gameId)
+                .filter(gameCode -> gameCode.getGameCodeStatus().equals(GameCodeStatus.Used)).count();
+        return numberOfUsedGameCode;
+    }
+
 }

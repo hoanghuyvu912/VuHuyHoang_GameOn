@@ -1,14 +1,8 @@
 package com.nonIt.GameOn.service.impl;
 
-import com.nonIt.GameOn.entity.Game;
-import com.nonIt.GameOn.entity.Receipt;
-import com.nonIt.GameOn.entity.ReceiptDetails;
-import com.nonIt.GameOn.entity.User;
+import com.nonIt.GameOn.entity.*;
 import com.nonIt.GameOn.exception.GameOnException;
-import com.nonIt.GameOn.repository.GameRepository;
-import com.nonIt.GameOn.repository.ReceiptDetailsRepository;
-import com.nonIt.GameOn.repository.ReceiptRepository;
-import com.nonIt.GameOn.repository.UserRepository;
+import com.nonIt.GameOn.repository.*;
 import com.nonIt.GameOn.rest.resources_dto.ReceiptCreateDto;
 import com.nonIt.GameOn.rest.resources_dto.SimplifiedReceiptDetailsDto;
 import com.nonIt.GameOn.service.ReceiptService;
@@ -37,6 +31,7 @@ public class ReceiptServiceImpl implements ReceiptService {
     private final GameRepository gameRepository;
     private final ReceiptDetailsRepository receiptDetailsRepository;
     private final ReceiptDetailsMapper receiptDetailsMapper;
+    private final GameCodeRepository gameCodeRepository;
 
     @Override
     public List<ReceiptRestDto> getAll() {
@@ -62,44 +57,54 @@ public class ReceiptServiceImpl implements ReceiptService {
     }
 
 
-//    @Override
-//    public ReceiptRestDto createReceipt(ReceiptCreateDto receiptCreateDto) {
-//        User user = userRepository.findById(receiptCreateDto.getUserId()).orElseThrow(GameOnException::UserNotFound);
-//        List<Integer> gamesIdListOfUser = receiptDetailsRepository.findByReceiptUserId(receiptCreateDto.getUserId()).stream()
-//                .map(receiptDetailsMapper::toSimplifiedDto)
-//                .map(SimplifiedReceiptDetailsDto::getGameId).collect(Collectors.toList());
-//        Receipt receipt = Receipt.builder()
-//                .user(user)
-//                .build();
-//
-//        List<ReceiptDetails> receiptDetailsList = new ArrayList<>();
-//        Double totalPriceOfCart = 0D;
-//
-//        for (Integer gameId : receiptCreateDto.getGameIdList()) {
-//            for (Integer gameIdOfUser : gamesIdListOfUser) {
-//                if (Objects.equals(gameId, gameIdOfUser)) {
-//                    throw GameOnException.badRequest("CannotBuyGame", "User has already bought this game!");
-//                }
-//            }
-//            ReceiptDetails receiptDetails = new ReceiptDetails();
-//            Game game = gameRepository.findById(gameId).orElseThrow(GameOnException::GameNotFound);
-//            totalPriceOfCart += game.getPrice();
-//            receiptDetails.setReceipt(receipt);
-//            receiptDetails.setGame(game);
-//            receiptDetailsList.add(receiptDetails);
-//        }
-//        if (totalPriceOfCart > user.getBalance()) {
-//            throw GameOnException.badRequest("InsufficientBalance", "Insufficient balance. \nYour current balance: $" + user.getBalance() + ". \nTotal price of cart: $" + totalPriceOfCart);
-//        }
-//
-//        user.setBalance(user.getBalance() - totalPriceOfCart);
-//
-//        receipt.setReceiptDetailsList(receiptDetailsList);
-//
-//        receipt = receiptRepository.save(receipt);
-//
-//        return receiptMapper.toDto(receipt);
-//    }
+    @Override
+    public ReceiptRestDto createReceipt(ReceiptCreateDto receiptCreateDto) {
+        User user = userRepository.findById(receiptCreateDto.getUserId()).orElseThrow(GameOnException::UserNotFound);
+        final Integer firstGameCodeIndex = 0;
+        List<Integer> gamesIdListOfUser = receiptDetailsRepository.findByReceiptUserId(receiptCreateDto.getUserId()).stream()
+                .map(ReceiptDetails::getGameCode)
+                .map(GameCode::getGame)
+                .map(Game::getId)
+                .collect(Collectors.toList());
+
+        Receipt receipt = Receipt.builder()
+                .user(user)
+                .build();
+
+        List<ReceiptDetails> receiptDetailsList = new ArrayList<>();
+        Double totalPriceOfCart = 0D;
+
+        for (Integer gameId : receiptCreateDto.getGameIdList()) {
+            for (Integer gameIdOfUser : gamesIdListOfUser) {
+                if (Objects.equals(gameId, gameIdOfUser)) {
+                    throw GameOnException.badRequest("CannotBuyGame", "User has already bought this game!");
+                }
+            }
+            ReceiptDetails receiptDetails = new ReceiptDetails();
+
+            Game game = gameRepository.findById(gameId).orElseThrow(GameOnException::GameNotFound);
+
+            GameCode gameCode = game.getGameCodeList().stream()
+                    .filter(gameItem -> gameItem.getGameCodeStatus().equals(GameCodeStatus.Available))
+                    .collect(Collectors.toList()).get(firstGameCodeIndex);
+            gameCode.setGameCodeStatus(GameCodeStatus.Used);
+            receiptDetails.setReceipt(receipt);
+            receiptDetails.setGamePrice(game.getPrice());
+            receiptDetails.setGameCode(gameCode);
+            receiptDetailsList.add(receiptDetails);
+        }
+        if (totalPriceOfCart > user.getBalance()) {
+            throw GameOnException.badRequest("InsufficientBalance", "Insufficient balance. \nYour current balance: $" + user.getBalance() + ". \nTotal price of cart: $" + totalPriceOfCart);
+        }
+
+        user.setBalance(user.getBalance() - totalPriceOfCart);
+
+        receipt.setReceiptDetailsList(receiptDetailsList);
+
+        receipt = receiptRepository.save(receipt);
+
+        return receiptMapper.toDto(receipt);
+    }
 
     @Override
     public ReceiptRestDto updateReceipt(Integer receiptId, ReceiptDto receiptDto) {

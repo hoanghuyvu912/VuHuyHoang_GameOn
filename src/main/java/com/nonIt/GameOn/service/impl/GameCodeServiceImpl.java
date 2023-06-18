@@ -7,6 +7,7 @@ import com.nonIt.GameOn.exception.GameOnException;
 import com.nonIt.GameOn.repository.GameCodeRepository;
 import com.nonIt.GameOn.repository.GameRepository;
 import com.nonIt.GameOn.service.GameCodeService;
+import com.nonIt.GameOn.service.customDto.GameWithUsedGameCodeListDto;
 import com.nonIt.GameOn.service.dto.GameCodeDto;
 import com.nonIt.GameOn.service.dto.GameDto;
 import com.nonIt.GameOn.service.mapper.GameCodeMapper;
@@ -88,5 +89,7 @@ public class GameCodeServiceImpl implements GameCodeService {
 
         gameCodeRepository.deleteById(gameCodeId);
     }
+
+
 }
 
