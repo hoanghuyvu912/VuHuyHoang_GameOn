@@ -1,9 +1,9 @@
 package com.nonIt.GameOn.rest;
 
-import com.nonIt.GameOn.rest.resources_dto.ReceiptCreateDto;
+import com.nonIt.GameOn.rest.resourcesdto.ReceiptCreateDto;
 import com.nonIt.GameOn.service.ReceiptService;
-import com.nonIt.GameOn.service.dto.ReceiptDto;
-import com.nonIt.GameOn.service.restDto.ReceiptRestDto;
+import com.nonIt.GameOn.service.createdto.ReceiptDto;
+import com.nonIt.GameOn.service.restdto.ReceiptRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;

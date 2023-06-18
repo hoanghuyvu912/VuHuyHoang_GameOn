@@ -1,7 +1,7 @@
 package com.nonIt.GameOn.service;
 
-import com.nonIt.GameOn.service.dto.DeveloperDto;
-import com.nonIt.GameOn.service.restDto.DeveloperRestDto;
+import com.nonIt.GameOn.service.createdto.DeveloperDto;
+import com.nonIt.GameOn.service.restdto.DeveloperRestDto;
 
 import java.time.LocalDate;
 import java.util.List;

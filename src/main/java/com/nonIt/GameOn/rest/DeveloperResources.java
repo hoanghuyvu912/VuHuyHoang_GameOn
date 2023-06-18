@@ -2,8 +2,8 @@ package com.nonIt.GameOn.rest;
 
 import com.nonIt.GameOn.exception.GameOnException;
 import com.nonIt.GameOn.service.DeveloperService;
-import com.nonIt.GameOn.service.dto.DeveloperDto;
-import com.nonIt.GameOn.service.restDto.DeveloperRestDto;
+import com.nonIt.GameOn.service.createdto.DeveloperDto;
+import com.nonIt.GameOn.service.restdto.DeveloperRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;

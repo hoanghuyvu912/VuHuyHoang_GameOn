@@ -1,11 +1,9 @@
 package com.nonIt.GameOn.service.mapper;
 
 import com.nonIt.GameOn.entity.GameImage;
-import com.nonIt.GameOn.service.dto.GameImageDto;
-import com.nonIt.GameOn.service.restDto.GameImageRestDto;
+import com.nonIt.GameOn.service.createdto.GameImageDto;
+import com.nonIt.GameOn.service.restdto.GameImageRestDto;
 import org.mapstruct.Mapper;
-
-import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface GameImageMapper extends EntityMapper<GameImageRestDto, GameImage, GameImageDto>{

@@ -1,7 +1,7 @@
 package com.nonIt.GameOn.service;
 
-import com.nonIt.GameOn.service.dto.GameImageDto;
-import com.nonIt.GameOn.service.restDto.GameImageRestDto;
+import com.nonIt.GameOn.service.createdto.GameImageDto;
+import com.nonIt.GameOn.service.restdto.GameImageRestDto;
 
 import java.util.List;
 

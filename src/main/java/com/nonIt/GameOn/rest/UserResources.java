@@ -2,11 +2,10 @@ package com.nonIt.GameOn.rest;
 
 import com.lowagie.text.DocumentException;
 import com.nonIt.GameOn.entity.Gender;
-import com.nonIt.GameOn.service.restDto.GameRestDto;
 import com.nonIt.GameOn.utils.PdfGenerator;
 import com.nonIt.GameOn.service.UserService;
-import com.nonIt.GameOn.service.dto.UserDto;
-import com.nonIt.GameOn.service.restDto.UserRestDto;
+import com.nonIt.GameOn.service.createdto.UserDto;
+import com.nonIt.GameOn.service.restdto.UserRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;

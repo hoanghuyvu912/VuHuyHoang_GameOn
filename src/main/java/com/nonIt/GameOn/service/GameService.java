@@ -1,23 +1,18 @@
 package com.nonIt.GameOn.service;
 
-import com.nonIt.GameOn.entity.Game;
+import com.nonIt.GameOn.rest.resourcesdto.SimplifiedGameDto;
 import com.nonIt.GameOn.service.customDto.GameSearchDto;
-import com.nonIt.GameOn.service.dto.GameDto;
-import com.nonIt.GameOn.service.restDto.GameRestDto;
-import org.springframework.cglib.core.Local;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.http.ResponseEntity;
+import com.nonIt.GameOn.service.createdto.GameDto;
+import com.nonIt.GameOn.service.restdto.GameRestDto;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 public interface GameService {
     //CRUD APIs
     List<GameRestDto> getAll();
 
-    GameRestDto findById(Integer gameId);
+    SimplifiedGameDto findById(Integer gameId);
 
     GameRestDto createGame(GameDto gameDto);
 
@@ -25,6 +20,11 @@ public interface GameService {
 
     void deleteGame(Integer gameId);
 
+    //Find featured games
+    List<SimplifiedGameDto> getFeaturedGame();
+
+    //Find best-seller games between a period
+//    List<GameRestDto> getBestSellerGamesBetweenAPeriod();
 
     //Find by name
     List<GameRestDto> findByNameIgnoreCaseContaining(String name);
@@ -151,8 +151,6 @@ public interface GameService {
     List<GameRestDto> findBySystemReqIgnoreCaseContaining(String req);
 
 
-
-
     //Find by system req and price
     List<GameRestDto> findBySystemReqIgnoreCaseContainingAndPriceGreaterThanEqual(String req, Double price);
 
@@ -191,7 +189,7 @@ public interface GameService {
     List<GameRestDto> getByRatingAndReleasedDateBetween(Integer rating1, Integer rating2, LocalDate date1, LocalDate date2);
 
 
-//    TEST ADVANCED SEARCH
+    //    TEST ADVANCED SEARCH
     List<GameRestDto> getGamesByGameSearchDto(GameSearchDto gameSearchDto);
 
 }

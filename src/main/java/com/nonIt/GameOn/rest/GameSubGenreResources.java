@@ -1,8 +1,8 @@
 package com.nonIt.GameOn.rest;
 
 import com.nonIt.GameOn.service.GameSubGenreService;
-import com.nonIt.GameOn.service.dto.GameSubGenreDto;
-import com.nonIt.GameOn.service.restDto.GameSubGenreRestDto;
+import com.nonIt.GameOn.service.createdto.GameSubGenreDto;
+import com.nonIt.GameOn.service.restdto.GameSubGenreRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
