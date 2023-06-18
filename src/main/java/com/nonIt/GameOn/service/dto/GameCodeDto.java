@@ -14,4 +14,5 @@ public class GameCodeDto {
     private List<String> gameCodeList;
     private Integer gameId;
     private GameCodeStatus gameCodeStatus;
+    private String gameCode;
 }

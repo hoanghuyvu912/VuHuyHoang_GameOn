@@ -1,19 +1,15 @@
-package com.nonIt.GameOn.service.restDto;
+package com.nonIt.GameOn.service.customDto;
 
-import com.nonIt.GameOn.entity.Game;
 import com.nonIt.GameOn.entity.GameCodeStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GameCodeRestDto {
-    private Integer id;
-    private List<String> gameCodeList;
-    private Game game;
+public class GameCodeUpdatedDto {
+    private String gameCode;
     private GameCodeStatus gameCodeStatus;
+    private Integer gameId;
 }

@@ -10,8 +10,8 @@ import java.util.List;
 
 public interface GameCodeService {
     List<GameCodeRestDto> getAll();
-    List<GameCodeRestDto> createGameCodeForGame(GameCodeDto gameCodeDto);
-//    GameCodeRestDto updateGameCode(Integer gameCodeId, GameCodeDto gameCodeDto);
+    List<GameCodeRestDto> createListGameCodeForGame(GameCodeDto gameCodeDto);
+    GameCodeRestDto updateGameCode(Integer gameCodeId, GameCodeDto gameCodeDto);
 
     void deleteGameCode(Integer gameCodeId);
 }
