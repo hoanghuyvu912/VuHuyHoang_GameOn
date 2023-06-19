@@ -98,20 +98,40 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
                 .stream()
                 .map(ReceiptDetails::getGameCode)
                 .collect(Collectors.toList());
+        List<Game> gameList = usedGameCodes.stream().map(GameCode::getGame).collect(Collectors.toList());
 
-//        usedGameCodes.forEach(ugc -> System.out.println(ugc.getGameCode()));
+        Map<Game, Long> gamesWithUsedGameCodeList = new HashMap<>();
+        for (Game game : gameList) {
+            gamesWithUsedGameCodeList.put(game, 0L);
+        }
 
-        Map<Game, Long> gameWithUsedGameCodeList = usedGameCodes.stream()
-                .collect(Collectors.groupingBy(GameCode::getGame, Collectors.counting()));
+        for (Map.Entry<Game, Long> entry : gamesWithUsedGameCodeList.entrySet()) {
+            Game key = entry.getKey();
+            Long value = entry.getValue();
 
-        gameWithUsedGameCodeList.forEach((key, value) -> System.out.println(key + ":" + value));
+//            for (GameCode gameCode : usedGameCodes) {
+//                if (Objects.equals(gameCode.getGame().getId(), key.getId())) {
+//                    value++;
+//                    entry.setValue(value);
+//                }
+//            }
+            for (Game game : gameList) {
+                if (game.getId().equals(key.getId())) {
+                    value++;
+                    entry.setValue(value);
+                }
+            }
+        }
+//        for (Map.Entry<Game, Long> entry : gamesWithUsedGameCodeList.entrySet()) {
+//            System.out.println(entry.getKey().getName() + ":" + entry.getValue());
+//        }
 
-        List<GameWithUsedGameCodeListDto> gameWithUsedGameCodeListDtos = gameWithUsedGameCodeList.entrySet().stream()
+        return gamesWithUsedGameCodeList.entrySet()
+                .stream()
+                .sorted(Comparator.comparing(Map.Entry<Game, Long>::getValue).reversed())
+                .limit(5)
                 .map(entry -> new GameWithUsedGameCodeListDto(entry.getKey(), entry.getValue().intValue()))
-                .sorted(Comparator.comparingInt(GameWithUsedGameCodeListDto::getNumberOfUsedGameCode))
                 .collect(Collectors.toList());
-
-        return gameWithUsedGameCodeListDtos.subList(0, Math.min(gameWithUsedGameCodeListDtos.size(), 5));
     }
 
     @Override
@@ -153,34 +173,36 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
 //                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
 //    }
 
-//    @Override
-//    public Map<Game, Long> getWorstSellerGamesBetweenDates(LocalDate date1, LocalDate date2) {
-//        List<Game> gamesByReceiptDate = getGamesBetweenDates(date1, date2);
-//
-//        Map<Game, Long> gamesWithCopiesSold = new HashMap<>();
-//        for (Game game : gamesByReceiptDate) {
-//            gamesWithCopiesSold.put(game, 0L);
-//        }
-//
-//        for (Map.Entry<Game, Long> entry : gamesWithCopiesSold.entrySet()) {
-//            Game key = entry.getKey();
-//            Long value = entry.getValue();
-//
-//            for (Game game : gamesByReceiptDate) {
-//                if (Objects.equals(game.getId(), key.getId())) {
-//                    value++;
-//                    entry.setValue(value);
-//                }
-//            }
-//        }
-//
-//        return gamesWithCopiesSold.entrySet()
-//                .stream()
-//                .sorted(Comparator.comparing(Map.Entry<Game, Long>::getValue))
-//                .limit(5)
-//                .collect(Collectors.toMap(
-//                        Map.Entry::getKey,
-//                        Map.Entry::getValue,
-//                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
-//    }
+    @Override
+    public List<GameWithUsedGameCodeListDto> getWorstSellerGamesBetweenDates(LocalDate startDate, LocalDate endDate) {
+        List<GameCode> usedGameCodes = receiptDetailsRepository.findByReceiptReceiptDate(startDate, endDate)
+                .stream()
+                .map(ReceiptDetails::getGameCode)
+                .collect(Collectors.toList());
+        List<Game> gameList = usedGameCodes.stream().map(GameCode::getGame).collect(Collectors.toList());
+
+        Map<Game, Long> gamesWithUsedGameCodeList = new HashMap<>();
+        for (Game game : gameList) {
+            gamesWithUsedGameCodeList.put(game, 0L);
+        }
+
+        for (Map.Entry<Game, Long> entry : gamesWithUsedGameCodeList.entrySet()) {
+            Game key = entry.getKey();
+            Long value = entry.getValue();
+
+            for (Game game : gameList) {
+                if (game.getId().equals(key.getId())) {
+                    value++;
+                    entry.setValue(value);
+                }
+            }
+        }
+
+        return gamesWithUsedGameCodeList.entrySet()
+                .stream()
+                .sorted(Comparator.comparing(Map.Entry<Game, Long>::getValue))
+                .limit(5)
+                .map(entry -> new GameWithUsedGameCodeListDto(entry.getKey(), entry.getValue().intValue()))
+                .collect(Collectors.toList());
+    }
 }

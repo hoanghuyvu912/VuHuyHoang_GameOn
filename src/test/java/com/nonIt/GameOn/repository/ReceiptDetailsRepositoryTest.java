@@ -22,6 +22,6 @@ class ReceiptDetailsRepositoryTest {
     void findByReceiptReceiptDate() {
         LocalDate startDate = LocalDate.parse("2023-06-15");
         LocalDate endDate = LocalDate.parse("2023-06-19");
-        System.out.println(receiptDetailsRepository.findByReceiptReceiptDate(startDate, endDate).stream().map(ReceiptDetails::getGameCode).collect(Collectors.toList()));
+        assertTrue(receiptDetailsRepository.findByReceiptReceiptDate(startDate, endDate).size()>0);
     }
 }

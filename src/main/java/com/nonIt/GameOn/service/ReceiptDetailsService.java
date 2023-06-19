@@ -33,6 +33,6 @@ public interface ReceiptDetailsService {
 //
     List<GameWithUsedGameCodeListDto> getBestSellerGamesBetweenDates(LocalDate date1, LocalDate date2);
     List<ReceiptDetailsDto> getReceiptDetailListBetweenDates(LocalDate date1, LocalDate date2);
-//    Map<Game, Long> getWorstSellerGamesBetweenDates(@Param("date1")LocalDate date1, @Param("date2")LocalDate date2);
+    List<GameWithUsedGameCodeListDto> getWorstSellerGamesBetweenDates(LocalDate startDate, LocalDate endDate);
 
 }

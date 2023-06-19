@@ -73,10 +73,9 @@ class ReceiptDetailsServiceImplTest {
     @Test
     void testGetBestSellerGamesBetweenDates() {
         LocalDate startDate = LocalDate.parse("2023-06-15");
-        System.out.println(startDate);
-        LocalDate endDate = LocalDate.parse("2023-06-18");
+        LocalDate endDate = LocalDate.parse("2023-06-20");
 
-        System.out.println( receiptDetailsService.getBestSellerGamesBetweenDates(startDate,endDate));
+        receiptDetailsService.getBestSellerGamesBetweenDates(startDate, endDate).forEach(e -> System.out.println(e.getGame().getName() + ": " + e.getNumberOfUsedGameCode()));
     }
 
     @Test
@@ -86,4 +85,11 @@ class ReceiptDetailsServiceImplTest {
         receiptDetailsService.getReceiptDetailListBetweenDates(dateOne,dateTwo);
     }
 
+    @Test
+    void getWorstSellerGamesBetweenDates() {
+        LocalDate startDate = LocalDate.parse("2023-06-15");
+        LocalDate endDate = LocalDate.parse("2023-06-20");
+
+        receiptDetailsService.getWorstSellerGamesBetweenDates(startDate, endDate).forEach(e -> System.out.println(e.getGame().getName() + ": " + e.getNumberOfUsedGameCode()));
+    }
 }
