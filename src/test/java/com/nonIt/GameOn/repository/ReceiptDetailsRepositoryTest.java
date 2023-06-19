@@ -32,7 +32,7 @@ class ReceiptDetailsRepositoryTest {
     @Test
     void getGameStatisticsPerMonth() {
         receiptDetailsRepository.getGameStatisticsPerMonth(6,2023).forEach(gs ->{
-            System.out.println(gs.getGame().getName() + gs.getNumberOfGameCodes() + gs.getTotalCost());
+            System.out.println(gs.getGame().getName() + gs.getGameCodeList() + gs.getRevenue());
         });
     }
 }
