@@ -1,9 +1,9 @@
 package com.nonIt.GameOn.rest;
 
-import com.nonIt.GameOn.entity.Game;
 import com.nonIt.GameOn.service.ReceiptDetailsService;
+import com.nonIt.GameOn.service.customDto.GameStatisticsDto;
 import com.nonIt.GameOn.service.customDto.GameWithUsedGameCodeListDto;
-import com.nonIt.GameOn.service.customDto.RevenuePerDateDto;
+import com.nonIt.GameOn.service.customDto.RevenuePerMonthInYearDto;
 import com.nonIt.GameOn.service.dto.ReceiptDetailsDto;
 import com.nonIt.GameOn.service.restDto.ReceiptDetailsRestDto;
 import lombok.RequiredArgsConstructor;
@@ -13,9 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -65,9 +63,14 @@ public class ReceiptDetailsResources {
         return ResponseEntity.ok(receiptDetailsService.getWorstSellerGamesBetweenDates(startDate, endDate));
     }
 
-//    @PreAuthorize("hasRole('ADMIN')")
-//    @GetMapping("/revenue-per-date")
-//    public ResponseEntity<List<RevenuePerDateDto>> getRevenuePerDateBetweenDates(@RequestParam("date1") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date1, @RequestParam("date2") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date2) {
-//        return ResponseEntity.ok(receiptDetailsService.getRevenuePerDateBetweenDates(date1, date2));
-//    }
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/revenue-per-month-in-year")
+    public ResponseEntity<RevenuePerMonthInYearDto> getRevenuePerDateBetweenDates(@RequestParam("month") Integer month, @RequestParam("year") Integer year) {
+        return ResponseEntity.ok(receiptDetailsService.getRevenuePerMonthInYear(month, year));
+    }
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/game-statistics-per-month")
+    public ResponseEntity<List<GameStatisticsDto>> getGameStatisticsPerMonthInYear(@RequestParam("month") Integer month, @RequestParam("year") Integer year) {
+        return ResponseEntity.ok(receiptDetailsService.getGameStatisticsDto(month, year));
+    }
 }
