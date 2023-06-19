@@ -1,10 +1,8 @@
 package com.nonIt.GameOn.rest;
 
-import com.nonIt.GameOn.entity.GameCodeStatus;
 import com.nonIt.GameOn.service.GameCodeService;
-import com.nonIt.GameOn.service.dto.GameCodeDto;
-import com.nonIt.GameOn.service.restDto.DeveloperRestDto;
-import com.nonIt.GameOn.service.restDto.GameCodeRestDto;
+import com.nonIt.GameOn.service.createdto.GameCodeDto;
+import com.nonIt.GameOn.service.restdto.GameCodeRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

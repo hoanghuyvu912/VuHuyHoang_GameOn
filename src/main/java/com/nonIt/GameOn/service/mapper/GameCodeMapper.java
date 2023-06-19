@@ -1,8 +1,8 @@
 package com.nonIt.GameOn.service.mapper;
 
 import com.nonIt.GameOn.entity.GameCode;
-import com.nonIt.GameOn.service.dto.GameCodeDto;
-import com.nonIt.GameOn.service.restDto.GameCodeRestDto;
+import com.nonIt.GameOn.service.createdto.GameCodeDto;
+import com.nonIt.GameOn.service.restdto.GameCodeRestDto;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

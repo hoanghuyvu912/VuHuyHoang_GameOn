@@ -1,4 +1,4 @@
-package com.nonIt.GameOn.service.restDto;
+package com.nonIt.GameOn.service.restdto;
 
 import com.nonIt.GameOn.entity.Game;
 import com.nonIt.GameOn.entity.GameCodeStatus;

@@ -1,4 +1,4 @@
-package com.nonIt.GameOn.service.dto;
+package com.nonIt.GameOn.service.createdto;
 
 import com.nonIt.GameOn.entity.GameCodeStatus;
 import lombok.AllArgsConstructor;

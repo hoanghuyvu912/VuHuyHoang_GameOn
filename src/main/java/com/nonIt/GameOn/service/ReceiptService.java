@@ -16,7 +16,7 @@ public interface ReceiptService {
 
     List<ReceiptRestDto> findByReceiptDateBefore(LocalDate date);
 
-//    ReceiptRestDto createReceipt(ReceiptCreateDto receiptCreateDto);
+    ReceiptRestDto createReceipt(ReceiptCreateDto receiptCreateDto);
 
     ReceiptRestDto updateReceipt(Integer receiptId, ReceiptDto receiptDto);
 

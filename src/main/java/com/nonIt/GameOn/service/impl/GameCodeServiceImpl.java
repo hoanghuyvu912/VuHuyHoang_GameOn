@@ -7,15 +7,13 @@ import com.nonIt.GameOn.exception.GameOnException;
 import com.nonIt.GameOn.repository.GameCodeRepository;
 import com.nonIt.GameOn.repository.GameRepository;
 import com.nonIt.GameOn.service.GameCodeService;
-import com.nonIt.GameOn.service.dto.GameCodeDto;
-import com.nonIt.GameOn.service.dto.GameDto;
+import com.nonIt.GameOn.service.createdto.GameCodeDto;
 import com.nonIt.GameOn.service.mapper.GameCodeMapper;
-import com.nonIt.GameOn.service.restDto.GameCodeRestDto;
+import com.nonIt.GameOn.service.restdto.GameCodeRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
