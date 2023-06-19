@@ -56,8 +56,13 @@ public class ReceiptDetailsResources {
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value = "/bestseller-games")
-    public ResponseEntity<List<GameWithUsedGameCodeListDto>> getBestSellerGamesBetweenDates(@RequestParam("date1") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)  LocalDate dateOne, @RequestParam("date2") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateTwo ) {
-            return ResponseEntity.ok(receiptDetailsService.getBestSellerGamesBetweenDates(dateOne, dateTwo));
+    public ResponseEntity<List<GameWithUsedGameCodeListDto>> getBestSellerGamesBetweenDates(@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)  LocalDate startDate, @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate ) {
+            return ResponseEntity.ok(receiptDetailsService.getBestSellerGamesBetweenDates(startDate, endDate));
+    }
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping(value = "/worstseller-games")
+    public ResponseEntity<List<GameWithUsedGameCodeListDto>> getWorstSellerGamesBetweenDates(@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)  LocalDate startDate, @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate ) {
+        return ResponseEntity.ok(receiptDetailsService.getWorstSellerGamesBetweenDates(startDate, endDate));
     }
 
 //    @PreAuthorize("hasRole('ADMIN')")

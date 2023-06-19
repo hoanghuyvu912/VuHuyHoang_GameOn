@@ -14,7 +14,4 @@ import java.util.List;
 public class GameWithUsedGameCodeListDto {
     private Game game;
     private Integer numberOfUsedGameCode;
-    public GameWithUsedGameCodeListDto(Game game){
-        this.game = game;
-    }
 }

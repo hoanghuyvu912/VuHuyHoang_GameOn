@@ -10,6 +10,7 @@ import com.nonIt.GameOn.service.dto.ReceiptDetailsDto;
 import com.nonIt.GameOn.service.restDto.GameRestDto;
 import com.nonIt.GameOn.service.restDto.ReceiptDetailsRestDto;
 import org.springframework.data.repository.query.Param;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -31,8 +32,8 @@ public interface ReceiptDetailsService {
 //    List<ReceiptDetailsRestDto> getRevenueOfReceiptDetailsBetweenDates(LocalDate date1, LocalDate date2);
 //    List<RevenuePerDateDto> getRevenuePerDateBetweenDates(@Param("date1")LocalDate date1, @Param("date2")LocalDate date2);
 //
-    List<GameWithUsedGameCodeListDto> getBestSellerGamesBetweenDates(LocalDate date1, LocalDate date2);
-    List<ReceiptDetailsDto> getReceiptDetailListBetweenDates(LocalDate date1, LocalDate date2);
+    List<GameWithUsedGameCodeListDto> getBestSellerGamesBetweenDates(LocalDate startDate, LocalDate endDate);
+    List<ReceiptDetailsDto> getReceiptDetailListBetweenDates(LocalDate startDate, LocalDate endDate);
     List<GameWithUsedGameCodeListDto> getWorstSellerGamesBetweenDates(LocalDate startDate, LocalDate endDate);
 
 }
