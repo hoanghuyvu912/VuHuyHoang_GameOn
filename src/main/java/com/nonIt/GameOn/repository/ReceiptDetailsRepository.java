@@ -1,9 +1,7 @@
 package com.nonIt.GameOn.repository;
 
-import com.nonIt.GameOn.entity.Receipt;
 import com.nonIt.GameOn.entity.ReceiptDetails;
 import com.nonIt.GameOn.service.customDto.RevenuePerDateDto;
-import com.nonIt.GameOn.service.restDto.GameRestDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

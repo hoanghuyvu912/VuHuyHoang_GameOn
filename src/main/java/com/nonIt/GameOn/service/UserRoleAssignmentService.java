@@ -1,7 +1,7 @@
 package com.nonIt.GameOn.service;
 
-import com.nonIt.GameOn.service.dto.UserRoleAssignmentDto;
-import com.nonIt.GameOn.service.restDto.UserRoleAssignmentRestDto;
+import com.nonIt.GameOn.service.createdto.UserRoleAssignmentDto;
+import com.nonIt.GameOn.service.restdto.UserRoleAssignmentRestDto;
 
 public interface UserRoleAssignmentService {
     UserRoleAssignmentRestDto createUserRoleAssignment(UserRoleAssignmentDto userRoleAssignmentDto);

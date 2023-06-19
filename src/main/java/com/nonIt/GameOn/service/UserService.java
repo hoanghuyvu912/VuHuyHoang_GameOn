@@ -1,8 +1,8 @@
 package com.nonIt.GameOn.service;
 
 import com.nonIt.GameOn.entity.Gender;
-import com.nonIt.GameOn.service.dto.UserDto;
-import com.nonIt.GameOn.service.restDto.UserRestDto;
+import com.nonIt.GameOn.service.createdto.UserDto;
+import com.nonIt.GameOn.service.restdto.UserRestDto;
 
 import java.time.LocalDate;
 import java.util.List;

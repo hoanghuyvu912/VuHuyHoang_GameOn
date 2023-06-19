@@ -1,8 +1,8 @@
 package com.nonIt.GameOn.service;
 
-import com.nonIt.GameOn.rest.resources_dto.ReceiptCreateDto;
-import com.nonIt.GameOn.service.dto.ReceiptDto;
-import com.nonIt.GameOn.service.restDto.ReceiptRestDto;
+import com.nonIt.GameOn.rest.resourcesdto.ReceiptCreateDto;
+import com.nonIt.GameOn.service.createdto.ReceiptDto;
+import com.nonIt.GameOn.service.restdto.ReceiptRestDto;
 
 import java.time.LocalDate;
 import java.util.List;

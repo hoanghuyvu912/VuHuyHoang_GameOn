@@ -6,6 +6,8 @@ import javax.persistence.*;
 import org.hibernate.validator.constraints.Length;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -33,4 +35,7 @@ public class Developer {
 
     @Column(name = "established_date")
     private LocalDate establishedDate;
+
+    @OneToMany(mappedBy = "developer", cascade = CascadeType.PERSIST)
+    private List<Game> gameList = new ArrayList<>();
 }

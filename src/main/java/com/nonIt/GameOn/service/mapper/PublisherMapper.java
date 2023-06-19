@@ -1,11 +1,9 @@
 package com.nonIt.GameOn.service.mapper;
 
 import com.nonIt.GameOn.entity.Publisher;
-import com.nonIt.GameOn.service.dto.PublisherDto;
-import com.nonIt.GameOn.service.restDto.PublisherRestDto;
+import com.nonIt.GameOn.service.createdto.PublisherDto;
+import com.nonIt.GameOn.service.restdto.PublisherRestDto;
 import org.mapstruct.Mapper;
-
-import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface PublisherMapper extends EntityMapper<PublisherRestDto, Publisher, PublisherDto>{
