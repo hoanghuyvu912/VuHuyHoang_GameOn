@@ -25,10 +25,10 @@ public interface ReceiptDetailsService {
     void deleteReceiptDetails(Integer receiptDetailsId);
 
 //    List<ReceiptDetailsRestDto> getRevenueOfReceiptDetailsBetweenDates(LocalDate date1, LocalDate date2);
-    List<RevenuePerDateDto> getRevenuePerDateBetweenDates(@Param("date1")LocalDate date1, @Param("date2")LocalDate date2);
-
-    Map<Game, Long> getBestSellerGamesBetweenDates(@Param("date1")LocalDate date1, @Param("date2")LocalDate date2);
-
-    Map<Game, Long> getWorstSellerGamesBetweenDates(@Param("date1")LocalDate date1, @Param("date2")LocalDate date2);
+//    List<RevenuePerDateDto> getRevenuePerDateBetweenDates(@Param("date1")LocalDate date1, @Param("date2")LocalDate date2);
+//
+//    Map<Game, Long> getBestSellerGamesBetweenDates(@Param("date1")LocalDate date1, @Param("date2")LocalDate date2);
+//
+//    Map<Game, Long> getWorstSellerGamesBetweenDates(@Param("date1")LocalDate date1, @Param("date2")LocalDate date2);
 
 }

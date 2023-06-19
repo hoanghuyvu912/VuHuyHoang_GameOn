@@ -52,6 +52,7 @@ public class Game {
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
 
+<<<<<<< HEAD
 //    @OneToMany(fetch = FetchType.LAZY, mappedBy = "game", cascade = CascadeType.PERSIST)
 //    private List<ReceiptDetails> receiptDetailsList = new ArrayList<>();
 
@@ -69,5 +70,9 @@ public class Game {
 
     @OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "game", cascade = CascadeType.PERSIST)
     private List<GameGenre> gameGenreList = new ArrayList<>();
+=======
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "game", cascade = CascadeType.PERSIST)
+    private List<GameCode> gameCodeList = new ArrayList<>();
+>>>>>>> feature/add-game-code-entity
 }
 

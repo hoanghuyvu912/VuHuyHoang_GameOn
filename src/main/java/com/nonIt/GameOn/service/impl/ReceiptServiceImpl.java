@@ -62,6 +62,7 @@ public class ReceiptServiceImpl implements ReceiptService {
     }
 
 
+<<<<<<< HEAD
     @Override
     public ReceiptRestDto createReceipt(ReceiptCreateDto receiptCreateDto) {
         User user = userRepository.findById(receiptCreateDto.getUserId()).orElseThrow(GameOnException::UserNotFound);
@@ -101,6 +102,46 @@ public class ReceiptServiceImpl implements ReceiptService {
 
         return receiptMapper.toDto(receipt);
     }
+=======
+//    @Override
+//    public ReceiptRestDto createReceipt(ReceiptCreateDto receiptCreateDto) {
+//        User user = userRepository.findById(receiptCreateDto.getUserId()).orElseThrow(GameOnException::UserNotFound);
+//        List<Integer> gamesIdListOfUser = receiptDetailsRepository.findByReceiptUserId(receiptCreateDto.getUserId()).stream()
+//                .map(receiptDetailsMapper::toSimplifiedDto)
+//                .map(SimplifiedReceiptDetailsDto::getGameId).collect(Collectors.toList());
+//        Receipt receipt = Receipt.builder()
+//                .user(user)
+//                .build();
+//
+//        List<ReceiptDetails> receiptDetailsList = new ArrayList<>();
+//        Double totalPriceOfCart = 0D;
+//
+//        for (Integer gameId : receiptCreateDto.getGameIdList()) {
+//            for (Integer gameIdOfUser : gamesIdListOfUser) {
+//                if (Objects.equals(gameId, gameIdOfUser)) {
+//                    throw GameOnException.badRequest("CannotBuyGame", "User has already bought this game!");
+//                }
+//            }
+//            ReceiptDetails receiptDetails = new ReceiptDetails();
+//            Game game = gameRepository.findById(gameId).orElseThrow(GameOnException::GameNotFound);
+//            totalPriceOfCart += game.getPrice();
+//            receiptDetails.setReceipt(receipt);
+//            receiptDetails.setGame(game);
+//            receiptDetailsList.add(receiptDetails);
+//        }
+//        if (totalPriceOfCart > user.getBalance()) {
+//            throw GameOnException.badRequest("InsufficientBalance", "Insufficient balance. \nYour current balance: $" + user.getBalance() + ". \nTotal price of cart: $" + totalPriceOfCart);
+//        }
+//
+//        user.setBalance(user.getBalance() - totalPriceOfCart);
+//
+//        receipt.setReceiptDetailsList(receiptDetailsList);
+//
+//        receipt = receiptRepository.save(receipt);
+//
+//        return receiptMapper.toDto(receipt);
+//    }
+>>>>>>> feature/add-game-code-entity
 
     @Override
     public ReceiptRestDto updateReceipt(Integer receiptId, ReceiptDto receiptDto) {

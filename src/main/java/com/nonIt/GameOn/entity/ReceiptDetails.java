@@ -26,8 +26,15 @@ public class ReceiptDetails {
     @JoinColumn(name = "receipt_id")
     private Receipt receipt;
 
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "game_id")
-    private Game game;
+//    @JsonIgnore
+//    @ManyToOne
+//    @JoinColumn(name = "game_id")
+//    private Game game;
+
+    @OneToOne
+    @JoinColumn(name = "game_code_id")
+    private GameCode gameCode;
+
+    @Column(name="game_price", columnDefinition="Decimal(4,2)")
+    private Double gamePrice;
 }

@@ -20,7 +20,7 @@ public interface RatingService {
     void deleteRating(Integer ratingId);
 
     List<RatingRestDto> getByUserId(Integer userId);
-    List<Rating> demo();
+//    List<Rating> demo();
 
-    List<GameRestDto> getGameByRatingBetweenAndReleasedDateBetween(Integer rating1, Integer rating2, LocalDate date1, LocalDate date2);
+//    List<GameRestDto> getGameByRatingBetweenAndReleasedDateBetween(Integer rating1, Integer rating2, LocalDate date1, LocalDate date2);
 }

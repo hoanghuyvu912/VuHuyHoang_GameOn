@@ -163,11 +163,11 @@ public interface GameRepository extends JpaRepository<Game, Integer>, CustomGame
     @Query(value = "SELECT g from Game g join Publisher p on g.publisher.id = p.id where p.id = :publisherId")
     List<Game> getByPublisherId(@Param("publisherId") Integer publisherId);
 
-    @Query(value = "SELECT g from Game g join ReceiptDetails rd on g.id = rd.game.id join Receipt r on rd.receipt.id = r.id join User u on u.id = r.user.id where u.id = :userId")
-    List<Game> getByUserId(@Param("userId") Integer userId);
-
-    @Query(value = "SELECT g from Game g join ReceiptDetails rd on g.id = rd.game.id join Receipt r on rd.receipt.id = r.id join User u on u.id = r.user.id where UPPER(u.username) LIKE UPPER(:username)")
-    List<Game> getByUsername(@Param("username") String username);
+//    @Query(value = "SELECT g from Game g join ReceiptDetails rd on g.id = rd.game.id join Receipt r on rd.receipt.id = r.id join User u on u.id = r.user.id where u.id = :userId")
+//    List<Game> getByUserId(@Param("userId") Integer userId);
+//
+//    @Query(value = "SELECT g from Game g join ReceiptDetails rd on g.id = rd.game.id join Receipt r on rd.receipt.id = r.id join User u on u.id = r.user.id where UPPER(u.username) LIKE UPPER(:username)")
+//    List<Game> getByUsername(@Param("username") String username);
 
     @Query(value = "SELECT g from Game g join GameGenre gg on g.id = gg.game.id join Genre g2 on gg.genre.id = g2.id where g2.id = :genreId")
     List<Game> getByGenreId(@Param("genreId") Integer genreId);

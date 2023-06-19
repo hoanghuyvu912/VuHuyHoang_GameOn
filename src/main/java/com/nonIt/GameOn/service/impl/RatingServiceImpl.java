@@ -89,21 +89,21 @@ public class RatingServiceImpl implements RatingService {
         return ratingRepository.getRatingByUserId(userId).stream().map(ratingMapper::toDto).collect(Collectors.toList());
     }
 
-    @Override
-    public List<Rating> demo() {
-        return ratingRepository.findTop1ByOrderByRatingDescByGroupByGame();
-    }
+//    @Override
+//    public List<Rating> demo() {
+//        return ratingRepository.findTop1ByOrderByRatingDescByGroupByGame();
+//    }
 
-    @Override
-    public List<GameRestDto> getGameByRatingBetweenAndReleasedDateBetween(Integer rating1, Integer rating2, LocalDate date1, LocalDate date2) {
-        return ratingRepository.findAll().stream()
-                .filter(r -> r.getRating() < rating2)
-                .filter(r -> r.getRating() > rating1)
-                .map(Rating::getGame)
-                .filter(game -> game.getReleasedDate().isAfter(date1))
-                .filter(game -> game.getReleasedDate().isBefore(date2))
-                .distinct()
-                .map(gameMapper::toDto)
-                .collect(Collectors.toList());
-    }
+//    @Override
+//    public List<GameRestDto> getGameByRatingBetweenAndReleasedDateBetween(Integer rating1, Integer rating2, LocalDate date1, LocalDate date2) {
+//        return ratingRepository.findAll().stream()
+//                .filter(r -> r.getRating() < rating2)
+//                .filter(r -> r.getRating() > rating1)
+//                .map(Rating::getGame)
+//                .filter(game -> game.getReleasedDate().isAfter(date1))
+//                .filter(game -> game.getReleasedDate().isBefore(date2))
+//                .distinct()
+//                .map(gameMapper::toDto)
+//                .collect(Collectors.toList());
+//    }
 }
