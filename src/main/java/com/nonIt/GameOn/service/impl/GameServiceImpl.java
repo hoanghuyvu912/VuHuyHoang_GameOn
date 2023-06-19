@@ -12,6 +12,7 @@ import com.nonIt.GameOn.service.GameService;
 import com.nonIt.GameOn.service.customDto.GameSearchDto;
 import com.nonIt.GameOn.service.createdto.GameDto;
 import com.nonIt.GameOn.service.mapper.CommentMapper;
+import com.nonIt.GameOn.repository.*;
 import com.nonIt.GameOn.service.mapper.GameMapper;
 import com.nonIt.GameOn.service.mapper.RatingMapper;
 import com.nonIt.GameOn.service.restdto.GameRestDto;
@@ -36,6 +37,7 @@ public class GameServiceImpl implements GameService {
     private final GameMapper gameMapper;
     private final RatingMapper ratingMapper;
     private final CommentMapper commentMapper;
+    private final GameCodeRepository gameCodeRepository;
 
     //CRUD Services
     @Override
@@ -670,4 +672,11 @@ public class GameServiceImpl implements GameService {
         }
         return gameRepository.findGamesByDto(gameSearchDto).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
+
+    public Integer getUsedGameCodeListOfGame(Integer gameId) {
+        return (Integer) (int) gameCodeRepository.findAll().stream()
+                .filter(gameCode -> gameId.equals(gameCode.getGame().getId()))
+                .filter(gameCode -> gameCode.getGameCodeStatus().equals(GameCodeStatus.Used)).count();
+    }
+
 }

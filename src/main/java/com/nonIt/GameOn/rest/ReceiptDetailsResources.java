@@ -1,9 +1,11 @@
 package com.nonIt.GameOn.rest;
 
 import com.nonIt.GameOn.service.ReceiptDetailsService;
-import com.nonIt.GameOn.service.customDto.RevenuePerDateDto;
 import com.nonIt.GameOn.service.createdto.ReceiptDetailsDto;
 import com.nonIt.GameOn.service.restdto.ReceiptDetailsRestDto;
+import com.nonIt.GameOn.service.customDto.GameStatisticsDto;
+import com.nonIt.GameOn.service.customDto.GameWithUsedGameCodeListDto;
+import com.nonIt.GameOn.service.customDto.RevenuePerMonthInYearDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -50,9 +52,25 @@ public class ReceiptDetailsResources {
         return ResponseEntity.noContent().build();
     }
 
-//    @PreAuthorize("hasRole('ADMIN')")
-//    @GetMapping("/revenue-per-date")
-//    public ResponseEntity<List<RevenuePerDateDto>> getRevenuePerDateBetweenDates(@RequestParam("date1") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date1, @RequestParam("date2") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date2) {
-//        return ResponseEntity.ok(receiptDetailsService.getRevenuePerDateBetweenDates(date1, date2));
-//    }
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping(value = "/bestseller-games")
+    public ResponseEntity<List<GameWithUsedGameCodeListDto>> getBestSellerGamesBetweenDates(@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)  LocalDate startDate, @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate ) {
+            return ResponseEntity.ok(receiptDetailsService.getBestSellerGamesBetweenDates(startDate, endDate));
+    }
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping(value = "/worstseller-games")
+    public ResponseEntity<List<GameWithUsedGameCodeListDto>> getWorstSellerGamesBetweenDates(@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)  LocalDate startDate, @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate ) {
+        return ResponseEntity.ok(receiptDetailsService.getWorstSellerGamesBetweenDates(startDate, endDate));
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/revenue-per-month-in-year")
+    public ResponseEntity<RevenuePerMonthInYearDto> getRevenuePerDateBetweenDates(@RequestParam("month") Integer month, @RequestParam("year") Integer year) {
+        return ResponseEntity.ok(receiptDetailsService.getRevenuePerMonthInYear(month, year));
+    }
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/game-statistics-per-month")
+    public ResponseEntity<List<GameStatisticsDto>> getGameStatisticsPerMonthInYear(@RequestParam("month") Integer month, @RequestParam("year") Integer year) {
+        return ResponseEntity.ok(receiptDetailsService.getGameStatisticsDto(month, year));
+    }
 }

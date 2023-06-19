@@ -8,13 +8,16 @@ import com.nonIt.GameOn.repository.GameCodeRepository;
 import com.nonIt.GameOn.repository.GameRepository;
 import com.nonIt.GameOn.service.GameCodeService;
 import com.nonIt.GameOn.service.createdto.GameCodeDto;
+import com.nonIt.GameOn.service.customDto.GameCodeResponseDto;
 import com.nonIt.GameOn.service.mapper.GameCodeMapper;
 import com.nonIt.GameOn.service.restdto.GameCodeRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,15 +34,26 @@ public class GameCodeServiceImpl implements GameCodeService {
     }
 
     @Override
-    public GameCodeRestDto createGameCodeForGame(GameCodeDto gameCodeDto) {
+    public GameCodeResponseDto createListGameCodeForGame(GameCodeDto gameCodeDto) {
         Game game = gameRepository.findById(gameCodeDto.getGameId()).orElseThrow(GameOnException::GameNotFound);
 
-        GameCode newGameCode = GameCode.builder().gameCode(gameCodeDto.getGameCode()).game(game).gameCodeStatus(GameCodeStatus.Available).build();
+        Set<String> uniqueCodes = new HashSet<>();
 
-        game.getGameCodeList().add(newGameCode);
+        gameCodeDto.getGameCodeList().forEach(gameCode -> {
+            if (uniqueCodes.contains(gameCode)) {
+                throw GameOnException.badRequest("DuplicateGameCodeFound" ,"Duplicate Game Code Found");
+            }
+            uniqueCodes.add(gameCode);
+            GameCode newGameCode = GameCode.builder()
+                    .gameCodeStatus(GameCodeStatus.Available)
+                    .gameCode(gameCode)
+                    .game(game)
+                    .build();
+            game.getGameCodeList().add(newGameCode);
+            gameCodeRepository.save(newGameCode);
+        });
 
-        gameCodeRepository.save(newGameCode);
-        return gameCodeMapper.toDto(newGameCode);
+        return gameCodeMapper.toGameCodeResponseDto(gameCodeDto);
     }
 
     @Override
@@ -73,4 +87,7 @@ public class GameCodeServiceImpl implements GameCodeService {
 
         gameCodeRepository.deleteById(gameCodeId);
     }
+
+
 }
+

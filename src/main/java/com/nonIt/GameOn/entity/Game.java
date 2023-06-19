@@ -52,22 +52,22 @@ public class Game {
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
 
-    @OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "game", cascade = CascadeType.PERSIST)
+    @OneToMany(orphanRemoval = true, mappedBy = "game", cascade = CascadeType.PERSIST)
     private List<Comment> commentList = new ArrayList<>();
 
-    @OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "game", cascade = CascadeType.PERSIST)
+    @OneToMany(orphanRemoval = true, mappedBy = "game", cascade = CascadeType.PERSIST)
     private List<Rating> ratingList = new ArrayList<>();
 
-    @OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "game", cascade = CascadeType.PERSIST)
+    @OneToMany(orphanRemoval = true, mappedBy = "game", cascade = CascadeType.PERSIST)
     private List<GameImage> gameImageList = new ArrayList<>();
 
-    @OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "game", cascade = CascadeType.PERSIST)
+    @OneToMany(orphanRemoval = true, mappedBy = "game", cascade = CascadeType.PERSIST)
     private List<GameSubGenre> gameSubGenreList = new ArrayList<>();
 
-    @OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "game", cascade = CascadeType.PERSIST)
+    @OneToMany(orphanRemoval = true, mappedBy = "game", cascade = CascadeType.PERSIST)
     private List<GameGenre> gameGenreList = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "game", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "game", cascade = CascadeType.PERSIST)
     private List<GameCode> gameCodeList = new ArrayList<>();
 }
 

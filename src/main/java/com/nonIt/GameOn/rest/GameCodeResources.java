@@ -3,6 +3,7 @@ package com.nonIt.GameOn.rest;
 import com.nonIt.GameOn.service.GameCodeService;
 import com.nonIt.GameOn.service.createdto.GameCodeDto;
 import com.nonIt.GameOn.service.restdto.GameCodeRestDto;
+import com.nonIt.GameOn.service.customDto.GameCodeResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,8 +26,8 @@ public class GameCodeResources {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<GameCodeRestDto> createGameCodeForGame(@RequestBody GameCodeDto gameCodeDto) {
-        return ResponseEntity.ok(gameCodeService.createGameCodeForGame(gameCodeDto));
+    public ResponseEntity<GameCodeResponseDto> createGameCodeForGame(@RequestBody GameCodeDto gameCodeDto) {
+        return ResponseEntity.ok(gameCodeService.createListGameCodeForGame(gameCodeDto));
     }
 
     @PreAuthorize("hasRole('ADMIN')")

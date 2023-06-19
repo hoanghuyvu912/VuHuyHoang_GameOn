@@ -37,4 +37,5 @@ public class ReceiptDetails {
 
     @Column(name="game_price", columnDefinition="Decimal(4,2)")
     private Double gamePrice;
+
 }

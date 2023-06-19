@@ -4,7 +4,6 @@ import com.nonIt.GameOn.entity.*;
 import com.nonIt.GameOn.exception.GameOnException;
 import com.nonIt.GameOn.repository.*;
 import com.nonIt.GameOn.rest.resourcesdto.ReceiptCreateDto;
-import com.nonIt.GameOn.rest.resourcesdto.SimplifiedReceiptDetailsDto;
 import com.nonIt.GameOn.service.ReceiptService;
 import com.nonIt.GameOn.service.createdto.ReceiptDto;
 import com.nonIt.GameOn.service.mapper.ReceiptDetailsMapper;
@@ -19,6 +18,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,8 +31,8 @@ public class ReceiptServiceImpl implements ReceiptService {
     private final GameRepository gameRepository;
     private final ReceiptDetailsRepository receiptDetailsRepository;
     private final ReceiptDetailsMapper receiptDetailsMapper;
-
     private final GameCodeRepository gameCodeRepository;
+
 
     @Override
     public List<ReceiptRestDto> getAll() {
@@ -77,13 +77,10 @@ public class ReceiptServiceImpl implements ReceiptService {
         Double totalPriceOfCart = 0D;
 
         for (Integer gameId : receiptCreateDto.getGameIdList()) {
-//            for (Integer gameIdOfUser : gamesIdListOfUser) {
-//                if (Objects.equals(gameId, gameIdOfUser)) {
-//                    throw GameOnException.badRequest("CannotBuyGame", "Game ID: " + gameId + " already existed in user's library!");
-//                }
-//            }
             Game game = gameRepository.findById(gameId).orElseThrow(GameOnException::GameNotFound);
             totalPriceOfCart += game.getPrice();
+            Optional<GameCode> gameCode = gameCodeRepository.findByGameId(gameId).stream().filter(gc -> GameCodeStatus.Available.equals(gc.getGameCodeStatus())).findFirst();
+
 //            ReceiptDetails receiptDetails = ReceiptDetails.builder()
 //                    .receipt(receipt)
 //                    .gameCode(gameCodeRepository.findAll().stream().filter(gc -> gameId.equals(gc.getGame().getId())).filter(gc -> GameCodeStatus.Available.equals(gc.getGameCodeStatus())).findFirst().get())
@@ -93,9 +90,15 @@ public class ReceiptServiceImpl implements ReceiptService {
 
             ReceiptDetails receiptDetails = ReceiptDetails.builder()
                     .receipt(receipt)
-                    .gameCode(gameCodeRepository.findByGameId(gameId).stream().filter(gc -> GameCodeStatus.Available.equals(gc.getGameCodeStatus())).findFirst().get())
+//                    .gameCode(gameCodeRepository.findByGameId(gameId).stream().filter(gc -> GameCodeStatus.Available.equals(gc.getGameCodeStatus())).findFirst().get())
                     .gamePrice(game.getPrice())
                     .build();
+
+            if (gameCode.isPresent()) {
+                receiptDetails.setGameCode(gameCode.get());
+            } else {
+                throw GameOnException.badRequest("CannotGetGameCode", "The current game doesn't have any code left.");
+            }
             receiptDetailsList.add(receiptDetails);
         }
         if (totalPriceOfCart > user.getBalance()) {
@@ -103,11 +106,8 @@ public class ReceiptServiceImpl implements ReceiptService {
         }
 
         user.setBalance(user.getBalance() - totalPriceOfCart);
-
         receipt.setReceiptDetailsList(receiptDetailsList);
-
         receipt = receiptRepository.save(receipt);
-
         return receiptMapper.toDto(receipt);
     }
 
@@ -174,6 +174,6 @@ public class ReceiptServiceImpl implements ReceiptService {
 
     @Override
     public List<ReceiptRestDto> getByUserId(Integer userId) {
-        return receiptRepository.getReceiptByUserId(userId).stream().map(receiptMapper::toDto).collect(Collectors.toList());
+        return receiptRepository.findByUserId(userId).stream().map(receiptMapper::toDto).collect(Collectors.toList());
     }
 }

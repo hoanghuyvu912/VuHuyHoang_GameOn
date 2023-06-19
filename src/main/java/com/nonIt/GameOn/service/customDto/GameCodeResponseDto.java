@@ -1,6 +1,5 @@
-package com.nonIt.GameOn.service.createdto;
+package com.nonIt.GameOn.service.customDto;
 
-import com.nonIt.GameOn.entity.GameCodeStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,9 +9,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GameCodeDto {
+public class GameCodeResponseDto {
     private List<String> gameCodeList;
     private Integer gameId;
-    private GameCodeStatus gameCodeStatus;
-    private String gameCode;
 }
