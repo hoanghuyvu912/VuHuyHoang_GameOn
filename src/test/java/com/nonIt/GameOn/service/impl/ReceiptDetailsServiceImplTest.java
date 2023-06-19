@@ -1,6 +1,7 @@
 package com.nonIt.GameOn.service.impl;
 
 import com.nonIt.GameOn.entity.Game;
+import com.nonIt.GameOn.entity.ReceiptDetails;
 import com.nonIt.GameOn.rest.resources_dto.SimplifiedReceiptDetailsDto;
 import com.nonIt.GameOn.service.GameService;
 import com.nonIt.GameOn.service.ReceiptDetailsService;
@@ -71,16 +72,18 @@ class ReceiptDetailsServiceImplTest {
 
     @Test
     void testGetBestSellerGamesBetweenDates() {
-        LocalDate dateOne = LocalDate.parse("2023-06-15");
-        LocalDate dateTwo = LocalDate.parse("2023-06-18");
+        LocalDate startDate = LocalDate.parse("2023-06-15");
+        System.out.println(startDate);
+        LocalDate endDate = LocalDate.parse("2023-06-18");
 
-        System.out.println( receiptDetailsService.getUsedGameCodeListBetweenDates(dateOne,dateTwo));
+        System.out.println( receiptDetailsService.getBestSellerGamesBetweenDates(startDate,endDate));
     }
 
     @Test
     void getReceiptDetailListBetweenDates() {
         LocalDate dateOne = LocalDate.parse("2023-06-15");
-        LocalDate dateTwo = LocalDate.parse("2023-06-18");
-        receiptDetailsService.getReceiptDetailListBetweenDates(dateOne,dateTwo).size();
+        LocalDate dateTwo = LocalDate.parse("2023-06-19");
+        receiptDetailsService.getReceiptDetailListBetweenDates(dateOne,dateTwo);
     }
+
 }

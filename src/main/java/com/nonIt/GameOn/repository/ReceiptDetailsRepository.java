@@ -24,7 +24,8 @@ public interface ReceiptDetailsRepository extends JpaRepository<ReceiptDetails, 
 //    List<RevenuePerDateDto> getRevenuePerDateBetweenDates(@Param("date1")LocalDate date1, @Param("date2")LocalDate date2);
     @Query("SELECT r FROM Receipt r WHERE r.receiptDate > ?1 AND r.receiptDate < ?2")
     List<Receipt> findReceiptsBetweenDates(LocalDate date1, LocalDate date2);
-
+    @Query("SELECT rd FROM ReceiptDetails rd JOIN rd.receipt r WHERE r.receiptDate >= ?1 AND r.receiptDate <= ?2")
+    List<ReceiptDetails> findByReceiptReceiptDate(LocalDate startDate, LocalDate endDate);
     List<ReceiptDetails> findByReceiptUserId(@Param("userId") Integer userId);
 }
 

@@ -11,8 +11,11 @@ import com.nonIt.GameOn.service.ReceiptDetailsService;
 import com.nonIt.GameOn.service.customDto.GameCodeCustomDto;
 import com.nonIt.GameOn.service.customDto.GameWithUsedGameCodeListDto;
 import com.nonIt.GameOn.service.customDto.RevenuePerDateDto;
+import com.nonIt.GameOn.service.dto.GameCodeDto;
 import com.nonIt.GameOn.service.dto.ReceiptDetailsDto;
+import com.nonIt.GameOn.service.mapper.GameCodeMapper;
 import com.nonIt.GameOn.service.mapper.ReceiptDetailsMapper;
+import com.nonIt.GameOn.service.restDto.GameCodeRestDto;
 import com.nonIt.GameOn.service.restDto.GameRestDto;
 import com.nonIt.GameOn.service.restDto.ReceiptDetailsRestDto;
 //import jakarta.transaction.Transactional;
@@ -34,6 +37,7 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
     private final GameRepository gameRepository;
     private final ReceiptDetailsMapper receiptDetailsMapper;
     private final GameCodeRepository gameCodeRepository;
+    private final GameCodeMapper gameCodeMapper;
 
     @Override
     public List<ReceiptDetailsRestDto> getAll() {
@@ -87,24 +91,20 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
 //    public List<RevenuePerDateDto> getRevenuePerDateBetweenDates(LocalDate date1, LocalDate date2) {
 //        return receiptDetailsRepository.getRevenuePerDateBetweenDates(date1, date2);
 //    }
+
     @Override
-    @Transactional
-    public List<GameCode> getUsedGameCodeListBetweenDates(LocalDate date1, LocalDate date2) {
-        return receiptDetailsRepository.findAll().stream()
-                .filter(rd -> rd.getReceipt().getReceiptDate().isAfter(date1.minusDays(1)))
-                .filter(rd -> rd.getReceipt().getReceiptDate().isBefore(date2.plusDays(1)))
+    public List<GameWithUsedGameCodeListDto> getBestSellerGamesBetweenDates(LocalDate startDate, LocalDate endDate) {
+        List<GameCode> usedGameCodes = receiptDetailsRepository.findByReceiptReceiptDate(startDate, endDate)
+                .stream()
                 .map(ReceiptDetails::getGameCode)
-                .filter(gc -> gc.getGameCodeStatus().equals(GameCodeStatus.Used))
                 .collect(Collectors.toList());
-    }
 
-
-    @Override
-    public List<GameWithUsedGameCodeListDto> getBestSellerGamesBetweenDates(LocalDate date1, LocalDate date2) {
-        List<GameCode> usedGameCodes = getUsedGameCodeListBetweenDates(date1, date2);
+//        usedGameCodes.forEach(ugc -> System.out.println(ugc.getGameCode()));
 
         Map<Game, Long> gameWithUsedGameCodeList = usedGameCodes.stream()
                 .collect(Collectors.groupingBy(GameCode::getGame, Collectors.counting()));
+
+        gameWithUsedGameCodeList.forEach((key, value) -> System.out.println(key + ":" + value));
 
         List<GameWithUsedGameCodeListDto> gameWithUsedGameCodeListDtos = gameWithUsedGameCodeList.entrySet().stream()
                 .map(entry -> new GameWithUsedGameCodeListDto(entry.getKey(), entry.getValue().intValue()))
@@ -118,10 +118,7 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
     public List<ReceiptDetailsDto> getReceiptDetailListBetweenDates(LocalDate date1, LocalDate date2) {
         List<ReceiptDetailsDto> receiptDetailsDtos = new ArrayList<>();
 
-        receiptDetailsRepository.findAll().stream()
-                .filter(rd -> rd.getReceipt().getReceiptDate().isAfter(date1))
-                .filter(rd -> rd.getReceipt().getReceiptDate().isBefore(date2))
-                .collect(Collectors.toList())
+        receiptDetailsRepository.findByReceiptReceiptDate(date1, date2)
                 .forEach(receiptDetails -> {
                     ReceiptDetailsDto receiptDetailsDto = new ReceiptDetailsDto(
                             receiptDetails.getReceipt().getId(),
@@ -130,10 +127,8 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
                     );
                     receiptDetailsDtos.add(receiptDetailsDto);
                 });
-
         return receiptDetailsDtos;
     }
-
 
 
 //        for (Map.Entry<Game, Long> entry : gameWithUsedGameCodeList.entrySet()) {
