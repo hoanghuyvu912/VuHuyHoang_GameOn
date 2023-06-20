@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GameWithUsedGameCodeListDto {
-    private Game game;
+    private Integer id;
+    private String gameName;
     private Integer numberOfUsedGameCode;
 }

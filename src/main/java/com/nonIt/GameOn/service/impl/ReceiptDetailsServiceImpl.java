@@ -97,7 +97,7 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
                 .stream()
                 .sorted(Comparator.comparing(Map.Entry<Game, Long>::getValue).reversed())
                 .limit(5)
-                .map(entry -> new GameWithUsedGameCodeListDto(entry.getKey(), entry.getValue().intValue()))
+                .map(entry -> new GameWithUsedGameCodeListDto(entry.getKey().getId(), entry.getKey().getName(), entry.getValue().intValue()))
                 .collect(Collectors.toList());
     }
 
@@ -138,7 +138,7 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
                 .stream()
                 .sorted(Comparator.comparing(Map.Entry<Game, Long>::getValue))
                 .limit(5)
-                .map(entry -> new GameWithUsedGameCodeListDto(entry.getKey(), entry.getValue().intValue()))
+                .map(entry -> new GameWithUsedGameCodeListDto(entry.getKey().getId(),entry.getKey().getName(), entry.getValue().intValue()))
                 .collect(Collectors.toList());
     }
 
