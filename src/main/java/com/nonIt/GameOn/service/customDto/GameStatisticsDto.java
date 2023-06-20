@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GameStatisticsDto {
-    private Game game;
+    private Integer id;
+    private String name;
     private Long gameCodeList;
     private Double revenue;
 }

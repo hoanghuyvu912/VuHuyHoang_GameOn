@@ -1,6 +1,9 @@
 package com.nonIt.GameOn.entity;
 
 //import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import javax.persistence.*;
 import org.hibernate.validator.constraints.Length;
@@ -37,5 +40,6 @@ public class Developer {
     private LocalDate establishedDate;
 
     @OneToMany(mappedBy = "developer", cascade = CascadeType.PERSIST)
+    @JsonIgnore
     private List<Game> gameList = new ArrayList<>();
 }

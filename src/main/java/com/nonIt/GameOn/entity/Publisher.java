@@ -4,6 +4,7 @@ package com.nonIt.GameOn.entity;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -38,5 +39,6 @@ public class Publisher {
     private LocalDate establishedDate;
 
     @OneToMany(mappedBy = "publisher", cascade = CascadeType.PERSIST)
+    @JsonIgnore
     private List<Game> game  = new ArrayList<>();
 }

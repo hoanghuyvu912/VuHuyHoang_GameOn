@@ -2,6 +2,8 @@ package com.nonIt.GameOn.entity;
 
 //import jakarta.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -53,6 +55,7 @@ public class Game {
     private Publisher publisher;
 
     @OneToMany(orphanRemoval = true, mappedBy = "game", cascade = CascadeType.PERSIST)
+    @JsonIgnore
     private List<Comment> commentList = new ArrayList<>();
 
     @OneToMany(orphanRemoval = true, mappedBy = "game", cascade = CascadeType.PERSIST)
