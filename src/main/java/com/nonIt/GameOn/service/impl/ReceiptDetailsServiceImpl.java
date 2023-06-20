@@ -84,7 +84,7 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
 
     @Override
     public RevenuePerMonthInYearDto getRevenuePerMonthInYear(Integer month, Integer year) {
-        return receiptDetailsRepository.getRevenuePerMonthInYear(month,year);
+        return receiptDetailsRepository.getRevenuePerMonthInYear(month, year);
     }
 
     @Override
@@ -127,6 +127,9 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
 
     @Override
     public List<GameWithUsedGameCodeListDto> getWorstSellerGamesBetweenDates(LocalDate startDate, LocalDate endDate) {
+        if ((!isAfterCurrentDate(startDate.getYear(), startDate.getMonthValue(), startDate.getDayOfMonth())) || !isAfterCurrentDate(endDate.getYear(), endDate.getMonthValue(), endDate.getDayOfMonth()))
+            throw GameOnException.badRequest("BadRequest", "The input time is after the current time.");
+
         List<Game> gameList = getGamesSoldBetweenDates(startDate, endDate);
 
         Map<Game, Long> gamesWithUsedGameCodeList = getGameLongMap(gameList);
@@ -141,7 +144,19 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
 
     @Override
     public List<GameStatisticsDto> getGameStatisticsDto(Integer month, Integer year) {
+        final int dayOfMonth = 1;
+
+        if (!isAfterCurrentDate(year, month, dayOfMonth))
+            throw GameOnException.badRequest("BadRequest", "The input time is after the current time.");
+
         return receiptDetailsRepository.getGameStatisticsPerMonth(month, year);
+    }
+
+    private static boolean isAfterCurrentDate(int year, int month, int day) {
+        LocalDate inputDate = LocalDate.of(year, month, day);
+        LocalDate currentDate = LocalDate.now();
+
+        return !inputDate.isAfter(currentDate);
     }
 
     private static Map<Game, Long> getGameLongMap(List<Game> gameList) {
