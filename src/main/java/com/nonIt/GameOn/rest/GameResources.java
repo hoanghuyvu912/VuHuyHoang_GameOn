@@ -27,7 +27,7 @@ public class GameResources {
 
     //CRUD APIs
     @GetMapping
-    public ResponseEntity<List<GameRestDto>> getAllGame() {
+    public ResponseEntity<List<SimplifiedGameDto>> getAllGame() {
         return ResponseEntity.ok(gameService.getAll());
     }
 

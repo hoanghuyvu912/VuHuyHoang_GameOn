@@ -81,16 +81,8 @@ public class ReceiptServiceImpl implements ReceiptService {
             totalPriceOfCart += game.getPrice();
             Optional<GameCode> gameCode = gameCodeRepository.findByGameId(gameId).stream().filter(gc -> GameCodeStatus.Available.equals(gc.getGameCodeStatus())).findFirst();
 
-//            ReceiptDetails receiptDetails = ReceiptDetails.builder()
-//                    .receipt(receipt)
-//                    .gameCode(gameCodeRepository.findAll().stream().filter(gc -> gameId.equals(gc.getGame().getId())).filter(gc -> GameCodeStatus.Available.equals(gc.getGameCodeStatus())).findFirst().get())
-//                    .gamePrice(game.getPrice())
-//                    .build();
-//            receiptDetailsList.add(receiptDetails);
-
             ReceiptDetails receiptDetails = ReceiptDetails.builder()
                     .receipt(receipt)
-//                    .gameCode(gameCodeRepository.findByGameId(gameId).stream().filter(gc -> GameCodeStatus.Available.equals(gc.getGameCodeStatus())).findFirst().get())
                     .gamePrice(game.getPrice())
                     .build();
 

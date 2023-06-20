@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface GameService {
     //CRUD APIs
-    List<GameRestDto> getAll();
+    List<SimplifiedGameDto> getAll();
 
     SimplifiedGameDto findById(Integer gameId);
 
