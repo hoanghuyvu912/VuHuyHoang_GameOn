@@ -96,6 +96,7 @@ public class ReceiptServiceImpl implements ReceiptService {
 
             if (gameCode.isPresent()) {
                 receiptDetails.setGameCode(gameCode.get());
+                gameCode.get().setGameCodeStatus(GameCodeStatus.Used);
             } else {
                 throw GameOnException.badRequest("CannotGetGameCode", "The current game doesn't have any code left.");
             }
