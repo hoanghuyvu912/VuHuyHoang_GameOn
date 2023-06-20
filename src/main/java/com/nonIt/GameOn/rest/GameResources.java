@@ -9,6 +9,7 @@ import com.nonIt.GameOn.service.restdto.GameRestDto;
 //import jakarta.validation.Valid;
 import com.nonIt.GameOn.utils.NullChecker;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -22,6 +23,7 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/games")
+@Slf4j
 public class GameResources {
     private final GameService gameService;
 
@@ -38,8 +40,13 @@ public class GameResources {
     }
 
     @GetMapping(value = "/{gameId}")
-    public ResponseEntity<SimplifiedGameDto> getGameById(@PathVariable("gameId") Integer userId) {
-        return ResponseEntity.ok(gameService.findById(userId));
+    public ResponseEntity<SimplifiedGameDto> getGameById(@PathVariable("gameId") Integer gameId) {
+        try {
+            log.info("Attempted to find game by id: {}", gameId );
+            return ResponseEntity.ok(gameService.findById(gameId));
+        } catch (Exception e) {
+            throw GameOnException.badRequest("GameIdNotFound", "Game ID does not exist!");
+        }
     }
 
     @PutMapping(value = "/{gameId}")

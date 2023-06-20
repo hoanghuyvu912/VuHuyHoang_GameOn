@@ -73,8 +73,10 @@ public class UserServiceImpl implements UserService {
         if (userDto.getGender() != Gender.Female && userDto.getGender() != Gender.Male) {
             throw GameOnException.badRequest("InvalidGender", "Gender must be MALE or FEMALE.");
         }
-        if (userDto.getBalance() < 0) {
-            throw GameOnException.badRequest("InvalidBalance", "Balance must be a positive number");
+        if (userDto.getBalance() != null) {
+            if (userDto.getBalance() < 0) {
+                throw GameOnException.badRequest("InvalidBalance", "Balance must be a positive number");
+            }
         }
 
         User user = User.builder()
@@ -108,14 +110,6 @@ public class UserServiceImpl implements UserService {
                 tempList.add(role);
             }
         }
-
-//        User finalUser = user;
-//        userDto.getRoles().forEach(r -> {
-//            UserRoleAssignment role = new UserRoleAssignment();
-//            role.setRole(r);
-//            role.setUsers(finalUser);
-//            tempList.add(role);
-//        });
 
         user.setRoles(tempList);
 

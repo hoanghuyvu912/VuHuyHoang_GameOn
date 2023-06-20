@@ -7,11 +7,4 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper extends EntityMapper<UserRestDto, User, UserDto>{
-//    UserDto toDto(User user);
-//
-//    List<UserDto> toDtos(List<User> users);
-//
-//    UserRestDto toRestDto(User user);
-//
-//    List<UserRestDto> toRestDtos(List<User> users);
 }

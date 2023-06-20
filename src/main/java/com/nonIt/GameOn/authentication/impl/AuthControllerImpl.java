@@ -1,6 +1,7 @@
 package com.nonIt.GameOn.authentication.impl;
 
 import com.nonIt.GameOn.authentication.AuthController;
+import com.nonIt.GameOn.exception.GameOnException;
 import com.nonIt.GameOn.repository.UserRepository;
 import com.nonIt.GameOn.security.jwt.JwtRequest;
 import com.nonIt.GameOn.security.jwt.JwtResponse;
@@ -9,6 +10,7 @@ import com.nonIt.GameOn.security.service.impl.UserSecurityDetailsImpl;
 import com.nonIt.GameOn.service.UserService;
 import com.nonIt.GameOn.service.createdto.UserDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,6 +26,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class AuthControllerImpl implements AuthController {
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
@@ -55,16 +58,19 @@ public class AuthControllerImpl implements AuthController {
 
     @Override
     public ResponseEntity<?> registerUser(UserDto userSignUpDto) {
+//        log.info("UserSignUpDto: " + userSignUpDto.getEmail());
         if (userRepository.existsByUsername(userSignUpDto.getUsername())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body("Error: Username is already taken!");
+//            return ResponseEntity
+//                    .badRequest()
+//                    .body("Error: Username is already taken!");
+            throw GameOnException.badRequest("UsernameExisted", "Username already taken!");
         }
 
         if (userRepository.existsByEmail(userSignUpDto.getEmail())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body("Error: Email is already in use!");
+//            return ResponseEntity
+//                    .badRequest()
+//                    .body("Error: Email is already in use!");
+            throw GameOnException.badRequest("EmailExisted", "Email already taken!");
         }
 
         // Create new user's account
