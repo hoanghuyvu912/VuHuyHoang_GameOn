@@ -164,7 +164,8 @@ public class GameServiceImpl implements GameService {
     // Find featured games
     @Override
     public List<SimplifiedGameDto> getFeaturedGame() {
-        return gameRepository.findByReleasedDateBetween(LocalDate.now().minusMonths(6), LocalDate.now()).stream().map(gameMapper::toSimplifiedDto).collect(Collectors.toList());
+        final int limitedMonth = 6;
+        return gameRepository.findByReleasedDateBetween(LocalDate.now().minusMonths(limitedMonth), LocalDate.now()).stream().map(gameMapper::toSimplifiedDto).collect(Collectors.toList());
     }
 
     // Find best-seller games between period

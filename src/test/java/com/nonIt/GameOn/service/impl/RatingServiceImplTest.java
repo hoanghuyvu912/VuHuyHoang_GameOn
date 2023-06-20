@@ -1,11 +1,13 @@
 package com.nonIt.GameOn.service.impl;
 
 import com.nonIt.GameOn.service.RatingService;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
@@ -13,5 +15,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 class RatingServiceImplTest {
     @Autowired
     private RatingService ratingService;
-
+    @Test
+    void Should_ReturnRatingList_When_GetAll(){
+        assertTrue(ratingService.getAll().size() > 0);
+    }
 }
