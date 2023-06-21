@@ -13,6 +13,7 @@ import java.util.List;
 
 @Repository
 public interface GameRepository extends JpaRepository<Game, Integer>, CustomGameRepository {
+    List<Game> findAllByOrderByIdAsc();
 
     //Find by name
     List<Game> findByNameIgnoreCaseContaining(String name);

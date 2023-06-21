@@ -42,7 +42,7 @@ public class GameServiceImpl implements GameService {
     //CRUD Services
     @Override
     public List<SimplifiedGameDto> getAll() {
-        return gameRepository.findAll().stream().map(gameMapper::toSimplifiedDto).collect(Collectors.toList());
+        return gameRepository.findAllByOrderByIdAsc().stream().map(gameMapper::toSimplifiedDto).collect(Collectors.toList());
     }
 
     @Override
