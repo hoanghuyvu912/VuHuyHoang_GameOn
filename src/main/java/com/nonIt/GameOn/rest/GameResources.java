@@ -10,10 +10,12 @@ import com.nonIt.GameOn.service.restdto.GameRestDto;
 import com.nonIt.GameOn.utils.NullChecker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
@@ -27,9 +29,17 @@ public class GameResources {
 
     //CRUD APIs
     @GetMapping
-    public ResponseEntity<List<SimplifiedGameDto>> getAllGame() {
+    public ResponseEntity<List<SimplifiedGameDto>> getAllGame(@RequestHeader("Authorization") String authorization) {
+//        System.out.println("My bearer token is: " + authorization);
         return ResponseEntity.ok(gameService.getAll());
     }
+
+//    @GetMapping("/get-header")
+//    public ResponseEntity<String> greeting(HttpServletRequest request) {
+//        // code that uses the language variable
+//        String token = request.getHeader("Authorization");
+//        return ResponseEntity.ok(token);
+//    }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping

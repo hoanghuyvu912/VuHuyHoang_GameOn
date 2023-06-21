@@ -24,6 +24,7 @@ public class JwtUtils implements Serializable {
 		UserSecurityDetailsImpl userPrincipal = (UserSecurityDetailsImpl) authentication.getPrincipal();
 
 		return Jwts.builder().setSubject((userPrincipal.getUsername())).setIssuedAt(new Date())
+				.setId(String.valueOf(userPrincipal.getId()))
 				.setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
 				.signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
 	}

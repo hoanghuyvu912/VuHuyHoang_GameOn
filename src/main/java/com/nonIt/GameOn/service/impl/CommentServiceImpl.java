@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -130,7 +131,24 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void deleteComment(Integer commentId) {
+    public void deleteComment(Integer commentId, String authorization) {
+        Comment comment = commentRepository.findById(commentId).orElseThrow(GameOnException::CommentNotFound);
+        System.out.println("%" + authorization + "%");
+        String[] chunks = authorization.split("\\.");
+        Base64.Decoder decoder = Base64.getUrlDecoder();
+        String header = new String(decoder.decode(chunks[0]));
+        String payload = new String(decoder.decode(chunks[1]));
+        String[] body = payload.split(",");
+        String idStr = body[2].split(":")[1].replaceAll("\"", "");
+        System.out.println(idStr);
+//        System.out.println("%" + id);
+        int id = Integer.parseInt(idStr);
+        System.out.println(id);
+        if(id != (comment.getUser().getId())) {
+            System.out.println("Comment does not belong to the active user!");
+            throw GameOnException.badRequest("CannotDeleteComment", "Comment does not belong to the active user!");
+        }
+        System.out.println("%" + header + ", " + payload);
 //        var auth = SecurityContextHolder.getContext().getAuthentication();
 //        var comment = commentRepository.findById(commentId).orElseThrow(GameOnException::CommentNotFound);
 //        if (!comment.getUser().getUsername().equalsIgnoreCase(auth.getName())) {

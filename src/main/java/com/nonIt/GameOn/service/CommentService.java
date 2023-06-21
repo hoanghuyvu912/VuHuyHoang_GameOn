@@ -16,7 +16,7 @@ public interface CommentService {
 
     CommentRestDto updateComment(Integer commentId, CommentDto commentDto);
 
-    void deleteComment(Integer commentId);
+    void deleteComment(Integer commentId, String authorization);
 
     List<SimplifiedCommentDto> getByUserId(Integer userId);
 
