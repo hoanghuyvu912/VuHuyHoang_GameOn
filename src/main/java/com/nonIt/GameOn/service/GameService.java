@@ -1,6 +1,7 @@
 package com.nonIt.GameOn.service;
 
 import com.nonIt.GameOn.rest.resourcesdto.SimplifiedGameDto;
+import com.nonIt.GameOn.service.customDto.GameLibraryDto;
 import com.nonIt.GameOn.service.customDto.GameSearchDto;
 import com.nonIt.GameOn.service.createdto.GameDto;
 import com.nonIt.GameOn.service.restdto.GameRestDto;
@@ -173,7 +174,7 @@ public interface GameService {
 
     List<GameRestDto> getByPublisherId(Integer publisherId);
 
-//    List<GameRestDto> getByUserId(Integer userId);
+    List<GameLibraryDto> getByUser(String authorization);
 //
 //    List<GameRestDto> getByUsername(String username);
 

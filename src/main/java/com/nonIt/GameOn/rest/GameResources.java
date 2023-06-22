@@ -3,6 +3,7 @@ package com.nonIt.GameOn.rest;
 import com.nonIt.GameOn.exception.GameOnException;
 import com.nonIt.GameOn.rest.resourcesdto.SimplifiedGameDto;
 import com.nonIt.GameOn.service.GameService;
+import com.nonIt.GameOn.service.customDto.GameLibraryDto;
 import com.nonIt.GameOn.service.customDto.GameSearchDto;
 import com.nonIt.GameOn.service.createdto.GameDto;
 import com.nonIt.GameOn.service.restdto.GameRestDto;
@@ -10,12 +11,10 @@ import com.nonIt.GameOn.service.restdto.GameRestDto;
 import com.nonIt.GameOn.utils.NullChecker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
@@ -387,6 +386,11 @@ public class GameResources {
 //    public ResponseEntity<List<GameRestDto>> getByUsername(@RequestParam("username") String username) {
 //        return ResponseEntity.ok(gameService.getByUsername("%" + username + "%"));
 //    }
+
+    @GetMapping(value = "/library")
+    public ResponseEntity<List<GameLibraryDto>> getGameLibrary(@RequestHeader("Authorization") String authorization) {
+        return ResponseEntity.ok(gameService.getByUser(authorization));
+    }
 
     @GetMapping(value = "/by-genre-id")
     public ResponseEntity<List<GameRestDto>> getByGenreId(@RequestParam("genreId") Integer genreId) {
