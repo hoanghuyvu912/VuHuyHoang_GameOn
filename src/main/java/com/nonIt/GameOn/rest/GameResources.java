@@ -30,7 +30,7 @@ public class GameResources {
     //CRUD APIs
     @GetMapping
     public ResponseEntity<List<SimplifiedGameDto>> getAllGame(@RequestHeader("Authorization") String authorization) {
-//        System.out.println("My bearer token is: " + authorization);
+        System.out.println("My bearer token is: " + authorization);
         return ResponseEntity.ok(gameService.getAll());
     }
 

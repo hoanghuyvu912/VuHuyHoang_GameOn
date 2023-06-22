@@ -79,9 +79,9 @@ public class CommentResources {
 
     //    @PreAuthorize("hasRole( 'ADMIN')")
     @DeleteMapping(value = "/{commentId}")
-    public ResponseEntity<Void> deleteCommentById(@PathVariable("commentId") Integer commentId, @RequestHeader("Authorization") String authorization) {
+    public ResponseEntity<Void> deleteCommentById(@PathVariable("commentId") Integer commentId, @RequestHeader("Authorization") String authorization,  @RequestHeader("Roles") List<String> roles) {
         System.out.println(authorization);
-        commentService.deleteComment(commentId, authorization);
+        commentService.deleteComment(commentId, authorization, roles);
         return ResponseEntity.noContent().build();
     }
 
