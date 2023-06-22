@@ -2,6 +2,7 @@ package com.nonIt.GameOn.repository;
 
 import com.nonIt.GameOn.entity.Game;
 import com.nonIt.GameOn.repository.CustomRepository.GameCustomRespository.CustomGameRepository;
+import com.nonIt.GameOn.service.customDto.GameLibraryDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -166,9 +167,17 @@ public interface GameRepository extends JpaRepository<Game, Integer>, CustomGame
 
 //    @Query(value = "SELECT g from Game g join ReceiptDetails rd on g.id = rd.game.id join Receipt r on rd.receipt.id = r.id join User u on u.id = r.user.id where u.id = :userId")
 //    List<Game> getByUserId(@Param("userId") Integer userId);
-//
+
 //    @Query(value = "SELECT g from Game g join ReceiptDetails rd on g.id = rd.game.id join Receipt r on rd.receipt.id = r.id join User u on u.id = r.user.id where UPPER(u.username) LIKE UPPER(:username)")
 //    List<Game> getByUsername(@Param("username") String username);
+
+    @Query(value = "SELECT new com.nonIt.GameOn.service.customDto.GameLibraryDto(g.name, r.receiptDate, rd.gamePrice) " +
+            "FROM Receipt r " +
+            "JOIN ReceiptDetails rd ON rd.receipt.id = r.id " +
+            "JOIN GameCode gc ON gc.id = rd.gameCode.id " +
+            "JOIN Game g ON g.id = gc.game.id " +
+            "WHERE r.user.id = :userId")
+    List<GameLibraryDto> getByUserId(Integer userId);
 
     @Query(value = "SELECT g from Game g join GameGenre gg on g.id = gg.game.id join Genre g2 on gg.genre.id = g2.id where g2.id = :genreId")
     List<Game> getByGenreId(@Param("genreId") Integer genreId);

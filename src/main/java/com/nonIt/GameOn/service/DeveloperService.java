@@ -22,4 +22,6 @@ public interface DeveloperService {
     DeveloperRestDto updateDeveloper(Integer developerId, DeveloperDto developerDto);
 
     void deleteDeveloper(Integer developerId);
+
+    List<DeveloperRestDto> getAllByAdmin(String authorization);
 }

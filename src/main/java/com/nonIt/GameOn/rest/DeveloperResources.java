@@ -20,11 +20,12 @@ public class DeveloperResources {
     private final DeveloperService developerService;
 
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
-
-    @GetMapping
-    public ResponseEntity<List<DeveloperRestDto>> getAllDeveloper() {
+    @GetMapping()
+    public ResponseEntity<List<DeveloperRestDto>> getAllDeveloper(@RequestHeader("Authorization") String authorization) {
         return ResponseEntity.ok(developerService.getAll());
     }
+
+
 
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping(value = "/name-contain")
