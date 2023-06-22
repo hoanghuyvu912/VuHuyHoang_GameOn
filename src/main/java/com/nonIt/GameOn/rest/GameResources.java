@@ -29,17 +29,17 @@ public class GameResources {
 
     //CRUD APIs
     @GetMapping
-    public ResponseEntity<List<SimplifiedGameDto>> getAllGame(@RequestHeader("Authorization") String authorization) {
-        System.out.println("My bearer token is: " + authorization);
+    public ResponseEntity<List<SimplifiedGameDto>> getAllGame() {
+//        System.out.println("My bearer token is: " + authorization);
         return ResponseEntity.ok(gameService.getAll());
     }
 
-//    @GetMapping("/get-header")
-//    public ResponseEntity<String> greeting(HttpServletRequest request) {
-//        // code that uses the language variable
-//        String token = request.getHeader("Authorization");
-//        return ResponseEntity.ok(token);
+//    @GetMapping("/library")
+//    public ResponseEntity<List<SimplifiedGameDto>> getLibrary(@RequestHeader("Authorization") String authorization) {
+//        System.out.println("My bearer token is: " + authorization);
+//        return ResponseEntity.ok(gameService.getLibrary(authorization));
 //    }
+
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping

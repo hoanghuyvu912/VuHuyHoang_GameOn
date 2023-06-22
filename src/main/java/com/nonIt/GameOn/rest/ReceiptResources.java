@@ -41,7 +41,8 @@ public class ReceiptResources {
     }
 
     @PostMapping
-    public ResponseEntity<ReceiptRestDto> createReceipt(@RequestBody ReceiptCreateDto receiptCreateDto) {
+    public ResponseEntity<ReceiptRestDto> createReceipt(@RequestBody ReceiptCreateDto receiptCreateDto, @RequestHeader("Authorization") String authorization) {
+        System.out.println(authorization);
         return ResponseEntity.ok(receiptService.createReceipt(receiptCreateDto));
     }
 

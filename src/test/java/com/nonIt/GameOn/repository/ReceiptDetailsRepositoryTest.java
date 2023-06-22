@@ -21,7 +21,7 @@ class ReceiptDetailsRepositoryTest {
     void findByReceiptReceiptDate() {
         LocalDate startDate = LocalDate.parse("2023-06-15");
         LocalDate endDate = LocalDate.parse("2023-06-19");
-        assertTrue(receiptDetailsRepository.findByReceiptReceiptDate(startDate, endDate).size()>0);
+        assertTrue(receiptDetailsRepository.findByReceiptReceiptDateBetween(startDate, endDate).size()>0);
     }
     @Test
     void findReceiptDetailsListPerMonth(){

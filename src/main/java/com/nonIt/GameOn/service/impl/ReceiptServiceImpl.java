@@ -4,6 +4,7 @@ import com.nonIt.GameOn.entity.*;
 import com.nonIt.GameOn.exception.GameOnException;
 import com.nonIt.GameOn.repository.*;
 import com.nonIt.GameOn.rest.resourcesdto.ReceiptCreateDto;
+import com.nonIt.GameOn.security.jwt.JwtUtils;
 import com.nonIt.GameOn.service.ReceiptService;
 import com.nonIt.GameOn.service.createdto.ReceiptDto;
 import com.nonIt.GameOn.service.mapper.ReceiptDetailsMapper;
@@ -11,6 +12,7 @@ import com.nonIt.GameOn.service.mapper.ReceiptMapper;
 import com.nonIt.GameOn.service.restdto.ReceiptRestDto;
 //import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +27,9 @@ import java.util.stream.Collectors;
 @Transactional
 @RequiredArgsConstructor
 public class ReceiptServiceImpl implements ReceiptService {
+    @Autowired
+    private final JwtUtils jwtUtils;
+
     private final ReceiptRepository receiptRepository;
     private final UserRepository userRepository;
     private final ReceiptMapper receiptMapper;
