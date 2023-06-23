@@ -9,6 +9,7 @@ import com.nonIt.GameOn.repository.ReceiptRepository;
 import com.nonIt.GameOn.rest.resourcesdto.SimplifiedReceiptDetailsDto;
 import com.nonIt.GameOn.service.ReceiptDetailsService;
 import com.nonIt.GameOn.service.createdto.ReceiptDetailsDto;
+import com.nonIt.GameOn.service.customDto.ReceiptDetailResponseDto;
 import com.nonIt.GameOn.service.mapper.ReceiptDetailsMapper;
 import com.nonIt.GameOn.service.restdto.ReceiptDetailsRestDto;
 import com.nonIt.GameOn.service.customDto.GameStatisticsDto;
@@ -142,6 +143,11 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
     @Override
     public List<GameStatisticsDto> getGameStatisticsDto(Integer month, Integer year) {
         return receiptDetailsRepository.getGameStatisticsPerMonth(month, year);
+    }
+
+    @Override
+    public List<ReceiptDetailResponseDto> getByReceiptId(Integer receiptId) {
+        return receiptDetailsRepository.findByReceiptId(receiptId);
     }
 
     private static Map<Game, Long> getGameLongMap(List<Game> gameList) {

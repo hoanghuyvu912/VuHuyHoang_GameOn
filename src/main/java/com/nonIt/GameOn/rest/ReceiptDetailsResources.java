@@ -2,6 +2,7 @@ package com.nonIt.GameOn.rest;
 
 import com.nonIt.GameOn.service.ReceiptDetailsService;
 import com.nonIt.GameOn.service.createdto.ReceiptDetailsDto;
+import com.nonIt.GameOn.service.customDto.ReceiptDetailResponseDto;
 import com.nonIt.GameOn.service.restdto.ReceiptDetailsRestDto;
 import com.nonIt.GameOn.service.customDto.GameStatisticsDto;
 import com.nonIt.GameOn.service.customDto.GameWithUsedGameCodeListDto;
@@ -72,5 +73,10 @@ public class ReceiptDetailsResources {
     @GetMapping("/game-statistics-per-month")
     public ResponseEntity<List<GameStatisticsDto>> getGameStatisticsPerMonthInYear(@RequestParam("month") Integer month, @RequestParam("year") Integer year) {
         return ResponseEntity.ok(receiptDetailsService.getGameStatisticsDto(month, year));
+    }
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/{receiptId}")
+    public ResponseEntity<List<ReceiptDetailResponseDto>> getByReceiptId(@PathVariable("receiptId") Integer receiptId) {
+        return ResponseEntity.ok(receiptDetailsService.getByReceiptId(receiptId));
     }
 }

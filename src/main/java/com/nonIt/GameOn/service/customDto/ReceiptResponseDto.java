@@ -1,4 +1,4 @@
-package com.nonIt.GameOn.service.restdto;
+package com.nonIt.GameOn.service.customDto;
 
 import com.nonIt.GameOn.entity.User;
 import lombok.AllArgsConstructor;
@@ -10,9 +10,10 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReceiptRestDto {
+public class ReceiptResponseDto {
     private Integer id;
-    private User user;
+    private Integer userId;
+    private String userName;
 
     private LocalDate receiptDate;
 }

@@ -35,4 +35,9 @@ class ReceiptDetailsRepositoryTest {
             System.out.println(gs.getGame().getName() + gs.getGameCodeList() + gs.getRevenue());
         });
     }
+
+    @Test
+    void findByReceiptId() {
+       receiptDetailsRepository.findByReceiptId(4);
+    }
 }
