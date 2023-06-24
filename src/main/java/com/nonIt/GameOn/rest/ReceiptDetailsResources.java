@@ -75,7 +75,7 @@ public class ReceiptDetailsResources {
         return ResponseEntity.ok(receiptDetailsService.getGameStatisticsDto(month, year));
     }
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/{receiptId}")
+    @GetMapping("/by-receipt/{receiptId}")
     public ResponseEntity<List<ReceiptDetailResponseDto>> getByReceiptId(@PathVariable("receiptId") Integer receiptId) {
         return ResponseEntity.ok(receiptDetailsService.getByReceiptId(receiptId));
     }
