@@ -19,7 +19,7 @@ import java.util.List;
 @PreAuthorize("hasRole('USER')")
 public class ReceiptResources {
     private final ReceiptService receiptService;
-    
+
     @GetMapping
     public ResponseEntity<List<ReceiptRestDto>> getAllReceipt() {
         return ResponseEntity.ok(receiptService.getAll());
