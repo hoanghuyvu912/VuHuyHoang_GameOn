@@ -2,11 +2,10 @@ package com.nonIt.GameOn.rest;
 
 import com.lowagie.text.DocumentException;
 import com.nonIt.GameOn.entity.Gender;
-import com.nonIt.GameOn.service.restDto.GameRestDto;
 import com.nonIt.GameOn.utils.PdfGenerator;
 import com.nonIt.GameOn.service.UserService;
-import com.nonIt.GameOn.service.dto.UserDto;
-import com.nonIt.GameOn.service.restDto.UserRestDto;
+import com.nonIt.GameOn.service.createdto.UserDto;
+import com.nonIt.GameOn.service.restdto.UserRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +41,13 @@ public class UserResources {
     public ResponseEntity<UserRestDto> getUserById(@PathVariable("userId") Integer userId) {
         return ResponseEntity.ok(userService.findById(userId));
     }
+
+//    @PostMapping(path = "/user-info")
+//    public ResponseEntity<UserRestDto> getUserInfo(@RequestHeader("id") Integer id)
+//    {
+//        //here I will add more code which should replace the String in the ResponseEntity.
+//        return ResponseEntity.ok(userService.findById(id));
+//    }
 
     @PutMapping(value = "/{userId}")
     public ResponseEntity<UserRestDto> updateUserById(@PathVariable("userId") Integer userId, @RequestBody UserDto userDto) {

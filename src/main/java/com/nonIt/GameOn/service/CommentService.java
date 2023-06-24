@@ -1,7 +1,8 @@
 package com.nonIt.GameOn.service;
 
-import com.nonIt.GameOn.service.dto.CommentDto;
-import com.nonIt.GameOn.service.restDto.CommentRestDto;
+import com.nonIt.GameOn.rest.resourcesdto.SimplifiedCommentDto;
+import com.nonIt.GameOn.service.createdto.CommentDto;
+import com.nonIt.GameOn.service.restdto.CommentRestDto;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -15,13 +16,13 @@ public interface CommentService {
 
     CommentRestDto updateComment(Integer commentId, CommentDto commentDto);
 
-    void deleteComment(Integer commentId);
+    void deleteComment(Integer commentId, String authorization, List<String> roles);
 
-    List<CommentRestDto> getByUserId(Integer userId);
+    List<SimplifiedCommentDto> getByUserId(Integer userId);
 
     List<CommentRestDto> getByUsername(String username);
 
-    List<CommentRestDto> getByGameId(Integer gameId);
+    List<SimplifiedCommentDto> getByGameId(Integer gameId);
 
     List<CommentRestDto> getByGameName(String gameName);
 

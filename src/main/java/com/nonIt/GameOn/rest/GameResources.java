@@ -1,12 +1,13 @@
 package com.nonIt.GameOn.rest;
 
 import com.nonIt.GameOn.exception.GameOnException;
+import com.nonIt.GameOn.rest.resourcesdto.SimplifiedGameDto;
 import com.nonIt.GameOn.service.GameService;
+import com.nonIt.GameOn.service.customDto.GameLibraryDto;
 import com.nonIt.GameOn.service.customDto.GameSearchDto;
-import com.nonIt.GameOn.service.dto.GameDto;
-import com.nonIt.GameOn.service.restDto.GameRestDto;
+import com.nonIt.GameOn.service.createdto.GameDto;
+import com.nonIt.GameOn.service.restdto.GameRestDto;
 //import jakarta.validation.Valid;
-import com.nonIt.GameOn.service.restDto.UserRestDto;
 import com.nonIt.GameOn.utils.NullChecker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -27,9 +28,17 @@ public class GameResources {
 
     //CRUD APIs
     @GetMapping
-    public ResponseEntity<List<GameRestDto>> getAllGame() {
+    public ResponseEntity<List<SimplifiedGameDto>> getAllGame() {
+//        System.out.println("My bearer token is: " + authorization);
         return ResponseEntity.ok(gameService.getAll());
     }
+
+//    @GetMapping("/library")
+//    public ResponseEntity<List<SimplifiedGameDto>> getLibrary(@RequestHeader("Authorization") String authorization) {
+//        System.out.println("My bearer token is: " + authorization);
+//        return ResponseEntity.ok(gameService.getLibrary(authorization));
+//    }
+
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
@@ -38,7 +47,7 @@ public class GameResources {
     }
 
     @GetMapping(value = "/{gameId}")
-    public ResponseEntity<GameRestDto> getGameById(@PathVariable("gameId") Integer userId) {
+    public ResponseEntity<SimplifiedGameDto> getGameById(@PathVariable("gameId") Integer userId) {
         return ResponseEntity.ok(gameService.findById(userId));
     }
 
@@ -57,6 +66,12 @@ public class GameResources {
     @GetMapping(value = "/name-containing")
     public ResponseEntity<List<GameRestDto>> findByNameIgnoreCaseContaining(@RequestParam("name") String name) {
         return ResponseEntity.ok(gameService.findByNameIgnoreCaseContaining(name));
+    }
+
+    //Find featured games
+    @GetMapping(value = "/featured")
+    public ResponseEntity<List<SimplifiedGameDto>> getFeaturedGames() {
+        return ResponseEntity.ok(gameService.getFeaturedGame());
     }
 
 
@@ -362,14 +377,19 @@ public class GameResources {
         return ResponseEntity.ok(gameService.getByPublisherId(publisherId));
     }
 
-    @GetMapping(value = "/by-user-id")
-    public ResponseEntity<List<GameRestDto>> getByUserId(@RequestParam("userId") Integer userId) {
-        return ResponseEntity.ok(gameService.getByUserId(userId));
-    }
+//    @GetMapping(value = "/by-user-id")
+//    public ResponseEntity<List<GameRestDto>> getByUserId(@RequestParam("userId") Integer userId) {
+//        return ResponseEntity.ok(gameService.getByUserId(userId));
+//    }
+//
+//    @GetMapping(value = "/by-username")
+//    public ResponseEntity<List<GameRestDto>> getByUsername(@RequestParam("username") String username) {
+//        return ResponseEntity.ok(gameService.getByUsername("%" + username + "%"));
+//    }
 
-    @GetMapping(value = "/by-username")
-    public ResponseEntity<List<GameRestDto>> getByUsername(@RequestParam("username") String username) {
-        return ResponseEntity.ok(gameService.getByUsername("%" + username + "%"));
+    @GetMapping(value = "/library")
+    public ResponseEntity<List<GameLibraryDto>> getGameLibrary(@RequestHeader("Authorization") String authorization) {
+        return ResponseEntity.ok(gameService.getByUser(authorization));
     }
 
     @GetMapping(value = "/by-genre-id")

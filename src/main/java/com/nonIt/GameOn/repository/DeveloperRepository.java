@@ -1,7 +1,6 @@
 package com.nonIt.GameOn.repository;
 
 import com.nonIt.GameOn.entity.Developer;
-import com.nonIt.GameOn.service.restDto.DeveloperRestDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

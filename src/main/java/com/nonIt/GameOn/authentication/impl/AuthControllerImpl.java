@@ -1,15 +1,13 @@
 package com.nonIt.GameOn.authentication.impl;
 
 import com.nonIt.GameOn.authentication.AuthController;
-import com.nonIt.GameOn.entity.User;
 import com.nonIt.GameOn.repository.UserRepository;
 import com.nonIt.GameOn.security.jwt.JwtRequest;
 import com.nonIt.GameOn.security.jwt.JwtResponse;
 import com.nonIt.GameOn.security.jwt.JwtUtils;
 import com.nonIt.GameOn.security.service.impl.UserSecurityDetailsImpl;
 import com.nonIt.GameOn.service.UserService;
-import com.nonIt.GameOn.service.dto.UserDto;
-import com.nonIt.GameOn.service.dto.UserSignUpDto;
+import com.nonIt.GameOn.service.createdto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,13 +17,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -55,6 +49,7 @@ public class AuthControllerImpl implements AuthController {
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(new JwtResponse(jwt,
+                userDetails.getId(),
                 userDetails.getUsername(),
                 roles));
     }
@@ -75,22 +70,6 @@ public class AuthControllerImpl implements AuthController {
 
         // Create new user's account
         userService.createUser(userSignUpDto);
-//        User user = User.builder()
-//                .firstName(userSignUpDto.getFirstName())
-//                .lastName(userSignUpDto.getLastName())
-//                .username(userSignUpDto.getUsername())
-//                .password(passwordEncoder.encode(userSignUpDto.getPassword()))
-//                .email(userSignUpDto.getEmail())
-//                .tel(userSignUpDto.getTel())
-//                .address(userSignUpDto.getAddress())
-//                .dob(userSignUpDto.getDob())
-//                .gender(userSignUpDto.getGender())
-//                .profileImg(userSignUpDto.getProfileImg())
-//                .balance(userSignUpDto.getBalance())
-//                .registeredDate(LocalDate.now())
-//                .build();
-//
-//        userRepository.save(user);
 
         return ResponseEntity.ok("User registered successfully!");
     }

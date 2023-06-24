@@ -1,19 +1,16 @@
 package com.nonIt.GameOn.rest;
 
-import com.nonIt.GameOn.entity.Comment;
 import com.nonIt.GameOn.exception.GameOnException;
+import com.nonIt.GameOn.rest.resourcesdto.SimplifiedCommentDto;
 import com.nonIt.GameOn.service.CommentService;
-import com.nonIt.GameOn.service.dto.CommentDto;
-import com.nonIt.GameOn.service.restDto.CommentRestDto;
-import com.nonIt.GameOn.service.restDto.DeveloperRestDto;
+import com.nonIt.GameOn.service.createdto.CommentDto;
+import com.nonIt.GameOn.service.restdto.CommentRestDto;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.http.parser.Authorization;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -82,14 +79,15 @@ public class CommentResources {
 
     //    @PreAuthorize("hasRole( 'ADMIN')")
     @DeleteMapping(value = "/{commentId}")
-    public ResponseEntity<Void> deleteCommentById(@PathVariable("commentId") Integer commentId) {
-        commentService.deleteComment(commentId);
+    public ResponseEntity<Void> deleteCommentById(@PathVariable("commentId") Integer commentId, @RequestHeader("Authorization") String authorization,  @RequestHeader("Roles") List<String> roles) {
+        System.out.println(authorization);
+        commentService.deleteComment(commentId, authorization, roles);
         return ResponseEntity.noContent().build();
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value = "/by-user-id/{userId}")
-    public ResponseEntity<List<CommentRestDto>> getCommentByUserId(@PathVariable("userId") Integer userId) {
+    public ResponseEntity<List<SimplifiedCommentDto>> getCommentByUserId(@PathVariable("userId") Integer userId) {
         return ResponseEntity.ok(commentService.getByUserId(userId));
     }
 
@@ -102,9 +100,9 @@ public class CommentResources {
         return ResponseEntity.ok(commentService.getByUsername("%" + username + "%"));
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value = "/by-game-id/{gameId}")
-    public ResponseEntity<List<CommentRestDto>> getCommentByGameId(@PathVariable("gameId") String gameId) {
+    public ResponseEntity<List<SimplifiedCommentDto>> getCommentByGameId(@PathVariable("gameId") String gameId) {
         boolean valid = true;
         int gameIdInt = 0;
         if (gameId == null || gameId.trim().isBlank() || gameId.isEmpty()) {

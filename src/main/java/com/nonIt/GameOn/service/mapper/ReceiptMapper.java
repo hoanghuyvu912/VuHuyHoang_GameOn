@@ -1,9 +1,11 @@
 package com.nonIt.GameOn.service.mapper;
 
 import com.nonIt.GameOn.entity.Receipt;
-import com.nonIt.GameOn.service.dto.ReceiptDto;
-import com.nonIt.GameOn.service.restDto.ReceiptRestDto;
+import com.nonIt.GameOn.service.createdto.ReceiptDto;
+import com.nonIt.GameOn.service.customDto.ReceiptResponseDto;
+import com.nonIt.GameOn.service.restdto.ReceiptRestDto;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 
@@ -16,4 +18,8 @@ public interface ReceiptMapper extends EntityMapper<ReceiptRestDto, Receipt, Rec
 //    ReceiptRestDto toRestDto(Receipt receipt);
 //
 //    List<ReceiptRestDto> toRestDtos(List<Receipt> receipts);
+    @Mapping(target = "userId", source = "user.id")
+    @Mapping(target = "userName", source = "user.username")
+    ReceiptResponseDto toResponseDto(Receipt receipt);
+    List<ReceiptResponseDto> toResponseDtos(List<Receipt> receiptList);
 }

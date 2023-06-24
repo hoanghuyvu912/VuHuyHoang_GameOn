@@ -1,9 +1,10 @@
 package com.nonIt.GameOn.rest;
 
-import com.nonIt.GameOn.rest.resources_dto.ReceiptCreateDto;
+import com.nonIt.GameOn.rest.resourcesdto.ReceiptCreateDto;
 import com.nonIt.GameOn.service.ReceiptService;
-import com.nonIt.GameOn.service.dto.ReceiptDto;
-import com.nonIt.GameOn.service.restDto.ReceiptRestDto;
+import com.nonIt.GameOn.service.createdto.ReceiptDto;
+import com.nonIt.GameOn.service.customDto.ReceiptResponseDto;
+import com.nonIt.GameOn.service.restdto.ReceiptRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class ReceiptResources {
     private final ReceiptService receiptService;
 
     @GetMapping
-    public ResponseEntity<List<ReceiptRestDto>> getAllReceipt() {
+    public ResponseEntity<List<ReceiptResponseDto>> getAllReceipt(@RequestHeader("Authorization") String authorization) {
         return ResponseEntity.ok(receiptService.getAll());
     }
 
@@ -41,7 +42,8 @@ public class ReceiptResources {
     }
 
     @PostMapping
-    public ResponseEntity<ReceiptRestDto> createReceipt(@RequestBody ReceiptCreateDto receiptCreateDto) {
+    public ResponseEntity<ReceiptRestDto> createReceipt(@RequestBody ReceiptCreateDto receiptCreateDto, @RequestHeader("Authorization") String authorization) {
+        System.out.println(authorization);
         return ResponseEntity.ok(receiptService.createReceipt(receiptCreateDto));
     }
 

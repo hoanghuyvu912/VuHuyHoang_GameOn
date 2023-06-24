@@ -1,14 +1,17 @@
 package com.nonIt.GameOn.service.impl;
 
 import com.nonIt.GameOn.entity.Developer;
-import com.nonIt.GameOn.entity.Game;
+import com.nonIt.GameOn.entity.User;
 import com.nonIt.GameOn.exception.GameOnException;
 import com.nonIt.GameOn.repository.DeveloperRepository;
+import com.nonIt.GameOn.repository.UserRepository;
+import com.nonIt.GameOn.security.jwt.JwtUtils;
 import com.nonIt.GameOn.service.DeveloperService;
-import com.nonIt.GameOn.service.dto.DeveloperDto;
+import com.nonIt.GameOn.service.createdto.DeveloperDto;
 import com.nonIt.GameOn.service.mapper.DeveloperMapper;
-import com.nonIt.GameOn.service.restDto.DeveloperRestDto;
+import com.nonIt.GameOn.service.restdto.DeveloperRestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,8 +23,11 @@ import java.util.stream.Collectors;
 @Transactional
 @RequiredArgsConstructor
 public class DeveloperServiceImpl implements DeveloperService {
+    @Autowired
+    private final JwtUtils jwtUtils;
     private final DeveloperRepository developerRepository;
     private final DeveloperMapper developerMapper;
+    private final UserRepository userRepository;
 
     @Override
     public List<DeveloperRestDto> getAll() {
@@ -122,5 +128,11 @@ public class DeveloperServiceImpl implements DeveloperService {
     @Override
     public void deleteDeveloper(Integer developerId) {
         developerRepository.deleteById(developerId);
+    }
+
+    @Override
+    public List<DeveloperRestDto> getAllByAdmin(String authorization) {
+
+        return null;
     }
 }

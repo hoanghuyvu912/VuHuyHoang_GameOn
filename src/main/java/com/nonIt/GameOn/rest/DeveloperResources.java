@@ -2,8 +2,8 @@ package com.nonIt.GameOn.rest;
 
 import com.nonIt.GameOn.exception.GameOnException;
 import com.nonIt.GameOn.service.DeveloperService;
-import com.nonIt.GameOn.service.dto.DeveloperDto;
-import com.nonIt.GameOn.service.restDto.DeveloperRestDto;
+import com.nonIt.GameOn.service.createdto.DeveloperDto;
+import com.nonIt.GameOn.service.restdto.DeveloperRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +20,12 @@ public class DeveloperResources {
     private final DeveloperService developerService;
 
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
-
-    @GetMapping
-    public ResponseEntity<List<DeveloperRestDto>> getAllDeveloper() {
+    @GetMapping()
+    public ResponseEntity<List<DeveloperRestDto>> getAllDeveloper(@RequestHeader("Authorization") String authorization) {
         return ResponseEntity.ok(developerService.getAll());
     }
+
+
 
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping(value = "/name-contain")
