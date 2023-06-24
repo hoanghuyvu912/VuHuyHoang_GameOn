@@ -35,7 +35,6 @@ public class ReceiptServiceImpl implements ReceiptService {
     private final ReceiptMapper receiptMapper;
     private final GameRepository gameRepository;
     private final ReceiptDetailsRepository receiptDetailsRepository;
-    private final ReceiptDetailsMapper receiptDetailsMapper;
     private final GameCodeRepository gameCodeRepository;
 
 

@@ -16,10 +16,10 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/receipts")
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasRole('USER')")
 public class ReceiptResources {
     private final ReceiptService receiptService;
-
+    
     @GetMapping
     public ResponseEntity<List<ReceiptRestDto>> getAllReceipt() {
         return ResponseEntity.ok(receiptService.getAll());
@@ -41,8 +41,8 @@ public class ReceiptResources {
     }
 
     @PostMapping
-    public ResponseEntity<ReceiptRestDto> createReceipt(@RequestBody ReceiptCreateDto receiptCreateDto, @RequestHeader("Authorization") String authorization) {
-        System.out.println(authorization);
+    public ResponseEntity<ReceiptRestDto> createReceipt(@RequestBody ReceiptCreateDto receiptCreateDto) {
+//        System.out.println(authorization);
         return ResponseEntity.ok(receiptService.createReceipt(receiptCreateDto));
     }
 

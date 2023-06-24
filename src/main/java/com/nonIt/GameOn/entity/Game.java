@@ -69,8 +69,5 @@ public class Game {
 
     @OneToMany(mappedBy = "game", cascade = CascadeType.PERSIST)
     private List<GameCode> gameCodeList = new ArrayList<>();
-    public Game(String gameName,double gamePrice){
-        this.price = gamePrice;
-    }
 }
 
