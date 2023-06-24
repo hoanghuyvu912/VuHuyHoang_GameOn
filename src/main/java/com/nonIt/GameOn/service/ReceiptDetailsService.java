@@ -2,6 +2,7 @@ package com.nonIt.GameOn.service;
 
 import com.nonIt.GameOn.rest.resourcesdto.SimplifiedReceiptDetailsDto;
 import com.nonIt.GameOn.service.createdto.ReceiptDetailsDto;
+import com.nonIt.GameOn.service.customDto.ReceiptDetailResponseDto;
 import com.nonIt.GameOn.service.restdto.ReceiptDetailsRestDto;
 import com.nonIt.GameOn.service.customDto.GameStatisticsDto;
 import com.nonIt.GameOn.service.customDto.GameWithUsedGameCodeListDto;
@@ -30,5 +31,6 @@ public interface ReceiptDetailsService {
     List<GameWithUsedGameCodeListDto> getWorstSellerGamesBetweenDates(LocalDate startDate, LocalDate endDate);
 
     List<GameStatisticsDto> getGameStatisticsDto(Integer month, Integer year);
+    List<ReceiptDetailResponseDto> getByReceiptId(Integer receiptId);
 
 }

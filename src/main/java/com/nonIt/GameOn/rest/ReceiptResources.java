@@ -3,6 +3,7 @@ package com.nonIt.GameOn.rest;
 import com.nonIt.GameOn.rest.resourcesdto.ReceiptCreateDto;
 import com.nonIt.GameOn.service.ReceiptService;
 import com.nonIt.GameOn.service.createdto.ReceiptDto;
+import com.nonIt.GameOn.service.customDto.ReceiptResponseDto;
 import com.nonIt.GameOn.service.restdto.ReceiptRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,7 +22,7 @@ public class ReceiptResources {
     private final ReceiptService receiptService;
 
     @GetMapping
-    public ResponseEntity<List<ReceiptRestDto>> getAllReceipt() {
+    public ResponseEntity<List<ReceiptResponseDto>> getAllReceipt(@RequestHeader("Authorization") String authorization) {
         return ResponseEntity.ok(receiptService.getAll());
     }
 

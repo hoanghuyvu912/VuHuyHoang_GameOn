@@ -7,6 +7,7 @@ import com.nonIt.GameOn.rest.resourcesdto.ReceiptCreateDto;
 import com.nonIt.GameOn.security.jwt.JwtUtils;
 import com.nonIt.GameOn.service.ReceiptService;
 import com.nonIt.GameOn.service.createdto.ReceiptDto;
+import com.nonIt.GameOn.service.customDto.ReceiptResponseDto;
 import com.nonIt.GameOn.service.mapper.ReceiptDetailsMapper;
 import com.nonIt.GameOn.service.mapper.ReceiptMapper;
 import com.nonIt.GameOn.service.restdto.ReceiptRestDto;
@@ -40,8 +41,8 @@ public class ReceiptServiceImpl implements ReceiptService {
 
 
     @Override
-    public List<ReceiptRestDto> getAll() {
-        return receiptRepository.findAll().stream().map(receiptMapper::toDto).collect(Collectors.toList());
+    public List<ReceiptResponseDto> getAll() {
+        return receiptRepository.findAll().stream().map(receiptMapper::toResponseDto).collect(Collectors.toList());
     }
 
     @Override
