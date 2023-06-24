@@ -49,6 +49,7 @@ public class AuthControllerImpl implements AuthController {
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(new JwtResponse(jwt,
+                userDetails.getId(),
                 userDetails.getUsername(),
                 roles));
     }
@@ -69,22 +70,6 @@ public class AuthControllerImpl implements AuthController {
 
         // Create new user's account
         userService.createUser(userSignUpDto);
-//        User user = User.builder()
-//                .firstName(userSignUpDto.getFirstName())
-//                .lastName(userSignUpDto.getLastName())
-//                .username(userSignUpDto.getUsername())
-//                .password(passwordEncoder.encode(userSignUpDto.getPassword()))
-//                .email(userSignUpDto.getEmail())
-//                .tel(userSignUpDto.getTel())
-//                .address(userSignUpDto.getAddress())
-//                .dob(userSignUpDto.getDob())
-//                .gender(userSignUpDto.getGender())
-//                .profileImg(userSignUpDto.getProfileImg())
-//                .balance(userSignUpDto.getBalance())
-//                .registeredDate(LocalDate.now())
-//                .build();
-//
-//        userRepository.save(user);
 
         return ResponseEntity.ok("User registered successfully!");
     }

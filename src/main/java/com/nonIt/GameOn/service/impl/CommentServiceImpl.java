@@ -8,16 +8,19 @@ import com.nonIt.GameOn.repository.CommentRepository;
 import com.nonIt.GameOn.repository.GameRepository;
 import com.nonIt.GameOn.repository.UserRepository;
 import com.nonIt.GameOn.rest.resourcesdto.SimplifiedCommentDto;
+import com.nonIt.GameOn.security.jwt.JwtUtils;
 import com.nonIt.GameOn.service.CommentService;
 import com.nonIt.GameOn.service.createdto.CommentDto;
 import com.nonIt.GameOn.service.mapper.CommentMapper;
 import com.nonIt.GameOn.service.restdto.CommentRestDto;
 import com.nonIt.GameOn.utils.NullChecker;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +28,8 @@ import java.util.stream.Collectors;
 @Transactional
 @RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService {
+    @Autowired
+    private final JwtUtils jwtUtils;
     private final CommentRepository commentRepository;
     private final UserRepository userRepository;
     private final GameRepository gameRepository;
@@ -79,7 +84,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public CommentRestDto findById(Integer commentId) {
         boolean isCommentIdNull = NullChecker.allNull(commentId);
-        if(isCommentIdNull) {
+        if (isCommentIdNull) {
             throw GameOnException.badRequest("InvalidCommentId", "Invalid comment ID!");
         }
         if (commentId < 0) {
@@ -130,12 +135,19 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void deleteComment(Integer commentId) {
-//        var auth = SecurityContextHolder.getContext().getAuthentication();
-//        var comment = commentRepository.findById(commentId).orElseThrow(GameOnException::CommentNotFound);
-//        if (!comment.getUser().getUsername().equalsIgnoreCase(auth.getName())) {
-//            throw new RuntimeException();
-//        }
-        commentRepository.deleteById(commentId);
+    public void deleteComment(Integer commentId, String authorization, List<String> roles) {
+        Comment comment = commentRepository.findById(commentId).orElseThrow(GameOnException::CommentNotFound);
+        User user = userRepository.findByUsername(jwtUtils.getUserNameFromJwtToken(authorization)).get();
+        if (roles.stream().anyMatch(r -> r.equalsIgnoreCase("role_admin"))) {
+            commentRepository.deleteById(commentId);
+            System.out.println("DELETE COMMENT BY ID SUCCESSFULLY! DONE BY AN ADMIN WITH ID: " + user.getId());
+        } else {
+            if (!user.getId().equals(comment.getUser().getId())) {
+                System.out.println("Comment does not belong to the active user!");
+                throw GameOnException.badRequest("CannotDeleteComment", "Comment does not belong to the active user!");
+            } else {
+                commentRepository.deleteById(commentId);
+            }
+        }
     }
 }

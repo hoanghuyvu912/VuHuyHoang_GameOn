@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 public class ReceiptDetailsDto {
     private Integer receiptId;
 
-    private Integer gameId;
+    private Integer gameCodeId;
+    private Double gamePrice;
 }

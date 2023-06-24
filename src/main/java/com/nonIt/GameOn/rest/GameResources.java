@@ -3,6 +3,7 @@ package com.nonIt.GameOn.rest;
 import com.nonIt.GameOn.exception.GameOnException;
 import com.nonIt.GameOn.rest.resourcesdto.SimplifiedGameDto;
 import com.nonIt.GameOn.service.GameService;
+import com.nonIt.GameOn.service.customDto.GameLibraryDto;
 import com.nonIt.GameOn.service.customDto.GameSearchDto;
 import com.nonIt.GameOn.service.createdto.GameDto;
 import com.nonIt.GameOn.service.restdto.GameRestDto;
@@ -27,9 +28,17 @@ public class GameResources {
 
     //CRUD APIs
     @GetMapping
-    public ResponseEntity<List<GameRestDto>> getAllGame() {
+    public ResponseEntity<List<SimplifiedGameDto>> getAllGame() {
+//        System.out.println("My bearer token is: " + authorization);
         return ResponseEntity.ok(gameService.getAll());
     }
+
+//    @GetMapping("/library")
+//    public ResponseEntity<List<SimplifiedGameDto>> getLibrary(@RequestHeader("Authorization") String authorization) {
+//        System.out.println("My bearer token is: " + authorization);
+//        return ResponseEntity.ok(gameService.getLibrary(authorization));
+//    }
+
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
@@ -368,14 +377,19 @@ public class GameResources {
         return ResponseEntity.ok(gameService.getByPublisherId(publisherId));
     }
 
-    @GetMapping(value = "/by-user-id")
-    public ResponseEntity<List<GameRestDto>> getByUserId(@RequestParam("userId") Integer userId) {
-        return ResponseEntity.ok(gameService.getByUserId(userId));
-    }
+//    @GetMapping(value = "/by-user-id")
+//    public ResponseEntity<List<GameRestDto>> getByUserId(@RequestParam("userId") Integer userId) {
+//        return ResponseEntity.ok(gameService.getByUserId(userId));
+//    }
+//
+//    @GetMapping(value = "/by-username")
+//    public ResponseEntity<List<GameRestDto>> getByUsername(@RequestParam("username") String username) {
+//        return ResponseEntity.ok(gameService.getByUsername("%" + username + "%"));
+//    }
 
-    @GetMapping(value = "/by-username")
-    public ResponseEntity<List<GameRestDto>> getByUsername(@RequestParam("username") String username) {
-        return ResponseEntity.ok(gameService.getByUsername("%" + username + "%"));
+    @GetMapping(value = "/library")
+    public ResponseEntity<List<GameLibraryDto>> getGameLibrary(@RequestHeader("Authorization") String authorization) {
+        return ResponseEntity.ok(gameService.getByUser(authorization));
     }
 
     @GetMapping(value = "/by-genre-id")

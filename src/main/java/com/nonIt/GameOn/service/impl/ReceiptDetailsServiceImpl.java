@@ -1,19 +1,20 @@
 package com.nonIt.GameOn.service.impl;
 
-import com.nonIt.GameOn.entity.Game;
-import com.nonIt.GameOn.entity.Receipt;
-import com.nonIt.GameOn.entity.ReceiptDetails;
+import com.nonIt.GameOn.entity.*;
 import com.nonIt.GameOn.exception.GameOnException;
+import com.nonIt.GameOn.repository.GameCodeRepository;
 import com.nonIt.GameOn.repository.GameRepository;
 import com.nonIt.GameOn.repository.ReceiptDetailsRepository;
 import com.nonIt.GameOn.repository.ReceiptRepository;
 import com.nonIt.GameOn.rest.resourcesdto.SimplifiedReceiptDetailsDto;
 import com.nonIt.GameOn.service.ReceiptDetailsService;
-import com.nonIt.GameOn.service.customDto.RevenuePerDateDto;
 import com.nonIt.GameOn.service.createdto.ReceiptDetailsDto;
 import com.nonIt.GameOn.service.mapper.ReceiptDetailsMapper;
 import com.nonIt.GameOn.service.restdto.ReceiptDetailsRestDto;
-//import jakarta.transaction.Transactional;
+import com.nonIt.GameOn.service.customDto.GameStatisticsDto;
+import com.nonIt.GameOn.service.customDto.GameWithUsedGameCodeListDto;
+import com.nonIt.GameOn.service.customDto.RevenuePerMonthInYearDto;
+import com.nonIt.GameOn.service.mapper.GameCodeMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +31,8 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
     private final ReceiptRepository receiptRepository;
     private final GameRepository gameRepository;
     private final ReceiptDetailsMapper receiptDetailsMapper;
+    private final GameCodeRepository gameCodeRepository;
+    private final GameCodeMapper gameCodeMapper;
 
     @Override
     public List<ReceiptDetailsRestDto> getAll() {
@@ -49,10 +52,10 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
     @Override
     public ReceiptDetailsRestDto createReceiptDetails(ReceiptDetailsDto receiptDetailsDto) {
         Receipt receipt = receiptRepository.findById(receiptDetailsDto.getReceiptId()).orElseThrow(GameOnException::ReceiptNotFound);
-        Game game = gameRepository.findById(receiptDetailsDto.getGameId()).orElseThrow(GameOnException::GameNotFound);
+        GameCode gameCode = gameCodeRepository.findById(receiptDetailsDto.getGameCodeId()).orElseThrow(GameOnException::GameCodeNotFound);
         ReceiptDetails receiptDetails = ReceiptDetails.builder()
                 .receipt(receipt)
-                .game(game)
+                .gameCode(gameCode)
                 .build();
         receiptDetails = receiptDetailsRepository.save(receiptDetails);
 
@@ -63,13 +66,13 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
     public ReceiptDetailsRestDto updateReceiptDetails(Integer receiptDetailsId, ReceiptDetailsDto receiptDetailsDto) {
         ReceiptDetails receiptDetails = receiptDetailsRepository.findById(receiptDetailsId).orElseThrow(GameOnException::ReceiptDetailsNotFound);
         Receipt receipt = receiptRepository.findById(receiptDetailsDto.getReceiptId()).orElseThrow(GameOnException::ReceiptNotFound);
-        Game game = gameRepository.findById(receiptDetailsDto.getGameId()).orElseThrow(GameOnException::GameNotFound);
-
-        if (receipt.getReceiptDate().isBefore(game.getReleasedDate())) {
-            throw GameOnException.badRequest("InvalidReceiptDate", "The receipt date cannot be before a game's released date. Please choose a different game, or a different receipt.");
-        }
+        GameCode gameCode = gameCodeRepository.findById(receiptDetailsDto.getGameCodeId()).orElseThrow(GameOnException::GameCodeNotFound);
+//
+//        if (receipt.getReceiptDate().isBefore(game.getReleasedDate())) {
+//            throw GameOnException.badRequest("InvalidReceiptDate", "The receipt date cannot be before a game's released date. Please choose a different game, or a different receipt.");
+//        }
         receiptDetails.setReceipt(receipt);
-        receiptDetails.setGame(game);
+        receiptDetails.setGameCode(gameCode);
         receiptDetails = receiptDetailsRepository.save(receiptDetails);
         return receiptDetailsMapper.toDto(receiptDetails);
     }
@@ -80,78 +83,84 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
     }
 
     @Override
-    public List<RevenuePerDateDto> getRevenuePerDateBetweenDates(LocalDate date1, LocalDate date2) {
-        return receiptDetailsRepository.getRevenuePerDateBetweenDates(date1, date2);
+    public RevenuePerMonthInYearDto getRevenuePerMonthInYear(Integer month, Integer year) {
+        return receiptDetailsRepository.getRevenuePerMonthInYear(month,year);
     }
 
-    private List<Game> getGamesBetweenDates(LocalDate date1, LocalDate date2) {
-        return receiptDetailsRepository.findAll().stream()
-                .filter(rd -> rd.getReceipt().getReceiptDate().isAfter(date1))
-                .filter(rd -> rd.getReceipt().getReceiptDate().isBefore(date2))
-                .map(ReceiptDetails::getGame)
+    @Override
+    public List<GameWithUsedGameCodeListDto> getBestSellerGamesBetweenDates(LocalDate startDate, LocalDate endDate) {
+        List<Game> gameList = getGamesSoldBetweenDates(startDate, endDate);
+
+        Map<Game, Long> gamesWithUsedGameCodeList = getGameLongMap(gameList);
+
+        return gamesWithUsedGameCodeList.entrySet()
+                .stream()
+                .sorted(Comparator.comparing(Map.Entry<Game, Long>::getValue).reversed())
+                .limit(5)
+                .map(entry -> new GameWithUsedGameCodeListDto(entry.getKey(), entry.getValue().intValue()))
+                .collect(Collectors.toList());
+    }
+
+    private List<Game> getGamesSoldBetweenDates(LocalDate startDate, LocalDate endDate) {
+        List<GameCode> usedGameCodes = receiptDetailsRepository.findByReceiptReceiptDateBetween(startDate, endDate)
+                .stream()
+                .map(ReceiptDetails::getGameCode)
+                .collect(Collectors.toList());
+        return usedGameCodes.stream().map(GameCode::getGame).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ReceiptDetailsDto> getReceiptDetailListBetweenDates(LocalDate date1, LocalDate date2) {
+        List<ReceiptDetailsDto> receiptDetailsDtos = new ArrayList<>();
+
+        receiptDetailsRepository.findByReceiptReceiptDateBetween(date1, date2)
+                .forEach(receiptDetails -> {
+                    ReceiptDetailsDto receiptDetailsDto = new ReceiptDetailsDto(
+                            receiptDetails.getReceipt().getId(),
+                            receiptDetails.getGameCode().getId(),
+                            receiptDetails.getGamePrice()
+                    );
+                    receiptDetailsDtos.add(receiptDetailsDto);
+                });
+        return receiptDetailsDtos;
+    }
+
+    @Override
+    public List<GameWithUsedGameCodeListDto> getWorstSellerGamesBetweenDates(LocalDate startDate, LocalDate endDate) {
+        List<Game> gameList = getGamesSoldBetweenDates(startDate, endDate);
+
+        Map<Game, Long> gamesWithUsedGameCodeList = getGameLongMap(gameList);
+
+        return gamesWithUsedGameCodeList.entrySet()
+                .stream()
+                .sorted(Comparator.comparing(Map.Entry<Game, Long>::getValue))
+                .limit(5)
+                .map(entry -> new GameWithUsedGameCodeListDto(entry.getKey(), entry.getValue().intValue()))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Map<Game, Long> getBestSellerGamesBetweenDates(LocalDate date1, LocalDate date2) {
-        List<Game> gamesByReceiptDate = getGamesBetweenDates(date1, date2);
-
-        Map<Game, Long> gamesWithCopiesSold = new HashMap<>();
-        for (Game game : gamesByReceiptDate) {
-            gamesWithCopiesSold.put(game, 0L);
-        }
-
-        for (Map.Entry<Game, Long> entry : gamesWithCopiesSold.entrySet()) {
-            Game key = entry.getKey();
-            Long value = entry.getValue();
-
-            for (Game game : gamesByReceiptDate) {
-                if (Objects.equals(game.getId(), key.getId())) {
-                    value++;
-                    entry.setValue(value);
-                }
-            }
-        }
-//        return gamesWithCopiesSold;
-        return gamesWithCopiesSold.entrySet()
-                .stream()
-                .sorted(Comparator.comparing(Map.Entry<Game, Long>::getValue).reversed())
-                .limit(5)
-                .collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                        Map.Entry::getValue,
-                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+    public List<GameStatisticsDto> getGameStatisticsDto(Integer month, Integer year) {
+        return receiptDetailsRepository.getGameStatisticsPerMonth(month, year);
     }
 
-
-    @Override
-    public Map<Game, Long> getWorstSellerGamesBetweenDates(LocalDate date1, LocalDate date2) {
-        List<Game> gamesByReceiptDate = getGamesBetweenDates(date1, date2);
-
-        Map<Game, Long> gamesWithCopiesSold = new HashMap<>();
-        for (Game game : gamesByReceiptDate) {
-            gamesWithCopiesSold.put(game, 0L);
+    private static Map<Game, Long> getGameLongMap(List<Game> gameList) {
+        Map<Game, Long> gamesWithUsedGameCodeList = new HashMap<>();
+        for (Game game : gameList) {
+            gamesWithUsedGameCodeList.put(game, 0L);
         }
 
-        for (Map.Entry<Game, Long> entry : gamesWithCopiesSold.entrySet()) {
+        for (Map.Entry<Game, Long> entry : gamesWithUsedGameCodeList.entrySet()) {
             Game key = entry.getKey();
             Long value = entry.getValue();
 
-            for (Game game : gamesByReceiptDate) {
-                if (Objects.equals(game.getId(), key.getId())) {
+            for (Game game : gameList) {
+                if (game.getId().equals(key.getId())) {
                     value++;
                     entry.setValue(value);
                 }
             }
         }
-
-        return gamesWithCopiesSold.entrySet()
-                .stream()
-                .sorted(Comparator.comparing(Map.Entry<Game, Long>::getValue))
-                .limit(5)
-                .collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                        Map.Entry::getValue,
-                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+        return gamesWithUsedGameCodeList;
     }
 }

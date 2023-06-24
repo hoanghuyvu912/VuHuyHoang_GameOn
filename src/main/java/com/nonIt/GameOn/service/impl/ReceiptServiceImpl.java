@@ -1,16 +1,10 @@
 package com.nonIt.GameOn.service.impl;
 
-import com.nonIt.GameOn.entity.Game;
-import com.nonIt.GameOn.entity.Receipt;
-import com.nonIt.GameOn.entity.ReceiptDetails;
-import com.nonIt.GameOn.entity.User;
+import com.nonIt.GameOn.entity.*;
 import com.nonIt.GameOn.exception.GameOnException;
-import com.nonIt.GameOn.repository.GameRepository;
-import com.nonIt.GameOn.repository.ReceiptDetailsRepository;
-import com.nonIt.GameOn.repository.ReceiptRepository;
-import com.nonIt.GameOn.repository.UserRepository;
+import com.nonIt.GameOn.repository.*;
 import com.nonIt.GameOn.rest.resourcesdto.ReceiptCreateDto;
-import com.nonIt.GameOn.rest.resourcesdto.SimplifiedReceiptDetailsDto;
+import com.nonIt.GameOn.security.jwt.JwtUtils;
 import com.nonIt.GameOn.service.ReceiptService;
 import com.nonIt.GameOn.service.createdto.ReceiptDto;
 import com.nonIt.GameOn.service.mapper.ReceiptDetailsMapper;
@@ -18,6 +12,7 @@ import com.nonIt.GameOn.service.mapper.ReceiptMapper;
 import com.nonIt.GameOn.service.restdto.ReceiptRestDto;
 //import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,18 +20,24 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class ReceiptServiceImpl implements ReceiptService {
+    @Autowired
+    private final JwtUtils jwtUtils;
+
     private final ReceiptRepository receiptRepository;
     private final UserRepository userRepository;
     private final ReceiptMapper receiptMapper;
     private final GameRepository gameRepository;
     private final ReceiptDetailsRepository receiptDetailsRepository;
     private final ReceiptDetailsMapper receiptDetailsMapper;
+    private final GameCodeRepository gameCodeRepository;
+
 
     @Override
     public List<ReceiptRestDto> getAll() {
@@ -66,25 +67,36 @@ public class ReceiptServiceImpl implements ReceiptService {
     public ReceiptRestDto createReceipt(ReceiptCreateDto receiptCreateDto) {
         User user = userRepository.findById(receiptCreateDto.getUserId()).orElseThrow(GameOnException::UserNotFound);
         List<Integer> gamesIdListOfUser = receiptDetailsRepository.findByReceiptUserId(receiptCreateDto.getUserId()).stream()
-                .map(receiptDetailsMapper::toSimplifiedDto)
-                .map(SimplifiedReceiptDetailsDto::getGameId).collect(Collectors.toList());
-        Receipt receipt = new Receipt();
+                .map(ReceiptDetails::getGameCode)
+                .map(GameCode::getGame)
+                .map(Game::getId)
+                .distinct()
+                .collect(Collectors.toList());
 
+        if (gamesIdListOfUser.stream().anyMatch(receiptCreateDto.getGameIdList().stream().collect(Collectors.toList())::contains)) {
+            throw GameOnException.badRequest("CannotBuyGame", "User already owns this game.");
+        }
+
+        Receipt receipt = Receipt.builder().user(user).build();
         List<ReceiptDetails> receiptDetailsList = new ArrayList<>();
         Double totalPriceOfCart = 0D;
 
         for (Integer gameId : receiptCreateDto.getGameIdList()) {
-            for (Integer gameIdOfUser : gamesIdListOfUser) {
-                if (Objects.equals(gameId, gameIdOfUser)) {
-                    throw GameOnException.badRequest("CannotBuyGame", "Game ID: " + gameId + " already existed in user's library!");
-                }
-            }
-
-            ReceiptDetails receiptDetails = new ReceiptDetails();
             Game game = gameRepository.findById(gameId).orElseThrow(GameOnException::GameNotFound);
             totalPriceOfCart += game.getPrice();
-            receiptDetails.setReceipt(receipt);
-            receiptDetails.setGame(game);
+            Optional<GameCode> gameCode = gameCodeRepository.findByGameId(gameId).stream().filter(gc -> GameCodeStatus.Available.equals(gc.getGameCodeStatus())).findFirst();
+
+            ReceiptDetails receiptDetails = ReceiptDetails.builder()
+                    .receipt(receipt)
+                    .gamePrice(game.getPrice())
+                    .build();
+
+            if (gameCode.isPresent()) {
+                receiptDetails.setGameCode(gameCode.get());
+                gameCode.get().setGameCodeStatus(GameCodeStatus.Used);
+            } else {
+                throw GameOnException.badRequest("CannotGetGameCode", "The current game doesn't have any code left.");
+            }
             receiptDetailsList.add(receiptDetails);
         }
         if (totalPriceOfCart > user.getBalance()) {
@@ -92,15 +104,50 @@ public class ReceiptServiceImpl implements ReceiptService {
         }
 
         user.setBalance(user.getBalance() - totalPriceOfCart);
-
-        receipt.setUser(user);
-
         receipt.setReceiptDetailsList(receiptDetailsList);
-
         receipt = receiptRepository.save(receipt);
-
         return receiptMapper.toDto(receipt);
     }
+
+//    @Override
+//    public ReceiptRestDto createReceipt(ReceiptCreateDto receiptCreateDto) {
+//        User user = userRepository.findById(receiptCreateDto.getUserId()).orElseThrow(GameOnException::UserNotFound);
+//        List<Integer> gamesIdListOfUser = receiptDetailsRepository.findByReceiptUserId(receiptCreateDto.getUserId()).stream()
+//                .map(receiptDetailsMapper::toSimplifiedDto)
+//                .map(SimplifiedReceiptDetailsDto::getGameId).collect(Collectors.toList());
+//        Receipt receipt = Receipt.builder()
+//                .user(user)
+//                .build();
+//
+//        List<ReceiptDetails> receiptDetailsList = new ArrayList<>();
+//        Double totalPriceOfCart = 0D;
+//
+//        for (Integer gameId : receiptCreateDto.getGameIdList()) {
+//            for (Integer gameIdOfUser : gamesIdListOfUser) {
+//                if (Objects.equals(gameId, gameIdOfUser)) {
+//                    throw GameOnException.badRequest("CannotBuyGame", "User has already bought this game!");
+//                }
+//            }
+//            ReceiptDetails receiptDetails = new ReceiptDetails();
+//            Game game = gameRepository.findById(gameId).orElseThrow(GameOnException::GameNotFound);
+//            totalPriceOfCart += game.getPrice();
+//            receiptDetails.setReceipt(receipt);
+//            receiptDetails.setGame(game);
+//            receiptDetailsList.add(receiptDetails);
+//        }
+//        if (totalPriceOfCart > user.getBalance()) {
+//            throw GameOnException.badRequest("InsufficientBalance", "Insufficient balance. \nYour current balance: $" + user.getBalance() + ". \nTotal price of cart: $" + totalPriceOfCart);
+//        }
+//
+//        user.setBalance(user.getBalance() - totalPriceOfCart);
+//
+//        receipt.setReceiptDetailsList(receiptDetailsList);
+//
+//        receipt = receiptRepository.save(receipt);
+//
+//        return receiptMapper.toDto(receipt);
+//    }
+
 
     @Override
     public ReceiptRestDto updateReceipt(Integer receiptId, ReceiptDto receiptDto) {
@@ -125,6 +172,6 @@ public class ReceiptServiceImpl implements ReceiptService {
 
     @Override
     public List<ReceiptRestDto> getByUserId(Integer userId) {
-        return receiptRepository.getReceiptByUserId(userId).stream().map(receiptMapper::toDto).collect(Collectors.toList());
+        return receiptRepository.findByUserId(userId).stream().map(receiptMapper::toDto).collect(Collectors.toList());
     }
 }

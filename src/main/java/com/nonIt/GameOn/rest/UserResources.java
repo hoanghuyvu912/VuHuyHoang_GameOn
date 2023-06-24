@@ -42,6 +42,13 @@ public class UserResources {
         return ResponseEntity.ok(userService.findById(userId));
     }
 
+//    @PostMapping(path = "/user-info")
+//    public ResponseEntity<UserRestDto> getUserInfo(@RequestHeader("id") Integer id)
+//    {
+//        //here I will add more code which should replace the String in the ResponseEntity.
+//        return ResponseEntity.ok(userService.findById(id));
+//    }
+
     @PutMapping(value = "/{userId}")
     public ResponseEntity<UserRestDto> updateUserById(@PathVariable("userId") Integer userId, @RequestBody UserDto userDto) {
         return ResponseEntity.ok(userService.updateUser(userId, userDto));

@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SimplifiedReceiptDetailsDto {
     private Integer receiptDetailsId;
-    private Integer gameId;
+    private Integer gameCodeId;
     private Integer receiptId;
 }

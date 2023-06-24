@@ -8,15 +8,19 @@ import com.nonIt.GameOn.repository.PublisherRepository;
 import com.nonIt.GameOn.repository.RatingRepository;
 import com.nonIt.GameOn.rest.resourcesdto.SimplifiedCommentDto;
 import com.nonIt.GameOn.rest.resourcesdto.SimplifiedGameDto;
+import com.nonIt.GameOn.security.jwt.JwtUtils;
 import com.nonIt.GameOn.service.GameService;
+import com.nonIt.GameOn.service.customDto.GameLibraryDto;
 import com.nonIt.GameOn.service.customDto.GameSearchDto;
 import com.nonIt.GameOn.service.createdto.GameDto;
 import com.nonIt.GameOn.service.mapper.CommentMapper;
+import com.nonIt.GameOn.repository.*;
 import com.nonIt.GameOn.service.mapper.GameMapper;
 import com.nonIt.GameOn.service.mapper.RatingMapper;
 import com.nonIt.GameOn.service.restdto.GameRestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +33,8 @@ import java.util.stream.Collectors;
 @Transactional
 @RequiredArgsConstructor
 public class GameServiceImpl implements GameService {
+    @Autowired
+    private final JwtUtils jwtUtils;
     private final GameRepository gameRepository;
     private final DeveloperRepository developerRepository;
     private final PublisherRepository publisherRepository;
@@ -36,11 +42,12 @@ public class GameServiceImpl implements GameService {
     private final GameMapper gameMapper;
     private final RatingMapper ratingMapper;
     private final CommentMapper commentMapper;
-
+    private final GameCodeRepository gameCodeRepository;
+    private final UserRepository userRepository;
     //CRUD Services
     @Override
-    public List<GameRestDto> getAll() {
-        return gameRepository.findAll().stream().map(gameMapper::toDto).collect(Collectors.toList());
+    public List<SimplifiedGameDto> getAll() {
+        return gameRepository.findAllByOrderByIdAsc().stream().map(gameMapper::toSimplifiedDto).collect(Collectors.toList());
     }
 
     @Override
@@ -606,14 +613,23 @@ public class GameServiceImpl implements GameService {
         return gameRepository.getByPublisherId(publisherId).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 
+//    @Override
+//    public List<GameRestDto> getByUserId(Integer userId) {
+//        return gameRepository.getByUserId(userId).stream().map(gameMapper::toDto).collect(Collectors.toList());
+//    }
+//
+//    @Override
+//    public List<GameRestDto> getByUsername(String username) {
+//        return gameRepository.getByUsername(username).stream().map(gameMapper::toDto).collect(Collectors.toList());
+//    }
     @Override
-    public List<GameRestDto> getByUserId(Integer userId) {
-        return gameRepository.getByUserId(userId).stream().map(gameMapper::toDto).collect(Collectors.toList());
-    }
+    public List<GameLibraryDto> getByUser(String authorization){
+        System.out.println(authorization);
+        User user = userRepository.findByUsername(jwtUtils.getUserNameFromJwtToken(authorization)).orElseThrow(GameOnException::UserNotFound);
 
-    @Override
-    public List<GameRestDto> getByUsername(String username) {
-        return gameRepository.getByUsername(username).stream().map(gameMapper::toDto).collect(Collectors.toList());
+        List<GameLibraryDto> gameLibraryDtos = gameRepository.getByUserId(user.getId());
+
+        return gameLibraryDtos;
     }
 
     @Override
@@ -670,4 +686,11 @@ public class GameServiceImpl implements GameService {
         }
         return gameRepository.findGamesByDto(gameSearchDto).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
+
+    public Integer getUsedGameCodeListOfGame(Integer gameId) {
+        return (Integer) (int) gameCodeRepository.findAll().stream()
+                .filter(gameCode -> gameId.equals(gameCode.getGame().getId()))
+                .filter(gameCode -> gameCode.getGameCodeStatus().equals(GameCodeStatus.Used)).count();
+    }
+
 }

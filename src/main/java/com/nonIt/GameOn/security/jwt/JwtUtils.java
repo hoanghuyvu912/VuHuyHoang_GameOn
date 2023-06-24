@@ -32,6 +32,10 @@ public class JwtUtils implements Serializable {
 		return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
 	}
 
+//	public String getIdFromJwtToken(String token) {
+//		return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getId();
+//	}
+
 	public boolean validateJwtToken(String authToken) {
 		try {
 			Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
