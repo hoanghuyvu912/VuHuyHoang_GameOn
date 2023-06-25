@@ -82,6 +82,6 @@ public class VNPayResource {
                 .message("Successfully!")
                 .URL(paymentUrl)
                 .build();
-        return ResponseEntity.status(HttpStatus.OK).body(paymentResponseDto); 
+        return ResponseEntity.status(HttpStatus.OK).body(paymentResponseDto);
     }
 }
