@@ -1,0 +1,1377 @@
+--INSERT INTO developer (cover_photo,description,established_date,developer_name,thumbnail) VALUES
+--	 ('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnDTkdA38Qi_7RLtj2283fRSJxLHxvX6FdZg&usqp=CAU',NULL,'1999-01-01','Santa Monica Studio','https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/Santa_Monica_Studio.svg/220px-Santa_Monica_Studio.svg.png'),
+--	 ('https://cdn.akamai.steamstatic.com/steamcommunity/public/images/clans/33273264/4256bc824357bb34aa4e2f7f11df9a62633d286f.png',NULL,'1979-05-30','Capcom','https://avatars.cloudflare.steamstatic.com/6b62a91eb5a093261d8831d1908717bab0d687e9_full.jpg'),
+--	 ('https://cdn.akamai.steamstatic.com/steamcommunity/public/images/clans/33075774/6f635e1eeae42b293705087fc040e77116ed365a.png','Ubisoft is a creator of worlds, committed to enriching players'' lives with original and memorable gaming experiences.','1986-03-28','Ubisoft','https://avatars.cloudflare.steamstatic.com/2b2486ae5a70d69c55f020ce8384d04646ddba4e_full.jpg'),
+--	 ('https://cdn.akamai.steamstatic.com/steamcommunity/public/images/clans/36135791/b42c79819a407c68f5b12a0028a2a8871bec6c7c.png',NULL,'1982-05-27','Electronic Arts','https://avatars.cloudflare.steamstatic.com/618cc2a46fad78ed1259df505c2de5bb4d806532_full.jpg'),
+--	 ('https://cdn.akamai.steamstatic.com/steamcommunity/public/images/clans/33016879/c0a3a3a256b1c8c0023cfce1a0fe900abb4cd64a.png',NULL,'2009-01-14','KOEI TECMO','https://avatars.cloudflare.steamstatic.com/f76177141df41c80109df7c0df81f303a933a44c_full.jpg'),
+--	 ('https://cdn.akamai.steamstatic.com/steamcommunity/public/images/clans/32989758/b05e42588fee27abeb63080593125642b63cf219.jpg','CD PROJEKT RED is a development studio founded in 2002. Our mission is to tell emotional stories riddled with meaningful choices and consequences, as well as featuring characters gamers can truly connect with.','2002-01-01','CD PROJEKT RED','https://avatars.cloudflare.steamstatic.com/4f1187c11ad41f8aa58b9109efd52c2f8bca9918_full.jpg'),
+--	 ('https://cdn.akamai.steamstatic.com/steamcommunity/public/images/clans/1541443/fb4af705f9b9e9d14640e48258d6ee11b8ad15a6.jpg',NULL,'1988-12-01','Rockstar Games','https://avatars.cloudflare.steamstatic.com/d83a1786f23929deb5f20326f128bbc13a9a1e85_full.jpg'),
+--	 ('https://cdn.akamai.steamstatic.com/steamcommunity/public/images/clans/33042543/22343df6affaa7a2657500d398024aed36ec2cba.png','Bandai Namco exists to share dreams, fun and inspiration with people around the world. Do you wish to enjoy every single day to the fullest? What we want is for people like you to always have a reason to smile.','2006-03-31','Bandai Namco Entertainment','https://avatars.cloudflare.steamstatic.com/97ea9619ba3076b8549c1484bef9308a67f0c64d_full.jpg'),
+--	 ('https://cdn.akamai.steamstatic.com/steamcommunity/public/images/clans/37700027/df452cd72626e4abc7fa73f6d641a5ce65cd2d19.jpg','Quantic Dream is an award-winning French video game developer and publisher founded to create AAA games with a focus on emotional, interactive storytelling and innovation in narrative.','1997-05-02','Quantic Dream','https://avatars.cloudflare.steamstatic.com/baf1dce75db2d5bfb0f5e14dd2183c4cb61911f7_full.jpg'),
+--	 ('https://cdn.akamai.steamstatic.com/steamcommunity/public/images/clans/32528477/75c893bdb19f4785094b30c98cc90f8fc69546b9.png','“To be this good takes AGES”','1960-03-06','SEGA','https://avatars.cloudflare.steamstatic.com/93aafaeb1ee958cc14bb78344df71c92d9734980_full.jpg');
+--INSERT INTO developer (cover_photo,description,established_date,developer_name,thumbnail) VALUES
+--	 ('https://static.wikia.nocookie.net/diablo/images/a/af/BlizzardEnt.jpg/revision/latest?cb=20080703111353','At Blizzard Entertainment, we pour our hearts and souls into everything we create. We embrace our core values every day so that we can continue creating epic entertainment experiences for all our players. It doesn’t matter who you are or where you’re located—if you’re a member of our evolving and vibrant community, working with us at one of our offices around the globe, or taking a piece of Blizzard with you into space—you’re welcome here.','1991-02-01','Blizzard Entertainment, Inc.','https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Blizzard_Entertainment_Logo_2015.svg/220px-Blizzard_Entertainment_Logo_2015.svg.png'),
+--	 ('https://cdn.akamai.steamstatic.com/steamcommunity/public/images/clans/1012195/52ab50f3f89e6188291c848fe7d4a45c86415d0a.jpg',NULL,'2003-04-01','Square Enix','https://avatars.cloudflare.steamstatic.com/2fe0615e013c887e87dd230e8268afdd15416f12_full.jpg'),
+--	 ('https://wallpaperaccess.com/full/2651906.jpg',NULL,'1986-11-01','From Software','https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Fromsoftware_logo.svg/220px-Fromsoftware_logo.svg.png'),
+--	 ('https://www.guerrilla-games.com/media/OG/gg-games-og-image-1200x628.jpg','Guerrilla is one of Europe''s leading game companies and a wholly-owned subsidiary of Sony Interactive Entertainment Europe. We started in 2003, and have pushed the boundaries of technical and artistic excellence in our games ever since.','2000-01-01','Guerrilla Games','https://upload.wikimedia.org/wikipedia/en/thumb/1/17/Guerrilla_logo.svg/220px-Guerrilla_logo.svg.png'),
+--	 ('https://s3.amazonaws.com/nd.images/uploads/blog_default-red.png','Established in 1984, Naughty Dog is one of the most successful and prolific game development studios in the world and a flagship first-party studio within PlayStation Studios. From creating the iconic Crash Bandicoot and Jak and Daxter series to modern franchises like Uncharted and The Last of Us, Naughty Dog is responsible for some of the most critically acclaimed and commercially successful games on Sony’s PlayStation platforms. Through its use of cutting-edge technology and evocative, character-driven storytelling, Naughty Dog has received hundreds of industry and media awards, while developing a passionate fan base of millions of players around the globe.','1984-01-01','Naughty Dog','https://upload.wikimedia.org/wikipedia/en/thumb/f/f3/Naughty_Dog.svg/220px-Naughty_Dog.svg.png'),
+--	 ('https://twistedvoxel.com/wp-content/uploads/2022/05/insomniac-Games.png','To create games that have a positive and lasting influence on people’s lives.','1994-02-28','Insomniac Games','https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Insomniac_Games_logo.svg/220px-Insomniac_Games_logo.svg.png'),
+--	 ('https://static0.gamerantimages.com/wordpress/wp-content/uploads/2022/07/bioware-games-jade-empire-knights-of-the-old-republic-anthem.jpg','Creating worlds of adventure, conflict and companionship that inspire you to become the hero of your story.','1995-02-01','Bioware','https://avatars.cloudflare.steamstatic.com/00d6df183d7b4eb8ac84a60a1f1a708b40dfcce9_full.jpg'),
+--	 ('https://static.wikia.nocookie.net/starwars/images/7/72/Respawn_logo.jpg/revision/latest?cb=20190410014944','We create incredible gameplay experiences.','2010-04-12','Respawn Entertainment','https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Respawn_Logo.png/220px-Respawn_Logo.png'),
+--	 ('https://www.gamespot.com/a/uploads/original/1179/11799911/2800388-treyarch.jpg','DEVELOPING GAMES SINCE 1996, TREYARCH IS HOME TO THE INDUSTRY''S BEST AND BRIGHTEST TALENT.','1996-01-01','Treyarch','https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Treyarch_logo.svg/330px-Treyarch_logo.svg.png'),
+--	 ('https://i0.wp.com/xboxera.com/wp-content/uploads/2022/02/Radical-Entertainment.png?fit=1920%2C1080&ssl=1',NULL,'1991-09-01','Radical Entertainment','https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Radical_Entertainment_logo.svg/330px-Radical_Entertainment_logo.svg.png');
+--INSERT INTO developer (cover_photo,description,established_date,developer_name,thumbnail) VALUES
+--	 ('https://www.callofduty.com/content/dam/atvi/callofduty/cod-touchui/blog/hero/mwii/MWII-001-IW-INTRO-TOUT.jpg','TOGETHER, WE''VE CRAFTED A LEGENDARY FRANCHISE THAT TRANSFORMED A GENREEXPLORE','2002-05-01','Infinity Ward','https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Infinity_Ward.svg/330px-Infinity_Ward.svg.png');
+--
+
+--INSERT INTO game (description,game_name,price,released_date,system_req,thumbnail,trailer,developer_id,publisher_id) VALUES
+--	 ('Play as Nathan Drake and Chloe Frazer in their own standalone adventures as they confront their pasts and forge their own legacies. This game includes the critically acclaimed single-player stories from both UNCHARTED 4: A Thief’s End and UNCHARTED: The Lost Legacy.','UNCHARTED™: Legacy of Thieves Collection',59.99,'2022-10-19','MINIMUM:
+--OS: Windows 10 64-bit
+--Processor: Intel i5-4430, AMD Ryzen 3 1200
+--Memory: 8 GB RAM
+--Graphics: NVIDIA GTX 960 (4 GB), AMD R9 290X (4 GB)
+--DirectX: Version 12
+--Storage: 126 GB available space','https://upload.wikimedia.org/wikipedia/en/1/1a/Uncharted_4_box_artwork.jpg','https://www.youtube.com/watch?v=F3Wl-OiZCO4',1,1),
+--	 ('His vengeance against the Gods of Olympus years behind him, Kratos now lives as a man in the realm of Norse Gods and monsters. It is in this harsh, unforgiving world that he must fight to survive… and teach his son to do the same.','God of War (2018)',59.99,'2022-01-14','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Windows 10 64-bit
+--Processor: Intel i5-2500k (4 core 3.3 GHz) or AMD Ryzen 3 1200 (4 core 3.1 GHz)
+--Memory: 8 GB RAM
+--Graphics: NVIDIA GTX 960 (4 GB) or AMD R9 290X (4 GB)
+--DirectX: Version 11
+--Storage: 70 GB available space
+--Additional Notes: DirectX feature level 11_1 required','https://upload.wikimedia.org/wikipedia/en/a/a7/God_of_War_4_cover.jpg','https://www.youtube.com/watch?v=HqQMh_tij0c',1,1),
+--	 ('Experience Aloy’s legendary quest to unravel the mysteries of a future Earth ruled by Machines. Use devastating tactical attacks against your prey and explore a majestic open world in this award-winning action RPG!','Horizon Zero Dawn™ Complete Edition',29.99,'2020-08-07','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Windows 10 64-bits
+--Processor: Intel Core i5-2500K@3.3GHz or AMD FX 6300@3.5GHz
+--Memory: 8 GB RAM
+--Graphics: Nvidia GeForce GTX 780 (3 GB) or AMD Radeon R9 290 (4GB)
+--DirectX: Version 12
+--Storage: 100 GB available space','https://cdn.cloudflare.steamstatic.com/steam/apps/1151640/header.jpg?t=1667297464','https://www.youtube.com/watch?v=76O5KaJHEA0',14,1),
+--	 ('Experience the emotional storytelling and unforgettable characters in The Last of Us™, winner of over 200 Game of the Year awards.','The Last of Us™ Part I',59.99,'20223-03-28','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Windows 10 (Version 1909 or Newer)
+--Processor: AMD Ryzen 5 1500X, Intel Core i7-4770K
+--Memory: 16 GB RAM
+--Graphics: AMD Radeon RX 470 (4 GB), AMD Radeon RX 6500 XT (4 GB), NVIDIA GeForce GTX 970 (4 GB), NVIDIA GeForce GTX 1050 Ti (4 GB)
+--Storage: 100 GB available space
+--Additional Notes: SSD Recommended','https://cdn.cloudflare.steamstatic.com/steam/apps/1888930/header.jpg?t=1680282721','https://www.youtube.com/watch?v=CxVyuE2Nn_w',15,1),
+--	 ('In Marvel’s Spider-Man Remastered, the worlds of Peter Parker and Spider-Man collide in an original action-packed story. Play as an experienced Peter Parker, fighting big crime and iconic villains in Marvel’s New York.','Marvel’s Spider-Man Remastered',59.99,'2022-08-12','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Windows 10 64-bit
+--Processor: Intel Core i3-4160, 3.6 GHz or AMD equivalent
+--Memory: 8 GB RAM
+--Graphics: NVIDIA GTX 950 or AMD Radeon RX 470
+--DirectX: Version 12
+--Storage: 75 GB available space','https://cdn.cloudflare.steamstatic.com/steam/apps/1817070/header.jpg?t=1673999865','https://www.youtube.com/watch?v=1E051WtpyWg',16,1),
+--	 ('After the events of Marvel’s Spider-Man Remastered, teenage Miles Morales is adjusting to his new home while following in the footsteps of his mentor, Peter Parker, as a new Spider-Man.','Marvel’s Spider-Man: Miles Morales',59.99,'2022-11-18','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Windows 10 64-bit 1909
+--Processor: Intel Core i3-4160, 3.6 GHz or AMD equivalent
+--Memory: 8 GB RAM
+--Graphics: NVIDIA GTX 950 or AMD Radeon RX 470
+--DirectX: Version 12
+--Storage: 75 GB available space','https://cdn.cloudflare.steamstatic.com/steam/apps/1817190/header.jpg?t=1672784176','https://www.youtube.com/watch?v=CMRBuagwRb4',16,1),
+--	 ('The ultimate Devil Hunter is back in style, in the game action fans have been waiting for.','Devil May Cry 5',39.99,'2019-03-08','MINIMUM:
+--OS: WINDOWS® 7, 8.1, 10 (64-BIT Required)
+--Processor: Intel® Core™ i5-4460, AMD FX™-6300, or better
+--Memory: 8 GB RAM
+--Graphics: NVIDIA® GeForce® GTX 760 or AMD Radeon™ R7 260x with 2GB Video RAM, or better
+--DirectX: Version 11
+--Storage: 35 GB available space
+--Additional Notes: *Xinput support Controllers recommended *Internet connection required for game activation. (Network connectivity uses Steam® developed by Valve® Corporation.)','https://upload.wikimedia.org/wikipedia/en/c/cb/Devil_May_Cry_5.jpg','https://www.youtube.com/watch?v=KMSGj9Y2T9Q',2,2),
+--	 ('Experience survival horror like never before in the 8th major installment in the Resident Evil franchise - Resident Evil Village. With detailed graphics, intense first-person action and masterful storytelling, the terror has never felt more realistic.','Resident Evil Village',39.99,'2021-05-07','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Windows 10 (64 bit)
+--Processor: AMD Ryzen 3 1200 ／ Intel Core i5-7500
+--Memory: 8 GB RAM
+--Graphics: AMD Radeon RX 560 with 4GB VRAM ／ NVIDIA GeForce GTX 1050 Ti with 4GB VRAM
+--DirectX: Version 12
+--Additional Notes: Estimated performance (when set to Prioritize Performance): 1080p/60fps. ・Framerate might drop in graphics-intensive scenes. ・AMD Radeon RX 6700 XT or NVIDIA GeForce RTX 2060 required to support ray tracing.','https://cdn.cloudflare.steamstatic.com/steam/apps/1196590/header.jpg?t=1681094558','https://www.youtube.com/watch?v=26tay8lMZW4',2,2),
+--	 ('Mega Man is back! The newest entry in this iconic series blends classic, challenging 2D platforming action with a fresh new visual style. The new Double Gear system boosts Mega Man''s speed and power for a new twist to the satisfying gameplay the series is known for.','Mega Man 11',29.99,'2018-10-03','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: OS: Windows 7, 8, 8.1, 10 (64-bit required)
+--Processor: Intel Core i5-3470 3.20GHz or AMD equivalent or better
+--Memory: 4 GB RAM
+--Graphics: GeForce GTX 650
+--DirectX: Version 11
+--Network: Broadband Internet connection
+--Sound Card: DirectSound (DirectX 9.0c or better)
+--Additional Notes: ・DirectX9.0c is also required ・Hardware specification target　Resolution: 1080P/60FPS　Display Mode: Windows Mode　Anti-aliasing: OFF','https://cdn.cloudflare.steamstatic.com/steam/apps/742300/header.jpg?t=1669873876','https://www.youtube.com/watch?v=3aSC5A726f0',2,2),
+--	 ('Welcome to a new world! In Monster Hunter: World, the latest installment in the series, you can enjoy the ultimate hunting experience, using everything at your disposal to hunt monsters in a new world teeming with surprises and excitement.','Monster Hunter: World',39.99,'2018-08-09','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: WINDOWS® 7, 8, 8.1, 10 (64-bit required)
+--Processor: Intel® Core™ i5 4460 or Core™ i3 9100F or AMD FX™-6300 or Ryzen™ 3 3200G
+--Memory: 8 GB RAM
+--Graphics: NVIDIA®GeForce®GTX 760 or GTX1050 or AMD Radeon™ R7 260x or RX 560
+--DirectX: Version 11
+--Network: Broadband Internet connection
+--Storage: 52 GB available space
+--Sound Card: DirectSound (DirectX® 9.0c or later)
+--Additional Notes: - These specs allow for the game to be played in 1080p/30fps with graphics settings at "Low". - 64-bit processor and operating system are required.','https://cdn.cloudflare.steamstatic.com/steam/apps/582010/header.jpg?t=1661838392','https://www.youtube.com/watch?v=-0l0B7NDTAU',2,2);
+--INSERT INTO game (description,game_name,price,released_date,system_req,thumbnail,trailer,developer_id,publisher_id) VALUES
+--	 ('Dead Rising 4 marks the return of photojournalist Frank West in an all-new chapter of one of the most popular zombie game franchises of all time.','Dead Rising 4',19.99,'2017-03-04','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Windows 7 64-bit
+--Processor: Intel i5-2400 or AMD FX 6300
+--Memory: 6 GB RAM
+--Graphics: NVIDIA GeForce GTX 760 (2 GB) or AMD Radeon HD 7850 (2 GB)
+--DirectX: Version 11
+--Network: Broadband Internet connection
+--Storage: 50 GB available space
+--Sound Card: DX11-compatible sound card
+--Additional Notes: Not compatible with AMD CPUs that do not support SSE 4.1 multi-threading.','https://cdn.cloudflare.steamstatic.com/steam/apps/543460/header.jpg?t=1644282464','https://www.youtube.com/watch?v=GT3cb3f5pM0',2,2),
+--	 ('The world’s greatest fighting game evolves to a whole new level with Ultra Street Fighter IV.','Ultra Street Fighter® IV',9.99,'2014-08-07','MINIMUM
+--OS: Windows Vista
+--Processor: Intel Core 2 Duo 2.0 GHz or better
+--Memory: 1 GB RAM
+--Hard Disk Space: 12 GB free hard drive space
+--Video Card: NVIDIA GeForce 6600 or better (except NVIDIA GeForce 7300)
+--DirectX®: 9.0c or greater
+--Sound: DirectSound, DirectX9.0c Compatible Audio','https://cdn.cloudflare.steamstatic.com/steam/apps/45760/header.jpg?t=1644283495','https://www.youtube.com/watch?v=d__QncYv3VU',2,2),
+--	 ('Welcome to San Francisco. Play as Marcus, a brilliant young hacker, and join the most notorious hacker group, DedSec. Your objective: execute the biggest hack of history.','Watch_Dogs® 2',39.99,'2016-11-28','MINIMUM:
+--OS: Originally released for Windows 7, the game can be played on Windows 10 and Windows 11 OS
+--Processor: Intel Core i5 2400s @ 2.5 GHz, AMD FX 6120 @ 3.5 GHz or better
+--Memory: 6 GB RAM
+--Graphics: NVIDIA GeForce GTX 660 with 2 GB VRAM or AMD Radeon HD 7870, with 2 GB VRAM or better - See supported List*
+--Network: Broadband Internet connection
+--Storage: 27 GB available space
+--Sound Card: DirectX compatible using the latest drivers
+--Additional Notes: Minimum specs above for 720p , 30+ FPS, Low graphic settings // Periphericals: Microsoft Xbox One Controller, DUALSHOCK® 4 Controller, Windows-compatible keyboard, mouse, optional controller / Multiplayer: 256 kbps or faster broadband connection / Note: This product supports 64-bit operating systems only. Laptop versions of these cards may work, but are not officially supported. For the most up-to-date requirement listings, please visit the FAQ on our support website at support.ubi.com. High speed internet access and a valid Ubisoft account are required to activate the game after installation, to authenticate your system and continue gameplay after any re-activation, access online features, play online or unlock exclusive content. Game contains EasyAntiCheat (https://www.easyanticheat.net/) anti-cheat technology and Denuvo (https://www.denuvo.com/) anti-tamper technology.','https://cdn.cloudflare.steamstatic.com/steam/apps/447040/header.jpg?t=1680017909','https://www.youtube.com/watch?v=2GIVVsTKTLg',3,3),
+--	 ('Become a legendary Viking on a quest for glory. Raid your enemies, grow your settlement, and build your political power.','Assassin''s Creed Valhalla',19.99,'2022-12-07','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Windows 10 (versions 64 bits uniquement)
+--Processor: AMD Ryzen 3 1200 3.1 GHz / Intel Core i5-4460 3.2 GHz
+--Memory: 8 GB RAM
+--Graphics: AMD R9 380 /NVIDIA GeForce GTX 960
+--DirectX: Version 12
+--Storage: 160 GB available space','https://cdn.cloudflare.steamstatic.com/steam/apps/2208920/header.jpg?t=1671135934','https://www.youtube.com/watch?v=rKjUAWlbTJk',3,3),
+--	 ('Tom Clancy''s Rainbow Six® Siege is an elite, tactical team-based shooter where superior planning and execution triumph.','Tom Clancy''s Rainbow Six® Siege',15.99,'2015-12-02','MINIMUM:
+--OS: Originally released for Windows 7, the game can be played on Windows 10 and Windows 11 OS
+--Processor: Intel Core i3 560 @ 3.3 GHz or AMD Phenom II X4 945 @ 3.0 GHz
+--Memory: 6 GB RAM
+--Graphics: NVIDIA GeForce GTX 460 or AMD Radeon HD 5870 (DirectX-11 compliant with 1GB of VRAM)
+--Network: Broadband Internet connection
+--Storage: 61 GB available space
+--Sound Card: DirectX® 9.0c compatible sound card with latest drivers
+--Additional Notes: SUPPORTED VIDEO CARDS AT TIME OF RELEASE: GeForce GTX 460 or better, GTX 560 or better, GTX 650 or better, GTX 750 or better, or any card from the GT900 and Titan Series, Radeon HD5870 or better, HD6870 or better, HD7770 or better, R7 260X or better, or any card from the R-300 series and Fury X. Laptop models of these cards may work but are not supported. These chipsets are the only ones that will run this game. Additional chipsets may be supported after release. For an up-to-date list of supported chipsets, please visit the FAQ for this game on our support website: http://support.ubi.com. Game contains FairFight (https://www.gameblocks.com/products) and BattleEye (https://www.battleye.com/) anti-cheat technology.','https://cdn.cloudflare.steamstatic.com/steam/apps/359550/header.jpg?t=1680010421','https://www.youtube.com/watch?v=6wlvYh0h63k',3,3),
+--	 ('Discover the open world of Hope County, Montana, besieged by a fanatical doomsday cult. Dive into the action solo or two-player co-op in the story campaign, use a vast arsenal of weapons and allies, and free Hope County from Joseph Seed and his cult.','Far Cry® 5',49.99,'2018-03-27','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Windows 8.1, Windows 10 (64-bit versions only)
+--Processor: Intel Core i5-2400 @ 3.1 GHz or AMD FX-6300 @ 3.5 GHz or equivalent
+--Memory: 8 GB RAM
+--Graphics: NVIDIA GeForce GTX 670 or AMD R9 270 (2GB VRAM with Shader Model 5.0 or better)
+--DirectX: Version 9.0c
+--Network: Broadband Internet connection
+--Storage: 40 GB available space
+--Additional Notes: Game contains EasyAntiCheat (https://www.easyanticheat.net/) anti-cheat technology, and Denuvo (https://www.denuvo.com/) and VMProtect (http://vmpsoft.com/support/user-manual/introduction/what-is-vmprotect/) anti-tamper technology.','https://cdn.cloudflare.steamstatic.com/steam/apps/552520/header.jpg?t=1681229356','https://www.youtube.com/watch?v=Kdaoe4hbMso',3,3),
+--	 ('FIFA 23 brings The World’s Game to the pitch, with HyperMotion2 Technology, men’s and women’s FIFA World Cup™coming during the season, women’s club teams, cross-play features*, and more.','EA SPORTS™ FIFA 23',49.99,'2022-09-29','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Windows 10 64-bit
+--Processor: Intel Core i5 6600k or AMD Ryzen 5 1600
+--Memory: 8 GB RAM
+--Graphics: NVIDIA GeForce GTX 1050 Ti or AMD Radeon RX 570
+--DirectX: Version 12
+--Network: Broadband Internet connection
+--Storage: 100 GB available space','https://cdn.cloudflare.steamstatic.com/steam/apps/1811260/header.jpg?t=1679504733','https://www.youtube.com/watch?v=o3V-GvvzjE4',4,4),
+--	 ('The sci-fi survival-horror classic returns, completely rebuilt to offer an even more immersive experience — including visual, audio, and gameplay improvements — while staying faithful to the original game’s thrilling vision.','Dead Space',39.99,'2023-01-27','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Window 10 64-bit +
+--Processor: Ryzen 5 2600x, Core i5 8600
+--Memory: 16 GB RAM
+--Graphics: AMD RX 5700, GTX 1070
+--DirectX: Version 12
+--Network: Broadband Internet connection
+--Storage: 50 GB available space
+--Additional Notes: 50GB SATA SSD','https://cdn.cloudflare.steamstatic.com/steam/apps/1693980/header.jpg?t=1678446810','https://www.youtube.com/watch?v=cTDJNZ9cK1w',4,4),
+--	 ('The Mass Effect™ Legendary Edition includes single-player base content and over 40 DLC from the highly acclaimed Mass Effect, Mass Effect 2, and Mass Effect 3 games, including promo weapons, armors, and packs — remastered and optimized for 4K Ultra HD.','Mass Effect™ Legendary Edition',49.99,'2021-05-14','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: 64-bit Windows 10
+--Processor: Intel Core i5 3570 or AMD FX-8350
+--Memory: 8 GB RAM
+--Graphics: GPU: NVIDIA GTX 760, AMD Radeon 7970 / R9280X GPU RAM: 2 GB Video Memory
+--DirectX: Version 11
+--Storage: 120 GB available space','https://cdn.cloudflare.steamstatic.com/steam/apps/1328670/header.jpg?t=1669773470','https://www.youtube.com/watch?v=n8i53TtQ6IQ',17,4),
+--	 ('Respawn Entertainment gives you the most advanced titan technology in its new, single player campaign & multiplayer experience. Combine & conquer with new titans & pilots, deadlier weapons, & customization and progression systems that help you and your titan flow as one unstoppable killing force.','Titanfall® 2',34.99,'2016-10-28','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Win 7/8/8.1/10 64bit
+--Processor: Intel Core i3-6300t or equivalent [4 or more hardware threads]
+--Memory: 8 GB RAM
+--Graphics: NVIDIA Geforce GTX 660 2GB or AMD Radeon HD 7850 2GB
+--DirectX: Version 11
+--Storage: 45 GB available space','https://cdn.cloudflare.steamstatic.com/steam/apps/1237970/header.jpg?t=1668565264','https://www.youtube.com/watch?v=VqeMjHmL9eg',18,4);
+--INSERT INTO game (description,game_name,price,released_date,system_req,thumbnail,trailer,developer_id,publisher_id) VALUES
+--	 ('A new dark fantasy Three Kingdoms action RPG from Team NINJA, the developers of Nioh.','Wo Long: Fallen Dynasty',49.99,'2023-03-03','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Windows® 10, Windows® 11, 64bit
+--Processor: Intel® Core™ i5-8400、AMD Ryzen™ 5 3400G
+--Memory: 8 GB RAM
+--Graphics: GeForce GTX 1650 4GB、Radeon RX 570 4GB
+--DirectX: Version 12
+--Network: Broadband Internet connection
+--Storage: 60 GB available space
+--Sound Card: 16 bit stereo, 48kHz WAVE file can be played
+--Additional Notes: HDD、720P、30FPS','https://cdn.cloudflare.steamstatic.com/steam/apps/1448440/header.jpg?t=1681876809','https://www.youtube.com/watch?v=SWRcZN4jMW8',5,5),
+--	 ('Experience the thrill of one versus thousands in an all new open world setting with DYNASTY WARRIORS 9! Travel through Ancient China depicted on a single, vast, open-world map, master the new State Combo System, and watch the Three Kingdoms story unfold through a cast of 90 playable characters!','DYNASTY WARRIORS 9',14.99,'2018-02-13','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Windows 10 64bit
+--Processor: Core i5 2400 or over
+--Memory: 6 GB RAM
+--Graphics: NVIDIA GeForce GTX 660 or over
+--DirectX: Version 11
+--Network: Broadband Internet connection
+--Storage: 50 GB available space
+--Sound Card: 16 bit stereo, 48KHz WAVE file can be played','https://cdn.cloudflare.steamstatic.com/steam/apps/730310/header.jpg?t=1673510123','https://www.youtube.com/watch?v=y_0IznfyIT4',5,5),
+--	 ('In Koei Tecmo Games'' DEAD OR ALIVE Xtreme Venus Vacation, players support the girls from the DEAD OR ALIVE series as they compete with each other in the Venus Festival - a festival of beauty and strength.','DEAD OR ALIVE Xtreme Venus Vacation',0.00,'2019-03-26','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Windows® 10 64bit
+--Processor: *With video card: Intel Celeron E3400 *Without video card: Intel Core i3-3220
+--Memory: 2 GB RAM
+--Graphics: *With video card: NVIDIA GeForce GT 630 2GB *Without video card: on board GPU (Intel Graphics 2500)
+--DirectX: Version 11
+--Network: Broadband Internet connection
+--Storage: 10 GB available space
+--Sound Card: DirectX 9.0c over','https://cdn.cloudflare.steamstatic.com/steam/apps/958260/header.jpg?t=1680773796','https://www.youtube.com/watch?v=RhK2zpSz4pQ',5,5),
+--	 ('DEAD OR ALIVE 6 is fast-paced 3D fighting game, produced by Koei Tecmo Games, featuring stunning graphics and multi-tiered stages that create a truly entertaining competitive experience.','DEAD OR ALIVE 6',19.99,'2019-03-01','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Windows 10 （64bit）
+--Processor: Intel Core i5-4690 or over
+--Memory: 8 GB RAM
+--Graphics: NVIDIA GeForce GTX 770
+--DirectX: Version 11
+--Network: Broadband Internet connection
+--Storage: 50 GB available space
+--Sound Card: DirectX 11 or over','https://cdn.cloudflare.steamstatic.com/steam/apps/838380/header.jpg?t=1659084195','https://www.youtube.com/watch?v=ecYRKkc6GGI',5,5),
+--	 ('You are Geralt of Rivia, mercenary monster slayer. Before you stands a war-torn, monster-infested continent you can explore at will. Your current contract? Tracking down Ciri — the Child of Prophecy, a living weapon that can alter the shape of the world.','The Witcher® 3: Wild Hunt',5.99,'2015-05-18','MINIMUM:
+--OS: 64-bit Windows 7, 64-bit Windows 8 (8.1)
+--Processor: Intel CPU Core i5-2500K 3.3GHz / AMD A10-5800K APU (3.8GHz)
+--Memory: 6 GB RAM
+--Graphics: Nvidia GPU GeForce GTX 660 / AMD GPU Radeon HD 7870
+--DirectX: Version 11
+--Storage: 50 GB available space','https://cdn.cloudflare.steamstatic.com/steam/apps/292030/header.jpg?t=1675178392','https://www.youtube.com/watch?v=1-l29HlKkXU',6,6),
+--	 ('Cyberpunk 2077 is an open-world, action-adventure RPG set in the dark future of Night City — a dangerous megalopolis obsessed with power, glamor, and ceaseless body modification.','Cyberpunk 2077',19.99,'2020-12-10','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Windows 10
+--Processor: Intel Core i5-3570K or AMD FX-8310
+--Memory: 8 GB RAM
+--Graphics: NVIDIA GeForce GTX 970 or AMD Radeon RX 470
+--DirectX: Version 12
+--Storage: 70 GB available space
+--Additional Notes: In this game you will encounter a variety of visual effects that may provide seizures or loss of consciousness in a minority of people. If you or someone you know experiences any of the above symptoms while playing, stop and seek medical attention immediately.','https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg?t=1680026109','https://www.youtube.com/watch?v=qIcTM8WXFjk',6,6),
+--	 ('Command mighty Witcher-world heroes in epic online PvP card battles!','GWENT: The Witcher Card Game',0.00,'2020-05-19','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: 7/8/8.1/10 (64 bit)
+--Processor: Intel Celeron G1820 | AMD A4-7300
+--Memory: 4 GB RAM
+--Graphics: NVIDIA GeForce GT 730 | Radeon R7 240','https://cdn.cloudflare.steamstatic.com/steam/apps/1284410/header.jpg?t=1659615342','https://www.youtube.com/watch?v=5yu7FVZOyAo',6,6),
+--	 ('Grand Theft Auto V for PC offers players the option to explore the award-winning world of Los Santos and Blaine County in resolutions of up to 4k and beyond, as well as the chance to experience the game running at 60 frames per second.','Grand Theft Auto V',11.99,'2015-04-14','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Windows 10 64 Bit, Windows 8.1 64 Bit, Windows 8 64 Bit, Windows 7 64 Bit Service Pack 1
+--Processor: Intel Core 2 Quad CPU Q6600 @ 2.40GHz (4 CPUs) / AMD Phenom 9850 Quad-Core Processor (4 CPUs) @ 2.5GHz
+--Memory: 4 GB RAM
+--Graphics: NVIDIA 9800 GT 1GB / AMD HD 4870 1GB (DX 10, 10.1, 11)
+--Storage: 72 GB available space
+--Sound Card: 100% DirectX 10 compatible','https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg?t=1678296348','https://www.youtube.com/watch?v=3DBrG2YjqQA',7,7),
+--	 ('Winner of over 175 Game of the Year Awards and recipient of over 250 perfect scores, RDR2 is the epic tale of outlaw Arthur Morgan and the infamous Van der Linde gang, on the run across America at the dawn of the modern age.','Red Dead Redemption 2',49.99,'2019-12-06','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Windows 10 - April 2018 Update (v1803)
+--Processor: Intel® Core™ i7-4770K / AMD Ryzen 5 1500X
+--Memory: 12 GB RAM
+--Graphics: Nvidia GeForce GTX 1060 6GB / AMD Radeon RX 480 4GB
+--Network: Broadband Internet connection
+--Storage: 150 GB available space
+--Sound Card: Direct X Compatible','https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg?t=1671485009','https://www.youtube.com/watch?v=SXvQ1nK4oxk',7,7),
+--	 ('No longer a New York City cop, Max Payne moves to São Paulo to protect a wealthy family in an effort to finally escape his troubled past.','Max Payne 3',12.99,'2012-06-01','OS: Windows 7 64-Bit Service Pack 1
+--Processor: Intel Dual Core 2.4 GHZ - i7 3930K 6 Core x 3.06 GHZ / AMD Dual Core 2.6 GHZ - FX-8150 8 Core x 3.6 GHZ
+--Memory: 2GB - 16GB RAM
+--Hard Drive: 35GB of free HDD Space
+--Graphics: NVIDIA® 8600 GT 512MB VRAM – NVIDIA® GeForce® GTX 680 2GB VRAM / Radeon HD 3400 512MB VRAM - Radeon HD 7970 3GB VRAM
+--Sound Card: 100% Direct X 9.0 compatible – Direct X 9.0 compatible supporting Dolby Digital Live','https://cdn.cloudflare.steamstatic.com/steam/apps/204100/header.jpg?t=1619108680','https://www.youtube.com/watch?v=q6a8t3zL70A',7,7);
+--INSERT INTO game (description,game_name,price,released_date,system_req,thumbnail,trailer,developer_id,publisher_id) VALUES
+--	 ('Bring more than your fists to the fight! Featuring all-new battle mechanics and characters, SOULCALIBUR VI marks a new era of the historic franchise. Welcome back to the stage of history!','SOULCALIBUR VI',49.99,'2018-10-19','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Windows 7, 8.1, 10 (64-bit)
+--Processor: Intel Core i3-4160 @ 3.60GHz or equivalent
+--Memory: 6 GB RAM
+--Graphics: NVIDIA GeForce GTX 1050
+--DirectX: Version 11
+--Storage: 20 GB available space
+--Sound Card: DirectX compatible soundcard or onboard chipset','https://cdn.cloudflare.steamstatic.com/steam/apps/544750/header.jpg?t=1646956219','https://www.youtube.com/watch?v=kOq5dVigDGU',8,8),
+--	 ('Discover the epic conclusion of the long-time clan warfare between members of the Mishima family. Powered by Unreal Engine 4, the legendary fighting game franchise fights back with stunning story-driven cinematic battles and intense duels that can be enjoyed with friends and rivals.','TEKKEN 7',34.99,'2017-06-02','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Windows 7/8/10 (64-bit OS required)
+--Processor: Intel Core i3-4160 @ 3.60GHz or equivalent
+--Memory: 6 GB RAM
+--Graphics: NVIDIA GeForce GTX 660 2GB, GTX 750Ti 2GB, or equivalent
+--DirectX: Version 11
+--Network: Broadband Internet connection
+--Storage: 60 GB available space
+--Sound Card: DirectX compatible soundcard or onboard chipset','https://cdn.cloudflare.steamstatic.com/steam/apps/389730/header.jpg?t=1676876387','https://www.youtube.com/watch?v=1V-_q3SKh5w',8,8),
+--	 ('A brand new RPG set in the world of the popular anime, ONE PIECE! Play as members of the Straw Hat Crew in a fantastic adventure set in the ONE PIECE world!','ONE PIECE ODYSSEY',29.99,'2023-01-13','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Windows 10 64-bit
+--Processor: Intel Core i5-6600 or AMD Ryzen 5 2400G
+--Memory: 8 GB RAM
+--Graphics: GeForce GTX 780 or Radeon R9 290X
+--DirectX: Version 11
+--Storage: 35 GB available space
+--Additional Notes: Estimated performance: 1080p/60fps with graphics settings at "Low". Framerate might drop in graphics-intensive scenes. - 64-bit processor and operating system are required.','https://cdn.cloudflare.steamstatic.com/steam/apps/814000/header.jpg?t=1681424388','https://www.youtube.com/watch?v=4LsSM7xlfCg',8,8),
+--	 ('Choose between Yuito and Kasane, elite psionics each armed with a talent in psychokinesis and their own reason to fight. Complete both of their stories to unlock all the mysteries of a Brain Punk future caught between technology and psychic abilities.','SCARLET NEXUS',39.99,'2021-06-25','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Windows 10
+--Processor: Intel Core i5-3470 | AMD FX-8350
+--Memory: 6 GB RAM
+--Graphics: Nvidia GeForce GTX 760, 2 GB | AMD Radeon HD 7970, 3 GB
+--DirectX: Version 11
+--Storage: 50 GB available space
+--Additional Notes: Estimated performance: 1080p/60fps with graphics settings at "Low". Framerate might drop in graphics-intensive scenes. - 64-bit processor and operating system are required.','https://cdn.cloudflare.steamstatic.com/steam/apps/775500/header.jpg?t=1680224698','https://www.youtube.com/watch?v=k1kI09X8L9Y',8,8),
+--	 ('Detroit: Become Human puts the destiny of both mankind and androids in your hands, taking you to a near future where machines have become more intelligent than humans. Every choice you make affects the outcome of the game, with one of the most intricately branching narratives ever created.','Detroit: Become Human',14.99,'2020-06-18','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Windows 10 (64 bit)
+--Processor: Intel Core i5-2300 @ 2.8 GHz or AMD Ryzen 3 1200 @ 3.1GHz or AMD FX-8350 @ 4.2GHz
+--Memory: 8 GB RAM
+--Graphics: Nvidia GeForce GTX 780 or AMD HD 7950 with 3GB VRAM minimum (Support of Vulkan 1.1 required)
+--Storage: 55 GB available space','https://cdn.cloudflare.steamstatic.com/steam/apps/1222140/header.jpg?t=1667468479','https://www.youtube.com/watch?v=EtF_iOZokiQ',9,9),
+--	 ('A unique psychological action thriller delivered by A-list Hollywood performances by Elliot Page and Willem Dafoe, Beyond: Two Souls takes you on a thrilling journey across the globe as you play out the remarkable life of Jodie Holmes.','Beyond: Two Souls',12.99,'2020-06-18','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Windows 7 or later (64 bit)
+--Processor: Intel Core i5-4430 @ 3.0 GHz or AMD FX-6300 @ 3.5 GHz
+--Memory: 4 GB RAM
+--Graphics: Nvidia GeForce GTX 660 with 2GB VRAM or AMD Radeon HD 7870 with 2GB VRAM
+--DirectX: Version 11
+--Storage: 49 GB available space
+--Additional Notes: 720p, 30 FPS','https://cdn.cloudflare.steamstatic.com/steam/apps/960990/header.jpg?t=1667468566','https://www.youtube.com/watch?v=uYxM0ULt2Js',9,9),
+--	 ('Experience a gripping psychological thriller filled with innumerable twists and turns. The hunt is on for a murderer known only as the Origami Killer. Four characters, each following their own leads, must take part in a desperate attempt to prevent the killer from claiming a new victim.','Heavy Rain',12.99,'2020-06-18','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Windows 7 or later (64 bit)
+--Processor: Intel Core i5-4430 @ 3.0 GHz or AMD FX-6300 @ 3.5 GHz
+--Memory: 4 GB RAM
+--Graphics: Nvidia GeForce GTX 660 with 2GB VRAM or AMD Radeon HD 7870 with 2GB VRAM
+--DirectX: Version 11
+--Storage: 35 GB available space
+--Additional Notes: 720p, 30 FPS','https://cdn.cloudflare.steamstatic.com/steam/apps/960910/header.jpg?t=1675271942','https://www.youtube.com/watch?v=e4NvqmZ_SiE',9,9),
+--	 ('Long ago, Ragnarok—the End Times—loomed upon the realms. The All-Father Odin, with the last of his strength, created an emissary of redemption, Valkyrie; her sole task being the salvation of a doomed world.','VALKYRIE ELYSIUM',59.99,'2022-11-11','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Windows® 10 / Windows® 11 64-bit
+--Processor: AMD Ryzen™ 3 1200 / Intel® Core™ i5-3330
+--Memory: 8 GB RAM
+--Graphics: AMD Radeon™ RX 560 / NVIDIA® GeForce® GTX 960
+--DirectX: Version 12
+--Storage: 25 GB available space
+--Additional Notes: 1280x720, Preset "Low", 30 FPS, VRAM 4GB required','https://cdn.cloudflare.steamstatic.com/steam/apps/1963210/header.jpg?t=1680172058','https://www.youtube.com/watch?v=lJReDSNL4vc',10,10),
+--	 ('Cloud Strife, an ex-SOLDIER operative, descends on the mako-powered city of Midgar. The world of the timeless classic FINAL FANTASY VII is reborn, using cutting-edge graphics technology, a new battle system and an additional adventure featuring Yuffie Kisaragi.','FINAL FANTASY VII REMAKE INTERGRADE',69.99,'2022-06-17','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Windows® 10 64-bit (ver. 2004 or later)
+--Processor: AMD FX-8350 / Intel® Core™ i5-3330
+--Memory: 8 GB RAM
+--Graphics: AMD Radeon™ RX 480 / NVIDIA® GeForce® GTX 780 / 3GB VRAM required
+--DirectX: Version 12
+--Storage: 100 GB available space
+--Additional Notes: Assuming a Resolution of 1920 x 1080','https://cdn.cloudflare.steamstatic.com/steam/apps/1462040/header.jpg?t=1663767129','https://www.youtube.com/watch?v=M4t1OFONu10',10,10),
+--	 ('This game is a brand-new entry in the OCTOPATH TRAVELER series, the first installment of which was initially released in 2018 and sold over 3 million copies worldwide.','OCTOPATH TRAVELER II',59.99,'2023-02-24','MINIMUM:
+--OS: Windows® 10 / 11 64-bit
+--Processor: AMD Ryzen™ 3 1200 / Intel® Core™ i3-6100
+--Memory: 8 GB RAM
+--Graphics: AMD Radeon™ RX 460 / NVIDIA® GeForce® GTX 750
+--DirectX: Version 12
+--Storage: 10 GB available space
+--Additional Notes: 60 FPS @ 1280x720, Preset "Low", 2GB VRAM required','https://cdn.cloudflare.steamstatic.com/steam/apps/1971650/header.jpg?t=1679563605','https://www.youtube.com/watch?v=XMpWElRyoxg',10,10);
+--INSERT INTO game (description,game_name,price,released_date,system_req,thumbnail,trailer,developer_id,publisher_id) VALUES
+--	 ('Dark Souls continues to push the boundaries with the latest, ambitious chapter in the critically-acclaimed and genre-defining series. Prepare yourself and Embrace The Darkness!','DARK SOULS™ III',49.99,'2016-04-12','MINIMUM:
+--OS: Windows 7 SP1 64bit, Windows 8.1 64bit Windows 10 64bit
+--Processor: Intel Core i3-2100 / AMD® FX-6300
+--Memory: 4 GB RAM
+--Graphics: NVIDIA® GeForce GTX 750 Ti / ATI Radeon HD 7950
+--DirectX: Version 11
+--Network: Broadband Internet connection
+--Storage: 25 GB available space
+--Sound Card: DirectX 11 sound device
+--Additional Notes: Internet connection required for online play and product activation','https://cdn.cloudflare.steamstatic.com/steam/apps/374320/header.jpg?t=1671097812','https://www.youtube.com/watch?v=cWBwFhUv1-8',11,11),
+--	 ('THE NEW FANTASY ACTION RPG. Rise, Tarnished, and be guided by grace to brandish the power of the Elden Ring and become an Elden Lord in the Lands Between.','ELDEN RING',39.99,'2022-02-25','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Windows 10
+--Processor: INTEL CORE I5-8400 or AMD RYZEN 3 3300X
+--Memory: 12 GB RAM
+--Graphics: NVIDIA GEFORCE GTX 1060 3 GB or AMD RADEON RX 580 4 GB
+--DirectX: Version 12
+--Storage: 60 GB available space
+--Sound Card: Windows Compatible Audio Device','https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg?t=1674441703','https://www.youtube.com/watch?v=AKXiKBnzpBQ',11,11),
+--	 ('The biggest first-person action series of all time and the follow-up to critically acclaimed Call of Duty®: Modern Warfare 2 returns with Call of Duty®: Black Ops.','Call of Duty®: Black Ops',42.99,'2010-11-09','OS: Windows® Vista / XP / 7
+--Processor: Intel® Core™2 Duo E6600 or AMD Phenom™ X3 8750 or better
+--Memory: 2GB
+--Graphics: Shader 3.0 or better 256MB NVIDIA® GeForce® 8600GT / ATI Radeon® X1950Pro or better
+--DirectX®: DirectX® 9.0c
+--Hard Drive: 12GB*
+--Sound: DirectX® 9.0c-compatible','https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/b64dc899-42c9-4857-9bc9-50aacdfeb971/d32q883-e0bea33d-d7cb-4ddc-b212-fb797f7e7fe5.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2I2NGRjODk5LTQyYzktNDg1Ny05YmM5LTUwYWFjZGZlYjk3MVwvZDMycTg4My1lMGJlYTMzZC1kN2NiLTRkZGMtYjIxMi1mYjc5N2Y3ZTdmZTUuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.uTuNTQAjNdXNqUSVcLBGzDxz4S0R2aqeHw-XQ21o-TY','https://www.youtube.com/watch?v=OPTOVQFRggI',19,12),
+--	 ('You are the Prototype, Alex Mercer, a man without memory armed with amazing shape-shifting abilities, hunting your way to the heart of the conspiracy which created you; making those responsible pay. Fast & Deadly Shape-Shifting Combat: Reconfigure your body to the situation at hand.','Prototype™',22.99,'2009-06-10','OS: Windows® XP (with Service Pack 3) or Windows Vista®
+--Processor: Intel® Core™2 Duo 2.6 GHz or AMD Athlon™ 64 X2 4000+ or better
+--Memory: Vista 2 GB RAM / XP 1 GB RAM
+--Graphics: All NVIDIA® GeForce® 7800 GT 256 MB and better chipsets. All ATI Radeon™ X1800 256 MB and better chipsets
+--DirectX®: Microsoft DirectX 9.0c
+--Hard Drive: 8GB of free hard drive space
+--Sound: DirectX® 9.0c compliant sound card','https://cdn.cloudflare.steamstatic.com/steam/apps/10150/header.jpg?t=1655760765','https://www.youtube.com/watch?v=gQoMELyEYFQ',20,12),
+--	 ('The new action-thriller from the award-winning team at Infinity Ward, the creators of the Call of Duty® series, delivers the most intense and cinematic action experience ever.','Call of Duty® 4: Modern Warfare® (2007)',22.99,'2007-11-12','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Windows 7 64-Bit or later
+--Processor: Intel Core i3-3225 @ 3.30GHz or equivalent
+--Memory: 8 GB RAM
+--Graphics: NVIDIA GeForce GTX 660 2GB / AMD Radeon HD 7850 2GB
+--DirectX: Version 11
+--Network: Broadband Internet connection
+--Sound Card: DirectX 11 Compatible','https://cdn.cloudflare.steamstatic.com/steam/apps/7940/header.jpg?t=1678298739','https://www.youtube.com/watch?v=LhuIjNSg7Gg',21,12),
+--	 ('Survival is just the beginning. Six years have passed since the biological disaster in Raccoon City. Leon S. Kennedy, one of the survivors, tracks the president''s kidnapped daughter to a secluded European village, where there is something terribly wrong with the locals.','Resident Evil 4',59.99,'2023-04-23','MINIMUM:
+--Requires a 64-bit processor and operating system
+--OS: Windows 10 (64 bit)
+--Processor: AMD Ryzen 3 1200 / Intel Core i5-7500
+--Memory: 8 GB RAM
+--Graphics: AMD Radeon RX 560 with 4GB VRAM / NVIDIA GeForce GTX 1050 Ti with 4GB VRAM
+--DirectX: Version 12
+--Network: Broadband Internet connection
+--Additional Notes: Estimated performance (when set to Prioritize Performance): 1080p/45fps. ・Framerate might drop in graphics-intensive scenes. ・AMD Radeon RX 6700 XT or NVIDIA GeForce RTX 2060 required to support ray tracing.','https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/header.jpg?t=1680840402','https://www.youtube.com/watch?v=j5Xv2lM9wes',2,2);
+--
+--INSERT INTO game_code (game_code,status,game_id) VALUES
+--	 ('zxcvbn456QWER','Used',1),
+--	 ('asdfgh789ZXCV','Used',1),
+--	 ('123456abcQWER','Used',1),
+--	 ('mvnvc67NHYs9KsLOd','Available',12),
+--	 ('vlkhg89T01s2QaRS','Available',12),
+--	 ('zvcvbdCsB34sa5TUV','Available',12),
+--	 ('asvd56GRa67sa8WY','Available',12),
+--	 ('qwet78UfsIas90ZAB','Available',12),
+--	 ('poiuvy2OKfIa23sB','Available',12),
+--	 ('mnbvcv5PLMaa57EFG','Available',12);
+--INSERT INTO game_code (game_code,status,game_id) VALUES
+--	 ('lkjh67vNBaV0sHIJ','Available',12),
+--	 ('zxc89MNva2dKLsO','Available',12),
+--	 ('asfg01345QsRS','Available',12),
+--	 ('qert2a3Ev678sTUddV','Available',12),
+--	 ('QAZWSX789MNBV','Available',1),
+--	 ('poiuyt321HJKL','Available',1),
+--	 ('mnbvcx654UIOP','Available',1),
+--	 ('lkjhgf987ASDF','Available',1),
+--	 ('0987poiuytZXCV','Available',1),
+--	 ('NBVCXZ123QWERTY','Available',1);
+--INSERT INTO game_code (game_code,status,game_id) VALUES
+--	 ('ASDFGH456LKJHGF','Available',1),
+--	 ('qwerty789POIUYT','Available',1),
+--	 ('123456zxcvBNMVC','Available',1),
+--	 ('poiuytqwerASDFG','Available',1),
+--	 ('LKJHGFDSAZXCVB','Available',1),
+--	 ('mnbvcxzxcbQAZWS','Available',1),
+--	 ('QWERTYUIOP09876','Available',1),
+--	 ('1234567890NBVCX','Available',1),
+--	 ('POIUYTREWQASDFG','Available',1),
+--	 ('LKJHGFDSAQWERTY','Available',1);
+--INSERT INTO game_code (game_code,status,game_id) VALUES
+--	 ('012jklBGT','Available',2),
+--	 ('345mnoCVB','Available',2),
+--	 ('678pqrVFD','Available',2),
+--	 ('901stuGTR','Available',2),
+--	 ('234vwxYUI','Available',2),
+--	 ('567yzOKI','Available',2),
+--	 ('abc123PLM','Available',2),
+--	 ('def456NBV','Available',2),
+--	 ('345mnoBGT','Available',3),
+--	 ('678pqrCVB','Available',3);
+--INSERT INTO game_code (game_code,status,game_id) VALUES
+--	 ('901stuVFD','Available',3),
+--	 ('234vwxGTR','Available',3),
+--	 ('567yzYUI','Available',3),
+--	 ('abc123OKI','Available',3),
+--	 ('def456PLM','Available',3),
+--	 ('ghi789NBV','Available',3),
+--	 ('jkl012MNB','Available',3),
+--	 ('poiuaZXCv91sWXdY','Available',12),
+--	 ('mnbac8EDC3sv4ZAsB','Available',12),
+--	 ('lkahs90RV56sv7BCD','Available',12);
+--INSERT INTO game_code (game_code,status,game_id) VALUES
+--	 ('zacb3s4GB89s0vEFG','Available',12),
+--	 ('adg67HJK012asHvIJ','Available',12),
+--	 ('wrt8LsKM34a5ssKLO','Available',12),
+--	 ('poiy2HsY6sa78sQRS','Available',12),
+--	 ('789ghiNOP','Available',4),
+--	 ('012jklQRS','Available',4),
+--	 ('345mnoTUV','Available',4),
+--	 ('678pqrWXY','Available',4),
+--	 ('901stuZAB','Available',4),
+--	 ('abc123XYZ','Used',2);
+--INSERT INTO game_code (game_code,status,game_id) VALUES
+--	 ('ghi789QWE','Used',3),
+--	 ('abc123FGH','Used',4),
+--	 ('def456QWE','Used',2),
+--	 ('jkl012ASD','Used',3),
+--	 ('def456JKL','Used',4),
+--	 ('ghi789ASD','Used',2),
+--	 ('mno345ZXC','Used',3),
+--	 ('ghi789MNO','Used',4),
+--	 ('jkl012ZXC','Used',2),
+--	 ('pqr678QAZ','Used',3);
+--INSERT INTO game_code (game_code,status,game_id) VALUES
+--	 ('jkl012PQR','Used',4),
+--	 ('mno345QAZ','Used',2),
+--	 ('stu901WSX','Used',3),
+--	 ('mno345STU','Used',4),
+--	 ('pqr678WSX','Used',2),
+--	 ('vwx234EDC','Used',3),
+--	 ('pqr678VWX','Used',4),
+--	 ('stu901EDC','Used',2),
+--	 ('yz567RFV','Used',3),
+--	 ('stu901YZA','Used',4);
+--INSERT INTO game_code (game_code,status,game_id) VALUES
+--	 ('vwx234RFV','Used',2),
+--	 ('123abcTGB','Used',3),
+--	 ('vwx234BCD','Used',4),
+--	 ('yz567TGB','Used',2),
+--	 ('456defHJK','Used',3),
+--	 ('yz567EFG','Used',4),
+--	 ('123abcHJK','Used',2),
+--	 ('789ghiLKM','Used',3),
+--	 ('123abcHIJ','Used',4),
+--	 ('456defLKM','Used',2);
+--INSERT INTO game_code (game_code,status,game_id) VALUES
+--	 ('012jklNHY','Used',3),
+--	 ('456defKLM','Used',4),
+--	 ('234vwxCDE','Available',4),
+--	 ('567yzFGH','Available',4),
+--	 ('abc123IJK','Available',4),
+--	 ('def456LMN','Available',4),
+--	 ('asdfg56GTR678WXY','Available',6),
+--	 ('qwert78YUI901ZAB','Available',6),
+--	 ('poiuy23OKI234BCD','Available',6),
+--	 ('mnbvc45PLM567EFG','Available',6);
+--INSERT INTO game_code (game_code,status,game_id) VALUES
+--	 ('lkjhg67NBV890HIJ','Available',6),
+--	 ('zxcvb89MNB012KLO','Available',6),
+--	 ('asdfg01ASD345QRS','Available',6),
+--	 ('qwert23QWE678TUV','Available',6),
+--	 ('poiuy56ZXC901WXY','Available',6),
+--	 ('mnbvc78EDC234ZAB','Available',6),
+--	 ('lkjhg90RFV567BCD','Available',6),
+--	 ('zxcvb34TGB890EFG','Available',6),
+--	 ('asdfg67HJK012HIJ','Available',6),
+--	 ('qwert89LKM345KLO','Available',6);
+--INSERT INTO game_code (game_code,status,game_id) VALUES
+--	 ('poiuy12NHY678QRS','Available',6),
+--	 ('mnbvc56BGT901TUV','Available',6),
+--	 ('lkjhg78CVB234WXY','Available',6),
+--	 ('zxcvb90GTR567ZAB','Available',6),
+--	 ('poiuy67PLM345HIJ','Available',7),
+--	 ('mnbvc89NBV678KLO','Available',7),
+--	 ('lkjhg01MNB901QRS','Available',7),
+--	 ('zxcvb12ASD234TUV','Available',7),
+--	 ('asdfg34QWE567WXY','Available',7),
+--	 ('qwert56ZXC890ZAB','Available',7);
+--INSERT INTO game_code (game_code,status,game_id) VALUES
+--	 ('poiuy78EDC012BCD','Available',7),
+--	 ('mnbvc90RFV345EFG','Available',7),
+--	 ('lkjhg23TGB678HIJ','Available',7),
+--	 ('zxcvb45HJK901KLO','Available',7),
+--	 ('asdfg67LKM234QRS','Available',7),
+--	 ('qwert78NHY567TUV','Available',7),
+--	 ('poiuy89BGT890WXY','Available',7),
+--	 ('mnbvc01CVB012ZAB','Available',7),
+--	 ('mnbvc45PLMa5g67EFG','Available',8),
+--	 ('lkjhg67NBV89e0HIJ','Available',8);
+--INSERT INTO game_code (game_code,status,game_id) VALUES
+--	 ('zxcvb89MNB012dKLO','Available',8),
+--	 ('asdfg01ASD345QsRS','Available',8),
+--	 ('qwert23QWE678TUddV','Available',8),
+--	 ('poiuy56ZXC901WXdY','Available',8),
+--	 ('mnbvc78EDC234ZAsB','Available',8),
+--	 ('lkjhgs90RFV567BCD','Available',8),
+--	 ('zxcvb3s4TGB890EFG','Available',8),
+--	 ('asdfg67sHJK012HIJ','Available',8),
+--	 ('qwert89LsKM345KLO','Available',8),
+--	 ('poiuy12NHsY678QRS','Available',8);
+--INSERT INTO game_code (game_code,status,game_id) VALUES
+--	 ('mnbvc5PLMaa5g67EFG','Available',9),
+--	 ('lkjh67NBaV89e0HIJ','Available',9),
+--	 ('zxc89MNaB012dKLO','Available',9),
+--	 ('asfg01aASD345QsRS','Available',9),
+--	 ('qert2a3QWE678TUddV','Available',9),
+--	 ('poiuay56ZXC91WXdY','Available',9),
+--	 ('mnbavc78EDC34ZAsB','Available',9),
+--	 ('lkajhgs90RV567BCD','Available',9),
+--	 ('zaxcvb3s4GB890EFG','Available',9),
+--	 ('asdfg67HJK012aHIJ','Available',9);
+--INSERT INTO game_code (game_code,status,game_id) VALUES
+--	 ('qwert8LsKM34a5KLO','Available',9),
+--	 ('poiuy2NHsY6a78QRS','Available',9),
+--	 ('mnbvc5PLMaa567EFG','Available',10),
+--	 ('lkjh67NBaV8e0HIJ','Available',10),
+--	 ('zxc89MNaB02dKLO','Available',10),
+--	 ('asfg01aAS345QsRS','Available',10),
+--	 ('qert2a3QE678TUddV','Available',10),
+--	 ('poiuay5ZXC91WXdY','Available',10),
+--	 ('mnbavc8EDC34ZAsB','Available',10),
+--	 ('lkajhs90RV567BCD','Available',10);
+--INSERT INTO game_code (game_code,status,game_id) VALUES
+--	 ('zaxcb3s4GB890EFG','Available',10),
+--	 ('asdg67HJK012aHIJ','Available',10),
+--	 ('qwrt8LsKM34a5KLO','Available',10),
+--	 ('poiy2NHsY6a78QRS','Available',10),
+--	 ('mnbvcv5PLMaa567EFG','Available',11),
+--	 ('lkjh67vNBaV8e0HIJ','Available',11),
+--	 ('zxc89MNvaB02dKLO','Available',11),
+--	 ('asfg01aAvS345QsRS','Available',11),
+--	 ('qert2a3QEv678TUddV','Available',11),
+--	 ('poiuay5ZXCv91WXdY','Available',11);
+--INSERT INTO game_code (game_code,status,game_id) VALUES
+--	 ('mnbavc8EDC3v4ZAsB','Available',11),
+--	 ('lkajhs90RV56v7BCD','Available',11),
+--	 ('zaxcb3s4GB890vEFG','Available',11),
+--	 ('asdg67HJK012aHvIJ','Available',11),
+--	 ('qwrt8LsKM34a5sKLO','Available',11),
+--	 ('poiy2NHsY6sa78QRS','Available',11),
+--	 ('asdfas234Dfs132','Used',5),
+--	 ('qwer12ASD345FGH','Used',5),
+--	 ('zxcv56QWE789JKL','Used',5),
+--	 ('poiuy89ZXC123MNO','Used',5);
+--INSERT INTO game_code (game_code,status,game_id) VALUES
+--	 ('lkjh45QAZ678PQR','Used',5),
+--	 ('mnbv23WSX901STU','Used',5),
+--	 ('ytrew10EDC234VWX','Used',5),
+--	 ('zxcvb45RFV678YZA','Used',5),
+--	 ('asdfg78TGB901BCD','Used',5),
+--	 ('qwerty90HJK123EFG','Used',5),
+--	 ('asdfg23YUI890BCD','Used',7),
+--	 ('qwert78YUfsI901ZAB','Used',8),
+--	 ('qwert78UfsIa901ZAB','Used',9),
+--	 ('qwert78UfsIa90ZAB','Used',10);
+--INSERT INTO game_code (game_code,status,game_id) VALUES
+--	 ('poiuy34LKM567HIJ','Used',5),
+--	 ('qwert45OKI012EFG','Used',7),
+--	 ('poiuy23OKfI234BCD','Used',8),
+--	 ('poiuy2OKfIa234BCD','Used',9),
+--	 ('poiuy2OKfIa23BCD','Used',10),
+--	 ('poiuvy2OKfIa23BCD','Used',11),
+--	 ('XYZ987pqrLKJH','Used',1),
+--	 ('789ghiNHY','Used',2);
+--
+--INSERT INTO game_comment (comment_content,comment_date,game_id,user_id) VALUES
+--	 ('Game is good.','2023-04-22',1,1),
+--	 ('Game is great','2023-03-26',2,1),
+--	 ('Game is awesome!','2023-02-27',3,1),
+--	 ('Game sucks!','2023-03-17',4,2),
+--	 ('What a Dark Souls rip-off!','2023-01-10',21,1),
+--	 ('Game is hard!','2023-01-01',10,2),
+--	 ('Assassin''s Creed has lost its way','2023-01-29',14,2),
+--	 ('Good port from the PS4.','2023-03-15',3,2),
+--	 ('PRAISE THE SUN!','2023-02-09',41,2),
+--	 ('I play this game for the plot.','2023-04-04',23,3);
+--INSERT INTO game_comment (comment_content,comment_date,game_id,user_id) VALUES
+--	 ('The last great game from EA.','2023-02-27',20,3),
+--	 ('What is this, 2D Dark Souls??!','2023-02-15',9,3),
+--	 ('John Wick if he had a cyber arm.','2023-05-01',26,3),
+--	 ('Look ma I''m robbing a bank!','2023-01-07',28,4),
+--	 ('The best focking game I''ve ever played!','2023-04-14',1,4),
+--	 ('Why does this guy look like every Spider-Man actor combine?','2023-01-02',5,4),
+--	 ('I got to fight giant mechanical dinosaurs, 10/10.','2023-03-10',3,4),
+--	 ('The worst port Naughty Dog has ever made!','2023-05-09',4,5),
+--	 ('BOIIIIIIIIIIIIIIIIIIIIIIII','2023-01-28',2,5),
+--	 ('I bought this just to see Aerith got donut in 4k.','2023-04-16',39,5);
+--INSERT INTO game_comment (comment_content,comment_date,game_id,user_id) VALUES
+--	 ('I FEEL MOTIVATED','2023-01-13',7,5),
+--	 ('LEON YOU MUST CONTINUE THE REDFIELD BLOODLINE!','2023-03-06',46,5),
+--	 ('CHOKE ME HARDER MAMA DIMITRESCU!','2023-04-21',8,6),
+--	 ('Barb wire baseball bat go brrrrrr','2023-01-18',11,6),
+--	 ('GOMU GOMU NO EAT SH*T **********','2023-04-13',33,6),
+--	 ('I came here to play video game, not to feel depressed wtf Rockstar??!','2023-03-03',29,6),
+--	 ('Aloy''s dad literally went out to buy milk and never came back.','2023-01-01',3,7),
+--	 ('PARRY THIS YOU F**KING CASUAL!','2023-01-07',21,7),
+--	 ('Buy the game expecting to watch dogs. No dog in the game, 0/10.','2023-01-05',13,7),
+--	 ('Dong Zhou literally got NTR by his adopted son.','2023-02-22',22,7);
+--INSERT INTO game_comment (comment_content,comment_date,game_id,user_id) VALUES
+--	 ('I smash random buttons with Eddy Gordo and win. Definitely would Eddy Gordo again.','2023-05-22',32,7),
+--	 ('TEAM TRISS FTW!','2023-03-06',25,8),
+--	 ('Who let the onion-cutting ninjas in??!','2023-02-08',37,8),
+--	 ('There''s a kingdom need saving and here I am playing Gwent with Ciri.','2023-01-24',27,8),
+--	 ('SLOW MO BULLETS GO BRRRRRRRRRRRR','2023-04-16',30,8),
+--	 ('Dont be sorry, be better boi.','2023-02-26',2,9),
+--	 ('Nathan please give me your seed.','2023-03-27',1,9),
+--	 ('A Dead or Alive game without fighting, weird.','2023-03-04',23,9),
+--	 ('ChatGPT if they went sentient.','2023-03-30',35,10),
+--	 ('Ooooooo scary.','2023-01-26',36,10);
+--INSERT INTO game_comment (comment_content,comment_date,game_id,user_id) VALUES
+--	 ('Typically American dream.','2023-05-06',16,10),
+--	 ('^#$%#$%%$&%^*%^&%^&**!#$#','2023-02-07',41,11),
+--	 ('Ivy can penetrate me with her sword anytime.','2023-01-15',31,11),
+--	 ('Somehow a 2D game is better than all these 3D AAA games.','2023-03-31',40,11),
+--	 ('How is a Viking also an assassin??!','2023-01-15',14,12),
+--	 ('The last of us? More the like the last of my pc after it finishes compiling these textures.','2023-01-05',4,12),
+--	 ('Stop feeding us the same game every year EA.','2023-02-22',17,12),
+--	 ('Unexpected good game.','2023-03-29',34,13),
+--	 ('Sephiroth looks like he can be my sugar daddy.','2023-02-13',39,13),
+--	 ('TEAM YENNEFER!','2023-05-05',25,13);
+--INSERT INTO game_comment (comment_content,comment_date,game_id,user_id) VALUES
+--	 ('My name is commander Shepard, and this is my favorite store on the Citadel.','2023-02-04',19,14),
+--	 ('Changing pants simulator.','2023-03-24',18,14),
+--	 ('Easy game.','2023-01-18',9,14),
+--	 ('Ashley is no longer useless.','2023-04-30',46,15),
+--	 ('The jiggling physics in this game is weird.','2023-03-13',25,15),
+--	 ('A gun in ancient history time? Count me in.','2023-03-31',10,15),
+--	 ('Max no longer has hair, 0 hair/10.','2023-02-25',30,15),
+--	 ('Like.','2023-01-16',34,16),
+--	 ('No uncle Ben, no aunt May, just Miles being a chad.','2023-04-10',6,16),
+--	 ('RESPAWN MAKE TITAN FALL 3 PLEASE!!!!!','2023-02-13',20,16);
+--INSERT INTO game_comment (comment_content,comment_date,game_id,user_id) VALUES
+--	 ('This game gave me anxiety, now I''m afraid im gonna make Alexa mad and at night she will choke me to death with a pillow.','2023-03-11',35,16),
+--	 ('SUPLEX CITY','2023-02-18',46,17),
+--	 ('If i got put into a castle with a THICC AF mama and her 3 vampire daughters, i wouldn''t complain.','2023-03-11',8,17),
+--	 ('Isaac Clarke looks like Adam Sandler now and I''m not okay with it.','2023-03-28',18,17),
+--	 ('Loudsy PC port, poor customization.','2023-01-16',22,18),
+--	 ('I have to consult a therapist after finishing this game.','2023-03-03',36,18),
+--	 ('Vergil best dad.','2023-04-10',7,18),
+--	 ('BRING BACK JACKIE RIGHT NOW','2023-04-24',26,19),
+--	 ('I must go to the gym at this very moment to look like Chris Redfield.','2023-02-12',8,19),
+--	 ('Weeb game','2023-02-25',38,19);
+--INSERT INTO game_comment (comment_content,comment_date,game_id,user_id) VALUES
+--	 ('Trevor looks like my long lost father.','2023-02-07',28,20),
+--	 ('Go back to 2D Mega Man please.','2023-02-19',9,20),
+--	 ('Game nhái phi phai.','2023-02-22',45,20),
+--	 ('Spider-Man on crack.','2023-01-29',44,21),
+--	 ('Better than PES.','2023-01-07',17,22),
+--	 ('PC gaming at its peak.','2023-04-06',29,22),
+--	 ('If you kill the turtle pope you''re a terrible person.','2023-05-01',42,22),
+--	 ('Why does the bad guy keep licking himself','2023-03-03',21,22),
+--	 ('Why does Dante keep looking better the more he age','2023-02-05',7,23),
+--	 ('Vordo is a creep.','2023-01-14',31,23);
+--INSERT INTO game_comment (comment_content,comment_date,game_id,user_id) VALUES
+--	 ('Zorro got lost again.','2023-01-03',33,23),
+--	 ('No nuke, 0/10.','2023-04-09',15,23),
+--	 ('Please don''t reboot the Uncharted series.','2023-02-26',1,24),
+--	 ('Technical issues make this game completely unplayble.','2023-01-26',4,24),
+--	 ('Hey at least we can cosplay Thor by wielding his hammer.','2023-03-26',14,24),
+--	 ('HACKERMAN','2023-01-21',13,18),
+--	 ('Press X to struggle.','2023-02-10',46,19),
+--	 ('Cloud in a dress is my wet dream.','2023-04-02',39,21),
+--	 ('How can a guy have too many nukes and the US government still lets him live??!','2023-02-23',16,21);
+--
+--INSERT INTO game_genre (game_id,genre_id) VALUES
+--	 (1,1),
+--	 (1,4),
+--	 (2,1),
+--	 (2,4),
+--	 (3,2),
+--	 (3,4),
+--	 (4,1),
+--	 (4,4),
+--	 (5,1),
+--	 (6,1);
+--INSERT INTO game_genre (game_id,genre_id) VALUES
+--	 (6,4),
+--	 (7,1),
+--	 (8,7),
+--	 (9,1),
+--	 (10,1),
+--	 (10,2),
+--	 (11,1),
+--	 (12,1),
+--	 (13,1),
+--	 (13,4);
+--INSERT INTO game_genre (game_id,genre_id) VALUES
+--	 (14,1),
+--	 (14,2),
+--	 (14,4),
+--	 (15,1),
+--	 (16,1),
+--	 (17,6),
+--	 (18,1),
+--	 (18,7),
+--	 (19,1),
+--	 (19,2);
+--INSERT INTO game_genre (game_id,genre_id) VALUES
+--	 (19,4),
+--	 (20,1),
+--	 (21,1),
+--	 (21,2),
+--	 (22,1),
+--	 (23,8),
+--	 (24,1),
+--	 (25,1),
+--	 (25,2),
+--	 (25,4);
+--INSERT INTO game_genre (game_id,genre_id) VALUES
+--	 (25,8),
+--	 (26,1),
+--	 (26,4),
+--	 (27,2),
+--	 (27,3),
+--	 (28,1),
+--	 (28,8),
+--	 (29,1),
+--	 (29,4),
+--	 (29,8);
+--INSERT INTO game_genre (game_id,genre_id) VALUES
+--	 (30,1),
+--	 (31,1),
+--	 (32,1),
+--	 (33,1),
+--	 (34,1),
+--	 (34,4),
+--	 (35,5),
+--	 (35,8),
+--	 (36,5),
+--	 (36,8);
+--INSERT INTO game_genre (game_id,genre_id) VALUES
+--	 (37,5),
+--	 (37,8),
+--	 (38,1),
+--	 (38,2),
+--	 (38,4),
+--	 (39,1),
+--	 (40,4),
+--	 (41,1),
+--	 (41,2),
+--	 (41,4);
+--INSERT INTO game_genre (game_id,genre_id) VALUES
+--	 (42,1),
+--	 (42,2),
+--	 (42,4),
+--	 (43,1),
+--	 (44,1),
+--	 (44,8),
+--	 (45,1),
+--	 (46,1),
+--	 (46,4),
+--	 (46,7);
+--
+--INSERT INTO game_image (image_link,game_id) VALUES
+--	 ('https://oyster.ignimgs.com/mediawiki/apis.ign.com/uncharted-4/c/c8/10_TheTwelveTowers_01.jpg',1),
+--	 ('https://cdn.cloudflare.steamstatic.com/steam/apps/1659420/ss_a1816dd536122dd740043c2b9440136503904215.1920x1080.jpg?t=1672777947',1),
+--	 (' https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/149709/Originals/18091357154041%20f.jpg',1),
+--	 ('https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F6%2F2018%2F12%2Fgod-of-war-2018-2000.jpg&q=60',2),
+--	 ('https://gamek.mediacdn.vn/133514250583805952/2021/9/13/photo-1-1631509649707187539248.jpg',2),
+--	 ('https://cdn.vox-cdn.com/thumbor/aUT1f87v_ylNloorzykySRudgTs=/0x0:1894x1061/1200x675/filters:focal(796x380:1098x682)/cdn.vox-cdn.com/uploads/chorus_image/image/59356329/My_Great_Capture_Screenshot_2018_04_02_13_17_17.0.png',2),
+--	 ('https://gamingtrend.com/wp-content/uploads/2020/08/youtube-thumb-1.jpg',3),
+--	 ('https://www.trustedreviews.com/wp-content/uploads/sites/54/2015/10/horizons-6-1-1.jpg',3),
+--	 ('https://assets1.ignimgs.com/2017/02/19/horizonzerodawn-1280-1487544580639_160w.jpg?width=1280',3),
+--	 ('https://d1lss44hh2trtw.cloudfront.net/assets/article/2023/03/29/the-last-of-us-part-1-screenshot_feature.jpg',4);
+--INSERT INTO game_image (image_link,game_id) VALUES
+--	 ('https://cdn.mos.cms.futurecdn.net/F39y9wwLUA3exsUdsQ48TG.jpg',4),
+--	 ('https://imgix.bustle.com/uploads/image/2022/8/30/b2131db1-23c2-4f9b-8b8d-7205f3e0dfe1-39cfa7cf-d780-4938-a892-62893f3c9a5e-tlou1-9.jpeg?w=1200&h=630&fit=crop&crop=faces&fm=jpg',4),
+--	 ('https://cdn.cloudflare.steamstatic.com/steam/apps/1817070/ss_dfba6f2477bfa42be69ddfdffbd421d3943d20bf.1920x1080.jpg?t=1673999865',5),
+--	 ('https://m.economictimes.com/thumb/msid-93539140,width-1200,height-900,resizemode-4,imgsize-50614/marvels-spider-man-remastered-is-finally-coming-to-pc-check-out-features-compatibility-release-date.jpg',5),
+--	 ('https://elcomercio.pe/resizer/pqa7PD22SYNol04bcTnwtbYz_Yo=/1200x675/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/UN4QELBNTNB5JEX5TAMODBDUNA.jpeg',5),
+--	 ('https://cdn.marvel.com/content/1x/msmmm_pc_teaser_holiday_review.jpg',6),
+--	 ('https://cdn.marvel.com/content/1x/msmmm_pc_prepurchase_spidercat_legal.jpg',6),
+--	 ('https://criticalhits.com.br/wp-content/uploads/2022/10/ae41e378c218909d9ae220f14dd513f41a684b49-910x512.webp',6),
+--	 ('https://imgproxy4.tinhte.vn/SnESwIbnugRoIuEDBLYs_zZDg-c369cM71UcCfFu8Ko/w:600/plain/https://downsieutoc.com/wp-content/uploads/2019/03/Devil-May-Cry-5-Free-Download-2.jpg',7),
+--	 ('https://cdn.tgdd.vn/GameApp/4/241082/Screentshots/devil-may-cry-5-tam-man-su-that-game-nhap-vai-nhat-ban-01-06-2021-3.jpg',7);
+--INSERT INTO game_image (image_link,game_id) VALUES
+--	 ('https://game8.vn/media/202008/images/5-best-games-like-devil-may-cry.jpg',7),
+--	 ('https://photo2.tinhte.vn/data/attachment-files/2022/06/6020342_Cover_RE.jpg',8),
+--	 ('https://cdn.vox-cdn.com/uploads/chorus_asset/file/22497090/Resident_Evil_Village.jpg',8),
+--	 ('https://img.phonandroid.com/2022/09/re-village-switch-cloud.jpg',8),
+--	 ('https://i.pcmag.com/imagery/reviews/04vxluHbMx1lIU9IXTUDQry-3..v1569469944.jpg',9),
+--	 ('https://cdn.akamai.steamstatic.com/steam/apps/742300/ss_b1449d9556d073825ea685245a59204f7249c587.1920x1080.jpg?t=1669873876',9),
+--	 ('https://herogame.vn/ad-min/assets/js/libs/kcfinder/upload/images/Herogame_MegaMan11_03.jpg',9),
+--	 ('https://cdn.tgdd.vn/GameApp/4/237211/Screentshots/monster-hunter-world-12-04-2021-4.jpg',10),
+--	 ('https://cdn.mos.cms.futurecdn.net/cktziwMLuMkcv2CkqojB2k.jpg',10),
+--	 ('https://m.media-amazon.com/images/M/MV5BNzEwNDFhODMtOGQ5NC00YmYwLTk3NTgtMDZkMjAyM2IwOGMyXkEyXkFqcGdeQXVyODg5MjUwNDY@._V1_.jpg',10);
+--INSERT INTO game_image (image_link,game_id) VALUES
+--	 ('https://genk.mediacdn.vn/2016/d2-1481021847671.jpg',11),
+--	 ('https://cdn.cloudflare.steamstatic.com/steam/apps/543460/ss_f11543d355d5e78a307b3256ae65d6f37371efed.1920x1080.jpg?t=1644282464',11),
+--	 ('https://images.squarespace-cdn.com/content/v1/55ef0e29e4b099e22cdc9eea/1479309412001-6N7C1FZ892QNOK38BPDP/image-asset.jpeg',11),
+--	 ('https://cdn.akamai.steamstatic.com/steam/apps/45760/ss_da00f2eb81e916929258bd8640705ad5c8c67ef8.1920x1080.jpg?t=1644283495',12),
+--	 ('https://sm.ign.com/t/ign_latam/articlepage/u/ultra-stre/ultra-street-fighter-4-ps4-release-date-and-pricin_myza.1280.jpg',12),
+--	 ('https://img.redbull.com/images/c_limit,w_1500,h_1000,f_auto,q_auto/redbullcom/2014/05/22/1331653325744_2/die-besten-street-fighter-iv-duelle-aller-zeiten',12),
+--	 ('https://cdn.tgdd.vn/GameApp/4/255518/Screentshots/tai-watch-dogs-2-sieu-pham-bom-tan-den-tu-nha-ubisoft-24-10-2021-1.jpg',13),
+--	 ('https://www.rtlnieuws.nl/sites/default/files/content/images/2016/11/20/Watch-Dogs-2-4K-gameplay-1920x1080.jpg?itok=UMdOoDwI&width=2048&height=1152&impolicy=semi_dynamic',13),
+--	 ('https://pliki.ppe.pl/storage/ad09e0f32bb299e81336/ad09e0f32bb299e81336-1600w.jpg',13),
+--	 ('https://cdn.cloudflare.steamstatic.com/steam/apps/2208920/ss_103481084a59b34837113daf27c04679caf743f3.1920x1080.jpg?t=1671135934',14);
+--INSERT INTO game_image (image_link,game_id) VALUES
+--	 ('https://ftw.usatoday.com/wp-content/uploads/sites/90/2021/12/ac-valhalla-dawn-of-ragnarok.jpg?w=1024&h=576&crop=1',14),
+--	 ('https://preview.redd.it/5v2rq0da7t481.jpg?width=610&format=pjpg&auto=webp&s=ee35b7ffb23c9b139a8669ef196002019847a19e',14),
+--	 ('https://static.wikia.nocookie.net/rainbowsix/images/6/69/651.jpg/revision/latest?cb=20191115144313',15),
+--	 ('https://gamek.mediacdn.vn/133514250583805952/2020/3/6/photo-1-15834836824451583570575.jpg',15),
+--	 ('https://cdn.siege.gg/img/articles/1301.23a8223.jpg',15),
+--	 ('https://cdn.akamai.steamstatic.com/steam/apps/552520/ss_f5ee2fb899c32f4c627ee250949645e52161150b.1920x1080.jpg?t=1681229356',16),
+--	 ('https://cdn.akamai.steamstatic.com/steam/apps/552520/ss_539a82bb6b1960c64fc13e88b079d85ffca77881.1920x1080.jpg?t=1681229356',16),
+--	 ('https://s.isanook.com/ga/0/ud/201/1006753/01.jpg',16),
+--	 ('https://cdn-img.thethao247.vn/storage/files/haibui/2022/09/30/tua-game-bong-da-fifa-23-chinh-thuc-ra-mat-195141.jpg',17),
+--	 ('https://cdn.gametv.vn/news_media/image/FIFA-23-World-Cup-1_0x0_1675304326.png',17);
+--INSERT INTO game_image (image_link,game_id) VALUES
+--	 ('https://staticg.sportskeeda.com/editor/2022/10/f32fd-16658531869499-1920.jpg',17),
+--	 ('https://eu-images.contentstack.com/v3/assets/blt95b381df7c12c15d/blt0068f7ee85633ce7/63d17511b8ce4767e36b20c4/deadspaceremakefeatured.jpg?quality=80&format=jpg&width=828',18),
+--	 ('https://cdn.mos.cms.futurecdn.net/Z3uRqREbWnnvvfhzTvASVh-1200-80.jpg',18),
+--	 ('https://cdn.arstechnica.net/wp-content/uploads/2013/10/BEYOND_SCREEN_14.jpg',36),
+--	 ('https://s2.glbimg.com/oiv-YQtwkEYHLafbqpwmlVxX11U=/0x0:3840x2160/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2022/E/E/gM3HSSQOi6zKAR1Dhb2A/cwcqmuhs.png',18),
+--	 ('https://www.nme.com/wp-content/uploads/2021/04/Mass-Effect-Mako.jpg',19),
+--	 ('https://i0.wp.com/d9n64ieh9hz8y.cloudfront.net/wp-content/uploads/20210527192949/mass-effect-1-legendary-edition-danh-gia-game-5.jpg?resize=800%2C450&ssl=1',19),
+--	 ('https://hexus.net/media/uploaded/2020/11/81c1fb1c-ad07-4e5b-b9c0-89ecda7e0236.jpg',19),
+--	 ('https://cdn.tgdd.vn/GameApp/4/244291/Screentshots/titanfall-2-28-06-2021-6.jpg',20),
+--	 ('https://hiepsibaotap.com/wp-content/uploads/2019/10/apps.47068.65123785197113223.0191c6ed-9ff7-488b-b8cc-c338d3886461.jpg',20);
+--INSERT INTO game_image (image_link,game_id) VALUES
+--	 ('https://www.digitaltrends.com/wp-content/uploads/2016/10/Titanfall-2-Review-0006.jpg?p=1',20),
+--	 ('https://cdn.cloudflare.steamstatic.com/steam/apps/1448440/ss_36a81a85d8f775a29d410d398c59686e81d0c303.1920x1080.jpg?t=1681280378',21),
+--	 ('https://culturageek.com.ar/wp-content/uploads/2023/03/Wo-Long-Fallen-Dynasty-culturageek.com_.ar-1.jpg',21),
+--	 ('https://adrenaline.com.br/uploads/chamadas/Wo_Long_Fallen_Dynasty_primeiro_trailer_de_historia.jpg',21),
+--	 ('https://cdn.tgdd.vn/GameApp/4/274388/Screentshots/dynasty-warriors-9-empires-tiep-tuc-hanh-trinh-thong-11-03-2022-1.png',22),
+--	 ('https://m.media-amazon.com/images/I/911p21GGxgL._AC_SL1500_.jpg',22),
+--	 ('https://cdn.akamai.steamstatic.com/steam/apps/1341200/ss_a14de0a9b4cae52eb7f31c32387b9ec0b4cd90b1.1920x1080.jpg?t=1673512802',22),
+--	 ('https://cdn.akamai.steamstatic.com/steam/apps/958260/ss_11e364968b9ab0681d436452d0865cc864ff9b71.1920x1080.jpg?t=1680773796',23),
+--	 ('https://cdn.akamai.steamstatic.com/steam/apps/958260/ss_8ae7e7540e5a92caacb40780e4867ae1bfc55854.1920x1080.jpg?t=1680773796',23),
+--	 ('https://gamefabrique.com/screenshots2/pc/dead-or-alive-extreme-venus-vacation-03.big.jpg',23);
+--INSERT INTO game_image (image_link,game_id) VALUES
+--	 ('https://cdn.tgdd.vn/GameApp/4/255641/Screentshots/tai-dead-or-alive-6-mat-hon-voi-nhung-nhan-vat-cuc-hap-26-10-2021-2.png',24),
+--	 ('https://haloshop.vn/image/catalog/blogs/dead-or-alive-6-game-doi-khang-toan-my-nu-xinh-dep/dead-or-alive-6-game-doi-khang-toan-my-nu-xinh-dep-8.jpg',24),
+--	 ('https://cdn.tgdd.vn/GameApp/4/255641/Screentshots/tai-dead-or-alive-6-mat-hon-voi-nhung-nhan-vat-cuc-hap-26-10-2021-0.png',24),
+--	 ('https://cdn.akamai.steamstatic.com/steam/apps/292030/ss_0901e64e9d4b8ebaea8348c194e7a3644d2d832d.1920x1080.jpg?t=1675178392',25),
+--	 ('https://www.digitaltrends.com/wp-content/uploads/2015/06/The-Witcher-3-Wild-Hunt-Stag-Battle.jpg?p=1',25),
+--	 ('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZYNAB7eqqPL5oNRmpyKNaGvUxpCCEZdYE4KVsPSG_C1xnQ42swDlwcSjif7_G8vWhOSA&usqp=CAU',25),
+--	 ('https://images.gog-statics.com/c0d58028ae827a37a47a4ab77473bdeb27ec92c65093ea21ab468fe4bfda59db_product_card_v2_mobile_slider_639.jpg',26),
+--	 ('https://www.cyberpunk.net/build/images/home3/screen-image-mercenary-e79283ec.jpg',26),
+--	 ('https://leclaireur.fnac.com/wp-content/uploads/2022/01/cyberpunk-2077-1256x826.jpeg',26),
+--	 ('https://cdn.cloudflare.steamstatic.com/steam/apps/1284410/ss_2d17cc665fbab97cc96f43bead1a13ef73d3bb5b.1920x1080.jpg?t=1659615342',27);
+--INSERT INTO game_image (image_link,game_id) VALUES
+--	 ('https://images.gog-statics.com/c16c9e9175c56fe59e0e5953379633192bc6b0b7f5eff2c69e5c3941b995a30c_product_card_v2_mobile_slider_639.jpg',27),
+--	 ('https://i.ytimg.com/vi/h5Rqdzv9ZGY/maxresdefault.jpg',27),
+--	 ('https://i.ytimg.com/vi/UK_tMhLyPy8/maxresdefault.jpg',28),
+--	 ('https://gallery.poskota.co.id/storage/Foto/6wkBw7S8q9nKY7VCzXrD3L.jpg',28),
+--	 ('https://www.lexpress.fr/resizer/PYxrKoyUgHrdoXPVGGEAq3RkeSw=/970x548/cloudfront-eu-central-1.images.arcpublishing.com/lexpress/XFOPQHFKEVCNRJ2VQTWUEA2LIE.jpg',28),
+--	 ('https://static01.nyt.com/images/2018/11/25/opinion/25SUDERMAN/25SUDERMAN-videoSixteenByNineJumbo1600.jpg',29),
+--	 ('https://www.pcworld.com/wp-content/uploads/2021/09/base-profile-screenshot-2019.11.05-14.21.01.04-100816901-orig.jpg?quality=50&strip=all',29),
+--	 ('https://www.hollywoodreporter.com/wp-content/uploads/2018/10/red_dead_redemption_2_screengrab.jpg?w=1296',29),
+--	 ('https://static01.nyt.com/images/2012/05/15/arts/PAYNE/PAYNE-superJumbo.jpg',30),
+--	 ('https://images.ctfassets.net/wn7ipiv9ue5v/AbWN0aHIx0Lw7SCqYk535/bd5de6f45ea9d5acf2dfbf21edd72bb5/ss_8e2bb13d1078aa87d3121847049ccfcc093f578b.jpg',30);
+--INSERT INTO game_image (image_link,game_id) VALUES
+--	 ('https://img.ibxk.com.br/2022/05/15/a-15022257355003.jpg?ims=328x',30),
+--	 ('https://cdn.vox-cdn.com/thumbor/TCAmBK_Z-wk2gzPlAFzedLtn8Zc=/0x0:1920x1080/1200x800/filters:focal(807x387:1113x693)/cdn.vox-cdn.com/uploads/chorus_image/image/62572837/Soulcalibur_6_guide_7.0.jpg',31),
+--	 ('https://static.bandainamcoent.eu/high/soulcalibur/soulcalibur-6/03-news/soulcalibur-6_community-faq.jpg',31),
+--	 ('https://cdn.wccftech.com/wp-content/uploads/2018/10/rah_h_16_1537286236.png',31),
+--	 ('https://gamek.mediacdn.vn/133514250583805952/2022/12/27/tekken-7-01-1670817381070-1670817381670388740213-1672056004397-16720560050081637539324-1672057510426-167205751054572944817-1672108380705-1672108380825261401599.jpg',32),
+--	 ('https://assets1.ignimgs.com/2017/05/31/tekken7-1280-2-1496201471106_160w.jpg?width=1280',32),
+--	 ('https://assets.altarofgaming.com/wp-content/uploads/2020/11/character-selection-screen-tekken-7.jpg',32),
+--	 ('https://static.bandainamcoent.eu/high/one-piece/one-piece-odyssey/00-page-setup/OPOD_header_mobile_new.jpg',33),
+--	 ('https://www.digitaltrends.com/wp-content/uploads/2022/12/A-screenshot-of-Luffy-in-battle-in-One-Piece-Odyssey..jpg?fit=720%2C405&p=1',33),
+--	 ('https://www.digitaltrends.com/wp-content/uploads/2023/01/The-Straw-Hats-meeting-a-crab-mover-in-One-Piece-Odyssey..jpg?p=1',33);
+--INSERT INTO game_image (image_link,game_id) VALUES
+--	 ('https://cdn.tgdd.vn/GameApp/4/240209/Screentshots/scarlet-nexus-24-05-2021-1.jpg',34),
+--	 ('https://ecdn.game4v.com/g4v-content/uploads/2023/01/27170950/game4v-scarlet-nexus-01-1674814188-81.png',34),
+--	 ('https://www.stargamers.nl/test/wp-content/uploads/2021/07/scarlet-nexus-4.jpg',34),
+--	 ('https://www.digitaltrends.com/wp-content/uploads/2017/12/Detroit-Become-Human-Hands-On-Preview-828.jpg?resize=625%2C417&p=1',35),
+--	 ('https://www.playstore.com/storage/images/gallery/product/25365/892x504/6-detroit-become-human.webp',35),
+--	 ('https://hd2.tudocdn.net/763653?w=1200&h=675',35),
+--	 ('https://m.media-amazon.com/images/M/MV5BMTQzOTU4NjI4Nl5BMl5BanBnXkFtZTgwMDYzNDc1MDE@._V1_.jpg',36),
+--	 ('https://cdn.akamai.steamstatic.com/steam/apps/960990/ss_fe44ec0e7b3676465167715b388b6d6484e82ef0.1920x1080.jpg?t=1667468566',36),
+--	 ('https://cdn.cloudflare.steamstatic.com/steam/apps/960910/ss_ae2b1381c68d8d909f02b9005ae97a2d818b4c93.1920x1080.jpg?t=1675271942',37),
+--	 ('https://cdn.mos.cms.futurecdn.net/B5ANYXiNwfTMSLkjWUAq5J.jpg',37);
+--INSERT INTO game_image (image_link,game_id) VALUES
+--	 ('https://cdn.cloudflare.steamstatic.com/steam/apps/960910/ss_f123d7bbd8c3e55ad42b3048be0d9685cab4bc6a.1920x1080.jpg?t=1675271942',37),
+--	 ('https://cdn.akamai.steamstatic.com/steam/apps/1963210/ss_80603153a15f54ec617872c5a5ec5f63c1022b40.1920x1080.jpg?t=1680172058',38),
+--	 ('https://cdn.akamai.steamstatic.com/steam/apps/1963210/ss_cae86f0a0a6f8b8dea5588f0b088ad823da1e1ed.1920x1080.jpg?t=1680172058',38),
+--	 ('https://images.squarespace-cdn.com/content/v1/613ef8a0a3de987d28d14431/1666112471579-5BF1WMNBQUGWBGH64BBL/VALKYRIE+ELYSIUM_20221005102122.jpg',38),
+--	 ('https://bizweb.dktcdn.net/100/452/569/products/a75c2fb1-3654-4277-a389-4e4449d2228a.jpg?v=1651131778970',39),
+--	 ('https://venturebeat.com/wp-content/uploads/2020/04/aerith.jpg?fit=3341%2C1871&strip=all',39),
+--	 ('https://oyster.ignimgs.com/mediawiki/apis.ign.com/final-fantasy-vii-remake/9/94/Final-Fantasy-VII-Remake-Tifa.jpg',39),
+--	 ('https://images.nintendolife.com/88d4670d47aa0/octopath-traveler-ii.large.jpg',40),
+--	 ('https://imageio.forbes.com/specials-images/imageserve/63f3294477272d12e2ed2989/0x0.jpg?format=jpg&width=1200',40),
+--	 ('https://cdn.cloudflare.steamstatic.com/steam/apps/1971650/ss_cd859f6ff08f678304dac0d8c36299b0a2f82a32.1920x1080.jpg?t=1679563605',40);
+--INSERT INTO game_image (image_link,game_id) VALUES
+--	 ('https://cdn.cloudflare.steamstatic.com/steam/apps/374320/ss_12c4d9a3c04d6d340ffea9335441eb2ad84e0028.1920x1080.jpg?t=1671097812',41),
+--	 ('https://s.yimg.com/ny/api/res/1.2/YZuYvHtLxInT6FJwqgGezQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA-/https://s.yimg.com/os/creatr-uploaded-images/2022-01/5a0909e0-7c5c-11ec-a79f-c2114d050d43',41),
+--	 ('https://i.pcmag.com/imagery/reviews/05isLvYQj5GS0EuxqHnsSfW-3.fit_scale.size_760x427.v1569482291.jpg',41),
+--	 ('https://www.videogameschronicle.com/files/2022/02/sds5.jpg',42),
+--	 ('https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/ss_e87a3e84890ab19f8995566e62762d5f8ed39315.1920x1080.jpg?t=1674441703',42),
+--	 ('https://sm.ign.com/ign_it/preview/e/elden-ring/elden-ring-the-first-preview_gq54.jpg',42),
+--	 ('https://cdn.akamai.steamstatic.com/steam/apps/42700/ss_e3ad24dd02143ffbbbf17467fde104b462c9120e.1920x1080.jpg?t=1654809667',43),
+--	 ('https://cdn.akamai.steamstatic.com/steam/apps/42700/ss_f6e1e6377f0b41e34575dc9d73e62784b2395731.1920x1080.jpg?t=1654809667',43),
+--	 ('https://cdn.akamai.steamstatic.com/steam/apps/42700/ss_775f7d3ef83669a70f9f008359f78177027fed21.1920x1080.jpg?t=1654809667',43),
+--	 ('https://www.straight.com/files/v3/styles/gs_feature/public/2012/10/Prototype1.jpg?itok=Knxh6l08',44);
+--INSERT INTO game_image (image_link,game_id) VALUES
+--	 ('https://m.media-amazon.com/images/M/MV5BZDY3ZmQ0MTYtOTFjOS00ZWZiLTk3MzAtNzY1MWEyNGNiOWRhXkEyXkFqcGdeQXVyNjcyNzkwMTc@._V1_.jpg',44),
+--	 ('https://extralives.files.wordpress.com/2009/06/prototype_1.jpg',44),
+--	 ('https://cdn.akamai.steamstatic.com/steam/apps/7940/0000002996.1920x1080.jpg?t=1678298739',45),
+--	 ('https://cdn.cloudflare.steamstatic.com/steam/apps/7940/0000003000.1920x1080.jpg?t=1678298739',45),
+--	 ('https://cdn.akamai.steamstatic.com/steam/apps/7940/0000002990.1920x1080.jpg?t=1678298739',45),
+--	 ('https://i.kinja-img.com/gawker-media/image/upload/c_fit,f_auto,g_center,q_60,w_645/e3681f8adbccc9dbd923ffa04d88ede4.jpg',46),
+--	 ('https://hiepsibaotap.com/wp-content/uploads/2023/04/resident-evil-4-remake-achievements-e1678692077105.jpg',46),
+--	 ('https://www.videogameschronicle.com/files/2022/10/%E3%80%90RE4%E3%80%91_SS_33_GL.jpg',46);
+--
+--INSERT INTO game_sub_genre (game_id,sub_genre_id) VALUES
+--	 (1,26),
+--	 (2,26),
+--	 (4,26),
+--	 (7,4),
+--	 (8,42),
+--	 (9,5),
+--	 (12,1),
+--	 (13,6),
+--	 (14,7),
+--	 (14,8);
+--INSERT INTO game_sub_genre (game_id,sub_genre_id) VALUES
+--	 (15,3),
+--	 (15,17),
+--	 (16,3),
+--	 (18,6),
+--	 (18,42),
+--	 (19,6),
+--	 (19,7),
+--	 (19,8),
+--	 (19,26),
+--	 (20,3);
+--INSERT INTO game_sub_genre (game_id,sub_genre_id) VALUES
+--	 (21,7),
+--	 (22,4),
+--	 (23,43),
+--	 (23,44),
+--	 (24,2),
+--	 (25,7),
+--	 (25,8),
+--	 (25,26),
+--	 (25,44),
+--	 (25,45);
+--INSERT INTO game_sub_genre (game_id,sub_genre_id) VALUES
+--	 (26,3),
+--	 (26,7),
+--	 (26,8),
+--	 (26,26),
+--	 (27,14),
+--	 (28,26),
+--	 (28,45),
+--	 (28,46),
+--	 (29,6),
+--	 (29,7);
+--INSERT INTO game_sub_genre (game_id,sub_genre_id) VALUES
+--	 (29,26),
+--	 (30,6),
+--	 (31,1),
+--	 (31,2),
+--	 (32,1),
+--	 (32,2),
+--	 (33,2),
+--	 (33,7),
+--	 (34,7),
+--	 (34,8);
+--INSERT INTO game_sub_genre (game_id,sub_genre_id) VALUES
+--	 (35,26),
+--	 (35,32),
+--	 (35,46),
+--	 (36,26),
+--	 (36,32),
+--	 (36,46),
+--	 (37,26),
+--	 (37,32),
+--	 (37,46),
+--	 (38,7);
+--INSERT INTO game_sub_genre (game_id,sub_genre_id) VALUES
+--	 (38,8),
+--	 (38,9),
+--	 (39,7),
+--	 (40,8),
+--	 (40,9),
+--	 (40,26),
+--	 (41,7),
+--	 (41,8),
+--	 (42,7),
+--	 (42,8);
+--INSERT INTO game_sub_genre (game_id,sub_genre_id) VALUES
+--	 (43,3),
+--	 (44,4),
+--	 (44,46),
+--	 (45,3),
+--	 (46,6);
+--
+INSERT INTO genre (genre_name) VALUES
+	 ('Action'),
+	 ('Role-Playing'),
+	 ('Strategy'),
+	 ('Adventure'),
+	 ('Simulation'),
+	 ('Sports & Racing'),
+	 ('Horror'),
+	 ('Adult');
+--
+--INSERT INTO publisher (cover_photo,description,established_date,publisher_name,thumbnail) VALUES
+--	 ('https://cdn.akamai.steamstatic.com/steamcommunity/public/images/clans/40425349/c263d17394502cedbf90373599eb2706ca84074d.png','PlayStation Studios is home to the development of Sony Interactive Entertainment’s own outstanding and immersive games, including some of the most popular and critically acclaimed titles in entertainment history.','1993-11-16','Sony Interactive Entertainment','https://avatars.cloudflare.steamstatic.com/40a85b52747a78b26e393e3f9e58f319194b1b33_full.jpg'),
+--	 ('https://cdn.akamai.steamstatic.com/steamcommunity/public/images/clans/33273264/4256bc824357bb34aa4e2f7f11df9a62633d286f.png',NULL,'1979-05-30','Capcom','https://avatars.cloudflare.steamstatic.com/6b62a91eb5a093261d8831d1908717bab0d687e9_full.jpg'),
+--	 ('https://cdn.akamai.steamstatic.com/steamcommunity/public/images/clans/33075774/6f635e1eeae42b293705087fc040e77116ed365a.png','Ubisoft is a creator of worlds, committed to enriching players'' lives with original and memorable gaming experiences.','1986-03-28','Ubisoft','https://avatars.cloudflare.steamstatic.com/2b2486ae5a70d69c55f020ce8384d04646ddba4e_full.jpg'),
+--	 ('https://cdn.akamai.steamstatic.com/steamcommunity/public/images/clans/36135791/b42c79819a407c68f5b12a0028a2a8871bec6c7c.png',NULL,'1982-05-27','Electronic Arts','https://avatars.cloudflare.steamstatic.com/618cc2a46fad78ed1259df505c2de5bb4d806532_full.jpg'),
+--	 ('https://cdn.akamai.steamstatic.com/steamcommunity/public/images/clans/33016879/c0a3a3a256b1c8c0023cfce1a0fe900abb4cd64a.png',NULL,'2009-01-14','KOEI TECMO','https://avatars.cloudflare.steamstatic.com/f76177141df41c80109df7c0df81f303a933a44c_full.jpg'),
+--	 ('https://cdn.akamai.steamstatic.com/steamcommunity/public/images/clans/32989758/b05e42588fee27abeb63080593125642b63cf219.jpg','CD PROJEKT RED is a development studio founded in 2002. Our mission is to tell emotional stories riddled with meaningful choices and consequences, as well as featuring characters gamers can truly connect with.','2002-01-01','CD PROJEKT RED','https://avatars.cloudflare.steamstatic.com/4f1187c11ad41f8aa58b9109efd52c2f8bca9918_full.jpg'),
+--	 ('https://cdn.akamai.steamstatic.com/steamcommunity/public/images/clans/1541443/fb4af705f9b9e9d14640e48258d6ee11b8ad15a6.jpg',NULL,'1988-12-01','Rockstar Games','https://avatars.cloudflare.steamstatic.com/d83a1786f23929deb5f20326f128bbc13a9a1e85_full.jpg'),
+--	 ('https://cdn.akamai.steamstatic.com/steamcommunity/public/images/clans/33042543/22343df6affaa7a2657500d398024aed36ec2cba.png','Bandai Namco exists to share dreams, fun and inspiration with people around the world. Do you wish to enjoy every single day to the fullest? What we want is for people like you to always have a reason to smile.','2006-03-31','Bandai Namco Entertainment','https://avatars.cloudflare.steamstatic.com/97ea9619ba3076b8549c1484bef9308a67f0c64d_full.jpg'),
+--	 ('https://cdn.akamai.steamstatic.com/steamcommunity/public/images/clans/37700027/df452cd72626e4abc7fa73f6d641a5ce65cd2d19.jpg','Quantic Dream is an award-winning French video game developer and publisher founded to create AAA games with a focus on emotional, interactive storytelling and innovation in narrative.','1997-05-02','Quantic Dream','https://avatars.cloudflare.steamstatic.com/baf1dce75db2d5bfb0f5e14dd2183c4cb61911f7_full.jpg'),
+--	 ('https://cdn.akamai.steamstatic.com/steamcommunity/public/images/clans/1012195/52ab50f3f89e6188291c848fe7d4a45c86415d0a.jpg',NULL,'2003-04-01','Square Enix','https://avatars.cloudflare.steamstatic.com/2fe0615e013c887e87dd230e8268afdd15416f12_full.jpg');
+--INSERT INTO publisher (cover_photo,description,established_date,publisher_name,thumbnail) VALUES
+--	 ('https://wallpaperaccess.com/full/2651906.jpg',NULL,'1986-11-01','From Software','https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Fromsoftware_logo.svg/220px-Fromsoftware_logo.svg.png'),
+--	 ('https://cdn.akamai.steamstatic.com/steam/apps/1938090/page_bg_generated_v6b.jpg?t=1683652297','Founded in 1979, Activision continues to disrupt the world of entertainment with its extensive roster of epic blockbuster games.','1979-10-01','Activision','https://avatars.cloudflare.steamstatic.com/751c4faad6133699315ca7d4ae03293cd3abbe49_full.jpg');
+--
+--INSERT INTO rating (rating,game_id,user_id) VALUES
+--	 (5,20,12),
+--	 (2,39,7),
+--	 (4,34,5),
+--	 (3,10,2),
+--	 (5,3,20),
+--	 (3,3,5),
+--	 (2,35,11),
+--	 (5,28,8),
+--	 (1,16,20),
+--	 (1,5,17);
+--INSERT INTO rating (rating,game_id,user_id) VALUES
+--	 (2,22,23),
+--	 (3,16,11),
+--	 (1,37,14),
+--	 (4,12,9),
+--	 (5,20,4),
+--	 (3,36,2),
+--	 (1,12,11),
+--	 (3,16,7),
+--	 (2,30,8),
+--	 (4,35,14);
+--INSERT INTO rating (rating,game_id,user_id) VALUES
+--	 (1,41,4),
+--	 (5,6,15),
+--	 (4,30,17),
+--	 (2,28,14),
+--	 (2,17,22),
+--	 (1,23,24),
+--	 (3,1,15),
+--	 (4,17,5),
+--	 (1,41,19),
+--	 (4,30,15);
+--INSERT INTO rating (rating,game_id,user_id) VALUES
+--	 (2,41,5),
+--	 (5,32,15),
+--	 (1,39,17),
+--	 (5,2,6),
+--	 (1,11,6),
+--	 (4,22,12),
+--	 (2,36,9),
+--	 (5,41,11),
+--	 (3,15,24),
+--	 (4,12,12);
+--INSERT INTO rating (rating,game_id,user_id) VALUES
+--	 (3,6,12),
+--	 (4,30,5),
+--	 (3,46,7),
+--	 (4,10,9),
+--	 (3,5,12),
+--	 (5,42,1),
+--	 (2,2,17),
+--	 (1,22,2),
+--	 (3,4,14),
+--	 (2,43,2);
+--INSERT INTO rating (rating,game_id,user_id) VALUES
+--	 (3,20,17),
+--	 (4,1,11),
+--	 (4,21,9),
+--	 (4,8,23),
+--	 (3,9,11),
+--	 (2,10,19),
+--	 (2,24,21),
+--	 (1,11,14),
+--	 (1,34,4),
+--	 (1,40,15);
+--INSERT INTO rating (rating,game_id,user_id) VALUES
+--	 (5,1,1),
+--	 (1,41,14),
+--	 (2,9,2),
+--	 (2,40,11),
+--	 (4,18,10),
+--	 (3,26,10),
+--	 (3,27,7),
+--	 (2,35,7),
+--	 (5,4,4),
+--	 (1,41,16);
+--INSERT INTO rating (rating,game_id,user_id) VALUES
+--	 (5,4,14),
+--	 (3,32,14);
+--
+--INSERT INTO receipt (receipt_date,user_id) VALUES
+--	 ('2023-06-19',1),
+--	 ('2023-06-19',2),
+--	 ('2023-06-19',3),
+--	 ('2023-06-19',3),
+--	 ('2023-06-19',4),
+--	 ('2023-06-19',5),
+--	 ('2023-06-19',6),
+--	 ('2023-06-19',7),
+--	 ('2023-06-19',8),
+--	 ('2023-06-19',9);
+--INSERT INTO receipt (receipt_date,user_id) VALUES
+--	 ('2023-06-19',10),
+--	 ('2023-06-19',11),
+--	 ('2023-06-19',12),
+--	 ('2023-06-19',13),
+--	 ('2023-06-19',1),
+--	 ('2023-06-23',25);
+--
+--INSERT INTO receipt_details (game_price,game_code_id,receipt_id) VALUES
+--	 (59.99,31,1),
+--	 (59.99,32,2),
+--	 (59.99,33,3),
+--	 (59.99,51,4),
+--	 (29.99,71,4),
+--	 (59.99,103,4),
+--	 (59.99,123,4),
+--	 (59.99,52,5),
+--	 (29.99,72,5),
+--	 (59.99,104,5);
+--INSERT INTO receipt_details (game_price,game_code_id,receipt_id) VALUES
+--	 (59.99,124,5),
+--	 (59.99,53,6),
+--	 (29.99,73,6),
+--	 (59.99,105,6),
+--	 (59.99,125,6),
+--	 (59.99,54,7),
+--	 (29.99,74,7),
+--	 (59.99,106,7),
+--	 (59.99,126,7),
+--	 (59.99,55,8);
+--INSERT INTO receipt_details (game_price,game_code_id,receipt_id) VALUES
+--	 (29.99,75,8),
+--	 (59.99,107,8),
+--	 (59.99,127,8),
+--	 (59.99,56,9),
+--	 (29.99,76,9),
+--	 (59.99,108,9),
+--	 (59.99,128,9),
+--	 (59.99,57,10),
+--	 (29.99,77,10),
+--	 (59.99,109,10);
+--INSERT INTO receipt_details (game_price,game_code_id,receipt_id) VALUES
+--	 (59.99,129,10),
+--	 (59.99,58,11),
+--	 (29.99,78,11),
+--	 (59.99,110,11),
+--	 (59.99,130,11),
+--	 (59.99,59,12),
+--	 (29.99,79,12),
+--	 (59.99,111,12),
+--	 (59.99,131,12),
+--	 (59.99,60,13);
+--INSERT INTO receipt_details (game_price,game_code_id,receipt_id) VALUES
+--	 (29.99,80,13),
+--	 (59.99,112,13),
+--	 (59.99,132,13),
+--	 (39.99,152,13),
+--	 (39.99,181,13),
+--	 (29.99,215,13),
+--	 (39.99,233,13),
+--	 (59.99,61,14),
+--	 (29.99,81,14),
+--	 (59.99,113,14);
+--INSERT INTO receipt_details (game_price,game_code_id,receipt_id) VALUES
+--	 (59.99,133,14),
+--	 (39.99,153,14),
+--	 (39.99,182,14),
+--	 (29.99,216,14),
+--	 (39.99,234,14),
+--	 (19.99,252,15),
+--	 (59.99,34,23),
+--	 (59.99,62,23);
+--
+--INSERT INTO sub_genre (sub_genre_name,genre_id) VALUES
+--	 ('Arcade & Rhythm',1),
+--	 ('Fighting & Martial Arts',1),
+--	 ('First-Person Shooter',1),
+--	 ('Hack & Slash',1),
+--	 ('Platformer & Runner',1),
+--	 ('Third-Person Shooter',1),
+--	 ('Action RPG',2),
+--	 ('Adventure RPG',2),
+--	 ('JRPG',2),
+--	 ('Party-Based',2);
+--INSERT INTO sub_genre (sub_genre_name,genre_id) VALUES
+--	 ('Rogue-Like',2),
+--	 ('Strategy RPG',2),
+--	 ('Turn-Based',2),
+--	 ('Card & Board',3),
+--	 ('City & Settlement',3),
+--	 ('Grand & 4x',3),
+--	 ('Military',3),
+--	 ('Real-Time Strategy',3),
+--	 ('Tower Defense',3),
+--	 ('Turn-Based Strategy',3);
+--INSERT INTO sub_genre (sub_genre_name,genre_id) VALUES
+--	 ('Adventure RPG',4),
+--	 ('Casual',4),
+--	 ('Hidden Object',4),
+--	 ('Metroidvania',4),
+--	 ('Puzzle',4),
+--	 ('Story-Rich',4),
+--	 ('Visual Novel',4),
+--	 ('Building & Automation',5),
+--	 ('Dating',5),
+--	 ('Farming & Crafting',5);
+--INSERT INTO sub_genre (sub_genre_name,genre_id) VALUES
+--	 ('Hobby & Job',5),
+--	 ('Life & Immersive',5),
+--	 ('Sandbox & Physics',5),
+--	 ('Space & Flight',5),
+--	 ('All Sports',6),
+--	 ('Fishing & Hunting',6),
+--	 ('Individual Sports',6),
+--	 ('Racing',6),
+--	 ('Racing Sim',6),
+--	 ('Sports Sim',6);
+--INSERT INTO sub_genre (sub_genre_name,genre_id) VALUES
+--	 ('Team Sports',6),
+--	 ('Survival Horror',7),
+--	 ('Hentai',8),
+--	 ('Sexual Content',8),
+--	 ('Nudity',8),
+--	 ('Language',8);
+--
+--INSERT INTO user_info (active,address,balance,dob,email,first_name,gender,last_name,user_password,profile_img,registered_date,telephone_num,username) VALUES
+--	 (true,'2120 Washington Court',10000.00,'1985-06-15','bpocknoll6@typepad.com','Benton','Male','Pocknoll','dWR2YXZwNkg=','https://images.pexels.com/photos/1462980/pexels-photo-1462980.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1','2002-10-30','520-164-6847','bentonpocknoll'),
+--	 (true,'6635 Buell Crossing',10000.00,'1931-07-26','fkirtland7@furl.net','Faunie','Female','Kirtland','dlVJQzQ0YXhIdQ==','https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1','2004-02-19','627-957-7220','fauniekirtland'),
+--	 (true,'517 Pawling Center',10000.00,'1974-07-02','ransteys9@ucoz.com','Reynard','Male','Ansteys','dTdZa2dVT2M=','https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1','2002-12-03','792-341-0273','reynardansteys'),
+--	 (true,'590 Everett Street',10000.00,'1970-08-13','dtollfreec@sciencedaily.com','Dee','Female','Tollfree','xnQFiVQRxV','https://images.pexels.com/photos/1860368/pexels-photo-1860368.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load','2004-06-16','713-202-6315','deetollfree'),
+--	 (true,'38 Basil Avenue',10000.00,'1993-12-01','sballind@digg.com','Susie','Female','Ballin','eG5RRmlWUVJ4Vg==','https://images.pexels.com/photos/6950769/pexels-photo-6950769.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load','2003-09-24','297-923-0089','susieballin'),
+--	 (true,'21683 Lindbergh Court',10000.00,'1931-11-27','wlaynee@state.gov','Wilmette','Female','Layne','frxSR0','https://images.pexels.com/photos/1914877/pexels-photo-1914877.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load','1999-04-05','875-113-6511','wilmettelayne'),
+--	 (true,'78 Manitowish Circle',10000.00,'1949-11-29','fwinsparf@redcross.org','Felicle','Female','Winspar','ZnJ4U1Iw','https://media.istockphoto.com/id/1370426275/photo/portrait-of-middle-aged-woman-with-ginger-hair.jpg?s=612x612&w=0&k=20&c=gdEulh7b2F0_1xFuJeoD7bEoiw2oaxZ_9VRw21j5MUI=','2011-03-19','751-934-5761','feliclewinspar'),
+--	 (true,'2132 Vahlen Circle',10000.00,'1986-10-09','efeastg@instagram.com','Eldridge','Male','Feast','zrImlZkT','https://images.pexels.com/photos/34534/people-peoples-homeless-male.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1','2010-10-10','543-471-8206','eldridgefeast'),
+--	 (true,'5387 Charing Cross Point',10000.00,'1954-04-15','eofieldh@cocolog-nifty.com','Edy','Female','Ofield','enJJbWxaa1Q=','https://images.pexels.com/photos/4116988/pexels-photo-4116988.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load','2012-05-04','592-216-7132','edyofield'),
+--	 (true,'74 Blackbird Center',10000.00,'1999-02-28','mminghellai@nhs.uk','Morton','Male','Minghella','MUtweklE','https://images.pexels.com/photos/810775/pexels-photo-810775.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1','2015-08-28','222-241-1513','mortonminghella');
+--INSERT INTO user_info (active,address,balance,dob,email,first_name,gender,last_name,user_password,profile_img,registered_date,telephone_num,username) VALUES
+--	 (true,'4 Porter Junction',10000.00,'1962-10-19','lmooneyj@vistaprint.com','Laurence','Male','Mooney','8116Oifsp2Ll','https://images.pexels.com/photos/1451162/pexels-photo-1451162.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load','2011-01-29','203-843-3920','laurencemooney'),
+--	 (true,'77 Ridgeview Crossing',10000.00,'1987-04-10','mkowalskik@quantcast.com','Myrna','Female','Kowalski','ODExNk9pZnNwMkxs','https://images.pexels.com/photos/5951543/pexels-photo-5951543.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load','2016-05-21','229-955-0371','myrnakowalski'),
+--	 (true,'56972 Karstens Avenue',10000.00,'1973-06-05','ymacdearmontl@theguardian.com','Yolanthe','Female','MacDearmont','ioYDxV','https://images.pexels.com/photos/3764119/pexels-photo-3764119.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1','2012-12-25','657-643-1026','yolanthemacdearmont'),
+--	 (true,'72 Melby Court',10000.00,'1959-08-13','fferrillom@histats.com','Finn','Male','Ferrillo','aW9ZRHhW','https://images.pexels.com/photos/947639/pexels-photo-947639.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1','2013-04-19','647-489-2623','finnferrillo'),
+--	 (true,'37 Carioca Alley',10000.00,'1935-12-06','ncrisfordn@com.com','Nelia','Female','Crisford','WjRVUXdHUmRL','https://images.pexels.com/photos/2761798/pexels-photo-2761798.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load','2015-07-27','454-496-2875','neliacrisford'),
+--	 (true,'927 Armistice Point',9940.01,'1977-09-16','emccaughan3@tiny.cc','Eleanora','Female','Mc Caughan','MEk0WngzaVU=','https://images.pexels.com/photos/634021/pexels-photo-634021.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1','2000-01-19','925-879-8502','eleanoracaughan'),
+--	 (true,'49 Vidon Place',9850.03,'1971-06-10','mlongforth1@china.com.cn','Mala','Female','Longforth','RGJFYlBwRg==','https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1','2000-05-13','659-648-8888','malalongforth'),
+--	 (true,'418 Katie Court',9700.06,'1972-01-15','pcours0@buzzfeed.com','Pepito','Male','Cours','SlFsVmVK','https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1','2001-03-04','277-432-4462','pepitocours'),
+--	 (true,'3 Kenwood Trail',9940.01,'1969-01-27','braspin2@state.tx.us','Benjamin','Male','Raspin','b2k3dTVnRmhKaHJZ','https://as2.ftcdn.net/v2/jpg/03/64/21/11/1000_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg','2002-11-22','134-274-3255','benjaminraspin'),
+--	 (true,'104 Dexter Point',9940.01,'1932-09-30','crawes4@ucsd.edu','Cross','Male','Rawes','MEk0WngzaVU=','https://images.pexels.com/photos/2589653/pexels-photo-2589653.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1','2003-07-11','326-298-1898','crossrawes');
+--INSERT INTO user_info (active,address,balance,dob,email,first_name,gender,last_name,user_password,profile_img,registered_date,telephone_num,username) VALUES
+--	 (true,'472 Russell Drive',9820.03,'1993-02-27','ablaylock5@phpbb.com','Addison','Male','Blaylock','eVlySHo5','https://images.pexels.com/photos/428361/pexels-photo-428361.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1','2001-08-03','668-215-6778','addisonblaylock'),
+--	 (true,'85432 Stephen Alley',9820.03,'1959-09-11','mromei8@moonfruit.com','Marie-jeanne','Female','Romei','Nm1ncEhSU2JlQXE=','https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load','2000-05-15','286-211-0645','mariejeanneromei'),
+--	 (true,'13 Meadow Ridge Junction',9790.04,'1942-03-13','elimeburna@moonfruit.com','Emily','Female','Limeburn','aXZ4a1ljeDJL','https://images.pexels.com/photos/3958866/pexels-photo-3958866.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load','2001-08-27','222-686-0489','emilylimeburn'),
+--	 (true,'021 Glacier Hill Terrace',9910.02,'1937-07-02','wlillgardb@chronoengine.com','Wylma','Female','Lillgard','Mk1ESlUwWUY5MmJC','https://images.pexels.com/photos/4992382/pexels-photo-4992382.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load','2005-07-14','802-409-4899','wylmalillgard'),
+--	 (true,'69 Hang Chuoi',9880.02,'1995-12-09','hoangvu@gmail.com','Hoang','Male','Vu','$2a$12$EM5Oxylefpp8GP.bJZbfo.NsP6hP34vGssw5hNKjHYWX4k9OHF286',NULL,'2023-03-13','045678912','hoangvu'),
+--	 (true,'tp hcm',0.00,'2000-01-01','test@gmail.com','luat','Male','luong minh','$2a$10$V.wIIYUsXVQgh9Ana7Zx3OkK.Zus5uugSKSFlt6gxd10abDapsS32',NULL,'2023-06-25','0938887876','minhluat');
+--
+--INSERT INTO user_role_assignment (assigned_date,"role",modified_date,user_id) VALUES
+--	 ('2023-03-13 00:00:00','ROLE_USER',NULL,1),
+--	 ('2023-03-13 00:00:00','ROLE_USER',NULL,2),
+--	 ('2023-03-13 00:00:00','ROLE_USER',NULL,3),
+--	 ('2023-03-13 00:00:00','ROLE_USER',NULL,4),
+--	 ('2023-03-13 00:00:00','ROLE_USER',NULL,5),
+--	 ('2023-03-13 00:00:00','ROLE_USER',NULL,6),
+--	 ('2023-03-13 00:00:00','ROLE_USER',NULL,7),
+--	 ('2023-03-13 00:00:00','ROLE_USER',NULL,8),
+--	 ('2023-03-13 00:00:00','ROLE_USER',NULL,9),
+--	 ('2023-03-13 00:00:00','ROLE_USER',NULL,10);
+--INSERT INTO user_role_assignment (assigned_date,"role",modified_date,user_id) VALUES
+--	 ('2023-03-13 00:00:00','ROLE_USER',NULL,11),
+--	 ('2023-03-13 00:00:00','ROLE_USER',NULL,12),
+--	 ('2023-03-13 00:00:00','ROLE_USER',NULL,13),
+--	 ('2023-03-13 00:00:00','ROLE_USER',NULL,14),
+--	 ('2023-03-13 00:00:00','ROLE_USER',NULL,15),
+--	 ('2023-03-13 00:00:00','ROLE_USER',NULL,16),
+--	 ('2023-03-13 00:00:00','ROLE_USER',NULL,17),
+--	 ('2023-03-13 00:00:00','ROLE_USER',NULL,18),
+--	 ('2023-03-13 00:00:00','ROLE_USER',NULL,19),
+--	 ('2023-03-13 00:00:00','ROLE_USER',NULL,20);
+--INSERT INTO user_role_assignment (assigned_date,"role",modified_date,user_id) VALUES
+--	 ('2023-03-13 00:00:00','ROLE_USER',NULL,21),
+--	 ('2023-03-13 00:00:00','ROLE_USER',NULL,22),
+--	 ('2023-03-13 00:00:00','ROLE_USER',NULL,23),
+--	 ('2023-03-13 00:00:00','ROLE_USER',NULL,24),
+--	 ('2023-03-13 00:00:00','ROLE_USER',NULL,25),
+--	 ('2023-06-25 10:57:25.721912','ROLE_ADMIN','2023-06-25 10:57:25.721912',27);
