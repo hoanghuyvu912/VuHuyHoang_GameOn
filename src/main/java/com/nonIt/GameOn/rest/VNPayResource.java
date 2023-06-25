@@ -1,11 +1,13 @@
 package com.nonIt.GameOn.rest;
 
 import com.nonIt.GameOn.rest.resourcesdto.PaymentResponseDto;
+import com.nonIt.GameOn.rest.resourcesdto.TransactionStatusDto;
 import com.nonIt.GameOn.utils.vnpay.Config;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.UnsupportedEncodingException;
@@ -15,7 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @RestController
-@RequestMapping("/vnpay")
+@RequestMapping("/vnpay/payment")
 public class VNPayResource {
     @GetMapping("/create_payment")
     public ResponseEntity<?> createPayment() throws UnsupportedEncodingException {
@@ -23,8 +25,8 @@ public class VNPayResource {
 //        long amount = Integer.parseInt(req.getParameter("amount"))*100;
 //        String bankCode = req.getParameter("bankCode");
 
-        Double amount = 1000D;
-
+//        Double amount = 1000D;
+        long amount = 1000000;
         String vnp_TxnRef = Config.getRandomNumber(8);
 //        String vnp_IpAddr = Config.getIpAddress(req);
         String vnp_TmnCode = Config.vnp_TmnCode;
@@ -39,6 +41,7 @@ public class VNPayResource {
         vnp_Params.put("vnp_TxnRef", vnp_TxnRef);
         vnp_Params.put("vnp_OrderInfo", "Thanh toan don hang:" + vnp_TxnRef);
         vnp_Params.put("vnp_Locale", "vn");
+        vnp_Params.put("vnp_ReturnUrl", Config.vnp_Returnurl);
 
         Calendar cld = Calendar.getInstance(TimeZone.getTimeZone("Etc/GMT+7"));
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -83,5 +86,25 @@ public class VNPayResource {
                 .URL(paymentUrl)
                 .build();
         return ResponseEntity.status(HttpStatus.OK).body(paymentResponseDto);
+    }
+
+    @GetMapping("/payment_info")
+    public ResponseEntity<?> transaction(
+            @RequestParam(value = "vnp_Amount", required = false) String amount,
+            @RequestParam(value = "vnp_BankCode", required = false) String bankCode,
+            @RequestParam(value = "vnp_OrderInfo", required = false) String order,
+            @RequestParam(value = "vnp_ResponseCode", required = false) String responseCode) {
+        TransactionStatusDto transactionStatusDto = new TransactionStatusDto();
+
+        if (responseCode.equals("00")) {
+            transactionStatusDto.setStatus("Ok");
+            transactionStatusDto.setMessage("Successfully");
+            transactionStatusDto.setData("");
+        } else {
+            transactionStatusDto.setStatus("No");
+            transactionStatusDto.setMessage("Failed");
+            transactionStatusDto.setData("");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(transactionStatusDto);
     }
 }
