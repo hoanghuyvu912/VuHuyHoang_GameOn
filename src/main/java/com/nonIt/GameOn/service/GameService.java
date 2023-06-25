@@ -15,7 +15,7 @@ public interface GameService {
 
     SimplifiedGameDto findById(Integer gameId);
 
-    GameRestDto createGame(GameDto gameDto);
+    SimplifiedGameDto createGame(GameDto gameDto);
 
     GameRestDto updateGame(Integer gameId, GameDto gameDto);
 

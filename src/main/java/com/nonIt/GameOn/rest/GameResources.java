@@ -42,7 +42,7 @@ public class GameResources {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<GameRestDto> createGame(@Valid @RequestBody GameDto gameDto) {
+    public ResponseEntity<SimplifiedGameDto> createGame(@Valid @RequestBody GameDto gameDto) {
         return ResponseEntity.ok(gameService.createGame(gameDto));
     }
 

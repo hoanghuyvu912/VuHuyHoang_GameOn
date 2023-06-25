@@ -12,11 +12,4 @@ public interface CommentMapper  extends EntityMapper<CommentRestDto, Comment, Co
     @Mapping(target = "userId", source = "user.id")
     @Mapping(target = "username", source = "user.username")
     SimplifiedCommentDto toSimplifiedDto(Comment comment);
-//    CommentDto toDto(Comment comment);
-//
-//    List<CommentDto> toDtos(List<Comment> comments);
-//
-//    CommentRestDto toRestDto(Comment comment);
-//
-//    List<CommentRestDto> toRestDtos(List<Comment> comments);
 }

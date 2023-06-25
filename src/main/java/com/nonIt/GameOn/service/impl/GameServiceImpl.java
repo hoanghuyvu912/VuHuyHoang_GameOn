@@ -6,17 +6,14 @@ import com.nonIt.GameOn.repository.DeveloperRepository;
 import com.nonIt.GameOn.repository.GameRepository;
 import com.nonIt.GameOn.repository.PublisherRepository;
 import com.nonIt.GameOn.repository.RatingRepository;
-import com.nonIt.GameOn.rest.resourcesdto.SimplifiedCommentDto;
-import com.nonIt.GameOn.rest.resourcesdto.SimplifiedGameDto;
+import com.nonIt.GameOn.rest.resourcesdto.*;
 import com.nonIt.GameOn.security.jwt.JwtUtils;
 import com.nonIt.GameOn.service.GameService;
 import com.nonIt.GameOn.service.customDto.GameLibraryDto;
 import com.nonIt.GameOn.service.customDto.GameSearchDto;
 import com.nonIt.GameOn.service.createdto.GameDto;
-import com.nonIt.GameOn.service.mapper.CommentMapper;
+import com.nonIt.GameOn.service.mapper.*;
 import com.nonIt.GameOn.repository.*;
-import com.nonIt.GameOn.service.mapper.GameMapper;
-import com.nonIt.GameOn.service.mapper.RatingMapper;
 import com.nonIt.GameOn.service.restdto.GameRestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,20 +36,30 @@ public class GameServiceImpl implements GameService {
     private final GameRepository gameRepository;
     private final DeveloperRepository developerRepository;
     private final PublisherRepository publisherRepository;
+    private final GameCodeRepository gameCodeRepository;
     private final RatingRepository ratingRepository;
     private final GameMapper gameMapper;
     private final RatingMapper ratingMapper;
     private final CommentMapper commentMapper;
-    private final GameCodeRepository gameCodeRepository;
     private final UserRepository userRepository;
+    private final GameImageMapper gameImageMapper;
+    private final GameSubGenreMapper gameSubGenreMapper;
+    private final GameGenreMapper gameGenreMapper;
+
     //CRUD Services
     @Override
     public List<SimplifiedGameDto> getAll() {
-        return gameRepository.findAllByOrderByIdAsc().stream().map(gameMapper::toSimplifiedDto).collect(Collectors.toList());
+//        return gameRepository.findAllByOrderByIdAsc().stream().map(gameMapper::toSimplifiedDto).collect(Collectors.toList());
+        List<Game> gameList = gameRepository.findAllByOrderByIdAsc();
+        List<SimplifiedGameDto> simplifiedGameDtoList = new ArrayList<>();
+        for(Game game : gameList) {
+            simplifiedGameDtoList.add(convertGameEntityToSimplifiedDto(game));
+        }
+        return simplifiedGameDtoList;
     }
 
     @Override
-    public GameRestDto createGame(GameDto gameDto) {
+    public SimplifiedGameDto createGame(GameDto gameDto) {
         Developer developer = developerRepository.findById(gameDto.getDeveloperId()).orElseThrow(GameOnException::DeveloperNotFound);
         Publisher publisher = publisherRepository.findById(gameDto.getPublisherId()).orElseThrow(GameOnException::PublisherNotFound);
 
@@ -96,7 +104,8 @@ public class GameServiceImpl implements GameService {
                 .build();
 
         game = gameRepository.save(game);
-        return gameMapper.toDto(game);
+
+        return convertGameEntityToSimplifiedDto(game);
     }
 
     @Override
@@ -613,7 +622,7 @@ public class GameServiceImpl implements GameService {
         return gameRepository.getByPublisherId(publisherId).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 
-//    @Override
+    //    @Override
 //    public List<GameRestDto> getByUserId(Integer userId) {
 //        return gameRepository.getByUserId(userId).stream().map(gameMapper::toDto).collect(Collectors.toList());
 //    }
@@ -623,7 +632,7 @@ public class GameServiceImpl implements GameService {
 //        return gameRepository.getByUsername(username).stream().map(gameMapper::toDto).collect(Collectors.toList());
 //    }
     @Override
-    public List<GameLibraryDto> getByUser(String authorization){
+    public List<GameLibraryDto> getByUser(String authorization) {
         System.out.println(authorization);
         User user = userRepository.findByUsername(jwtUtils.getUserNameFromJwtToken(authorization)).orElseThrow(GameOnException::UserNotFound);
 
@@ -693,4 +702,44 @@ public class GameServiceImpl implements GameService {
                 .filter(gameCode -> gameCode.getGameCodeStatus().equals(GameCodeStatus.Used)).count();
     }
 
+    public SimplifiedGameDto convertGameEntityToSimplifiedDto(Game game) {
+        List<SimplifiedCommentDto> simplifiedCommentDtoList = new ArrayList<>();
+        List<SimplifiedRatingDto> simplifiedRatingDtoList = new ArrayList<>();
+        List<SimplifiedGameImageDto> simplifiedGameImageDtoList = new ArrayList<>();
+        List<SimplifiedGameGenreDto> simplifiedGameGenreDtoList = new ArrayList<>();
+        List<SimplifiedGameSubGenreDto> simplifiedGameSubGenreDtoList = new ArrayList<>();
+
+        SimplifiedGameDto simplifiedGameDto = gameMapper.toSimplifiedDto(game);
+        for (Comment comment : game.getCommentList()) {
+            SimplifiedCommentDto simplifiedCommentDto = commentMapper.toSimplifiedDto(comment);
+            simplifiedCommentDtoList.add(simplifiedCommentDto);
+        }
+
+        for (Rating rating : game.getRatingList()) {
+            SimplifiedRatingDto simplifiedRatingDto = ratingMapper.toSimplifiedDto(rating);
+            simplifiedRatingDtoList.add(simplifiedRatingDto);
+        }
+
+        for (GameImage gameImage : game.getGameImageList()) {
+            SimplifiedGameImageDto simplifiedGameImageDto = gameImageMapper.toSimplifiedDto(gameImage);
+            simplifiedGameImageDtoList.add(simplifiedGameImageDto);
+        }
+
+        for (GameSubGenre gameSubGenre : game.getGameSubGenreList()) {
+            SimplifiedGameSubGenreDto simplifiedGameSubGenreDto = gameSubGenreMapper.toSimplifiedDto(gameSubGenre);
+            simplifiedGameSubGenreDtoList.add(simplifiedGameSubGenreDto);
+        }
+
+        for (GameGenre gameGenre : game.getGameGenreList()) {
+            SimplifiedGameGenreDto simplifiedGameGenreDto = gameGenreMapper.toSimplifiedDto(gameGenre);
+            simplifiedGameGenreDtoList.add(simplifiedGameGenreDto);
+        }
+
+        simplifiedGameDto.setSimplifiedCommentDtoList(simplifiedCommentDtoList);
+        simplifiedGameDto.setSimplifiedRatingDtoList(simplifiedRatingDtoList);
+        simplifiedGameDto.setSimplifiedGameGenreDtoList(simplifiedGameGenreDtoList);
+        simplifiedGameDto.setSimplifiedGameSubGenreDtoList(simplifiedGameSubGenreDtoList);
+        simplifiedGameDto.setSimplifiedGameImageDtoList(simplifiedGameImageDtoList);
+        return simplifiedGameDto;
+    }
 }

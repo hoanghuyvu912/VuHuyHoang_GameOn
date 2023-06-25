@@ -11,13 +11,6 @@ import org.mapstruct.Mapping;
 public interface ReceiptDetailsMapper extends EntityMapper<ReceiptDetailsRestDto, ReceiptDetails, ReceiptDetailsDto> {
     @Mapping(source = "receipt.id", target = "receiptId")
     @Mapping(source = "id", target = "receiptDetailsId")
-    @Mapping(source = "gameCode.id ", target = "gameCodeId")
+    @Mapping(source = "gameCode.id", target = "gameCodeId")
     SimplifiedReceiptDetailsDto toSimplifiedDto(ReceiptDetails receiptDetails);
-//    ReceiptDetailsDto toDto(ReceiptDetails receiptDetails);
-//
-//    List<ReceiptDetailsDto> toDtos(List<ReceiptDetails> receiptDetails);
-//
-//    ReceiptDetailsRestDto toRestDto(ReceiptDetails receiptDetails);
-//
-//    List<ReceiptDetailsRestDto> toRestDtos(List<ReceiptDetails> receiptDetails);
 }
