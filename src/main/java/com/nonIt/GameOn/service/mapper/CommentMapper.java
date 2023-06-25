@@ -11,5 +11,6 @@ import org.mapstruct.Mapping;
 public interface CommentMapper  extends EntityMapper<CommentRestDto, Comment, CommentDto>{
     @Mapping(target = "userId", source = "user.id")
     @Mapping(target = "username", source = "user.username")
+    @Mapping(target = "gameId", source = "game.id")
     SimplifiedCommentDto toSimplifiedDto(Comment comment);
 }

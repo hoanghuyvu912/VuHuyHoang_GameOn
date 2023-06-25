@@ -52,7 +52,7 @@ public class GameServiceImpl implements GameService {
 //        return gameRepository.findAllByOrderByIdAsc().stream().map(gameMapper::toSimplifiedDto).collect(Collectors.toList());
         List<Game> gameList = gameRepository.findAllByOrderByIdAsc();
         List<SimplifiedGameDto> simplifiedGameDtoList = new ArrayList<>();
-        for(Game game : gameList) {
+        for (Game game : gameList) {
             simplifiedGameDtoList.add(convertGameEntityToSimplifiedDto(game));
         }
         return simplifiedGameDtoList;
@@ -664,12 +664,7 @@ public class GameServiceImpl implements GameService {
     @Override
     public SimplifiedGameDto findById(Integer gameId) {
         Game game = gameRepository.findById(gameId).orElseThrow(GameOnException::GameNotFound);
-        List<SimplifiedCommentDto> simplifiedCommentDtoList = game.getCommentList().stream()
-                .map(commentMapper::toSimplifiedDto)
-                .collect(Collectors.toList());
-        SimplifiedGameDto simplifiedGameDto = gameMapper.toSimplifiedDto(game);
-        simplifiedGameDto.setSimplifiedCommentDtoList(simplifiedCommentDtoList);
-        return simplifiedGameDto;
+        return convertGameEntityToSimplifiedDto(game);
     }
 
 
@@ -703,37 +698,57 @@ public class GameServiceImpl implements GameService {
     }
 
     public SimplifiedGameDto convertGameEntityToSimplifiedDto(Game game) {
-        List<SimplifiedCommentDto> simplifiedCommentDtoList = new ArrayList<>();
-        List<SimplifiedRatingDto> simplifiedRatingDtoList = new ArrayList<>();
-        List<SimplifiedGameImageDto> simplifiedGameImageDtoList = new ArrayList<>();
-        List<SimplifiedGameGenreDto> simplifiedGameGenreDtoList = new ArrayList<>();
-        List<SimplifiedGameSubGenreDto> simplifiedGameSubGenreDtoList = new ArrayList<>();
+//        List<SimplifiedCommentDto> simplifiedCommentDtoList = new ArrayList<>();
+//        List<SimplifiedRatingDto> simplifiedRatingDtoList = new ArrayList<>();
+//        List<SimplifiedGameImageDto> simplifiedGameImageDtoList = new ArrayList<>();
+//        List<SimplifiedGameGenreDto> simplifiedGameGenreDtoList = new ArrayList<>();
+//        List<SimplifiedGameSubGenreDto> simplifiedGameSubGenreDtoList = new ArrayList<>();
 
         SimplifiedGameDto simplifiedGameDto = gameMapper.toSimplifiedDto(game);
-        for (Comment comment : game.getCommentList()) {
-            SimplifiedCommentDto simplifiedCommentDto = commentMapper.toSimplifiedDto(comment);
-            simplifiedCommentDtoList.add(simplifiedCommentDto);
-        }
+        List<SimplifiedCommentDto> simplifiedCommentDtoList = game.getCommentList().stream()
+                .map(commentMapper::toSimplifiedDto)
+                .collect(Collectors.toList());
 
-        for (Rating rating : game.getRatingList()) {
-            SimplifiedRatingDto simplifiedRatingDto = ratingMapper.toSimplifiedDto(rating);
-            simplifiedRatingDtoList.add(simplifiedRatingDto);
-        }
+        List<SimplifiedRatingDto> simplifiedRatingDtoList = game.getRatingList().stream()
+                .map(ratingMapper::toSimplifiedDto)
+                .collect(Collectors.toList());
 
-        for (GameImage gameImage : game.getGameImageList()) {
-            SimplifiedGameImageDto simplifiedGameImageDto = gameImageMapper.toSimplifiedDto(gameImage);
-            simplifiedGameImageDtoList.add(simplifiedGameImageDto);
-        }
+        List<SimplifiedGameImageDto> simplifiedGameImageDtoList = game.getGameImageList().stream()
+                .map(gameImageMapper::toSimplifiedDto)
+                .collect(Collectors.toList());
 
-        for (GameSubGenre gameSubGenre : game.getGameSubGenreList()) {
-            SimplifiedGameSubGenreDto simplifiedGameSubGenreDto = gameSubGenreMapper.toSimplifiedDto(gameSubGenre);
-            simplifiedGameSubGenreDtoList.add(simplifiedGameSubGenreDto);
-        }
+        List<SimplifiedGameGenreDto> simplifiedGameGenreDtoList = game.getGameGenreList().stream()
+                .map(gameGenreMapper::toSimplifiedDto)
+                .collect(Collectors.toList());
 
-        for (GameGenre gameGenre : game.getGameGenreList()) {
-            SimplifiedGameGenreDto simplifiedGameGenreDto = gameGenreMapper.toSimplifiedDto(gameGenre);
-            simplifiedGameGenreDtoList.add(simplifiedGameGenreDto);
-        }
+        List<SimplifiedGameSubGenreDto> simplifiedGameSubGenreDtoList = game.getGameSubGenreList().stream()
+                .map(gameSubGenreMapper::toSimplifiedDto)
+                .collect(Collectors.toList());
+
+//        for (Comment comment : game.getCommentList()) {
+//            SimplifiedCommentDto simplifiedCommentDto = commentMapper.toSimplifiedDto(comment);
+//            simplifiedCommentDtoList.add(simplifiedCommentDto);
+//        }
+//
+//        for (Rating rating : game.getRatingList()) {
+//            SimplifiedRatingDto simplifiedRatingDto = ratingMapper.toSimplifiedDto(rating);
+//            simplifiedRatingDtoList.add(simplifiedRatingDto);
+//        }
+//
+//        for (GameImage gameImage : game.getGameImageList()) {
+//            SimplifiedGameImageDto simplifiedGameImageDto = gameImageMapper.toSimplifiedDto(gameImage);
+//            simplifiedGameImageDtoList.add(simplifiedGameImageDto);
+//        }
+//
+//        for (GameSubGenre gameSubGenre : game.getGameSubGenreList()) {
+//            SimplifiedGameSubGenreDto simplifiedGameSubGenreDto = gameSubGenreMapper.toSimplifiedDto(gameSubGenre);
+//            simplifiedGameSubGenreDtoList.add(simplifiedGameSubGenreDto);
+//        }
+//
+//        for (GameGenre gameGenre : game.getGameGenreList()) {
+//            SimplifiedGameGenreDto simplifiedGameGenreDto = gameGenreMapper.toSimplifiedDto(gameGenre);
+//            simplifiedGameGenreDtoList.add(simplifiedGameGenreDto);
+//        }
 
         simplifiedGameDto.setSimplifiedCommentDtoList(simplifiedCommentDtoList);
         simplifiedGameDto.setSimplifiedRatingDtoList(simplifiedRatingDtoList);
