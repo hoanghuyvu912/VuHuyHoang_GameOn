@@ -2,13 +2,14 @@ package com.nonIt.GameOn.service;
 
 import com.nonIt.GameOn.rest.resourcesdto.ReceiptCreateDto;
 import com.nonIt.GameOn.service.createdto.ReceiptDto;
+import com.nonIt.GameOn.service.customDto.ReceiptResponseDto;
 import com.nonIt.GameOn.service.restdto.ReceiptRestDto;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public interface ReceiptService {
-    List<ReceiptRestDto> getAll();
+    List<ReceiptResponseDto> getAll();
 
     ReceiptRestDto findById(Integer receiptId);
 
