@@ -1,6 +1,5 @@
 "id","active","address","balance","dob","email","first_name","gender","last_name","user_password","profile_img","registered_date","telephone_num","username"
 1,true,"418 Katie Court",10000.00,1972-01-15,pcours0@buzzfeed.com,Pepito,Male,Cours,SlFsVmVK,https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1,2001-03-04,"277-432-4462",pepitocours
-2,true,"49 Vidon Place",10000.00,1971-06-10,mlongforth1@china.com.cn,Mala,Female,Longforth,RGJFYlBwRg==,https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1,2000-05-13,"659-648-8888",malalongforth
 3,true,"3 Kenwood Trail",10000.00,1969-01-27,braspin2@state.tx.us,Benjamin,Male,Raspin,b2k3dTVnRmhKaHJZ,https://as2.ftcdn.net/v2/jpg/03/64/21/11/1000_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg,2002-11-22,"134-274-3255",benjaminraspin
 4,true,"927 Armistice Point",10000.00,1977-09-16,emccaughan3@tiny.cc,Eleanora,Female,Mc Caughan,MEk0WngzaVU=,https://images.pexels.com/photos/634021/pexels-photo-634021.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1,2000-01-19,"925-879-8502",eleanoracaughan
 5,true,"104 Dexter Point",10000.00,1932-09-30,crawes4@ucsd.edu,Cross,Male,Rawes,MEk0WngzaVU=,https://images.pexels.com/photos/2589653/pexels-photo-2589653.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1,2003-07-11,"326-298-1898",crossrawes
@@ -22,5 +21,12 @@
 21,true,"77 Ridgeview Crossing",10000.00,1987-04-10,mkowalskik@quantcast.com,Myrna,Female,Kowalski,ODExNk9pZnNwMkxs,https://images.pexels.com/photos/5951543/pexels-photo-5951543.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load,2016-05-21,"229-955-0371",myrnakowalski
 22,true,"56972 Karstens Avenue",10000.00,1973-06-05,ymacdearmontl@theguardian.com,Yolanthe,Female,MacDearmont,ioYDxV,https://images.pexels.com/photos/3764119/pexels-photo-3764119.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1,2012-12-25,"657-643-1026",yolanthemacdearmont
 23,true,"72 Melby Court",10000.00,1959-08-13,fferrillom@histats.com,Finn,Male,Ferrillo,aW9ZRHhW,https://images.pexels.com/photos/947639/pexels-photo-947639.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1,2013-04-19,"647-489-2623",finnferrillo
-24,true,"37 Carioca Alley",10000.00,1935-12-06,ncrisfordn@com.com,Nelia,Female,Crisford,WjRVUXdHUmRL,https://images.pexels.com/photos/2761798/pexels-photo-2761798.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load,2015-07-27,"454-496-2875",neliacrisford
-25,true,"69 Hang Chuoi",10000.00,1995-12-09,hoangvu@gmail.com,Hoang,Male,Vu,$2a$12$5F6WrM6jNeXJv.ci66QFPuqeyXGGFS6.lIiJ5dshLn88Nd6GsUr3.,,2023-03-13,"045678912",hoangvu
+24,true,"37 Carioca Alley",10000.00,1935-12-06,ncrisfordn@com.com,Nelia,Female,Crisford,$2a$10$Wrdsw4fk6AXczEXpUjfdhOW4MxPWPWFZztqd5H3lqYY9VnF61INy6,https://images.pexels.com/photos/2761798/pexels-photo-2761798.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load,2015-07-27,"454-496-2875",neliacrisford
+2,true,"49 Vidon Place",9810.06,1971-06-10,mlongforth1@china.com.cn,Mala,Female,Longforth,RGJFYlBwRg==,https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1,2000-05-13,"659-648-8888",malalongforth
+27,true,"123 Street",0.00,1995-09-12,hoangvu123@gmail.com,Hoang 2,Male,Vu 2,$2a$10$Ov7TIdL7Lu.iwcjcriXG1uU3vmwD4/37040JD1aJ70TMElzt/VSOS,,2023-06-23,"12345678",hoangvu123
+31,true,"123 Street",0.00,1995-12-09,hoangvu45@gmail.com,hoang4,Male,vu4,$2a$10$J9S.ZlJhothcIbWgnv/pdeNzKCZIiQBQrPp509JzLzJ97do252Lrq,,2023-06-24,"123456789",hoangvu45
+28,true,"1234 Street",0.00,1995-12-09,abcd@gmail.com,ABCD,Male,EFGH,$2a$10$c1GqqxRxTvdT8PsW9s3fN.MbQ.hdCcnDbEBDphuJps6vnvQwQWixO,,2023-06-23,"1234567890",abcd
+29,true,"1234 Street",0.00,1995-12-09,abcd2@gmail.com,ABCD,Male,EFGH,$2a$10$ZuEtMTx7Wu3fN6rW0bAIlex/lXA/zeyrQL0b366xkHwxvmxC8uJb.,,2023-06-23,"1234567890",abcd2
+30,true,"123 Street",0.00,1995-12-09,hoang3vu7@gmail.com,Hoang3,Male,Vu3,$2a$10$FeOxxZ10MQniR6AlS1SQSeIX0RngOlA19ukoxZnlzAUxFdubP0kj.,,2023-06-23,"12345679",hoang3vu3
+25,true,"69 Hang Chuoi",9500.10,1995-12-09,hoangvu@gmail.com,Hoang,Male,Vu,$2a$12$5F6WrM6jNeXJv.ci66QFPuqeyXGGFS6.lIiJ5dshLn88Nd6GsUr3.,"",2023-03-13,"045678912",hoangvu
+32,true,"1234 Street",0.00,1995-12-09,hoangvu6@gmail,hoang6,Male,vu6,$2a$10$AsvXeh4tXLgaWcrWB5c1l.MkpzvoEkg3hA2CWwiJ0Loj0KTJj9N9O,,2023-06-24,"12345678",hoangvu6
