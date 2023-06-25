@@ -2,6 +2,7 @@ package com.nonIt.GameOn.repository;
 
 import com.nonIt.GameOn.entity.ReceiptDetails;
 import com.nonIt.GameOn.service.customDto.GameStatisticsDto;
+import com.nonIt.GameOn.service.customDto.ReceiptDetailResponseDto;
 import com.nonIt.GameOn.service.customDto.RevenuePerMonthInYearDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -41,5 +42,12 @@ public interface ReceiptDetailsRepository extends JpaRepository<ReceiptDetails, 
             "AND gc.id = rd.gameCode.id " +
             "GROUP BY gc.game.id")
     List<GameStatisticsDto> getGameStatisticsPerMonth(Integer month, Integer year);
+
+    @Query("SELECT new com.nonIt.GameOn.service.customDto.ReceiptDetailResponseDto( rd.id,rd.receipt.id, g.name, rd.gamePrice) " +
+            "FROM ReceiptDetails rd " +
+            "JOIN GameCode gc on gc.id = rd.gameCode.id " +
+            "JOIN Game g on g.id = gc.game.id " +
+            "WHERE rd.receipt.id = :receiptId")
+    List<ReceiptDetailResponseDto> findByReceiptId(Integer receiptId);
 }
 
