@@ -4,6 +4,7 @@ import com.nonIt.GameOn.rest.resourcesdto.SimplifiedGameDto;
 import com.nonIt.GameOn.service.customDto.GameLibraryDto;
 import com.nonIt.GameOn.service.customDto.GameSearchDto;
 import com.nonIt.GameOn.service.createdto.GameDto;
+import com.nonIt.GameOn.service.customDto.GameWithUsedGameCodeListDto;
 import com.nonIt.GameOn.service.restdto.GameRestDto;
 
 import java.time.LocalDate;
@@ -24,8 +25,8 @@ public interface GameService {
     //Find featured games
     List<SimplifiedGameDto> getFeaturedGame();
 
-    //Find best-seller games between a period
-//    List<GameRestDto> getBestSellerGamesBetweenAPeriod();
+//    Find best-seller games between a period
+    List<GameWithUsedGameCodeListDto> getRecentBestSellerGames();
 
     //Find by name
     List<GameRestDto> findByNameIgnoreCaseContaining(String name);

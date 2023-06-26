@@ -6,6 +6,7 @@ import com.nonIt.GameOn.repository.GameCodeRepository;
 import com.nonIt.GameOn.repository.GameRepository;
 import com.nonIt.GameOn.repository.ReceiptDetailsRepository;
 import com.nonIt.GameOn.repository.ReceiptRepository;
+import com.nonIt.GameOn.rest.resourcesdto.SimplifiedGameDto;
 import com.nonIt.GameOn.rest.resourcesdto.SimplifiedReceiptDetailsDto;
 import com.nonIt.GameOn.service.ReceiptDetailsService;
 import com.nonIt.GameOn.service.createdto.ReceiptDetailsDto;
@@ -16,6 +17,7 @@ import com.nonIt.GameOn.service.customDto.GameStatisticsDto;
 import com.nonIt.GameOn.service.customDto.GameWithUsedGameCodeListDto;
 import com.nonIt.GameOn.service.customDto.RevenuePerMonthInYearDto;
 import com.nonIt.GameOn.service.mapper.GameCodeMapper;
+import com.nonIt.GameOn.utils.ConvertToSimplifiedDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +36,7 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
     private final ReceiptDetailsMapper receiptDetailsMapper;
     private final GameCodeRepository gameCodeRepository;
     private final GameCodeMapper gameCodeMapper;
+    private final ConvertToSimplifiedDto convertToSimplifiedDto;
 
     @Override
     public List<ReceiptDetailsRestDto> getAll() {
@@ -90,24 +93,25 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
 
     @Override
     public List<GameWithUsedGameCodeListDto> getBestSellerGamesBetweenDates(LocalDate startDate, LocalDate endDate) {
-        List<Game> gameList = getGamesSoldBetweenDates(startDate, endDate);
+        List<SimplifiedGameDto> gameList = getGamesSoldBetweenDates(startDate, endDate);
 
-        Map<Game, Long> gamesWithUsedGameCodeList = getGameLongMap(gameList);
+        Map<SimplifiedGameDto, Long> gamesWithUsedGameCodeList = getGameLongMap(gameList);
 
         return gamesWithUsedGameCodeList.entrySet()
                 .stream()
-                .sorted(Comparator.comparing(Map.Entry<Game, Long>::getValue).reversed())
+                .sorted(Comparator.comparing(Map.Entry<SimplifiedGameDto, Long>::getValue).reversed())
                 .limit(5)
                 .map(entry -> new GameWithUsedGameCodeListDto(entry.getKey(), entry.getValue().intValue()))
                 .collect(Collectors.toList());
     }
 
-    private List<Game> getGamesSoldBetweenDates(LocalDate startDate, LocalDate endDate) {
-        List<GameCode> usedGameCodes = receiptDetailsRepository.findByReceiptReceiptDateBetween(startDate, endDate)
+    private List<SimplifiedGameDto> getGamesSoldBetweenDates(LocalDate startDate, LocalDate endDate) {
+        return receiptDetailsRepository.findByReceiptReceiptDateBetween(startDate, endDate)
                 .stream()
                 .map(ReceiptDetails::getGameCode)
+                .map(GameCode::getGame)
+                .map(convertToSimplifiedDto::convertGameEntityToSimplifiedDto)
                 .collect(Collectors.toList());
-        return usedGameCodes.stream().map(GameCode::getGame).collect(Collectors.toList());
     }
 
     @Override
@@ -128,13 +132,13 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
 
     @Override
     public List<GameWithUsedGameCodeListDto> getWorstSellerGamesBetweenDates(LocalDate startDate, LocalDate endDate) {
-        List<Game> gameList = getGamesSoldBetweenDates(startDate, endDate);
+        List<SimplifiedGameDto> gameList = getGamesSoldBetweenDates(startDate, endDate);
 
-        Map<Game, Long> gamesWithUsedGameCodeList = getGameLongMap(gameList);
+        Map<SimplifiedGameDto, Long> gamesWithUsedGameCodeList = getGameLongMap(gameList);
 
         return gamesWithUsedGameCodeList.entrySet()
                 .stream()
-                .sorted(Comparator.comparing(Map.Entry<Game, Long>::getValue))
+                .sorted(Comparator.comparing(Map.Entry<SimplifiedGameDto, Long>::getValue))
                 .limit(5)
                 .map(entry -> new GameWithUsedGameCodeListDto(entry.getKey(), entry.getValue().intValue()))
                 .collect(Collectors.toList());
@@ -150,18 +154,18 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
         return receiptDetailsRepository.findByReceiptId(receiptId);
     }
 
-    private static Map<Game, Long> getGameLongMap(List<Game> gameList) {
-        Map<Game, Long> gamesWithUsedGameCodeList = new HashMap<>();
-        for (Game game : gameList) {
-            gamesWithUsedGameCodeList.put(game, 0L);
+    private static Map<SimplifiedGameDto, Long> getGameLongMap(List<SimplifiedGameDto> gameList) {
+        Map<SimplifiedGameDto, Long> gamesWithUsedGameCodeList = new HashMap<>();
+        for (SimplifiedGameDto simplifiedGameDto : gameList) {
+            gamesWithUsedGameCodeList.put(simplifiedGameDto, 0L);
         }
 
-        for (Map.Entry<Game, Long> entry : gamesWithUsedGameCodeList.entrySet()) {
-            Game key = entry.getKey();
+        for (Map.Entry<SimplifiedGameDto, Long> entry : gamesWithUsedGameCodeList.entrySet()) {
+            SimplifiedGameDto key = entry.getKey();
             Long value = entry.getValue();
 
-            for (Game game : gameList) {
-                if (game.getId().equals(key.getId())) {
+            for (SimplifiedGameDto simplifiedGameDto : gameList) {
+                if (simplifiedGameDto.getId().equals(key.getId())) {
                     value++;
                     entry.setValue(value);
                 }

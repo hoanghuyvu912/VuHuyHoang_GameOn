@@ -26,7 +26,7 @@ public class VNPayResource {
 //        String bankCode = req.getParameter("bankCode");
 
 //        Double amount = 1000D;
-        long amount = 1000000;
+        long amount = 4000000;
         String vnp_TxnRef = Config.getRandomNumber(8);
 //        String vnp_IpAddr = Config.getIpAddress(req);
         String vnp_TmnCode = Config.vnp_TmnCode;

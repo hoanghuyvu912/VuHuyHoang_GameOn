@@ -6,6 +6,7 @@ import com.nonIt.GameOn.service.GameService;
 import com.nonIt.GameOn.service.customDto.GameLibraryDto;
 import com.nonIt.GameOn.service.customDto.GameSearchDto;
 import com.nonIt.GameOn.service.createdto.GameDto;
+import com.nonIt.GameOn.service.customDto.GameWithUsedGameCodeListDto;
 import com.nonIt.GameOn.service.restdto.GameRestDto;
 //import jakarta.validation.Valid;
 import com.nonIt.GameOn.utils.NullChecker;
@@ -72,6 +73,11 @@ public class GameResources {
     @GetMapping(value = "/featured")
     public ResponseEntity<List<SimplifiedGameDto>> getFeaturedGames() {
         return ResponseEntity.ok(gameService.getFeaturedGame());
+    }
+
+    @GetMapping(value = "/recent-best-seller")
+    public ResponseEntity<List<GameWithUsedGameCodeListDto>> getRecentBestSellerGames() {
+        return ResponseEntity.ok(gameService.getRecentBestSellerGames());
     }
 
 
