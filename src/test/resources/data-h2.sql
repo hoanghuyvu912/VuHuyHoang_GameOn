@@ -80,7 +80,7 @@ INSERT INTO game_code (game_code,status,game_id) VALUES
 	 ('zxcvbn456QWER','Available',1),
 	 ('asdfgh789ZXCV','Available',2),
 	 ('123456abcQWER','Available',3),
-	 ('mvnvc67NHYs9KsLOd','Available',4);
+	 ('mvnvc67NHYs9KsLOd','Available',1);
 --
 INSERT INTO receipt_details (game_price,game_code_id,receipt_id) VALUES
 	 (59.99,1,1),

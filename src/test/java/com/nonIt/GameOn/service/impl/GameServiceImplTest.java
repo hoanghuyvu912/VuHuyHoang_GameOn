@@ -3,18 +3,18 @@ package com.nonIt.GameOn.service.impl;
 import com.nonIt.GameOn.entity.Developer;
 import com.nonIt.GameOn.entity.Game;
 import com.nonIt.GameOn.entity.Publisher;
+import com.nonIt.GameOn.exception.GameOnException;
+import com.nonIt.GameOn.exception.ResponseException;
 import com.nonIt.GameOn.repository.*;
+import com.nonIt.GameOn.rest.resourcesdto.SimplifiedGameDto;
 import com.nonIt.GameOn.service.GameService;
 import com.nonIt.GameOn.service.createdto.GameDto;
 import com.nonIt.GameOn.service.mapper.CommentMapper;
 import com.nonIt.GameOn.service.mapper.GameMapper;
 import com.nonIt.GameOn.service.mapper.RatingMapper;
 import com.nonIt.GameOn.service.restdto.GameRestDto;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.*;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -22,111 +22,151 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-
-@ExtendWith(MockitoExtension.class)
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@MockitoSettings(strictness = Strictness.STRICT_STUBS)
+@SpringBootTest
+@AutoConfigureTestDatabase
+@ActiveProfiles("test")
+@TestPropertySource(locations = "classpath:application-test.properties")
 class GameServiceImplTest {
-    @Mock
-    private GameRepository gameRepository;
-//    private  DeveloperRepository developerRepository;
-//    private  PublisherRepository publisherRepository;
-//    private  RatingRepository ratingRepository;
-//    private  GameMapper gameMapper;
-//    private  RatingMapper ratingMapper;
-//    private  CommentMapper commentMapper;
-//    private  GameCodeRepository gameCodeRepository;
-//    private  UserRepository userRepository;
-
-    @InjectMocks
+    @Autowired
     private GameServiceImpl gameService;
-    @BeforeEach
-    void setUp() {
+    @Autowired
+    private DeveloperRepository developerRepository;
+    @Autowired
+    private PublisherRepository publisherRepository;
+    @Autowired
+    private GameRepository gameRepository;
+
+    public GameDto createGameDto(){
         LocalDate releasedDate = LocalDate.parse("2023-06-25");
-        LocalDate establishedDate = LocalDate.parse("2023-06-21");
-
-        Publisher publisher = Publisher.builder()
-                .coverPhoto("https://cdn.akamai.steamstatic.com/steamcommunity/public/images/clans/40425349/c263d17394502cedbf90373599eb2706ca84074d.png")
-                .description("PlayStation Studios is home to the development of Sony Interactive Entertainment’s own outstanding and immersive games, including some of the most popular and critically acclaimed titles in entertainment history.")
-                .establishedDate(establishedDate)
-                .name("Sony Interactive Entertainment")
-                .thumbnail("https://avatars.cloudflare.steamstatic.com/40a85b52747a78b26e393e3f9e58f319194b1b33_full.jpg")
-                .build();
-
-        Developer developer = Developer.builder()
-                .coverPhoto("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnDTkdA38Qi_7RLtj2283fRSJxLHxvX6FdZg&usqp=CAU")
-                .description("Ubisoft is a creator of worlds, committed to enriching players' lives with original and memorable gaming experiences.")
-                .establishedDate(establishedDate)
-                .name("Ubisoft")
-                .thumbnail("https://avatars.cloudflare.steamstatic.com/2b2486ae5a70d69c55f020ce8384d04646ddba4e_full.jpg")
-                .build();
-
-        Game game = Game.builder()
-                .developer(developer)
-                .publisher(publisher)
+        GameDto gameDto = GameDto.builder()
+                .developerId(1)
+                .publisherId(1)
                 .description("His vengeance against the Gods of Olympus years behind him, Kratos now lives as a man in the realm of Norse Gods and monsters. It is in this harsh, unforgiving world that he must fight to survive… and teach his son to do the same.")
                 .name("God of War (2018)")
-                .price(19.99D)
+                .price(19.99)
                 .trailer("https://www.youtube.com/watch?v=76O5KaJHEA0")
                 .releasedDate(releasedDate)
+                .systemReq("MINIMUM:\n" +
+                        "Requires a 64-bit processor and operating system\n" +
+                        "OS: WINDOWS® 7, 8, 8.1, 10 (64-bit required)\n" +
+                        "Processor: Intel® Core™ i5 4460 or Core™ i3 9100F or AMD FX™-6300 or Ryzen™ 3 3200G\n" +
+                        "Memory: 8 GB RAM\n" +
+                        "Graphics: NVIDIA®GeForce®GTX 760 or GTX1050 or AMD Radeon™ R7 260x or RX 560\n" +
+                        "DirectX: Version 11\n" +
+                        "Network: Broadband Internet connection\n" +
+                        "Storage: 52 GB available space\n" +
+                        "Sound Card: DirectSound (DirectX® 9.0c or later)\n" +
+                        "Additional Notes: - These specs allow for the game to be played in 1080p/30fps with graphics settings at \"Low\". - 64-bit processor and operating system are required.")
                 .thumbnail("https://cdn.cloudflare.steamstatic.com/steam/apps/1151640/header.jpg?t=1667297464")
                 .build();
-        List<Game> games = new ArrayList<>();
-        games.add(game);
-        Mockito.when(gameRepository.findAll()).thenReturn(games);
+
+        return gameDto;
     }
     @Test
-    void whenGetAll_thenReturnGameList(){
+    void Should_ReturnGameList_When_GetAll(){
 
-        System.out.println(gameService.getAll());
+        assertTrue(gameService.getAll().size() > 0);
 
     }
-//    @BeforeAll
-//    public static void setUpDeveloperAndPublished(){
-//        LocalDate establishedDate = LocalDate.parse("2023-06-21");
-//
-//        Publisher publisher = Publisher.builder()
-//                .coverPhoto("https://cdn.akamai.steamstatic.com/steamcommunity/public/images/clans/40425349/c263d17394502cedbf90373599eb2706ca84074d.png")
-//                .description("PlayStation Studios is home to the development of Sony Interactive Entertainment’s own outstanding and immersive games, including some of the most popular and critically acclaimed titles in entertainment history.")
-//                .establishedDate(establishedDate)
-//                .name("Sony Interactive Entertainment")
-//                .thumbnail("https://avatars.cloudflare.steamstatic.com/40a85b52747a78b26e393e3f9e58f319194b1b33_full.jpg")
-//                .build();
-//
-//        Developer developer = Developer.builder()
-//                .coverPhoto("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnDTkdA38Qi_7RLtj2283fRSJxLHxvX6FdZg&usqp=CAU")
-//                .description("Ubisoft is a creator of worlds, committed to enriching players' lives with original and memorable gaming experiences.")
-//                .establishedDate(establishedDate)
-//                .name("Ubisoft")
-//                .thumbnail("https://avatars.cloudflare.steamstatic.com/2b2486ae5a70d69c55f020ce8384d04646ddba4e_full.jpg")
-//                .build();
-//    }
-//    @Test
-//    void createGame() {
-//        LocalDate releasedDate = LocalDate.parse("2023-06-25");
-//        GameDto gameDto = GameDto.builder()
-//                .developerId(1)
-//                .publisherId(1)
-//                .description("His vengeance against the Gods of Olympus years behind him, Kratos now lives as a man in the realm of Norse Gods and monsters. It is in this harsh, unforgiving world that he must fight to survive… and teach his son to do the same.")
-//                .name("God of War (2018)")
-//                .price(19.99D)
-//                .trailer("https://www.youtube.com/watch?v=76O5KaJHEA0")
-//                .releasedDate(releasedDate)
-//                .thumbnail("https://cdn.cloudflare.steamstatic.com/steam/apps/1151640/header.jpg?t=1667297464")
-//                .build();
-//
-//        GameRestDto gameRestDto = gameService.createGame(gameDto);
-//
-//        assertEquals(gameRestDto.getName(), gameDto.getName());
-//    }
-//    @Test
-//    void whenGetAll_ShouldReturnList(){
-//        assertTrue(gameService.getAll().size() > 0);
-//    }
+    @Test
+    @DisplayName("Test createGame Success")
+    void When_CreateNewGame_Expect_GameListSizeIncrease1(){
+
+        int gameListSizeBefore = gameService.getAll().size();
+
+        GameDto newGameDto = createGameDto();
+
+        GameRestDto newGameRestDto = gameService.createGame(newGameDto);
+
+        int gameListSizeAfter = gameService.getAll().size();
+
+        assertEquals(1, gameListSizeAfter - gameListSizeBefore);
+
+    }
+
+    @Test
+    @DisplayName("Test createGame Throw Exception")
+    void Should_ThrowException_When_GetInvalidDeveloperId() {
+        LocalDate releasedDate = LocalDate.parse("2023-06-25");
+        int invalidDeveloperId = gameService.getAll().size() + 1;
+
+        GameDto newGame = GameDto.builder()
+                .developerId(invalidDeveloperId)
+                .publisherId(1)
+                .description("His vengeance against the Gods of Olympus years behind him, Kratos now lives as a man in the realm of Norse Gods and monsters. It is in this harsh, unforgiving world that he must fight to survive… and teach his son to do the same.")
+                .name("God of War (2018)")
+                .price(19.99)
+                .trailer("https://www.youtube.com/watch?v=76O5KaJHEA0")
+                .releasedDate(releasedDate)
+                .systemReq("MINIMUM:\n" +
+                        "Requires a 64-bit processor and operating system\n" +
+                        "OS: WINDOWS® 7, 8, 8.1, 10 (64-bit required)\n" +
+                        "Processor: Intel® Core™ i5 4460 or Core™ i3 9100F or AMD FX™-6300 or Ryzen™ 3 3200G\n" +
+                        "Memory: 8 GB RAM\n" +
+                        "Graphics: NVIDIA®GeForce®GTX 760 or GTX1050 or AMD Radeon™ R7 260x or RX 560\n" +
+                        "DirectX: Version 11\n" +
+                        "Network: Broadband Internet connection\n" +
+                        "Storage: 52 GB available space\n" +
+                        "Sound Card: DirectSound (DirectX® 9.0c or later)\n" +
+                        "Additional Notes: - These specs allow for the game to be played in 1080p/30fps with graphics settings at \"Low\". - 64-bit processor and operating system are required.")
+                .thumbnail("https://cdn.cloudflare.steamstatic.com/steam/apps/1151640/header.jpg?t=1667297464")
+                .build();
+
+        ResponseException thrown = Assertions.assertThrows(ResponseException.class, () -> {
+            gameService.createGame(newGame);
+        });
+    }
+    @Test
+    @DisplayName("Test updateGame Success")
+    void Should_ReturnUpdatedGame_When_UpdateAGame(){
+        Optional<Game> initialGame = gameRepository.findById(1);
+        assertTrue(initialGame.isPresent());
+
+        GameDto updateInitialGameDto = GameDto.builder()
+                .name("Spiderman")
+                .build();
+
+        gameService.updateGame(1,updateInitialGameDto);
+
+        Optional<Game> updatedGame = gameRepository.findById(1);
+        assertTrue(updatedGame.isPresent());
+
+        assertEquals(updateInitialGameDto.getName(),updatedGame.get().getName());
+    }
+
+    @Test
+    @DisplayName("Test deleteGame Success")
+    void Should_DeleteGame_When_GameIsDeleted() {
+        //create new game
+        GameDto newGameDto = createGameDto();
+        gameService.createGame(newGameDto);
+
+        //ensure new game is created
+        int newGameId = gameRepository.findAll().size() - 1;
+
+        //test
+        gameService.deleteGame(newGameId);
+
+        boolean gameExists = gameRepository.existsById(newGameId);
+
+        assertFalse(gameExists,"Game should be deleted");
+    }
+
 }
