@@ -17,9 +17,9 @@ public interface ReceiptMapper extends EntityMapper<ReceiptRestDto, Receipt, Rec
 //
 //    ReceiptRestDto toRestDto(Receipt receipt);
 //
-//    List<ReceiptRestDto> toRestDtos(List<Receipt> receipts);
+    List<ReceiptResponseDto> toResponseDtos(List<Receipt> receipts);
     @Mapping(target = "userId", source = "user.id")
     @Mapping(target = "userName", source = "user.username")
     ReceiptResponseDto toResponseDto(Receipt receipt);
-    List<ReceiptResponseDto> toResponseDtos(List<Receipt> receiptList);
+
 }

@@ -7,6 +7,7 @@ import com.nonIt.GameOn.exception.GameOnException;
 import com.nonIt.GameOn.repository.GameRepository;
 import com.nonIt.GameOn.repository.RatingRepository;
 import com.nonIt.GameOn.repository.UserRepository;
+import com.nonIt.GameOn.rest.resourcesdto.SimplifiedRatingDto;
 import com.nonIt.GameOn.service.RatingService;
 import com.nonIt.GameOn.service.createdto.RatingDto;
 import com.nonIt.GameOn.service.mapper.GameMapper;
@@ -43,7 +44,7 @@ public class RatingServiceImpl implements RatingService {
     }
 
     @Override
-    public RatingRestDto createRating(RatingDto ratingDto) {
+    public SimplifiedRatingDto createRating(RatingDto ratingDto) {
         User user = userRepository.findById(ratingDto.getUserId()).orElseThrow(GameOnException::UserNotFound);
         Game game = gameRepository.findById(ratingDto.getGameId()).orElseThrow(GameOnException::GameNotFound);
         if (ratingDto.getRating() > 5 || ratingDto.getRating() < 1) {
@@ -56,7 +57,7 @@ public class RatingServiceImpl implements RatingService {
                 .build();
         rating = ratingRepository.save(rating);
 
-        return ratingMapper.toDto(rating);
+        return ratingMapper.toSimplifiedDto(rating);
     }
 
     @Override
