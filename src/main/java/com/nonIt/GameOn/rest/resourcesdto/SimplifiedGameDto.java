@@ -32,4 +32,8 @@ public class SimplifiedGameDto {
     private String publisherName;
 
     private List<SimplifiedCommentDto> simplifiedCommentDtoList = new ArrayList<>();
+    private List<SimplifiedRatingDto> simplifiedRatingDtoList = new ArrayList<>();
+    private List<SimplifiedGameImageDto> simplifiedGameImageDtoList = new ArrayList<>();
+    private List<SimplifiedGameSubGenreDto> simplifiedGameSubGenreDtoList = new ArrayList<>();
+    private List<SimplifiedGameGenreDto> simplifiedGameGenreDtoList = new ArrayList<>();
 }

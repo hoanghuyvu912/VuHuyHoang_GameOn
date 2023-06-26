@@ -1,15 +1,7 @@
 package com.nonIt.GameOn.service.impl;
 
-<<<<<<< HEAD
-import com.nonIt.GameOn.entity.Game;
 
 import com.nonIt.GameOn.rest.resourcesdto.SimplifiedReceiptDetailsDto;
-=======
-
-import com.nonIt.GameOn.rest.resourcesdto.SimplifiedReceiptDetailsDto;
-
-
->>>>>>> 7cd61c815d16499d3520b246a521429059b5a3eb
 import com.nonIt.GameOn.service.ReceiptDetailsService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,15 +12,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDate;
-<<<<<<< HEAD
-import java.time.format.DateTimeFormatter;
-
 import java.util.List;
-=======
-
-import java.util.List;
-import java.util.Map;
->>>>>>> 7cd61c815d16499d3520b246a521429059b5a3eb
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)

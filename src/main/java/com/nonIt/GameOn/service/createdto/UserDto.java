@@ -34,7 +34,7 @@ public class UserDto {
 
     private String profileImg;
 
-    private Double balance;
+//    private Double balance;
 
 //    private LocalDate registeredDate;
 

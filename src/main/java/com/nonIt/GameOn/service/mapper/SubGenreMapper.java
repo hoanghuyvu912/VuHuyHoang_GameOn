@@ -7,11 +7,4 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface SubGenreMapper extends EntityMapper<SubGenreRestDto, SubGenre, SubGenreDto> {
-//    SubGenreDto toDto(SubGenre subGenre);
-//
-//    List<SubGenreDto> toDtos(List<SubGenre> subGenres);
-//
-//    SubGenreRestDto toRestDto(SubGenre subGenre);
-//
-//    List<SubGenreRestDto> toRestDtos(List<SubGenre> subGenres);
 }

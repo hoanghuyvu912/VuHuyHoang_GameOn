@@ -73,9 +73,9 @@ public class UserServiceImpl implements UserService {
         if (userDto.getGender() != Gender.Female && userDto.getGender() != Gender.Male) {
             throw GameOnException.badRequest("InvalidGender", "Gender must be MALE or FEMALE.");
         }
-        if (userDto.getBalance() < 0) {
-            throw GameOnException.badRequest("InvalidBalance", "Balance must be a positive number");
-        }
+//        if (userDto.getBalance() < 0) {
+//            throw GameOnException.badRequest("InvalidBalance", "Balance must be a positive number");
+//        }
 
         User user = User.builder()
                 .firstName(userDto.getFirstName())
@@ -88,7 +88,7 @@ public class UserServiceImpl implements UserService {
                 .dob(userDto.getDob())
                 .gender(userDto.getGender())
                 .profileImg(userDto.getProfileImg())
-                .balance(userDto.getBalance())
+                .balance(0D)
                 .registeredDate(LocalDate.now())
                 .active(true)
                 .build();
@@ -172,11 +172,11 @@ public class UserServiceImpl implements UserService {
                 throw GameOnException.badRequest("InvalidGender", "Gender must be MALE or FEMALE.");
             }
         }
-        if (userDto.getBalance() != null) {
-            if (userDto.getBalance() < 0) {
-                throw GameOnException.badRequest("InvalidBalance", "Balance must be a positive number");
-            }
-        }
+//        if (userDto.getBalance() != null) {
+//            if (userDto.getBalance() < 0) {
+//                throw GameOnException.badRequest("InvalidBalance", "Balance must be a positive number");
+//            }
+//        }
 //        if (userDto.getRole() != null) {
 //            if (userDto.getRole() != Role.ROLE_USER && userDto.getRole() != Role.ROLE_ADMIN) {
 //                throw GameOnException.badRequest("InvalidRole", "Role must be " + Role.ROLE_USER + " or " + Role.ROLE_ADMIN);

@@ -6,6 +6,7 @@ import com.nonIt.GameOn.service.GameService;
 import com.nonIt.GameOn.service.customDto.GameLibraryDto;
 import com.nonIt.GameOn.service.customDto.GameSearchDto;
 import com.nonIt.GameOn.service.createdto.GameDto;
+import com.nonIt.GameOn.service.customDto.GameWithUsedGameCodeListDto;
 import com.nonIt.GameOn.service.restdto.GameRestDto;
 //import jakarta.validation.Valid;
 import com.nonIt.GameOn.utils.NullChecker;
@@ -42,7 +43,7 @@ public class GameResources {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<GameRestDto> createGame(@Valid @RequestBody GameDto gameDto) {
+    public ResponseEntity<SimplifiedGameDto> createGame(@Valid @RequestBody GameDto gameDto) {
         return ResponseEntity.ok(gameService.createGame(gameDto));
     }
 
@@ -74,6 +75,15 @@ public class GameResources {
         return ResponseEntity.ok(gameService.getFeaturedGame());
     }
 
+    @GetMapping(value = "/recent-best-seller")
+    public ResponseEntity<List<GameWithUsedGameCodeListDto>> getRecentBestSellerGames() {
+        return ResponseEntity.ok(gameService.getRecentBestSellerGames());
+    }
+
+    @GetMapping(value = "/recent-worst-seller")
+    public ResponseEntity<List<GameWithUsedGameCodeListDto>> getRecentWorstSellerGames() {
+        return ResponseEntity.ok(gameService.getRecentWorstSellerGames());
+    }
 
     //Find by name and released date
     @GetMapping(value = "/name-containing-released-date-after")

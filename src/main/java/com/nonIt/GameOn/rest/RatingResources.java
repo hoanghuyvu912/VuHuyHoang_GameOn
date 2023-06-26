@@ -1,6 +1,7 @@
 package com.nonIt.GameOn.rest;
 
 import com.nonIt.GameOn.entity.Rating;
+import com.nonIt.GameOn.rest.resourcesdto.SimplifiedRatingDto;
 import com.nonIt.GameOn.service.RatingService;
 import com.nonIt.GameOn.service.createdto.RatingDto;
 import com.nonIt.GameOn.service.restdto.RatingRestDto;
@@ -29,7 +30,7 @@ public class RatingResources {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<RatingRestDto> createRating(@RequestBody RatingDto ratingDto) {
+    public ResponseEntity<SimplifiedRatingDto> createRating(@RequestBody RatingDto ratingDto) {
         return ResponseEntity.ok(ratingService.createRating(ratingDto));
     }
 
