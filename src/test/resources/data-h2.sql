@@ -72,21 +72,27 @@ INSERT INTO rating (rating,game_id,user_id)
 --
 INSERT INTO receipt (receipt_date,user_id) VALUES
 	 ('2023-06-19',1),
-	 ('2023-06-19',2),
-	 ('2023-06-19',3),
-	 ('2023-06-19',3);
+	 ('2023-06-20',2),
+	 ('2023-06-21',3),
+	 ('2023-06-22',3);
 
 INSERT INTO game_code (game_code,status,game_id) VALUES
-	 ('zxcvbn456QWER','Available',1),
-	 ('asdfgh789ZXCV','Available',2),
-	 ('123456abcQWER','Available',3),
-	 ('mvnvc67NHYs9KsLOd','Available',1);
+	 ('zxcvbn456QWEsR','Available',1),
+	 ('asdfgh789ZXCVf','Available',1),
+	 ('123456abcQWERf','Available',1),
+	 ('123456EfghfghR','Available',2),
+	 ('12abcQWEhhfghR','Available',2),
+	 ('3456bcQWERfghf','Available',2),
+	 ('16abcdfghfQWER','Available',3),
+	 ('4dfgh56abcQWER','Available',3),
+	 ('123cQasdfsdWER','Available',3),
+	 ('mvnvc67NHYsLOd','Available',2);
 --
 INSERT INTO receipt_details (game_price,game_code_id,receipt_id) VALUES
 	 (59.99,1,1),
 	 (59.99,2,2),
 	 (59.99,3,3),
-	 (59.99,4,4);
+	 (59.99,4,2);
 
 INSERT INTO sub_genre (sub_genre_name,genre_id) VALUES
 	 ('Arcade & Rhythm',1),

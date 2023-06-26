@@ -158,10 +158,8 @@ class GameServiceImplTest {
         GameDto newGameDto = createGameDto();
         gameService.createGame(newGameDto);
 
-        //ensure new game is created
-        int newGameId = gameRepository.findAll().size() - 1;
-
         //test
+        int newGameId = gameRepository.findAll().size() - 1;
         gameService.deleteGame(newGameId);
 
         boolean gameExists = gameRepository.existsById(newGameId);
