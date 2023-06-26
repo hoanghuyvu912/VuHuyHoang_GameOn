@@ -77,22 +77,22 @@ INSERT INTO receipt (receipt_date,user_id) VALUES
 	 ('2023-06-22',3);
 
 INSERT INTO game_code (game_code,status,game_id) VALUES
-	 ('zxcvbn456QWEsR','Available',1),
+	 ('zxcvbn456QWEsR','Used',1),
 	 ('asdfgh789ZXCVf','Available',1),
 	 ('123456abcQWERf','Available',1),
-	 ('123456EfghfghR','Available',2),
+	 ('123456EfghfghR','Used',2),
 	 ('12abcQWEhhfghR','Available',2),
 	 ('3456bcQWERfghf','Available',2),
-	 ('16abcdfghfQWER','Available',3),
+	 ('16abcdfghfQWER','Used',3),
 	 ('4dfgh56abcQWER','Available',3),
-	 ('123cQasdfsdWER','Available',3),
-	 ('mvnvc67NHYsLOd','Available',2);
+	 ('4dfgh56abcasdf','Available',3),
+	 ('123cQasdfsdWER','Used',4);
 --
 INSERT INTO receipt_details (game_price,game_code_id,receipt_id) VALUES
 	 (59.99,1,1),
-	 (59.99,2,2),
-	 (59.99,3,3),
-	 (59.99,4,2);
+	 (59.99,4,2),
+	 (59.99,7,3),
+	 (59.99,10,4);
 
 INSERT INTO sub_genre (sub_genre_name,genre_id) VALUES
 	 ('Arcade & Rhythm',1),

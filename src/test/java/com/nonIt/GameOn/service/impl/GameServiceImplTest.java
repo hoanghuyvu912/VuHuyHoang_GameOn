@@ -1,42 +1,25 @@
 package com.nonIt.GameOn.service.impl;
 
-import com.nonIt.GameOn.entity.Developer;
 import com.nonIt.GameOn.entity.Game;
-import com.nonIt.GameOn.entity.Publisher;
-import com.nonIt.GameOn.exception.GameOnException;
+
 import com.nonIt.GameOn.exception.ResponseException;
 import com.nonIt.GameOn.repository.*;
-import com.nonIt.GameOn.rest.resourcesdto.SimplifiedGameDto;
-import com.nonIt.GameOn.service.GameService;
+
 import com.nonIt.GameOn.service.createdto.GameDto;
-import com.nonIt.GameOn.service.mapper.CommentMapper;
-import com.nonIt.GameOn.service.mapper.GameMapper;
-import com.nonIt.GameOn.service.mapper.RatingMapper;
+
 import com.nonIt.GameOn.service.restdto.GameRestDto;
 import org.junit.jupiter.api.*;
 
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.junit.jupiter.MockitoSettings;
-import org.mockito.quality.Strictness;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.verify;
 import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Optional;
 
 @SpringBootTest
