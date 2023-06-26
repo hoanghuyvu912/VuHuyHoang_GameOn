@@ -184,7 +184,7 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public List<GameWithUsedGameCodeListDto> getRecentBestSellerGames() {
-        List<SimplifiedGameDto> recentSoldGames = receiptDetailsRepository.findByReceiptReceiptDateBetween(LocalDate.now().minusMonths(1), LocalDate.now())
+        List<SimplifiedGameDto> recentSoldGames = receiptDetailsRepository.findByReceiptReceiptDateBetween(LocalDate.now().minusYears(2), LocalDate.now())
                 .stream()
                 .map(ReceiptDetails::getGameCode)
                 .map(GameCode::getGame)
@@ -209,6 +209,38 @@ public class GameServiceImpl implements GameService {
         return gamesWithUsedGameCodeList.entrySet()
                 .stream()
                 .sorted(Comparator.comparing(Map.Entry<SimplifiedGameDto, Long>::getValue).reversed())
+                .limit(5)
+                .map(entry -> new GameWithUsedGameCodeListDto(entry.getKey(), entry.getValue().intValue()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameWithUsedGameCodeListDto> getRecentWorstSellerGames() {
+        List<SimplifiedGameDto> recentSoldGames = receiptDetailsRepository.findByReceiptReceiptDateBetween(LocalDate.now().minusYears(2), LocalDate.now())
+                .stream()
+                .map(ReceiptDetails::getGameCode)
+                .map(GameCode::getGame)
+                .map(this::convertGameEntityToSimplifiedDto)
+                .collect(Collectors.toList());
+        Map<SimplifiedGameDto, Long> gamesWithUsedGameCodeList = new HashMap<>();
+        for (SimplifiedGameDto simplifiedGameDto : recentSoldGames) {
+            gamesWithUsedGameCodeList.put(simplifiedGameDto, 0L);
+        }
+
+        for (Map.Entry<SimplifiedGameDto, Long> entry : gamesWithUsedGameCodeList.entrySet()) {
+            SimplifiedGameDto key = entry.getKey();
+            Long value = entry.getValue();
+
+            for (SimplifiedGameDto simplifiedGameDto : recentSoldGames) {
+                if (simplifiedGameDto.getId().equals(key.getId())) {
+                    value++;
+                    entry.setValue(value);
+                }
+            }
+        }
+        return gamesWithUsedGameCodeList.entrySet()
+                .stream()
+                .sorted(Comparator.comparing(Map.Entry<SimplifiedGameDto, Long>::getValue))
                 .limit(5)
                 .map(entry -> new GameWithUsedGameCodeListDto(entry.getKey(), entry.getValue().intValue()))
                 .collect(Collectors.toList());

@@ -25,8 +25,11 @@ public interface GameService {
     //Find featured games
     List<SimplifiedGameDto> getFeaturedGame();
 
-//    Find best-seller games between a period
+    //Find recent best-seller games
     List<GameWithUsedGameCodeListDto> getRecentBestSellerGames();
+
+    //Find recent worst-seller games
+    List<GameWithUsedGameCodeListDto> getRecentWorstSellerGames();
 
     //Find by name
     List<GameRestDto> findByNameIgnoreCaseContaining(String name);

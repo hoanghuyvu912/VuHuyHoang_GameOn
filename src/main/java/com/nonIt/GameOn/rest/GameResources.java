@@ -80,6 +80,10 @@ public class GameResources {
         return ResponseEntity.ok(gameService.getRecentBestSellerGames());
     }
 
+    @GetMapping(value = "/recent-worst-seller")
+    public ResponseEntity<List<GameWithUsedGameCodeListDto>> getRecentWorstSellerGames() {
+        return ResponseEntity.ok(gameService.getRecentWorstSellerGames());
+    }
 
     //Find by name and released date
     @GetMapping(value = "/name-containing-released-date-after")
