@@ -6,17 +6,15 @@ import com.nonIt.GameOn.repository.DeveloperRepository;
 import com.nonIt.GameOn.repository.GameRepository;
 import com.nonIt.GameOn.repository.PublisherRepository;
 import com.nonIt.GameOn.repository.RatingRepository;
-import com.nonIt.GameOn.rest.resourcesdto.SimplifiedCommentDto;
-import com.nonIt.GameOn.rest.resourcesdto.SimplifiedGameDto;
+import com.nonIt.GameOn.rest.resourcesdto.*;
 import com.nonIt.GameOn.security.jwt.JwtUtils;
 import com.nonIt.GameOn.service.GameService;
 import com.nonIt.GameOn.service.customDto.GameLibraryDto;
 import com.nonIt.GameOn.service.customDto.GameSearchDto;
 import com.nonIt.GameOn.service.createdto.GameDto;
-import com.nonIt.GameOn.service.mapper.CommentMapper;
+import com.nonIt.GameOn.service.customDto.GameWithUsedGameCodeListDto;
+import com.nonIt.GameOn.service.mapper.*;
 import com.nonIt.GameOn.repository.*;
-import com.nonIt.GameOn.service.mapper.GameMapper;
-import com.nonIt.GameOn.service.mapper.RatingMapper;
 import com.nonIt.GameOn.service.restdto.GameRestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -38,20 +36,31 @@ public class GameServiceImpl implements GameService {
     private final GameRepository gameRepository;
     private final DeveloperRepository developerRepository;
     private final PublisherRepository publisherRepository;
+    private final GameCodeRepository gameCodeRepository;
     private final RatingRepository ratingRepository;
+    private final ReceiptDetailsRepository receiptDetailsRepository;
     private final GameMapper gameMapper;
     private final RatingMapper ratingMapper;
     private final CommentMapper commentMapper;
-    private final GameCodeRepository gameCodeRepository;
     private final UserRepository userRepository;
+    private final GameImageMapper gameImageMapper;
+    private final GameSubGenreMapper gameSubGenreMapper;
+    private final GameGenreMapper gameGenreMapper;
+
     //CRUD Services
     @Override
     public List<SimplifiedGameDto> getAll() {
-        return gameRepository.findAllByOrderByIdAsc().stream().map(gameMapper::toSimplifiedDto).collect(Collectors.toList());
+//        return gameRepository.findAllByOrderByIdAsc().stream().map(gameMapper::toSimplifiedDto).collect(Collectors.toList());
+        List<Game> gameList = gameRepository.findAllByOrderByIdAsc();
+        List<SimplifiedGameDto> simplifiedGameDtoList = new ArrayList<>();
+        for (Game game : gameList) {
+            simplifiedGameDtoList.add(convertGameEntityToSimplifiedDto(game));
+        }
+        return simplifiedGameDtoList;
     }
 
     @Override
-    public GameRestDto createGame(GameDto gameDto) {
+    public SimplifiedGameDto createGame(GameDto gameDto) {
         Developer developer = developerRepository.findById(gameDto.getDeveloperId()).orElseThrow(GameOnException::DeveloperNotFound);
         Publisher publisher = publisherRepository.findById(gameDto.getPublisherId()).orElseThrow(GameOnException::PublisherNotFound);
 
@@ -96,7 +105,8 @@ public class GameServiceImpl implements GameService {
                 .build();
 
         game = gameRepository.save(game);
-        return gameMapper.toDto(game);
+
+        return convertGameEntityToSimplifiedDto(game);
     }
 
     @Override
@@ -170,6 +180,70 @@ public class GameServiceImpl implements GameService {
     @Override
     public List<SimplifiedGameDto> getFeaturedGame() {
         return gameRepository.findByReleasedDateBetween(LocalDate.now().minusMonths(6), LocalDate.now()).stream().map(gameMapper::toSimplifiedDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameWithUsedGameCodeListDto> getRecentBestSellerGames() {
+        List<SimplifiedGameDto> recentSoldGames = receiptDetailsRepository.findByReceiptReceiptDateBetween(LocalDate.now().minusYears(2), LocalDate.now())
+                .stream()
+                .map(ReceiptDetails::getGameCode)
+                .map(GameCode::getGame)
+                .map(this::convertGameEntityToSimplifiedDto)
+                .collect(Collectors.toList());
+        Map<SimplifiedGameDto, Long> gamesWithUsedGameCodeList = new HashMap<>();
+        for (SimplifiedGameDto simplifiedGameDto : recentSoldGames) {
+            gamesWithUsedGameCodeList.put(simplifiedGameDto, 0L);
+        }
+
+        for (Map.Entry<SimplifiedGameDto, Long> entry : gamesWithUsedGameCodeList.entrySet()) {
+            SimplifiedGameDto key = entry.getKey();
+            Long value = entry.getValue();
+
+            for (SimplifiedGameDto simplifiedGameDto : recentSoldGames) {
+                if (simplifiedGameDto.getId().equals(key.getId())) {
+                    value++;
+                    entry.setValue(value);
+                }
+            }
+        }
+        return gamesWithUsedGameCodeList.entrySet()
+                .stream()
+                .sorted(Comparator.comparing(Map.Entry<SimplifiedGameDto, Long>::getValue).reversed())
+                .limit(5)
+                .map(entry -> new GameWithUsedGameCodeListDto(entry.getKey(), entry.getValue().intValue()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GameWithUsedGameCodeListDto> getRecentWorstSellerGames() {
+        List<SimplifiedGameDto> recentSoldGames = receiptDetailsRepository.findByReceiptReceiptDateBetween(LocalDate.now().minusYears(2), LocalDate.now())
+                .stream()
+                .map(ReceiptDetails::getGameCode)
+                .map(GameCode::getGame)
+                .map(this::convertGameEntityToSimplifiedDto)
+                .collect(Collectors.toList());
+        Map<SimplifiedGameDto, Long> gamesWithUsedGameCodeList = new HashMap<>();
+        for (SimplifiedGameDto simplifiedGameDto : recentSoldGames) {
+            gamesWithUsedGameCodeList.put(simplifiedGameDto, 0L);
+        }
+
+        for (Map.Entry<SimplifiedGameDto, Long> entry : gamesWithUsedGameCodeList.entrySet()) {
+            SimplifiedGameDto key = entry.getKey();
+            Long value = entry.getValue();
+
+            for (SimplifiedGameDto simplifiedGameDto : recentSoldGames) {
+                if (simplifiedGameDto.getId().equals(key.getId())) {
+                    value++;
+                    entry.setValue(value);
+                }
+            }
+        }
+        return gamesWithUsedGameCodeList.entrySet()
+                .stream()
+                .sorted(Comparator.comparing(Map.Entry<SimplifiedGameDto, Long>::getValue))
+                .limit(5)
+                .map(entry -> new GameWithUsedGameCodeListDto(entry.getKey(), entry.getValue().intValue()))
+                .collect(Collectors.toList());
     }
 
     // Find best-seller games between period
@@ -613,7 +687,7 @@ public class GameServiceImpl implements GameService {
         return gameRepository.getByPublisherId(publisherId).stream().map(gameMapper::toDto).collect(Collectors.toList());
     }
 
-//    @Override
+    //    @Override
 //    public List<GameRestDto> getByUserId(Integer userId) {
 //        return gameRepository.getByUserId(userId).stream().map(gameMapper::toDto).collect(Collectors.toList());
 //    }
@@ -623,7 +697,7 @@ public class GameServiceImpl implements GameService {
 //        return gameRepository.getByUsername(username).stream().map(gameMapper::toDto).collect(Collectors.toList());
 //    }
     @Override
-    public List<GameLibraryDto> getByUser(String authorization){
+    public List<GameLibraryDto> getByUser(String authorization) {
         System.out.println(authorization);
         User user = userRepository.findByUsername(jwtUtils.getUserNameFromJwtToken(authorization)).orElseThrow(GameOnException::UserNotFound);
 
@@ -655,12 +729,7 @@ public class GameServiceImpl implements GameService {
     @Override
     public SimplifiedGameDto findById(Integer gameId) {
         Game game = gameRepository.findById(gameId).orElseThrow(GameOnException::GameNotFound);
-        List<SimplifiedCommentDto> simplifiedCommentDtoList = game.getCommentList().stream()
-                .map(commentMapper::toSimplifiedDto)
-                .collect(Collectors.toList());
-        SimplifiedGameDto simplifiedGameDto = gameMapper.toSimplifiedDto(game);
-        simplifiedGameDto.setSimplifiedCommentDtoList(simplifiedCommentDtoList);
-        return simplifiedGameDto;
+        return convertGameEntityToSimplifiedDto(game);
     }
 
 
@@ -693,4 +762,35 @@ public class GameServiceImpl implements GameService {
                 .filter(gameCode -> gameCode.getGameCodeStatus().equals(GameCodeStatus.Used)).count();
     }
 
+    public SimplifiedGameDto convertGameEntityToSimplifiedDto(Game game) {
+
+        SimplifiedGameDto simplifiedGameDto = gameMapper.toSimplifiedDto(game);
+        List<SimplifiedCommentDto> simplifiedCommentDtoList = game.getCommentList().stream()
+                .map(commentMapper::toSimplifiedDto)
+                .collect(Collectors.toList());
+
+        List<SimplifiedRatingDto> simplifiedRatingDtoList = game.getRatingList().stream()
+                .map(ratingMapper::toSimplifiedDto)
+                .collect(Collectors.toList());
+
+        List<SimplifiedGameImageDto> simplifiedGameImageDtoList = game.getGameImageList().stream()
+                .map(gameImageMapper::toSimplifiedDto)
+                .collect(Collectors.toList());
+
+        List<SimplifiedGameGenreDto> simplifiedGameGenreDtoList = game.getGameGenreList().stream()
+                .map(gameGenreMapper::toSimplifiedDto)
+                .collect(Collectors.toList());
+
+        List<SimplifiedGameSubGenreDto> simplifiedGameSubGenreDtoList = game.getGameSubGenreList().stream()
+                .map(gameSubGenreMapper::toSimplifiedDto)
+                .collect(Collectors.toList());
+
+
+        simplifiedGameDto.setSimplifiedCommentDtoList(simplifiedCommentDtoList);
+        simplifiedGameDto.setSimplifiedRatingDtoList(simplifiedRatingDtoList);
+        simplifiedGameDto.setSimplifiedGameGenreDtoList(simplifiedGameGenreDtoList);
+        simplifiedGameDto.setSimplifiedGameSubGenreDtoList(simplifiedGameSubGenreDtoList);
+        simplifiedGameDto.setSimplifiedGameImageDtoList(simplifiedGameImageDtoList);
+        return simplifiedGameDto;
+    }
 }

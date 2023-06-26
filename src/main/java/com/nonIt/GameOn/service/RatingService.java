@@ -1,5 +1,6 @@
 package com.nonIt.GameOn.service;
 
+import com.nonIt.GameOn.rest.resourcesdto.SimplifiedRatingDto;
 import com.nonIt.GameOn.service.createdto.RatingDto;
 import com.nonIt.GameOn.service.restdto.RatingRestDto;
 
@@ -10,7 +11,7 @@ public interface RatingService {
 
     RatingRestDto findById(Integer ratingId);
 
-    RatingRestDto createRating(RatingDto ratingDto);
+    SimplifiedRatingDto createRating(RatingDto ratingDto);
 
     RatingRestDto updateRating(Integer ratingId, RatingDto ratingDto);
 
