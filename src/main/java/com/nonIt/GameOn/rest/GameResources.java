@@ -32,8 +32,7 @@ public class GameResources {
     public ResponseEntity<List<SimplifiedGameDto>> getAllGame() {
         return ResponseEntity.ok(gameService.getAll());
     }
-
-
+    
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<SimplifiedGameDto> createGame(@Valid @RequestBody GameDto gameDto) {
@@ -113,20 +112,6 @@ public class GameResources {
     public ResponseEntity<List<GameRestDto>> getBySubGenreName(@RequestParam("subGenreName") String subGenreName) {
         return ResponseEntity.ok(gameService.getBySubGenreName("%" + subGenreName + "%"));
     }
-
-    //TEST ADVANCED SEARCH
-    @GetMapping("/search-for-game")
-    public ResponseEntity<List<GameRestDto>> searchGame(@RequestParam("name") String name, @RequestParam("date1") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Optional<LocalDate> date1, @RequestParam("date2") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Optional<LocalDate> date2, @RequestParam("req") Optional<String> req, @RequestParam("price1") Optional<Double> price1, @RequestParam("price2") Optional<Double> price2) {
-        ResponseEntity<List<GameRestDto>> resultGamesList = null;
-        if (date1.isPresent() && date2.isPresent() && req.isPresent() && price1.isPresent() && price2.isPresent()) {
-            resultGamesList = ResponseEntity.ok(gameService.findByNameIgnoreCaseContainingAndReleasedDateBetweenAndSystemReqIgnoreCaseContainingAndPriceBetween(name, date1.get(), date2.get(), req.get(), price1.get(), price2.get()));
-        }
-        if (date1.isPresent() && date2.isPresent() && req.isPresent() && price1.isPresent()) {
-            resultGamesList = ResponseEntity.ok(gameService.findByNameIgnoreCaseContainingAndReleasedDateBetweenAndSystemReqIgnoreCaseContainingAndPriceLessThanEqual(name, date1.get(), date2.get(), req.get(), price1.get()));
-        }
-        return resultGamesList;
-    }
-
 
     @GetMapping("/rating-released-date-between")
     public ResponseEntity<List<GameRestDto>> getByRatingAndReleasedDateBetween(@RequestParam("rating1") Integer rating1, @RequestParam("rating2") Integer rating2, @RequestParam("date1") LocalDate date1, @RequestParam("date2") LocalDate date2) {
