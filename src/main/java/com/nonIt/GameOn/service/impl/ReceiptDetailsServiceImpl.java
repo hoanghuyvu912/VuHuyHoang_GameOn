@@ -92,6 +92,7 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
 
     @Override
     public List<GameWithUsedGameCodeListDto> getBestSellerGamesBetweenDates(LocalDate startDate, LocalDate endDate) {
+        isValidDate(startDate, endDate);
         List<Game> gameList = getGamesSoldBetweenDates(startDate, endDate);
 
         Map<Game, Long> gamesWithUsedGameCodeList = getGameLongMap(gameList);
@@ -105,6 +106,7 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
     }
 
     private List<Game> getGamesSoldBetweenDates(LocalDate startDate, LocalDate endDate) {
+        isValidDate(startDate, endDate);
         List<GameCode> usedGameCodes = receiptDetailsRepository.findByReceiptReceiptDateBetween(startDate, endDate)
                 .stream()
                 .map(ReceiptDetails::getGameCode)
@@ -113,10 +115,12 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
     }
 
     @Override
-    public List<ReceiptDetailsDto> getReceiptDetailListBetweenDates(LocalDate date1, LocalDate date2) {
+    public List<ReceiptDetailsDto> getReceiptDetailListBetweenDates(LocalDate startDate, LocalDate endDate) {
         List<ReceiptDetailsDto> receiptDetailsDtos = new ArrayList<>();
 
-        receiptDetailsRepository.findByReceiptReceiptDateBetween(date1, date2)
+        isValidDate(startDate, endDate);
+
+        receiptDetailsRepository.findByReceiptReceiptDateBetween(startDate, endDate)
                 .forEach(receiptDetails -> {
                     ReceiptDetailsDto receiptDetailsDto = new ReceiptDetailsDto(
                             receiptDetails.getReceipt().getId(),
@@ -128,8 +132,16 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
         return receiptDetailsDtos;
     }
 
+    private static void isValidDate(LocalDate startDate, LocalDate endDate) {
+        if(startDate.isAfter(LocalDate.now()) || endDate.isAfter(LocalDate.now())) {
+            throw GameOnException.badRequest("BadRequest","Invalid Date");
+        }
+    }
+
     @Override
     public List<GameWithUsedGameCodeListDto> getWorstSellerGamesBetweenDates(LocalDate startDate, LocalDate endDate) {
+        isValidDate(startDate, endDate);
+
         List<Game> gameList = getGamesSoldBetweenDates(startDate, endDate);
 
         Map<Game, Long> gamesWithUsedGameCodeList = getGameLongMap(gameList);
