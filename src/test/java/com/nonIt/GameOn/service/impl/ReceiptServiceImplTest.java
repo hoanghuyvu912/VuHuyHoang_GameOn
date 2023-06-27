@@ -1,16 +1,13 @@
 package com.nonIt.GameOn.service.impl;
 
-import com.nonIt.GameOn.entity.Game;
-import com.nonIt.GameOn.entity.Receipt;
-import com.nonIt.GameOn.entity.User;
+import com.nonIt.GameOn.entity.*;
 import com.nonIt.GameOn.exception.ResponseException;
-import com.nonIt.GameOn.repository.GameRepository;
-import com.nonIt.GameOn.repository.ReceiptRepository;
-import com.nonIt.GameOn.repository.UserRepository;
+import com.nonIt.GameOn.repository.*;
 import com.nonIt.GameOn.rest.resourcesdto.ReceiptCreateDto;
 import com.nonIt.GameOn.service.GameService;
 import com.nonIt.GameOn.service.ReceiptService;
 import com.nonIt.GameOn.service.createdto.ReceiptDto;
+import com.nonIt.GameOn.service.customDto.ReceiptDetailResponseDto;
 import com.nonIt.GameOn.service.restdto.ReceiptRestDto;
 import org.apache.coyote.Response;
 import org.junit.jupiter.api.Test;
@@ -28,6 +25,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -37,15 +35,20 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestPropertySource(locations = "classpath:application-test.properties")
 class ReceiptServiceImplTest {
     @Autowired
-    private ReceiptService receiptService;
+    private ReceiptServiceImpl receiptService;
     @Autowired
     private ReceiptRepository receiptRepository;
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private GameRepository gameRepository;
+    @Autowired
+    private GameCodeRepository gameCodeRepository;
+    @Autowired
+    private ReceiptDetailsRepository receiptDetailsRepository;
+
     private ReceiptCreateDto getReceiptCreateDto() {
-        int userId = 3;
+        int userId = 4;
         Optional<User> user = userRepository.findById(userId);
         assertTrue(user.isPresent());
 
@@ -59,17 +62,20 @@ class ReceiptServiceImplTest {
         ReceiptCreateDto receiptCreateDto = new ReceiptCreateDto(userId, gameIdList);
         return receiptCreateDto;
     }
+
     @Test
     void Should_HaveNewReceipt_When_CreateReceipt() {
         ReceiptCreateDto receiptCreateDto = getReceiptCreateDto();
 
+        List<GameCode> gameCodeList = gameCodeRepository.findByGameId(receiptCreateDto.getGameIdList().get(0));
+
         ReceiptRestDto newReceiptDto = receiptService.createReceipt(receiptCreateDto);
+
+       List<ReceiptDetailResponseDto>  receiptDetails = receiptDetailsRepository.findByReceiptId(newReceiptDto.getId());
 
         assertNotNull(newReceiptDto);
         assertNotNull(newReceiptDto.getId());
     }
-
-
 
     @Test
     void Should_ThrowException_When_CreateReceiptFail() {
@@ -103,17 +109,17 @@ class ReceiptServiceImplTest {
                 .receiptDate(newDate)
                 .build();
 
-        receiptService.updateReceipt(receiptId,receiptDto);
+        receiptService.updateReceipt(receiptId, receiptDto);
 
         Optional<Receipt> updatedReceipt = receiptRepository.findById(receiptId);
         assertTrue(updatedReceipt.isPresent());
 
-        assertNotEquals(initialReceipt.get().getReceiptDate(),updatedReceipt.get().getReceiptDate());
-        assertNotEquals(initialReceipt.get().getUser().getId(),updatedReceipt.get().getUser().getId());
+        assertNotEquals(initialReceipt.get().getReceiptDate(), updatedReceipt.get().getReceiptDate());
+        assertNotEquals(initialReceipt.get().getUser().getId(), updatedReceipt.get().getUser().getId());
     }
 
     @Test
-    void updateReceipt_InvalidReceiptDate_ExceptionThrow(){
+    void updateReceipt_InvalidReceiptDate_ExceptionThrow() {
         int wrongNewUserId = 999;
         LocalDate wrongNewDate = LocalDate.parse("2024-06-26");
 
@@ -127,12 +133,12 @@ class ReceiptServiceImplTest {
                 .build();
 
         ResponseException exception = assertThrows(ResponseException.class, () -> {
-            receiptService.updateReceipt(receiptId,receiptDto);
+            receiptService.updateReceipt(receiptId, receiptDto);
         });
     }
 
     @Test
-    void When_DeleteReceipt_Expect_ReceiptIsDeleted(){
+    void When_DeleteReceipt_Expect_ReceiptIsDeleted() {
         ReceiptCreateDto receiptCreateDto = getReceiptCreateDto();
         receiptService.createReceipt(receiptCreateDto);
 
@@ -145,8 +151,8 @@ class ReceiptServiceImplTest {
     }
 
     @Test
-    void deleteReceipt_InvalidReceiptId_ExceptionThrow(){
-        int wrongReceiptId = receiptService.getAll().size();
+    void deleteReceipt_InvalidReceiptId_ExceptionThrow() {
+        int wrongReceiptId = receiptService.getAll().size() + 1;
         System.out.println(wrongReceiptId);
         ResponseException exception = assertThrows(ResponseException.class, () -> {
             receiptService.deleteReceipt(wrongReceiptId);
