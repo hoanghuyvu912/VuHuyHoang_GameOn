@@ -30,15 +30,8 @@ public class GameResources {
     //CRUD APIs
     @GetMapping
     public ResponseEntity<List<SimplifiedGameDto>> getAllGame() {
-//        System.out.println("My bearer token is: " + authorization);
         return ResponseEntity.ok(gameService.getAll());
     }
-
-//    @GetMapping("/library")
-//    public ResponseEntity<List<SimplifiedGameDto>> getLibrary(@RequestHeader("Authorization") String authorization) {
-//        System.out.println("My bearer token is: " + authorization);
-//        return ResponseEntity.ok(gameService.getLibrary(authorization));
-//    }
 
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -85,7 +78,6 @@ public class GameResources {
         return ResponseEntity.ok(gameService.getRecentWorstSellerGames());
     }
 
-    //Find by name and released date
     @GetMapping(value = "/name-containing-released-date-after")
     public ResponseEntity<List<GameRestDto>> findByNameIgnoreCaseContainingAndReleasedDateAfter(@RequestParam("name") String name, @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return ResponseEntity.ok(gameService.findByNameIgnoreCaseContainingAndReleasedDateAfter(name, date));
