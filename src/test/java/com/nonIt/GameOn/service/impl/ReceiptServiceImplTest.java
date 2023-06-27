@@ -10,6 +10,8 @@ import com.nonIt.GameOn.service.createdto.ReceiptDto;
 import com.nonIt.GameOn.service.customDto.ReceiptDetailResponseDto;
 import com.nonIt.GameOn.service.restdto.ReceiptRestDto;
 import org.apache.coyote.Response;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.event.annotation.BeforeTestClass;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.swing.text.html.Option;
@@ -32,7 +35,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @AutoConfigureTestDatabase
 @ActiveProfiles("test")
-@TestPropertySource(locations = "classpath:application-test.properties")
 class ReceiptServiceImplTest {
     @Autowired
     private ReceiptServiceImpl receiptService;
@@ -47,7 +49,8 @@ class ReceiptServiceImplTest {
     @Autowired
     private ReceiptDetailsRepository receiptDetailsRepository;
 
-    private ReceiptCreateDto getReceiptCreateDto() {
+    @BeforeTestClass
+    public ReceiptCreateDto getReceiptCreateDto() {
         int userId = 4;
         Optional<User> user = userRepository.findById(userId);
         assertTrue(user.isPresent());
@@ -71,7 +74,7 @@ class ReceiptServiceImplTest {
 
         ReceiptRestDto newReceiptDto = receiptService.createReceipt(receiptCreateDto);
 
-       List<ReceiptDetailResponseDto>  receiptDetails = receiptDetailsRepository.findByReceiptId(newReceiptDto.getId());
+        List<ReceiptDetailResponseDto> receiptDetails = receiptDetailsRepository.findByReceiptId(newReceiptDto.getId());
 
         assertNotNull(newReceiptDto);
         assertNotNull(newReceiptDto.getId());
@@ -158,6 +161,4 @@ class ReceiptServiceImplTest {
             receiptService.deleteReceipt(wrongReceiptId);
         });
     }
-
-
 }

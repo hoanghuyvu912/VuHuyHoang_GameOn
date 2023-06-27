@@ -3,6 +3,7 @@ package com.nonIt.GameOn.service.restdto;
 import com.nonIt.GameOn.entity.Gender;
 import com.nonIt.GameOn.entity.UserRoleAssignment;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class UserRestDto {
     private Integer id;
 
