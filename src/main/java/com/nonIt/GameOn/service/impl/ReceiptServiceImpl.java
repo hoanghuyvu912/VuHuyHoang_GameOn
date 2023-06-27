@@ -167,6 +167,7 @@ public class ReceiptServiceImpl implements ReceiptService {
 
     @Override
     public void deleteReceipt(Integer receiptId) {
+        Receipt receipt = receiptRepository.findById(receiptId).orElseThrow(GameOnException::ReceiptNotFound);
         receiptRepository.deleteById(receiptId);
     }
 

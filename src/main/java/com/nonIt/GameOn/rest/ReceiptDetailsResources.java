@@ -34,11 +34,11 @@ public class ReceiptDetailsResources {
         return ResponseEntity.ok(receiptDetailsService.findById(receiptDetailsId));
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping
-    public ResponseEntity<ReceiptDetailsRestDto> createReceiptDetails(@RequestBody ReceiptDetailsDto receiptDetailsDto) {
-        return ResponseEntity.ok(receiptDetailsService.createReceiptDetails(receiptDetailsDto));
-    }
+//    @PreAuthorize("hasRole('ADMIN')")
+//    @PostMapping
+//    public ResponseEntity<ReceiptDetailsRestDto> createReceiptDetails(@RequestBody ReceiptDetailsDto receiptDetailsDto) {
+//        return ResponseEntity.ok(receiptDetailsService.createReceiptDetails(receiptDetailsDto));
+//    }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(value = "/{receiptDetailsId}")

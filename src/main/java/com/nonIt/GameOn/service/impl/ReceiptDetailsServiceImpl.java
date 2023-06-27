@@ -56,7 +56,9 @@ public class ReceiptDetailsServiceImpl implements ReceiptDetailsService {
     @Override
     public ReceiptDetailsRestDto createReceiptDetails(ReceiptDetailsDto receiptDetailsDto) {
         Receipt receipt = receiptRepository.findById(receiptDetailsDto.getReceiptId()).orElseThrow(GameOnException::ReceiptNotFound);
+
         GameCode gameCode = gameCodeRepository.findById(receiptDetailsDto.getGameCodeId()).orElseThrow(GameOnException::GameCodeNotFound);
+
         ReceiptDetails receiptDetails = ReceiptDetails.builder()
                 .receipt(receipt)
                 .gameCode(gameCode)
