@@ -2,28 +2,24 @@ package com.nonIt.GameOn.service.impl;
 
 
 import com.nonIt.GameOn.entity.Game;
-import com.nonIt.GameOn.entity.GameCode;
-import com.nonIt.GameOn.entity.GameCodeStatus;
 import com.nonIt.GameOn.entity.User;
 import com.nonIt.GameOn.exception.ResponseException;
 import com.nonIt.GameOn.repository.GameCodeRepository;
 import com.nonIt.GameOn.repository.GameRepository;
+import com.nonIt.GameOn.repository.ReceiptDetailsRepository;
 import com.nonIt.GameOn.repository.UserRepository;
 import com.nonIt.GameOn.rest.resourcesdto.ReceiptCreateDto;
-import com.nonIt.GameOn.rest.resourcesdto.SimplifiedReceiptDetailsDto;
-import com.nonIt.GameOn.service.ReceiptDetailsService;
-import com.nonIt.GameOn.service.ReceiptService;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
-import org.springframework.test.annotation.DirtiesContext;
+
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -34,7 +30,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @AutoConfigureTestDatabase
 @ActiveProfiles("test")
-@TestPropertySource(locations = "classpath:application-test.properties")
 class ReceiptDetailsServiceImplTest {
     @Autowired
     private ReceiptDetailsServiceImpl receiptDetailsService;
@@ -45,7 +40,7 @@ class ReceiptDetailsServiceImplTest {
     @Autowired
     private GameRepository gameRepository;
     @Autowired
-    private GameCodeRepository gameCodeRepository;
+    private ReceiptDetailsRepository receiptDetailsRepository;
     @BeforeEach
     void setUp(){
         int userId = 4;
