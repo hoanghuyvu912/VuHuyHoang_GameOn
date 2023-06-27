@@ -43,4 +43,5 @@ public interface UserService {
     List<UserRestDto> findByMonthOfRegisteredDate(Integer month);
 
     void deleteUser(Integer userId);
+    UserRestDto getByUser(String authorization);
 }

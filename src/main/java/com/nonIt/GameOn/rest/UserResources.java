@@ -9,7 +9,6 @@ import com.nonIt.GameOn.service.restdto.UserRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -41,13 +40,13 @@ public class UserResources {
     public ResponseEntity<UserRestDto> getUserById(@PathVariable("userId") Integer userId) {
         return ResponseEntity.ok(userService.findById(userId));
     }
+    @GetMapping(value = "/user-info")
+    public ResponseEntity<UserRestDto> getAccountInfoOfUser(@RequestHeader("Authorization") String authorization){
+        return ResponseEntity.ok(userService.getByUser(authorization.substring(7)));
+    }
 
-//    @PostMapping(path = "/user-info")
-//    public ResponseEntity<UserRestDto> getUserInfo(@RequestHeader("id") Integer id)
-//    {
-//        //here I will add more code which should replace the String in the ResponseEntity.
-//        return ResponseEntity.ok(userService.findById(id));
-//    }
+
+
 
     @PutMapping(value = "/{userId}")
     public ResponseEntity<UserRestDto> updateUserById(@PathVariable("userId") Integer userId, @RequestBody UserDto userDto) {

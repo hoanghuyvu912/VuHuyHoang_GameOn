@@ -6,8 +6,10 @@ import com.nonIt.GameOn.entity.User;
 import com.nonIt.GameOn.entity.UserRoleAssignment;
 import com.nonIt.GameOn.exception.GameOnException;
 import com.nonIt.GameOn.repository.UserRepository;
+import com.nonIt.GameOn.security.jwt.JwtUtils;
 import com.nonIt.GameOn.service.UserService;
 import com.nonIt.GameOn.service.createdto.UserDto;
+import com.nonIt.GameOn.service.customDto.GameLibraryDto;
 import com.nonIt.GameOn.service.mapper.UserMapper;
 import com.nonIt.GameOn.service.restdto.UserRestDto;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +31,8 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     private final UserMapper userMapper;
+    @Autowired
+    private final JwtUtils jwtUtils;
 
     @Autowired
     private final PasswordEncoder passwordEncoder;
@@ -286,5 +290,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(Integer userId) {
         userRepository.deleteById(userId);
+    }
+
+    @Override
+    public UserRestDto getByUser(String authorization) {
+        System.out.println(authorization);
+        User userFromUserName = userRepository.findByUsername(jwtUtils.getUserNameFromJwtToken(authorization)).orElseThrow(GameOnException::UserNotFound);
+
+        User user = userRepository.findById(userFromUserName.getId()).orElseThrow(GameOnException::UserNotFound);
+
+        return userMapper.toDto(user);
     }
 }
