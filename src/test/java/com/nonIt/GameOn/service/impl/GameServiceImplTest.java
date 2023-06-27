@@ -5,6 +5,7 @@ import com.nonIt.GameOn.entity.Game;
 import com.nonIt.GameOn.exception.ResponseException;
 import com.nonIt.GameOn.repository.*;
 
+import com.nonIt.GameOn.rest.resourcesdto.SimplifiedGameDto;
 import com.nonIt.GameOn.service.createdto.GameDto;
 
 import com.nonIt.GameOn.service.restdto.GameRestDto;
@@ -76,7 +77,7 @@ class GameServiceImplTest {
 
         GameDto newGameDto = createGameDto();
 
-        GameRestDto newGameRestDto = gameService.createGame(newGameDto);
+        SimplifiedGameDto simplifiedGameDto = gameService.createGame(newGameDto);
 
         int gameListSizeAfter = gameService.getAll().size();
 

@@ -67,13 +67,6 @@ class ReceiptDetailsServiceImplTest {
         assertTrue(receiptDetailsService.getAll().size() > 0);
     }
 
-//    @Test
-//    void Should_ReturnNewReceiptDetail_When_CreateReceiptDetail() {
-//        int receiptId = receiptService.getAll().size() - 1;
-//
-//        GameCode gameCode
-//    }
-
     @Test
     void getReceiptDetailListBetweenDates() {
         LocalDate dateOne = LocalDate.parse("2023-06-15");
@@ -86,6 +79,6 @@ class ReceiptDetailsServiceImplTest {
         LocalDate startDate = LocalDate.parse("2023-06-15");
         LocalDate endDate = LocalDate.parse("2023-06-20");
 
-        receiptDetailsService.getWorstSellerGamesBetweenDates(startDate, endDate).forEach(e -> System.out.println(e.getGame().getName() + ": " + e.getNumberOfUsedGameCode()));
+//        receiptDetailsService.getWorstSellerGamesBetweenDates(startDate, endDate).forEach(e -> System.out.println(e.getGame().getName() + ": " + e.getNumberOfUsedGameCode()));
     }
 }
