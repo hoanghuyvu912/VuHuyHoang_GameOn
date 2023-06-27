@@ -2,14 +2,12 @@ package com.nonIt.GameOn.service.impl;
 
 import com.nonIt.GameOn.entity.*;
 import com.nonIt.GameOn.exception.ResponseException;
-import com.nonIt.GameOn.repository.GameCodeRepository;
-import com.nonIt.GameOn.repository.GameRepository;
-import com.nonIt.GameOn.repository.ReceiptRepository;
-import com.nonIt.GameOn.repository.UserRepository;
+import com.nonIt.GameOn.repository.*;
 import com.nonIt.GameOn.rest.resourcesdto.ReceiptCreateDto;
 import com.nonIt.GameOn.service.GameService;
 import com.nonIt.GameOn.service.ReceiptService;
 import com.nonIt.GameOn.service.createdto.ReceiptDto;
+import com.nonIt.GameOn.service.customDto.ReceiptDetailResponseDto;
 import com.nonIt.GameOn.service.restdto.ReceiptRestDto;
 import org.apache.coyote.Response;
 import org.junit.jupiter.api.Test;
@@ -46,6 +44,8 @@ class ReceiptServiceImplTest {
     private GameRepository gameRepository;
     @Autowired
     private GameCodeRepository gameCodeRepository;
+    @Autowired
+    private ReceiptDetailsRepository receiptDetailsRepository;
 
     private ReceiptCreateDto getReceiptCreateDto() {
         int userId = 4;
@@ -69,15 +69,12 @@ class ReceiptServiceImplTest {
 
         List<GameCode> gameCodeList = gameCodeRepository.findByGameId(receiptCreateDto.getGameIdList().get(0));
 
-        int gameCodeAvailableBefore = (int) gameCodeList.stream().filter(gc -> gc.getGameCodeStatus().equals(GameCodeStatus.Available)).count();
-        System.out.println(gameCodeAvailableBefore);
         ReceiptRestDto newReceiptDto = receiptService.createReceipt(receiptCreateDto);
+
+       List<ReceiptDetailResponseDto>  receiptDetails = receiptDetailsRepository.findByReceiptId(newReceiptDto.getId());
 
         assertNotNull(newReceiptDto);
         assertNotNull(newReceiptDto.getId());
-
-        int gameCodeAvailableAfter= (int) gameCodeList.stream().filter(gc -> gc.getGameCodeStatus().equals(GameCodeStatus.Available)).count();
-        System.out.println(gameCodeAvailableAfter);
     }
 
     @Test
@@ -155,7 +152,7 @@ class ReceiptServiceImplTest {
 
     @Test
     void deleteReceipt_InvalidReceiptId_ExceptionThrow() {
-        int wrongReceiptId = receiptService.getAll().size();
+        int wrongReceiptId = receiptService.getAll().size() + 1;
         System.out.println(wrongReceiptId);
         ResponseException exception = assertThrows(ResponseException.class, () -> {
             receiptService.deleteReceipt(wrongReceiptId);

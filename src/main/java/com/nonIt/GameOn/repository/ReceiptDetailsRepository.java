@@ -43,7 +43,7 @@ public interface ReceiptDetailsRepository extends JpaRepository<ReceiptDetails, 
             "GROUP BY gc.game.id")
     List<GameStatisticsDto> getGameStatisticsPerMonth(Integer month, Integer year);
 
-    @Query("SELECT new com.nonIt.GameOn.service.customDto.ReceiptDetailResponseDto( rd.id,rd.receipt.id, g.name, rd.gamePrice) " +
+    @Query("SELECT new com.nonIt.GameOn.service.customDto.ReceiptDetailResponseDto( rd.id,rd.receipt.id, g.name, rd.gamePrice, gc.id, gc.gameCodeStatus) " +
             "FROM ReceiptDetails rd " +
             "JOIN GameCode gc on gc.id = rd.gameCode.id " +
             "JOIN Game g on g.id = gc.game.id " +

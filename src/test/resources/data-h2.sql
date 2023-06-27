@@ -92,7 +92,7 @@ INSERT INTO receipt_details (game_price,game_code_id,receipt_id) VALUES
 	 (59.99,1,1),
 	 (59.99,4,2),
 	 (59.99,7,3),
-	 (59.99,10,4);
+	 (59.99,10,3);
 
 INSERT INTO sub_genre (sub_genre_name,genre_id) VALUES
 	 ('Arcade & Rhythm',1),
