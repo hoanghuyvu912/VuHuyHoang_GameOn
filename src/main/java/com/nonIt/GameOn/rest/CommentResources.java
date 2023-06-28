@@ -29,23 +29,6 @@ public class CommentResources {
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value = "/{commentId}")
     public ResponseEntity<CommentRestDto> getCommentById(@PathVariable("commentId") Integer commentId) {
-//        boolean valid = true;
-//        int commentIdInt = 0;
-//        if (commentId == null || commentId.trim().isBlank() || commentId.isEmpty()) {
-//            valid = false;
-//        } else {
-//            try {
-//                commentIdInt = Integer.parseInt(commentId);
-//            } catch (Exception e) {
-//                valid = false;
-//                throw GameOnException.badRequest("MissingCommentId", "Comment Id search query not found.");
-//            }
-//        }
-//        if (valid) {
-//            return ResponseEntity.ok(commentService.findById(commentIdInt));
-//        } else {
-//            throw GameOnException.badRequest("InvalidCommentId", "Invalid comment ID!");
-//        }
         try {
             return ResponseEntity.ok(commentService.findById(commentId));
         } catch (Exception e) {
@@ -77,11 +60,10 @@ public class CommentResources {
         return ResponseEntity.ok(commentService.updateComment(commentId, commentDto));
     }
 
-    //    @PreAuthorize("hasRole( 'ADMIN')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @DeleteMapping(value = "/{commentId}")
     public ResponseEntity<Void> deleteCommentById(@PathVariable("commentId") Integer commentId, @RequestHeader("Authorization") String authorization,  @RequestHeader("Roles") List<String> roles) {
-        System.out.println(authorization);
-        commentService.deleteComment(commentId, authorization, roles);
+        commentService.deleteComment(commentId, authorization.substring(7), roles);
         return ResponseEntity.noContent().build();
     }
 

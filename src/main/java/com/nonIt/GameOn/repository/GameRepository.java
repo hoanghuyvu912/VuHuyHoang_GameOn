@@ -35,7 +35,7 @@ public interface GameRepository extends JpaRepository<Game, Integer>, CustomGame
 //    @Query(value = "SELECT g from Game g join ReceiptDetails rd on g.id = rd.game.id join Receipt r on rd.receipt.id = r.id join User u on u.id = r.user.id where UPPER(u.username) LIKE UPPER(:username)")
 //    List<Game> getByUsername(@Param("username") String username);
 
-    @Query(value = "SELECT new com.nonIt.GameOn.service.customDto.GameLibraryDto(g.name, r.receiptDate, rd.gamePrice) " +
+    @Query(value = "SELECT new com.nonIt.GameOn.service.customDto.GameLibraryDto(g.id, g.name, g.thumbnail, r.receiptDate, rd.gamePrice, gc.gameCode) " +
             "FROM Receipt r " +
             "JOIN ReceiptDetails rd ON rd.receipt.id = r.id " +
             "JOIN GameCode gc ON gc.id = rd.gameCode.id " +

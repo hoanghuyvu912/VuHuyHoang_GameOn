@@ -42,12 +42,14 @@ public class UserResources {
         return ResponseEntity.ok(userService.findById(userId));
     }
 
-//    @PostMapping(path = "/user-info")
-//    public ResponseEntity<UserRestDto> getUserInfo(@RequestHeader("id") Integer id)
-//    {
-//        //here I will add more code which should replace the String in the ResponseEntity.
-//        return ResponseEntity.ok(userService.findById(id));
-//    }
+    @GetMapping(path = "/account-info")
+    public ResponseEntity<UserRestDto> getAccountInfo(@RequestHeader("Authorization") String authorization)
+    {
+        //here I will add more code which should replace the String in the ResponseEntity.
+        return ResponseEntity.ok(userService.getAccountInfo(authorization.substring(7)));
+    }
+
+    @PostMapping(path = "/")
 
     @PutMapping(value = "/{userId}")
     public ResponseEntity<UserRestDto> updateUserById(@PathVariable("userId") Integer userId, @RequestBody UserDto userDto) {

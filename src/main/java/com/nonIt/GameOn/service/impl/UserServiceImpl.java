@@ -1,11 +1,9 @@
 package com.nonIt.GameOn.service.impl;
 
-import com.nonIt.GameOn.entity.Gender;
-import com.nonIt.GameOn.entity.Role;
-import com.nonIt.GameOn.entity.User;
-import com.nonIt.GameOn.entity.UserRoleAssignment;
+import com.nonIt.GameOn.entity.*;
 import com.nonIt.GameOn.exception.GameOnException;
 import com.nonIt.GameOn.repository.UserRepository;
+import com.nonIt.GameOn.security.jwt.JwtUtils;
 import com.nonIt.GameOn.service.UserService;
 import com.nonIt.GameOn.service.createdto.UserDto;
 import com.nonIt.GameOn.service.mapper.UserMapper;
@@ -26,6 +24,9 @@ import java.util.stream.Collectors;
 @Transactional
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
+    @Autowired
+    private final JwtUtils jwtUtils;
+
     private final UserRepository userRepository;
 
     private final UserMapper userMapper;
@@ -41,6 +42,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserRestDto findById(Integer userId) {
         User user = userRepository.findById(userId).orElseThrow(GameOnException::UserNotFound);
+        return userMapper.toDto(user);
+    }
+
+    @Override
+    public UserRestDto getAccountInfo(String authorization) {
+        User user = userRepository.findByUsername(jwtUtils.getUserNameFromJwtToken(authorization)).get();
         return userMapper.toDto(user);
     }
 
@@ -108,14 +115,6 @@ public class UserServiceImpl implements UserService {
                 tempList.add(role);
             }
         }
-
-//        User finalUser = user;
-//        userDto.getRoles().forEach(r -> {
-//            UserRoleAssignment role = new UserRoleAssignment();
-//            role.setRole(r);
-//            role.setUsers(finalUser);
-//            tempList.add(role);
-//        });
 
         user.setRoles(tempList);
 

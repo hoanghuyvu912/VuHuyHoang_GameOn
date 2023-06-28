@@ -12,6 +12,8 @@ public interface UserService {
 
     UserRestDto findById(Integer userId);
 
+    UserRestDto getAccountInfo(String authorization);
+
     UserRestDto createUser(UserDto userDto);
 
     UserRestDto updateUser(Integer userId, UserDto userDto);

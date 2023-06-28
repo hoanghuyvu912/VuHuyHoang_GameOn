@@ -10,7 +10,10 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GameLibraryDto {
-    private String gameName;
+    private Integer id;
+    private String name;
+    private String thumbnail;
     private LocalDate receiptDate;
-    private Double gamePrice;
+    private Double price;
+    private String gameCode;
 }
