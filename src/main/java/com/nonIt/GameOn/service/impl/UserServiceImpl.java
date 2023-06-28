@@ -52,6 +52,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void depositAmountIntoAccount(String authorization, Double amount) {
+        User user = userRepository.findByUsername(jwtUtils.getUserNameFromJwtToken(authorization)).get();
+        System.out.println(amount);
+        user.setBalance(user.getBalance() + amount);
+        userRepository.save(user);
+    }
+
+    @Override
     public UserRestDto createUser(UserDto userDto) {
         Period age = Period.between(userDto.getDob(), LocalDate.now());
         int years = age.getYears();

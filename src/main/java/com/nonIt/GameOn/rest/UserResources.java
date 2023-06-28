@@ -49,7 +49,12 @@ public class UserResources {
         return ResponseEntity.ok(userService.getAccountInfo(authorization.substring(7)));
     }
 
-    @PostMapping(path = "/")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PostMapping(path = "/deposit")
+    public ResponseEntity<Void> depositAmountIntoAccount(@RequestHeader("Authorization") String authorization, @RequestParam("amount") Double amount) {
+        userService.depositAmountIntoAccount(authorization.substring(7), amount );
+        return ResponseEntity.noContent().build();
+    }
 
     @PutMapping(value = "/{userId}")
     public ResponseEntity<UserRestDto> updateUserById(@PathVariable("userId") Integer userId, @RequestBody UserDto userDto) {

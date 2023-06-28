@@ -14,6 +14,8 @@ public interface UserService {
 
     UserRestDto getAccountInfo(String authorization);
 
+    void depositAmountIntoAccount(String authorzation, Double amount);
+
     UserRestDto createUser(UserDto userDto);
 
     UserRestDto updateUser(Integer userId, UserDto userDto);
