@@ -2,4 +2,12 @@ services:
   gameon-local:
     container_name: gameon-maven-local
     build:
-      dockerfile:
+      dockerfile: Dockerfile
+    volumes:
+      - .m2:/root/.m2
+    ports:
+      - 8081:8080
+    restart: unless-stopped
+    image: gameon-local:latest
+    stdin_open: true
+    tty: true

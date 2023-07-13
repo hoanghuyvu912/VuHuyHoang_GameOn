@@ -1,0 +1,11 @@
+services:
+  gameon-test:
+    container_name: gameon-maven-test
+    build:
+      dockerfile: Dockerfile
+    volumes:
+      - .m2:/root/.m2
+    ports:
+      - 8083:8080
+    restart: unless-stopped
+    image: gameon-test:latest
