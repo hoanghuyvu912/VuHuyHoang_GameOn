@@ -112,6 +112,7 @@ public class GameServiceImpl implements GameService {
     @Override
     public GameRestDto updateGame(Integer gameId, GameDto gameDto) {
         Game game = gameRepository.findById(gameId).orElseThrow(GameOnException::GameNotFound);
+        Game updatedGame = new Game();
 
         if (gameDto.getName() != null) {
             if (gameDto.getName().trim().isBlank() || gameDto.getName().isEmpty()) {
@@ -166,7 +167,7 @@ public class GameServiceImpl implements GameService {
         }
 
         gameMapper.mapFromDto(gameDto, game);
-        game = gameRepository.save(game);
+//        game = gameRepository.save(game);
         return gameMapper.toDto(game);
     }
 

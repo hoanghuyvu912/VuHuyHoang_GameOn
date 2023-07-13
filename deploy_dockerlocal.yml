@@ -1,0 +1,5 @@
+services:
+  gameon-local:
+    container_name: gameon-maven-local
+    build:
+      dockerfile:
