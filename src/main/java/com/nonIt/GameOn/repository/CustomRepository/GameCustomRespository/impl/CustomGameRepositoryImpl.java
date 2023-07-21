@@ -27,7 +27,6 @@ public class CustomGameRepositoryImpl implements CustomGameRepository {
         Root<Game> game = cq.from(Game.class);
         List<Predicate> predicates = new ArrayList<>();
 
-
         if (systemReq != null) {
             predicates.add(cb.like(game.get("systemReq"), "%" + systemReq + "%"));
         }
