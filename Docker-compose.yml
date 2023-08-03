@@ -1,0 +1,8 @@
+version: "1"
+services:
+  game-service:
+    build: ./
+    volumes:
+      - ./app
+    ports:
+      - 5001:8080

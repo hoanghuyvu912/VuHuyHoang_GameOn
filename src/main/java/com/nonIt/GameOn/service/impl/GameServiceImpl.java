@@ -22,6 +22,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -46,6 +52,9 @@ public class GameServiceImpl implements GameService {
     private final GameImageMapper gameImageMapper;
     private final GameSubGenreMapper gameSubGenreMapper;
     private final GameGenreMapper gameGenreMapper;
+
+    @PersistenceContext
+    private final EntityManager em;
 
     //CRUD Services
     @Override
@@ -754,6 +763,24 @@ public class GameServiceImpl implements GameService {
             throw GameOnException.badRequest("MissingSearchCriteria", "Search criteria not found.");
         }
         return gameRepository.findGamesByDto(gameSearchDto).stream().map(gameMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Game> getGamesByCriteria(Optional<String> publisherName, Optional<Double> price, Optional<LocalDate> date) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+
+        CriteriaQuery<Game> cq = cb.createQuery(Game.class);
+
+        Root<Game> root = cq.from(Game.class);
+
+        cq.select(root);
+
+        publisherName.ifPresent(p -> cq.where(cb.like(root.get("publisherName"), p)));
+        price.ifPresent(p -> cq.where(cb.lessThanOrEqualTo(root.get("price"), p)));
+        date.ifPresent(d -> cq.where(cb.equal(root.get("date"), d)));
+
+        TypedQuery<Game> query = em.createQuery(cq);
+        return query.getResultList();
     }
 
     public Integer getUsedGameCodeListOfGame(Integer gameId) {

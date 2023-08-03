@@ -1,5 +1,6 @@
 package com.nonIt.GameOn.service;
 
+import com.nonIt.GameOn.entity.Game;
 import com.nonIt.GameOn.rest.resourcesdto.SimplifiedGameDto;
 import com.nonIt.GameOn.service.customDto.GameLibraryDto;
 import com.nonIt.GameOn.service.customDto.GameSearchDto;
@@ -9,6 +10,7 @@ import com.nonIt.GameOn.service.restdto.GameRestDto;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface GameService {
     //CRUD APIs
@@ -197,5 +199,6 @@ public interface GameService {
     //    TEST ADVANCED SEARCH
     List<GameRestDto> getGamesByGameSearchDto(GameSearchDto gameSearchDto);
 
+    List<Game> getGamesByCriteria(Optional<String> publisherName, Optional<Double> price, Optional<LocalDate> date);
 
 }

@@ -1,5 +1,6 @@
 package com.nonIt.GameOn.rest;
 
+import com.nonIt.GameOn.entity.Game;
 import com.nonIt.GameOn.exception.GameOnException;
 import com.nonIt.GameOn.rest.resourcesdto.SimplifiedGameDto;
 import com.nonIt.GameOn.service.GameService;
@@ -17,6 +18,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +28,7 @@ import java.util.Optional;
 @RequestMapping(value = "/games")
 public class GameResources {
     private final GameService gameService;
+
 
     //CRUD APIs
     @GetMapping
@@ -50,6 +53,13 @@ public class GameResources {
     @GetMapping(value = "/{gameId}")
     public ResponseEntity<SimplifiedGameDto> getGameById(@PathVariable("gameId") Integer userId) {
         return ResponseEntity.ok(gameService.findById(userId));
+    }
+
+    @GetMapping(value = "/criteria")
+    public ResponseEntity<List<Game>> getGameByCriteria(@PathParam("publisherName") Optional<String> publisherName,
+                                                        @PathParam("price") Optional<Double> price,
+                                                        @PathParam("date") Optional<LocalDate> date) {
+        return ResponseEntity.ok(gameService.getGamesByCriteria(publisherName,price,date));
     }
 
     @PutMapping(value = "/{gameId}")
